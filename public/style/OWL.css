@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Offside&display=swap');
+
+/*
+
+Kodchasan
+Audiowide
+Offside
+
+*/
+
+* {
+  font-family: "Offside", monospace;
+}
+
 .main_block {
   display: flex;
   flex-direction: column;
@@ -11,35 +25,33 @@
 
 h1 {
   font-size: 60px;
-  color: var(--color1);
+  color: var(--fg);
 }
 
 h2 {
-  font-family: "Varela Round";
   font-size: x-large;
-  color: var(--color1);
+  color: var(--fg);
 }
 
 h3 {
-  font-family: "Varela Round";
   font-size: medium;
-  color: var(--color1);
+  color: var(--fg);
 }
 
 .app_name {
-  font-family: "Madimi One";
+  font-family: "Kodchasan", serif;
   z-index: -1;
   align-items: center;
   text-align: center;
-  font-size: 40vw;
+  font-size: 30vw;
   margin: 0;
   padding: 0;
-  color: transparent;
   text-shadow: none;
   background-size: cover;
-  -webkit-text-stroke: 6px var(--color1);
+  /*-webkit-text-stroke: 4px var(--fg);
 	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	-webkit-text-fill-color: transparent;*/
+  text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.4);
   position:absolute;
 }
 
@@ -52,7 +64,7 @@ h3 {
   justify-content: center;
   align-items: center;
   align-content: center;
-  color: var(--color1);
+  color: var(--fg);
 }
 
 img {
@@ -68,7 +80,7 @@ img {
 }
 
 .imgs img {
-  width: 40%;
+  width: 50%;
   border-radius: 15px;
 }
 
@@ -83,6 +95,10 @@ img {
   background-color: transparent;
 }
 
+.svg_image {
+  width: 300px;
+}
+
 @media screen and (min-width: 1000px) {
   img {
     width: 900px;
@@ -93,6 +109,7 @@ img {
   .imgs img {
     width: 300px;
   }
+  
 }
 
 @media screen and (min-width: 1500px) {
@@ -104,5 +121,9 @@ img {
 
   .imgs img {
     width: 400px;
+  }
+
+  .svg_image {
+    width: 500px;
   }
 }
