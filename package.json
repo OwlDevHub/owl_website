@@ -13,6 +13,7 @@
     "live": "browser-sync start --proxy 'localhost:3000' --files 'public/**/*.*'"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.4.1",
     "express": "^4.21.2"
   }
 }
