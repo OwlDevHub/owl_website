@@ -1,53 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Madimi+One&family=Playwrite+HR+Lijeva:wght@100..400&family=WindSong:wght@400;500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Capriola&family=M+PLUS+Rounded+1c&display=swap');
+
+/*
+
+  font-family: "M PLUS Rounded 1c", serif;
+  font-family: "Capriola", serif;
+
+*/
 
 :root {
-  --bg: hsl(220, 20%, 18%);
-  --bg2: hsl(220, 15%, 32%);
-  --bg3: hsl(220, 15%, 36%);
-  --fg: hsl(220, 30%, 88%);
-  --fg2: hsl(220, 20%, 92%);
-  --color1: hsl(220, 30%, 88%);
-  --red: hsl(350, 40%, 55%);
-  --green: hsl(100, 30%, 60%);
-  --blue: hsl(210, 40%, 60%);
-  --yellow: hsl(40, 60%, 70%);
-  --pink: hsl(320, 30%, 60%);
-  --purple: hsl(280, 30%, 60%);
-  --cyan: hsl(200, 50%, 65%);
-  --blur: hsla(220, 15%, 32%, 0.5);
+  --bg: hsl(24, 18%, 10%);
+  --fg: hsl(34, 51%, 86%);
+  --fg2: hsla(34, 51%, 86%, 0.9);
+  --fg3: hsla(34, 51%, 86%, 0.0);
+  --color1: hsl(28, 70%, 47%);
+  --blur: hsla(24, 18%, 23%, 0.5);
 }
 
 :root.light {
-  --bg: hsl(220, 30%, 88%);
-  --bg2: hsl(220, 20%, 92%);
-  --bg3: hsl(220, 20%, 94%);
-  --fg: hsl(220, 20%, 22%);
-  --fg2: hsl(220, 15%, 32%);
-  --color1: hsl(220, 15%, 32%);
-  --red: hsl(350, 40%, 55%);
-  --green: hsl(100, 30%, 60%);
-  --blue: hsl(210, 40%, 60%);
-  --yellow: hsl(40, 60%, 70%);
-  --pink: hsl(320, 30%, 60%);
-  --purple: hsl(280, 30%, 60%);
-  --cyan: hsl(200, 50%, 65%);
-  --blur: hsla(220, 20%, 92%, 0.5);
+  --bg: hsl(34, 51%, 86%);
+  --fg: hsl(0, 0%, 6%);
+  --fg2: hsla(0, 0%, 6%, 0.5);
+  --fg3: hsla(0, 0%, 6%, 0.0);
+  --color1: hsl(28, 70%, 47%);
+  --blur: hsla(34, 51%, 86%, 0.5);
 }
 
 
-/*
-WindSong
-Playwrite HR Lijeva
-Madimi One
-Varela Round
-Permanent Marker
-*/
+
 
 * {
   user-select: none;
-  font-family: 'Varela Round', monospace;
+  font-family: "Capriola", monospace;
 }
 
 .rights {
@@ -78,12 +61,8 @@ Permanent Marker
   border-radius: 15px;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: "Madimi One";
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
-}
-
-.header * {
-  font-family: "Madimi One";
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.6);
+  font-weight: 1000;
 }
 
 .navbar_button_text {
@@ -98,7 +77,6 @@ Permanent Marker
 }
 
 .navbar_button {
-  font-family: "Madimi One", monospace;
   text-decoration: none;
   color: var(--bg);
   padding: 10px;
@@ -170,14 +148,12 @@ Permanent Marker
 }
 
 h1 {
-  font-family: "Madimi One";
   font-optical-sizing: auto;
   font-size: xx-large;
   color: var(--fg);
 }
 
 h3 {
-  font-family: "Madimi One", system-ui;
   padding: 0%;
   margin: 5px;
   font-size: medium;
@@ -220,7 +196,6 @@ html {
   background-attachment: scroll;
   scrollbar-color: var(--fg) transparent;
   scrollbar-arrow-color: transparent transparent;
-  font-family: "Madimi One", monospace;
   font-weight: 400;
   display: flex;
   justify-content: center;
@@ -347,13 +322,11 @@ body {
   line-height: 2;
   align-content: center;
   text-align: center;
-  font-family: "Madimi One", monospace;
 }
 
 .text-box {
   width: 85%;
   padding: 15px;
-  font-family: "Madimi One", monospace;
   font-weight: 700;
   font-size: medium;
   background-color: var(--fg);
@@ -431,15 +404,15 @@ a .text-box .i {
   align-items: center;
   align-content: center;
   text-align: center;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
 .contact_button:hover {
-  background-color: var(--blue);
+  color: var(--color1);
 }
 
 .button {
-  font-family: "Madimi One", monospace;
   font-size: medium;
   font-weight: 700;
   background-color: var(--fg);
@@ -462,7 +435,7 @@ a .text-box .i {
 }
 
 .button:hover {
-  background-color: var(--green);
+  background-color: var(--color1);
   width: 350px;
 }
 
@@ -476,7 +449,6 @@ a {
 }
 
 a .button {
-  font-family: "Madimi One", monospace;
   font-size: medium;
   font-weight: 700;
   background-color: var(--fg);
@@ -498,7 +470,7 @@ a .button {
 }
 
 a .button:hover {
-  background-color: var(--blue);
+  background-color: var(--color1);
   width: 350px;
 }
 
@@ -519,7 +491,7 @@ a .button:hover {
   background-color: var(--fg);
   color: var(--bg);
   transition: all 1s;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.6);
 }
 
 .theme-toggle,
@@ -536,7 +508,7 @@ a .button:hover {
 
 .theme-toggle:active,
 .back_button:active {
-  background-color: var(--blue);
+  background-color: var(--color1);
   transform: scale(0.8);
 }
 
@@ -547,7 +519,7 @@ a .button:hover {
 }
 
 .footer {
-  margin-bottom: 100px;
+  margin-bottom: 10px;
   font-size: medium;
   color: var(--fg)
 }
