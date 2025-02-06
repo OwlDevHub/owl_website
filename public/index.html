@@ -17,14 +17,17 @@
         <link rel="shortcut icon" href="imgs/icon.svg" />
     </head>
     <header class="header animate__animated animate__bounceInRight">
-        <a class="navbar_button_text" href="#about_app"> ABOUT</a>| <a class="navbar_button_text" href="#download_app"> DOWNLOAD APP</a>|
-        <a class="navbar_button_text" href="#contacts"> CONTACTS</a>
+        <a class="navbar_button_text" href="#about_app"><i class="fa-solid fa-lightbulb"></i> ABOUT</a>|
+        <a class="navbar_button_text" href="#download_app"><i class="fa-solid fa-cloud-arrow-down"></i> DOWNLOAD</a>|
+        <a class="navbar_button_text" href="#contacts"><i class="fa-solid fa-comment"></i> CONTACTS</a>
     </header>
     <body>
         <button class="theme-toggle animate__animated animate__backInLeft" id="theme-toggle">
             <i class="fa-solid fa-moon"></i>
         </button>
-        <div class="main_block animate__animated animate__bounceInDown">
+        <div class="main_block animate__animated animate__bounceInDown" id="about_app">
+            <div class="bg_img"></div>
+            <div class="bg_blur"></div>
             <svg class="svg_image" viewBox="0 0 14.528579 19.371439" version="1.1" id="svg1" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                 <defs id="defs1">
                     <linearGradient id="swatch13">
@@ -64,20 +67,17 @@
                     </g>
                 </g>
             </svg>
-            <h2 style="font-size: x-large; text-wrap: pretty; width: 70%;">A modern task and project manager with a user-friendly interface, customization options, and extensive functionality</h2>
+            <h2 style="font-size: xx-large; text-wrap: pretty; width: 70%; font-weight: 500;">Modern task and project manager for your 
+                <br />
+                <a class="selected-text">productivity</a>
+            </h2>
+        </div>
+        <div class="main_block">
+            <img class="ui" src="imgs/app.png" alt="Welcome" />
         </div>
         <div class="content">
-            <div class="slides">
-              <div><img class="ui" src="imgs/welcome.png" alt="Welcome" data-animation="animate__bounceInUp" /></div>
-              <div><img class="ui" src="imgs/tasks.png" alt="Tasks" data-animation="animate__bounceInUp" /></div>
-              <div><img class="ui" src="imgs/projects.png" alt="Projects" data-animation="animate__bounceInUp" /></div>
-              <div><img class="ui" src="imgs/tasks_s.png" alt="Tasks Small" data-animation="animate__bounceInUp" /></div>
-              <div><img class="ui" src="imgs/projects_s.png" alt="Projects Small" data-animation="animate__bounceInUp" /></div>
-              <div><img class="ui" src="imgs/account.png" alt="Account" data-animation="animate__bounceInUp" /></div>
-              <div><img class="ui" src="imgs/settings.png" alt="Settings" data-animation="animate__bounceInUp" /></div>
-            </div>
             <div class="spacer"></div>
-            <div class="content download_app" id="download_app" data-animation="animate__bounceInLeft">
+            <div class="content download_app" id="download_app">
               <h2>You can download the free trial version</h2>
               <br />
               <a href="https://github.com/Nighty3098/OWL_APP" class="btn-slide2">
@@ -88,7 +88,7 @@
             </div>
           </div>
         <div class="spacer"></div>
-        <div class="content contacts" id="contacts" data-animation="animate__bounceInRight">
+        <div class="content contacts" id="contacts">
             <h2>Contact with me</h2>
             <div class="contacts_badge_block block_l">
                 <a href="https://t.me/Night3098" , target="_blank" ,>
