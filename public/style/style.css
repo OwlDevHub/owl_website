@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Capriola&family=M+PLUS+Rounded+1c&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Madimi+One&family=Playwrite+HR+Lijeva:wght@100..400&family=WindSong:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Capriola&family=M+PLUS+Rounded+1c&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap');
 
 /*
 
   font-family: "M PLUS Rounded 1c", serif;
   font-family: "Capriola", serif;
+  font-family: "Oswald", serif;
+  font-family: "Nunito", serif;
 
 */
 
@@ -14,6 +15,7 @@
   --fg2: hsla(226deg, 64%, 88%, 0.9);
   --fg3: hsla(226deg, 64%, 88%, 0.0);
   --color1: hsl(237deg, 16%, 23%);
+  --tr: hsla(237deg, 16%, 23%, 0.5);
 }
 
 :root.light {
@@ -22,6 +24,7 @@
   --fg2: hsla(234deg, 16%, 35%, 0.5);
   --fg3: hsla(234deg, 16%, 35%, 0.0);
   --color1: hsl(225deg, 14%, 77%);
+  --tr: hsla(225deg, 14%, 77%, 0.5);
 }
 
 * {
@@ -43,7 +46,6 @@
 
 .selected-text {
   font-weight: 900;
-  font-family: "Capriola", serif;
 }
 
 .header {
@@ -52,34 +54,37 @@
   top: 10px;
   height: 50px;
   z-index: 10000;
-  width: auto;
-  justify-content: right;
+  width: 80%;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
-  background-color: var(--fg);
-  backdrop-filter: blur(5px);
+  background-color: var(--tr);
+  backdrop-filter: blur(15px);
   color: var(--bg);
   border-radius: 15px;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: "Madimi One";
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
 }
 
+.header_title {
+  font-size: medium;
+}
+
 .header * {
-  font-family: "Madimi One";
+  font-weight: bolder;
+  color: var(--fg);
+  font-family: "Capriola", monospace;
 }
 
 .navbar_button {
-  font-family: "Madimi One", monospace;
   text-decoration: none;
-  color: var(--bg);
   padding: 10px;
   margin-left: 10px;
   margin-right: 10px;
   transition: color 0.5s;
-  height: 20px;
-  border-radius: 10px;
+  height: 40pxe;
+  border-radius: 15px;
   transition: all 0.5s ease-in-out;
 }
 
@@ -88,13 +93,7 @@
 }
 
 .navbar_button:hover {
-  background-color: var(--bg);
-  color: var(--fg);
-}
-
-.navbar_button:active {
-  background-color: var(--bg);
-  color: var(--fg);
+  background-color: var(--color1);
 }
 
 .modal {
@@ -140,19 +139,6 @@
   color: rgb(255, 0, 0);
   text-decoration: none;
   cursor: pointer;
-}
-
-h1 {
-  font-optical-sizing: auto;
-  font-size: xx-large;
-  color: var(--fg);
-}
-
-h3 {
-  padding: 0%;
-  margin: 5px;
-  font-size: medium;
-  line-height: 2;
 }
 
 svg path {
@@ -384,7 +370,6 @@ a .text-box .i {
 }
 
 .contact_button {
-  font-family: "Varela Round", sans-serif;
   font-weight: 700;
   font-size: medium;
   background-color: var(--fg);
@@ -479,38 +464,35 @@ a .button:hover {
 }
 
 .theme-toggle {
-  position: fixed;
-  width: 50px;
+  height: 40px;
   aspect-ratio: 1/1;
-  bottom: 40px;
-  right: 20px;
-  z-index: 1000;
   align-items: center;
   align-content: center;
   justify-content: center;
-  border-radius: 50%;
+  text-align: center;
+  border-radius: 15px;
   border: none;
+  padding: 0px;
+  margin: 0px;
   box-shadow: none;
-  background-color: var(--fg);
-  color: var(--bg);
-  transition: all 1s;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  color: var(--fg);
+  transition: all 0.3s;
 }
 
 .theme-toggle i {
-  color: var(--bg);
+  color: var(--fg);
   margin: 0px;
   padding: 0px;
   font-size: 16px;
 }
 
 .theme-toggle:hover {
-  background-color: var(--fg);
+  background-color: var(--color1);
 }
 
 .theme-toggle:active {
-  background-color: var(--color1);
-  transform: scale(0.8);
+  transform: scale(0.2);
 }
 
 .spacer {
@@ -520,6 +502,7 @@ a .button:hover {
 }
 
 .footer {
+  font-family: "Capriola", monospace;
   margin-bottom: 10px;
   font-size: medium;
   color: var(--fg)
@@ -542,29 +525,42 @@ a .button:hover {
 }
 
 h1 {
-  font-size: 60px;
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+  font-size: xx-large;
   color: var(--fg);
 }
 
 h2 {
   font-size: x-large;
+  font-family: 'Capriola';
+  font-weight: bolder;
   color: var(--fg);
 }
 
 h3 {
+  padding: 0%;
+  margin: 5px;
   font-size: medium;
-  color: var(--fg);
+  line-height: 2;
 }
 
 .app_name {
   z-index: -1;
   align-items: center;
   text-align: center;
-  font-size: 15vw;
+  font-size: 30vw;
+  position: absolute;
   margin: 0;
   padding: 0;
-  color: var(--fg);
+  opacity: 0.4;
+  background-image: linear-gradient(0deg, transparent, var(--fg));
+  background-size: 100%;
+  background-repeat: repeat;
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
 }
 
 .content {
@@ -579,24 +575,9 @@ h3 {
   color: var(--fg);
 }
 
-img {
+.ui {
   width: 90%;
   border-radius: 15px;
-}
-
-.imgs {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 5%;
-}
-
-.imgs img {
-  width: 50%;
-  border-radius: 15px;
-}
-
-.ui {
   border-radius: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -774,6 +755,7 @@ img {
 
 .square_block h2 {
   color: var(--fg);
+  line-height: 1.6rem;
   font-size: medium;
   font-weight: 1000;
   padding: 0px;
@@ -793,29 +775,19 @@ img {
   text-transform: uppercase;
 }
 
-
 @media screen and (min-width: 1000px) {
-  img {
+  .ui {
     width: 900px;
     height: auto;
     border-radius: 20px;
-  }
-
-  .imgs img {
-    width: 300px;
-  }
-  
+  }  
 }
 
 @media screen and (min-width: 1500px) {
-  img {
+  .ui {
     width: 1300px;
     height: auto;
     border-radius: 20px;
-  }
-
-  .imgs img {
-    width: 400px;
   }
 
   .svg_image {
@@ -941,6 +913,10 @@ img {
     flex-direction: column;
   }
 
+  .header_title {
+    display: none;
+  }
+
   .header {
     justify-content: center;
   }
@@ -979,6 +955,10 @@ img {
 
   .bio_content {
     flex-direction: column;
+  }
+
+  .header_title {
+    display: none;
   }
 
   .header {
