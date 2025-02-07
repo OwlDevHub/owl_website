@@ -15,6 +15,7 @@ const features = [
 const Features = () => (
   <div className="main_block">
     <img className="ui" src="imgs/app_dark.png" alt="App interface" />
+    <div className='spacer'></div>
     <div className="widget_blocks">
       {features.map((feature, index) => (
         <div key={index} className="square_block">

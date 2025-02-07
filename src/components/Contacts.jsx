@@ -11,7 +11,7 @@ const socials = [
 
 const Contacts = () => (
   <div className="contacts" id="contacts">
-    <h2>Contact with me</h2>
+    <h1>Contact with me</h1>
     <div className="contacts_badge_block">
       {socials.map((social, index) => (
         <a key={index} href={social.link} target="_blank" rel="noopener noreferrer">
@@ -23,7 +23,7 @@ const Contacts = () => (
         </a>
       ))}
     </div>
-    <a href="https://discord.gg/tnHSEc2cZv" className="btn-slide2">
+    <a href="https://discord.gg/tnHSEc2cZv" className="btn-slide2" style={{ marginTop: "30px"}}>
       <span className="circle2"><FontAwesomeIcon icon={faDiscord} /></span>
       <span className="title2">DS SERVER</span>
       <span className="title-hover2">CLICK</span>
