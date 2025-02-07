@@ -19,7 +19,6 @@
   --tr: hsla(237deg, 16%, 23%, 0.5);
   --red: hsl(0, 100%, 77%);
   --green: hsl(114, 100%, 77%);
-  --screenshot: url("./../imgs/app_dark.png");
 }
 
 :root.light {
@@ -32,7 +31,6 @@
   --tr: hsla(225deg, 14%, 77%, 0.5);
   --red: hsl(0, 100%, 77%);
   --green: hsl(114, 100%, 77%);
-  --screenshot: url("./../imgs/app_light.png");
 }
 
 * {
@@ -71,6 +69,7 @@
   height: 50px;
   z-index: 10000;
   width: 80%;
+  left: 10%;
   justify-content: space-between;
   align-items: center;
   align-content: center;
@@ -141,6 +140,15 @@ svg circle {
   background-color: var(--fg);
 }
 
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
 html {
   background: var(--bg);
   background-origin: padding-box;
@@ -151,6 +159,9 @@ html {
   font-weight: 400;
   display: flex;
   justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
   flex-direction: column;
   font-style: normal;
   scroll-behavior: smooth;
@@ -163,6 +174,8 @@ html {
 body {
   margin: 0px;
   padding: 0px;
+  min-width: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,14 +213,6 @@ a .text-box .i {
   margin-left: 20px;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  margin: 0px;
-  width: 50%;
-  padding: 0px;
-}
-
 .contacts_badge_block {
   width: 100%;
   padding: 0;
@@ -215,6 +220,7 @@ a .text-box .i {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 .contact_button {
@@ -242,6 +248,7 @@ a .text-box .i {
 }
 
 .contact_button i {
+  font-size: 30px;
   transition: transform 0.5s ease;
 }
 
@@ -345,7 +352,8 @@ a .button:hover {
 }
 
 .spacer {
-  height: 150px;
+  min-height: 150px;
+  max-height: 150px;
   background-color: transparent;
   border: none;
 }
@@ -431,6 +439,15 @@ h3 {
 
 .svg_image {
   width: 300px;
+}
+
+.download-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .download_app {
@@ -609,7 +626,7 @@ h3 {
   box-shadow: 0 4px 6px transparent;
 }
 
-.square_block .emoji {
+.emoji {
   color: var(--fg);
   font-size: 60px;
   font-weight: 1000;

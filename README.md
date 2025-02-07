@@ -9,8 +9,8 @@
 
 git clone https://github.com/Nighty3098/owl_website
 cd owl_website
-npm install
-npm start
+yarn
+yarn start
 
 ```
 
