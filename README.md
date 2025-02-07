@@ -1,6 +1,7 @@
 # OWL PROJECT HOMEPAGE
 
-![image](https://github.com/user-attachments/assets/552dab37-e563-40ed-b936-8c678a3bc55f)
+![image](https://github.com/user-attachments/assets/943d20fd-e30d-4bfa-91b4-8498d05d5ec5)
+![image](https://github.com/user-attachments/assets/c8355be1-685b-41e3-b091-0bb74ca3054c)
 
 ### Install:
 
