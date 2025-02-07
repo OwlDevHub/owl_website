@@ -273,6 +273,7 @@ a .text-box .i {
 
 .button:hover {
   background-color: var(--color1);
+  color: var(--fg);
   width: 350px;
 }
 
@@ -644,7 +645,7 @@ h3 {
 }
 
 .square_block:hover h1 {
-  color: var(--color2);
+  color: var(--fg);
 }
 
 .square_block h2 {
