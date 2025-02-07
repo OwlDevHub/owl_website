@@ -12,13 +12,13 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/theme.js"></script>
         <script src="js/animation.js"></script>
+        <script src="js/fix_mobile_hover.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
         <link rel="shortcut icon" href="imgs/icon.svg" />
     </head>
     <header class="header animate__animated animate__bounceInRight">
-        <div style="display: flex; flex-direction: row; align-items: center; gap: 20px">
-            <i class="header_title fa-solid fa-mountain-sun"></i>
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
             <h1 class="header_title">OWL - YOUR PRODUCTIVITY APP</h1>
         </div>
         <div>
@@ -70,50 +70,71 @@
                     </g>
                 </g>
             </svg>
-            <h1 style="font-size: xxx-large; text-wrap: pretty; width: 70%; font-weight: 1000;">Modern task and project manager for your productivity</h1>
+            <h1 style="font-size: xx-large; text-wrap: pretty; width: 70%; font-weight: 1000;">OWL - YOUR PRODUCTIVITY APP</h1>
         </div>
         <div class="main_block" style="height: 100%;">
-            <img class="ui" src="imgs/app.png" alt="Welcome" />
+            <img class="ui" src="imgs/app_dark.png" alt="Welcome" />
             <div class="spacer"></div>
             <div class="widget_blocks" style="margin-top: 100px;">
                 <div class="square_block">
                     <i class="fa-solid fa-rocket emoji"></i>
-                    <h1>Native<br />look like</h1>
+                    <h1>
+                        Custom<br />
+                        design
+                    </h1>
                 </div>
                 <div class="square_block">
                     <i class="fa-solid fa-arrows-rotate emoji"></i>
-                    <h1>Convenient<br />synchronization</h1>
+                    <h1>
+                        Convenient<br />
+                        synchronization
+                    </h1>
                 </div>
                 <div class="square_block">
                     <i class="fa-solid fa-bell emoji"></i>
-                    <h1>Instant<br />notifications</h1>
+                    <h1>
+                        Instant<br />
+                        notifications
+                    </h1>
                 </div>
                 <div class="square_block">
                     <i class="fa-solid fa-screwdriver-wrench emoji"></i>
-                    <h1>Customizing<br />the UI</h1>
+                    <h1>
+                        Customizing<br />
+                        the UI
+                    </h1>
                 </div>
                 <div class="square_block">
                     <i class="fa-solid fa-yen-sign emoji"></i>
-                    <h1>Free<br />trial version</h1>
+                    <h1>
+                        Free<br />
+                        trial version
+                    </h1>
                 </div>
                 <div class="square_block">
                     <i class="fa-brands fa-apple emoji"></i>
-                    <h1>Cross<br />platform</h1>
+                    <h1>
+                        Cross<br />
+                        platform
+                    </h1>
                 </div>
             </div>
         </div>
+        <div class="spacer"></div>
         <div class="content">
             <div class="spacer"></div>
+            <h1>Modern task and project manager for your productivity</h1>
             <div class="content download_app" id="download_app">
-              <h2>You can download the free trial version</h2>
-              <br />
-              <a href="https://github.com/Nighty3098/OWL_APP" class="btn-slide2">
-                <span class="circle2"><i class="fa fa-download"></i></span>
-                <span class="title2">DOWNLOAD</span>
-                <span class="title-hover2">CLICK</span>
-              </a>
+                <a href="" class="purchase_button">
+                    <h3><i class="fa-solid fa-heart purchase_emoji"></i> PURCHASE</h3>
+                    <h3 class="button_subblock">29.99$</h3>
+                </a>
+                <a href="https://github.com/Nighty3098/OWL_APP/releases" class="download_button">
+                    <h3><i class="fa-solid fa-download purchase_emoji"></i> DOWNLOAD</h3>
+                    <h3 class="button_subblock">TRIAL</h3>
+                </a>
             </div>
-          </div>
+        </div>
         <div class="spacer"></div>
         <div class="content contacts" id="contacts">
             <h2>Contact with me</h2>
@@ -139,6 +160,11 @@
                     </h3>
                 </a>
             </div>
+            <a href="https://discord.gg/tnHSEc2cZv" class="btn-slide2">
+                <span class="circle2"><i class="fa-brands fa-discord"></i></span>
+                <span class="title2">DS SERVER</span>
+                <span class="title-hover2">CLICK</span>
+            </a>
             <div class="spacer"></div>
             <div class="footer">
                 <p class="rights animate__animated animate__backInUp">&copy; <span id="year"></span> Semenov Artem (Nighty3098). All Rights Reserved.</p>

@@ -15,7 +15,11 @@
   --fg2: hsla(226deg, 64%, 88%, 0.9);
   --fg3: hsla(226deg, 64%, 88%, 0.0);
   --color1: hsl(237deg, 16%, 23%);
+  --color2: hsl(232deg, 23%, 18%);
   --tr: hsla(237deg, 16%, 23%, 0.5);
+  --red: hsl(0, 100%, 77%);
+  --green: hsl(114, 100%, 77%);
+  --screenshot: url("./../imgs/app_dark.png");
 }
 
 :root.light {
@@ -24,12 +28,24 @@
   --fg2: hsla(234deg, 16%, 35%, 0.5);
   --fg3: hsla(234deg, 16%, 35%, 0.0);
   --color1: hsl(225deg, 14%, 77%);
+  --color2: hsl(234deg, 16%, 35%);
   --tr: hsla(225deg, 14%, 77%, 0.5);
+  --red: hsl(0, 100%, 77%);
+  --green: hsl(114, 100%, 77%);
+  --screenshot: url("./../imgs/app_light.png");
 }
 
 * {
   user-select: none;
   font-family: "Capriola", monospace;
+}
+
+.ui {
+  width: 90%;
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
 .rights {
@@ -51,7 +67,7 @@
 .header {
   display: flex;
   position: fixed;
-  top: 10px;
+  top: 15px;
   height: 50px;
   z-index: 10000;
   width: 80%;
@@ -94,51 +110,6 @@
 
 .navbar_button:hover {
   background-color: var(--color1);
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  backdrop-filter: blur(10px);
-}
-
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--bg);
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
-  color: var(--fg);
-  border-radius: 20px;
-  padding: 20px;
-  width: 80%;
-}
-
-#inputData {
-  color: var(--bg);
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: rgb(255, 0, 0);
-  text-decoration: none;
-  cursor: pointer;
 }
 
 svg path {
@@ -201,110 +172,6 @@ body {
   scroll-snap-type: x mandatory;
 }
 
-.scrollButton {
-  background-color: transparent;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  color: var(--fg);
-  cursor: pointer;
-  font-size: 20px;
-  position: absolute;
-  bottom: 150px;
-  left: 50%;
-  border: none;
-  transform: translateX(-30%);
-}
-
-.profile_card,
-.welcome_card,
-.profile_card_2,
-.profile_stats,
-.profile_repos,
-.user_bio,
-.git_profile_card,
-.my_contacts,
-.profile_blogs {
-  background-color: transparent;
-  border-radius: 30px;
-  color: var(--fg);
-  font-size: x-large;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  margin: 20px;
-  opacity: 1;
-  transition: all 0.5s ease-in-out;
-}
-
-.user_bio {
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.git_profile_card {
-  min-height: 100%;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-}
-
-.git_profile_card * {
-  color: var(--bg);
-}
-
-#open_git_button {
-  background-color: var(--bg);
-  color: var(--fg)
-}
-
-#open_git_button * {
-  background-color: var(--bg);
-  color: var(--fg)
-}
-
-.user_bio h3 {
-  margin: 30px;
-}
-
-.profile_blogs,
-.profile_repos {
-  background-color: var(--bg);
-}
-
-.profile_card a {
-  width: 100%;
-  height: auto;
-  margin: 0px;
-  padding: 0%;
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.profile_card .button {
-  width: 50%;
-}
-
-.bio_info {
-  font-style: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-}
-
-.bio_info h3 {
-  font-size: medium;
-  line-height: 2;
-  align-content: center;
-  text-align: center;
-}
-
 .text-box {
   width: 85%;
   padding: 15px;
@@ -333,31 +200,12 @@ a .text-box .i {
   margin-left: 20px;
 }
 
-.profile_info {
-  display: flex;
-  flex-direction: column;
-  margin: 0px;
-  padding: 0px;
-  height: 100%;
-}
-
-.welcome_card {
-  height: 100vh;
-}
-
 .content {
   display: flex;
   flex-direction: column;
   margin: 0px;
   width: 50%;
   padding: 0px;
-}
-
-.user_avatar {
-  height: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 40px;
-  z-index: -1000;
 }
 
 .contacts_badge_block {
@@ -575,15 +423,6 @@ h3 {
   color: var(--fg);
 }
 
-.ui {
-  width: 90%;
-  border-radius: 15px;
-  border-radius: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-}
-
 .small_spacer {
   height: 50px;
   background-color: transparent;
@@ -591,6 +430,61 @@ h3 {
 
 .svg_image {
   width: 300px;
+}
+
+.download_app {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.purchase_button, .download_button {
+  height: 50px;
+  width: 250px;
+  margin: 10px;
+  border-radius: 50px;
+  background-color: var(--fg);
+  color: var(--bg);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: background-color 0.5s, box-shadow 0.5s, width 0.5s, color 0.5s;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  padding: 0px 10px 0px 10px;
+}
+
+.purchase_button i, .download_button i {
+  margin-right: 10px;
+}
+
+.button_subblock {
+  background-color: var(--bg);
+  color: var(--fg);
+  border-radius: 10px;
+  height: 35px;
+  text-align: center;
+  font-weight: 1000;
+  padding: 0 10px;
+  transition: background-color 0.5s;
+}
+
+.purchase_button:hover {
+  width: 350px;
+  color: var(--color2);
+  background-color: var(--red);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.download_button:hover {
+  width: 350px;
+  color: var(--color2);
+  background-color: var(--green);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .btn-slide, .btn-slide2 {
@@ -613,22 +507,22 @@ h3 {
 }
 
 .btn-slide:hover {
-  background-color: var(--color1);
+  background-color: var(--green);
 }
 
 .btn-slide2:hover {
-  background-color: var(--color1);
+  background-color: var(--green);
 }
 
 .btn-slide:hover span.circle, .btn-slide2:hover span.circle2 {
   left: 100%;
   margin-left: -45px;
-  background-color: var(--fg);
-  color: var(--color1);
+  background-color: var(--color2);
+  color: var(--green);
 }
 
 .btn-slide2:hover span.circle2 {
-  color: var(--bg);
+  color: var(--green);
 }
 
 .btn-slide:hover span.title, .btn-slide2:hover span.title2 {
@@ -643,7 +537,7 @@ h3 {
 
 .btn-slide span.circle, .btn-slide2 span.circle2 {
   display: block;
-  background-color: var(--color1);
+  background-color: var(--green);
   color: var(--fg);
   position: absolute;
   float: left;
@@ -658,7 +552,7 @@ h3 {
 }
 
 .btn-slide2 span.circle2 {
-  background-color: var(--color1);
+  background-color: var(--bg);
 }
 
 .btn-slide span.title,
@@ -686,7 +580,7 @@ h3 {
 }
 
 .btn-slide span.title-hover, .btn-slide2 span.title-hover2 {
-  color: var(--fg);
+  color: var(--color2);
 }
 
 .widget_blocks {
@@ -814,6 +708,10 @@ h3 {
 
   .widget_blocks {
     grid-template-columns: auto auto;
+  }
+
+  .download_app {
+    flex-direction: column;
   }
 }
 
