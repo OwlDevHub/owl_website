@@ -7,7 +7,6 @@ import DownloadSection from './components/DownloadSection';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
 import './styles/index.css';
-import './styles/owl_animation.css';
 
 const App = () => {
   return (
