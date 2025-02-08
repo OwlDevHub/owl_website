@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import Features from './components/Features';
+import { HeroSection, SloganSection } from './components/HeroSection';
+import { Features, Images } from './components/Features';
 import DownloadSection from './components/DownloadSection';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
@@ -17,8 +17,11 @@ const App = () => {
         <main>
               <>
                 <HeroSection />
+                <div className='spacer'></div>
+                <Images />
                 <Features />
                 <div className='spacer'></div>
+                <SloganSection />
                 <DownloadSection />
                 <div className='spacer'></div>
                 <Contacts />

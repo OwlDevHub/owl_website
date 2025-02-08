@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTelegram, faDiscord, faReddit, faSignalMessenger } from '@fortawesome/free-brands-svg-icons'; // Импортируем иконки
+import { faTelegram, faDiscord, faReddit, faSignalMessenger } from '@fortawesome/free-brands-svg-icons';
 
 const socials = [
   { icon: faTelegram, link: 'https://t.me/Night3098' },
@@ -11,7 +11,7 @@ const socials = [
 
 const Contacts = () => (
   <div className="contacts" id="contacts">
-    <h1>Contact with me</h1>
+    <h1>CONTACTS</h1>
     <div className="contacts_badge_block">
       {socials.map((social, index) => (
         <a key={index} href={social.link} target="_blank" rel="noopener noreferrer">

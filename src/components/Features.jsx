@@ -12,10 +12,8 @@ const features = [
   { icon: faApple, text: 'Cross\nplatform' },
 ];
 
-const Features = () => (
-  <div className="main_block">
-    <img className="ui" src="imgs/app_dark.png" alt="App interface" />
-    <div className='spacer'></div>
+export const Features = () => (
+  <div className="content">
     <div className="widget_blocks">
       {features.map((feature, index) => (
         <div key={index} className="square_block">
@@ -33,4 +31,8 @@ const Features = () => (
   </div>
 );
 
-export default Features;
+export const Images = () => (
+  <div className="content">
+    <img className="ui" src="imgs/app_dark.png" alt="App interface" />
+  </div>
+)
