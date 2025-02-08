@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const TimelineItem = ({ text, status }) => {
   let statusColor;
   let statusText;
 
   switch (status) {
-    case 'completed':
-      statusColor = 'var(--green)';
-      statusText = 'DONE';
+    case "completed":
+      statusColor = "var(--green)";
+      statusText = "DONE";
       break;
-    case 'not_completed':
-      statusColor = 'var(--red)';
-      statusText = 'NS';
+    case "not_completed":
+      statusColor = "var(--red)";
+      statusText = "NS";
       break;
-    case 'in_progress':
-      statusColor = 'var(--purple)';
-      statusText = 'IN DEV';
+    case "in_progress":
+      statusColor = "var(--purple)";
+      statusText = "IN DEV";
       break;
     default:
-      statusColor = 'var(--color1)';
-      statusText = '';
+      statusColor = "var(--color1)";
+      statusText = "";
   }
 
   return (
-    <div className="timeline-content" style={{ borderLeft: `15px solid ${statusColor}` }}>
+    <div
+      className="timeline-content"
+      style={{ borderLeft: `15px solid ${statusColor}` }}
+    >
       {text}
       <span className="status-text">{statusText}</span>
     </div>
@@ -52,13 +55,13 @@ const Timeline = () => {
     { text: "Placement on the server", status: "not_completed" },
     { text: "Setup CI/CD", status: "not_completed" },
     { text: "Configure server environment", status: "not_completed" },
-    { text: "Attracting an audience", status: "not_completed" }
+    { text: "Attracting an audience", status: "not_completed" },
   ];
 
   const [showAll, setShowAll] = useState(false);
 
   const handleToggleTasks = () => {
-    setShowAll(prev => !prev);
+    setShowAll((prev) => !prev);
   };
 
   return (
@@ -67,7 +70,7 @@ const Timeline = () => {
         <TimelineItem key={index} text={task.text} status={task.status} />
       ))}
       <button onClick={handleToggleTasks} className="show-more-button">
-        {showAll ? 'HIDE' : 'SHOW ALL'}
+        {showAll ? "HIDE" : "SHOW ALL"}
       </button>
     </div>
   );
@@ -75,8 +78,12 @@ const Timeline = () => {
 
 export const DevelopmentProgressPage = () => {
   return (
-    <div className='content'>
-        <h1>DEVELOPMENT<br />PROGRESS</h1>
+    <div className="content">
+      <h1>
+        DEVELOPMENT
+        <br />
+        PROGRESS
+      </h1>
       <Timeline />
     </div>
   );

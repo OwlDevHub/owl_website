@@ -1,7 +1,12 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLightbulb, faCloudArrowDown, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
-import useTheme from '../hooks/useTheme';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLightbulb,
+  faCloudArrowDown,
+  faMoon,
+  faSun,
+} from "@fortawesome/free-solid-svg-icons";
+import useTheme from "../hooks/useTheme";
 
 const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -11,7 +16,7 @@ const Header = () => {
       <div className="header-left">
         <h1 className="header_title">OWL - YOUR PRODUCTIVITY APP</h1>
       </div>
-      <div className='header-left'>
+      <div className="header-left">
         <a className="navbar_button" href="#about_app">
           <FontAwesomeIcon icon={faLightbulb} /> INFO
         </a>
