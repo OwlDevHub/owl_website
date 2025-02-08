@@ -128,17 +128,23 @@ svg circle {
   outline: none;
 }
 
-.svg_image {
+.app_logo {
   width: 350px;
   margin: 30px;
+  transition: transform 0.5s ease-in;
+  perspective: 1000px;
 }
 
-.svg_image path {
+.app_logo:hover {
+  transform:scale(1.1);
+}
+
+.app_logo path {
   stroke: var(--fg);
   background-color: var(--fg);
 }
 
-.svg_image circle {
+.app_logo circle {
   stroke: var(--fg);
   background-color: var(--fg);
 }
@@ -492,7 +498,7 @@ h3 {
   background-color: transparent;
 }
 
-.svg_image {
+.app_logo {
   width: 300px;
 }
 
@@ -779,7 +785,7 @@ h3 {
     border-radius: 20px;
   }
 
-  .svg_image {
+  .app_logo {
     width: 300px;
   }
 }
@@ -862,7 +868,7 @@ h3 {
     align-items: center;
     }
 
-    .svg_image {
+    .app_logo {
       width: 500px;
       margin: 30px;
     }

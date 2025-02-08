@@ -1,6 +1,6 @@
 const OwlIcon = () => (
 <svg
-  className="svg_image"
+  className="app_logo"
   viewBox="0 0 14.528579 19.371439"
   version="1.1"
   id="svg1"
