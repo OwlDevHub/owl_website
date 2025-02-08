@@ -15,9 +15,9 @@
   --color1: hsl(237deg, 16%, 23%);
   --color2: hsl(232deg, 23%, 18%);
   --tr: hsla(237deg, 16%, 23%, 0.5);
-  --red: hsl(0, 100%, 77%);
-  --green: hsl(114, 100%, 77%);
-  --purple: hsl(258, 100%, 77%);
+  --red: hsl(0, 100%, 81%);
+  --green: hsl(114, 100%, 86%);
+  --purple: hsl(258, 100%, 83%);
 }
 
 :root.light {
@@ -28,9 +28,9 @@
   --color1: hsl(225deg, 14%, 77%);
   --color2: hsl(234deg, 16%, 35%);
   --tr: hsla(225deg, 14%, 77%, 0.5);
-  --red: hsl(0, 100%, 77%);
-  --green: hsl(114, 100%, 77%);
-  --purple: hsl(252, 100%, 77%);
+  --red: hsl(0, 100%, 83%);
+  --green: hsl(114, 100%, 85%);
+  --purple: hsl(252, 100%, 84%);
 }
 
 * {
@@ -64,12 +64,12 @@
 
 .header {
   display: flex;
-  position: fixed;
+  position:sticky;
   top: 15px;
   height: 50px;
   z-index: 10000;
-  width: 80%;
-  left: calc(10% - 20px);
+  width: 60%;
+  left: calc(20% - 20px);
   justify-content: space-between;
   align-items: center;
   align-content: center;
@@ -80,6 +80,7 @@
   padding-left: 20px;
   padding-right: 20px;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  transition: width 0.5s ease-in-out;
 }
 
 .header_title {
@@ -111,7 +112,7 @@
 }
 
 .navbar_button:hover {
-  background-color: var(--color1);
+  background-color: var(--tr);
 }
 
 svg path {
@@ -129,7 +130,7 @@ svg circle {
 }
 
 .app_logo {
-  width: 350px;
+  width: 200px;
   margin: 30px;
   transition: transform 0.5s ease-in;
   perspective: 1000px;
@@ -281,17 +282,13 @@ body {
 }
 
 .contact_button:hover {
-  background-color: var(--color1);
+  background-color: var(--tr);
   color: var(--fg);
 }
 
 .contact_button i {
   font-size: 30px;
   transition: transform 0.5s ease;
-}
-
-.contact_button:hover i {
-  transform: scale(1.2);
 }
 
 .button {
@@ -317,7 +314,7 @@ body {
 }
 
 .button:hover {
-  background-color: var(--color1);
+  background-color: var(--tr);
   color: var(--fg);
   width: 350px;
 }
@@ -353,10 +350,51 @@ a .button {
 }
 
 a .button:hover {
-  background-color: var(--color1);
+  background-color: var(--tr);
   width: 350px;
 }
 
+.development_progress_button {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  height: 30px;
+  width: 200px;
+  transition: all 0.6s ease;
+}
+
+.development_progress_button .circle::after {
+  position: relative;
+  transition: all 0.6s ease;
+  color: var(--bg);
+  border-radius: 20px;
+  align-content: center;
+}
+
+.development_progress_button:hover {
+  background-color: var(--tr);
+  color: var(--fg);
+  width: 300px;
+}
+
+.development_progress_button:hover .circle::after {
+  color: var(--fg);
+}
+
+.task-text  {
+  color: var(--fg);
+  font-family: "Capriola", monospace;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+.tasks-content {
+  width: 200px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
 
 .checkbox {
   width: 20px;
@@ -390,7 +428,7 @@ a .button:hover {
 
 .checkbox:checked::after {
   content: "\2713";
-  color: var(--bg);
+  color: var(--fg);
   opacity: 1;
   transform: scale(1);
   transition:
@@ -494,10 +532,6 @@ h3 {
   background-color: transparent;
 }
 
-.app_logo {
-  width: 300px;
-}
-
 .theme-toggle {
   background-color: transparent;
   color: var(--fg);
@@ -575,7 +609,7 @@ h3 {
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
 }
 
-.btn-slide, .btn-slide2 {
+.btn-slide {
   position: relative;
   display: inline-block;
   height: 50px;
@@ -590,7 +624,7 @@ h3 {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.btn-slide2 {
+.btn-slide {
   border: none;
 }
 
@@ -598,32 +632,28 @@ h3 {
   background-color: var(--purple);
 }
 
-.btn-slide2:hover {
-  background-color: var(--purple);
-}
-
-.btn-slide:hover span.circle, .btn-slide2:hover span.circle2 {
+.btn-slide:hover span.circle, .btn-slide:hover span.circle2 {
   left: 100%;
   margin-left: -45px;
   background-color: var(--color2);
   color: var(--purple);
 }
 
-.btn-slide2:hover span.circle2 {
+.btn-slide:hover span.circle2 {
   color: var(--purple);
 }
 
-.btn-slide:hover span.title, .btn-slide2:hover span.title2 {
+.btn-slide:hover span.title {
   left: 40px;
   opacity: 0;
 }
 
-.btn-slide:hover span.title-hover, .btn-slide2:hover span.title-hover2 {
+.btn-slide:hover span.title-hover {
   opacity: 1;
   left: 40px;
 }
 
-.btn-slide span.circle, .btn-slide2 span.circle2 {
+.btn-slide span.circle {
   display: block;
   background-color: var(--purple);
   color: var(--fg);
@@ -639,13 +669,11 @@ h3 {
   border-radius: 50%;
 }
 
-.btn-slide2 span.circle2 {
+.btn-slide span.circle {
   background-color: var(--bg);
 }
 
-.btn-slide span.title,
-.btn-slide span.title-hover, .btn-slide2 span.title2,
-.btn-slide2 span.title-hover2 {
+.btn-slide span.title-hover, .btn-slide span.title {
   position: absolute;
   left: 90px;
   text-align: center;
@@ -656,18 +684,18 @@ h3 {
   transition: .5s;
 }
 
-.btn-slide2 span.title2,
-.btn-slide2 span.title-hover2 {
+.btn-slide span.title,
+.btn-slide span.title-hover {
   color: var(--bg);
   left: 80px;
 }
 
-.btn-slide span.title-hover, .btn-slide2 span.title-hover2 {
+.btn-slide span.title-hover {
   left: 80px;
   opacity: 0;
 }
 
-.btn-slide span.title-hover, .btn-slide2 span.title-hover2 {
+.btn-slide span.title-hover {
   color: var(--color2);
 }
 
@@ -711,7 +739,7 @@ h3 {
 }
 
 .square_block:hover {
-  background-color: var(--color1);
+  background-color: var(--tr);
   transform: scale(1.05);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
@@ -766,6 +794,64 @@ h3 {
   text-transform: uppercase;
 }
 
+.status-text {
+  float: right;
+  font-weight: bold;
+  margin: 0px;
+  color: var(--fg);
+}
+
+.timeline {
+  width: auto;
+  margin: 0px;
+  padding: 0px;
+}
+
+.timeline-container {
+  width: auto;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.timeline-content {
+  background-color: var(--fg);
+  border-radius: 15px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  height: 30px;
+  padding: 10px;
+  margin: 10px;
+  color: var(--bg);
+  text-align: left;
+  align-items: center;
+  align-content: center;
+}
+
+.timeline-content * {
+  color: var(--bg);
+}
+
+.icon {
+  font-size: large;
+  margin-right: 10px;
+  color: var(--fg);
+}
+
+.show-more-button {
+  background-color: var(--fg);
+  color: var(--bg);
+  padding: 15px;
+  font-family: 'Capriola', monospace;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 10px;
+  font-weight: 1000;
+  width: 150px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (min-width: 1000px) {
   .ui {
     width: 900px;
@@ -782,7 +868,7 @@ h3 {
   }
 
   .app_logo {
-    width: 300px;
+    width: 250px;
   }
 }
 
@@ -832,18 +918,6 @@ h3 {
   .square_block h3 {
     font-size: medium;
   }
-
-  .welcome_card {
-    height: 100%;
-  }
-
-  .bio_content {
-    flex-direction: column;
-  }
-
-  .username {
-    font-size: 50px;
-  }
 }
 
 @media screen and (min-width: 1500px) {
@@ -865,7 +939,7 @@ h3 {
     }
 
     .app_logo {
-      width: 500px;
+      width: 400px;
       margin: 30px;
     }
 }
@@ -897,10 +971,8 @@ h3 {
 
 @media screen and (max-width: 1500px) {
   .content {
-    width: 60%;
+    width: 100%;
     margin: 0px;
-    margin-left: 15%;
-    margin-right: 15%;
     padding: 0px;
   }
 
@@ -915,41 +987,16 @@ h3 {
   .header {
     justify-content: center;
   }
-
-  .user_avatar {
-    width: 45%;
-  }
-
-  .left_text {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 2000px) {
-  .bio_content {
-    flex-direction: column;
-  }
-
-  .left_text {
-    margin-left: 0px;
-  }
-
-  .user_avatar {
-    margin: 5%;
-  }
 }
 
 @media screen and (max-width: 850px) {
+  .header {
+    width: 80%;
+    left: calc(10% - 20px);
+  }
+
   .username {
     font-size: 55px;
-  }
-
-  .left_text {
-    margin-left: 0px;
-  }
-
-  .bio_content {
-    flex-direction: column;
   }
 
   .header_title {
@@ -966,39 +1013,5 @@ h3 {
 
   .link_badge {
     width: 200px;
-  }
-
-  .tabs {
-    display: flex;
-    cursor: pointer;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-  }
-
-  .content {
-    justify-content: center;
-    width: 100%;
-    margin: 0px;
-  }
-
-  .user_avatar {
-    width: 70%;
-    margin: 5%;
-    border-radius: 30%;
-  }
-
-  .skill_badge {
-    width: 60px;
-    margin: 10px;
-  }
-
-  .left_text {
-    width: 90%;
-  }
-
-  #flip {
-    font-size: x-large;
   }
 }

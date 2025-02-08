@@ -23,10 +23,10 @@ const Contacts = () => (
         </a>
       ))}
     </div>
-    <a href="https://discord.gg/tnHSEc2cZv" className="btn-slide2" style={{ marginTop: "30px"}}>
-      <span className="circle2"><FontAwesomeIcon icon={faDiscord} /></span>
-      <span className="title2">DS SERVER</span>
-      <span className="title-hover2">CLICK</span>
+    <a href="https://discord.gg/tnHSEc2cZv" className="btn-slide" style={{ marginTop: "30px"}}>
+      <span className="circle"><FontAwesomeIcon icon={faDiscord} /></span>
+      <span className="title">DS SERVER</span>
+      <span className="title-hover">CLICK</span>
     </a>
   </div>
 );

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import OwlIcon from './OwlIcon';
 
 export const HeroSection = () => {
   return (
-      <div className="main_block animate__animated animate__fadeInDown" id="about_app">
+      <div className="main_block animate__animated animate__fadeInDown">
         <OwlIcon />
-        <h1>Modern task and project manager<br />for your productivity</h1>
+        <h2>Modern task and project manager<br />for your productivity</h2>
       </div>
   );
 };
@@ -17,4 +17,3 @@ export const SloganSection = ()  => {
     </div>
   )
 }
-
