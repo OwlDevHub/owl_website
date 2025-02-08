@@ -7,6 +7,7 @@ import DownloadSection from './components/DownloadSection';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
 import './styles/index.css';
+import { DevelopmentProgressPage } from './components/DevelopmentProgressPage';
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
                 <div className='spacer'></div>
                 <SloganSection />
                 <DownloadSection />
+                <div className='spacer'></div>
+                <DevelopmentProgressPage />
                 <div className='spacer'></div>
                 <Contacts />
                 <div className='spacer'></div>
