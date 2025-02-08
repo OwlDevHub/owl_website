@@ -7,7 +7,7 @@ const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <header className="header animate__animated animate__bounceInRight">
+    <header className="header animate__animated animate__fadeInRight">
       <div className="header-left">
         <h1 className="header_title">OWL - YOUR PRODUCTIVITY APP</h1>
       </div>
