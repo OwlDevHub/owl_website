@@ -135,10 +135,6 @@ svg circle {
   perspective: 1000px;
 }
 
-.app_logo:hover {
-  transform:scale(1.1);
-}
-
 .app_logo path {
   stroke: var(--fg);
   background-color: var(--fg);
@@ -599,22 +595,22 @@ h3 {
 }
 
 .btn-slide:hover {
-  background-color: var(--green);
+  background-color: var(--purple);
 }
 
 .btn-slide2:hover {
-  background-color: var(--green);
+  background-color: var(--purple);
 }
 
 .btn-slide:hover span.circle, .btn-slide2:hover span.circle2 {
   left: 100%;
   margin-left: -45px;
   background-color: var(--color2);
-  color: var(--green);
+  color: var(--purple);
 }
 
 .btn-slide2:hover span.circle2 {
-  color: var(--green);
+  color: var(--purple);
 }
 
 .btn-slide:hover span.title, .btn-slide2:hover span.title2 {
@@ -629,7 +625,7 @@ h3 {
 
 .btn-slide span.circle, .btn-slide2 span.circle2 {
   display: block;
-  background-color: var(--green);
+  background-color: var(--purple);
   color: var(--fg);
   position: absolute;
   float: left;
@@ -762,7 +758,7 @@ h3 {
 }
 
 .big_text {
-  font-size: xx-large;
+  font-size: large;
   font-weight: 1000;
   padding: 0px;
   margin: 0px;
