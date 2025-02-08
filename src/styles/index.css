@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Capriola&family=M+PLUS+Rounded+1c&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap');
 
 /*
-
   font-family: "M PLUS Rounded 1c", serif;
   font-family: "Capriola", serif;
   font-family: "Oswald", serif;
   font-family: "Nunito", serif;
-
 */
 
 :root {
@@ -19,6 +17,7 @@
   --tr: hsla(237deg, 16%, 23%, 0.5);
   --red: hsl(0, 100%, 77%);
   --green: hsl(114, 100%, 77%);
+  --purple: hsl(258, 100%, 77%);
 }
 
 :root.light {
@@ -31,6 +30,7 @@
   --tr: hsla(225deg, 14%, 77%, 0.5);
   --red: hsl(0, 100%, 77%);
   --green: hsl(114, 100%, 77%);
+  --purple: hsl(252, 100%, 77%);
 }
 
 * {
@@ -477,6 +477,7 @@ h3 {
 .content {
   height: 100%;
   width: 100%;
+  min-height: 100%;
   text-wrap: pretty;
   display: flex;
   flex-direction: column;
@@ -754,6 +755,15 @@ h3 {
   text-transform: uppercase;
 }
 
+.big_text {
+  font-size: xx-large;
+  font-weight: 1000;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
 @media screen and (min-width: 1000px) {
   .ui {
     width: 900px;
@@ -851,6 +861,11 @@ h3 {
     justify-content: center;
     align-items: center;
     }
+
+    .svg_image {
+      width: 500px;
+      margin: 30px;
+    }
 }
 
 @media screen and (max-width: 2000px) {
@@ -860,11 +875,6 @@ h3 {
   }
   .skill_badge {
     width: 80px;
-  }
-
-  .svg_image {
-    width: 200px;
-    margin: 30px;
   }
 }
 

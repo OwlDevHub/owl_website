@@ -1,20 +1,20 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import OwlIcon from './OwlIcon';
 
-const HeroSection = () => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/development-progress');
-  };
-
+export const HeroSection = () => {
   return (
-    <div className="main_block animate__animated animate__bounceInDown" id="about_app">
-      <OwlIcon />
-      <h1>OWL - YOUR PRODUCTIVITY APP</h1>
-    </div>
+      <div className="main_block animate__animated animate__bounceInDown" id="about_app">
+        <OwlIcon />
+        <h1>Modern task and project manager<br />for your productivity</h1>
+      </div>
   );
 };
 
-export default HeroSection;
+export const SloganSection = ()  => {
+  return (
+    <div className="main_block" style={{ textAlign: "left", height: "100%", width: "100%"}}>
+      <h1 className='big_text'><h1 style={{ padding: "0px", margin: "0px", fontSize: "xxx-large", fontWeight: "1000"}}>OWL:</h1>Your ideas<br />your organization<br />your freedom</h1>
+    </div>
+  )
+}
+
