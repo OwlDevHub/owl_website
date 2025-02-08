@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Capriola&family=M+PLUS+Rounded+1c&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Capriola&family=M+PLUS+Rounded+1c&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap");
 
 /*
   font-family: "M PLUS Rounded 1c", serif;
@@ -11,7 +11,7 @@
   --bg: hsl(232deg, 23%, 18%);
   --fg: hsl(226deg, 64%, 88%);
   --fg2: hsla(226deg, 64%, 88%, 0.9);
-  --fg3: hsla(226deg, 64%, 88%, 0.0);
+  --fg3: hsla(226deg, 64%, 88%, 0);
   --color1: hsl(237deg, 16%, 23%);
   --color2: hsl(232deg, 23%, 18%);
   --tr: hsla(237deg, 16%, 23%, 0.5);
@@ -24,7 +24,7 @@
   --bg: hsl(220deg, 23%, 95%);
   --fg: hsl(234deg, 16%, 35%);
   --fg2: hsla(234deg, 16%, 35%, 0.5);
-  --fg3: hsla(234deg, 16%, 35%, 0.0);
+  --fg3: hsla(234deg, 16%, 35%, 0);
   --color1: hsl(225deg, 14%, 77%);
   --color2: hsl(234deg, 16%, 35%);
   --tr: hsla(225deg, 14%, 77%, 0.5);
@@ -64,7 +64,7 @@
 
 .header {
   display: flex;
-  position:sticky;
+  position: sticky;
   top: 15px;
   height: 50px;
   z-index: 10000;
@@ -382,7 +382,7 @@ a .button:hover {
   color: var(--fg);
 }
 
-.task-text  {
+.task-text {
   color: var(--fg);
   font-family: "Capriola", monospace;
   font-weight: bold;
@@ -456,12 +456,12 @@ a .button:hover {
   font-family: "Capriola", monospace;
   margin-bottom: 10px;
   font-size: medium;
-  color: var(--fg)
+  color: var(--fg);
 }
 
 .footer p {
   font-size: small;
-  color: var(--fg)
+  color: var(--fg);
 }
 
 .main_block {
@@ -484,7 +484,7 @@ h1 {
 
 h2 {
   font-size: x-large;
-  font-family: 'Capriola';
+  font-family: "Capriola";
   font-weight: bolder;
   color: var(--fg);
 }
@@ -509,7 +509,7 @@ h3 {
   background-size: 100%;
   background-repeat: repeat;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
+  -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 }
@@ -563,7 +563,8 @@ h3 {
   align-content: center;
 }
 
-.purchase_button, .download_button {
+.purchase_button,
+.download_button {
   height: 50px;
   width: 250px;
   margin: 10px;
@@ -575,12 +576,17 @@ h3 {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  transition: background-color 0.5s, box-shadow 0.5s, width 0.5s, color 0.5s;
+  transition:
+    background-color 0.5s,
+    box-shadow 0.5s,
+    width 0.5s,
+    color 0.5s;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
   padding: 0px 10px 0px 10px;
 }
 
-.purchase_button i, .download_button i {
+.purchase_button i,
+.download_button i {
   margin-right: 10px;
 }
 
@@ -620,7 +626,7 @@ h3 {
   background: var(--fg);
   border: none;
   margin: 10px;
-  transition: .5s;
+  transition: 0.5s;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -632,7 +638,8 @@ h3 {
   background-color: var(--purple);
 }
 
-.btn-slide:hover span.circle, .btn-slide:hover span.circle2 {
+.btn-slide:hover span.circle,
+.btn-slide:hover span.circle2 {
   left: 100%;
   margin-left: -45px;
   background-color: var(--color2);
@@ -665,7 +672,7 @@ h3 {
   width: 40px;
   top: 0;
   left: 0;
-  transition: .5s;
+  transition: 0.5s;
   border-radius: 50%;
 }
 
@@ -673,15 +680,16 @@ h3 {
   background-color: var(--bg);
 }
 
-.btn-slide span.title-hover, .btn-slide span.title {
+.btn-slide span.title-hover,
+.btn-slide span.title {
   position: absolute;
   left: 90px;
   text-align: center;
   margin: 0 auto;
   font-size: 16px;
   font-weight: bold;
-  color:var(--bg);
-  transition: .5s;
+  color: var(--bg);
+  transition: 0.5s;
 }
 
 .btn-slide span.title,
@@ -842,7 +850,7 @@ h3 {
   background-color: var(--fg);
   color: var(--bg);
   padding: 15px;
-  font-family: 'Capriola', monospace;
+  font-family: "Capriola", monospace;
   border: none;
   border-radius: 15px;
   cursor: pointer;
@@ -857,7 +865,7 @@ h3 {
     width: 900px;
     height: auto;
     border-radius: 20px;
-  }  
+  }
 }
 
 @media screen and (min-width: 1500px) {
@@ -880,11 +888,11 @@ h3 {
   .square_block h1 {
     font-size: medium;
   }
-  
+
   .square_block h2 {
     font-size: small;
   }
-  
+
   .square_block h3 {
     font-size: small;
   }
@@ -910,11 +918,11 @@ h3 {
   .square_block h1 {
     font-size: large;
   }
-  
+
   .square_block h2 {
     font-size: medium;
   }
-  
+
   .square_block h3 {
     font-size: medium;
   }
@@ -932,16 +940,17 @@ h3 {
   .square {
     position: relative;
     margin: 0 10px;
-    width: 500px; height: 500px;
+    width: 500px;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
-    }
+  }
 
-    .app_logo {
-      width: 400px;
-      margin: 30px;
-    }
+  .app_logo {
+    width: 400px;
+    margin: 30px;
+  }
 }
 
 @media screen and (max-width: 2000px) {
@@ -958,14 +967,15 @@ h3 {
   .square {
     position: relative;
     margin: 0 10px;
-    width: 1200px; height: 1200px;
+    width: 1200px;
+    height: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .username { 
-      font-size: 180px;
+  .username {
+    font-size: 180px;
   }
 }
 
