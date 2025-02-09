@@ -1,9 +1,19 @@
-# OWL PROJECT HOMEPAGE
+<div align="center">
+<h1>OWL PROJECT HOMEPAGE</h1>
 
-![image](https://github.com/user-attachments/assets/943d20fd-e30d-4bfa-91b4-8498d05d5ec5)
-![image](https://github.com/user-attachments/assets/c8355be1-685b-41e3-b091-0bb74ca3054c)
+<br /><br />
 
-### Install:
+<img src="sc/2.png">
+<img src="sc/1.png">
+
+<br /><br />
+
+<img src="https://github.com/Nighty3098/DevIcons/blob/main/badges/badges_react.png?raw=true" width="60px" />
+<img src="https://github.com/Nighty3098/DevIcons/blob/main/badges/badges_javascript.png?raw=true" width="60px" />
+
+<br /><br />
+
+</div>
 
 ```bash
 
@@ -13,5 +23,3 @@ yarn
 yarn start
 
 ```
-
-#### License: MIT
