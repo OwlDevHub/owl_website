@@ -42,6 +42,7 @@ export const Features = () => (
 
 export const Images = () => (
   <div className="content">
-    <img className="ui" src="imgs/app_dark.png" alt="App interface" />
+    <img className="ui" src="imgs/app_1.png" alt="App interface" />
+    <img className="ui" src="imgs/app_2.png" alt="App interface" />
   </div>
 );
