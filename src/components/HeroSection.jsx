@@ -17,8 +17,7 @@ export const HeroSection = () => {
 export const SloganSection = () => {
   return (
     <div
-      className="main_block"
-      style={{ textAlign: "left", height: "100%", width: "100%" }}
+      style={{ textAlign: "left", height: "100%", width: "100%", alignItems: "center", display: "flex", justifyContent: "center" }}
     >
       <h1 className="big_text">
         <p
