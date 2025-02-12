@@ -5,7 +5,7 @@ export const HeroSection = () => {
   return (
     <div className="main_block animate__animated animate__fadeInDown">
       <OwlIcon />
-      <h2>
+      <h2 style={{ fontSize: "x-large", marginTop: "50px", lineHeight: "45px"}}>
         Modern task and project manager
         <br />
         for your productivity
