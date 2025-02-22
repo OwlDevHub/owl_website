@@ -25,7 +25,7 @@ const TimelineItem = ({ text, status }) => {
   return (
     <div
       className="timeline-content"
-      style={{ borderLeft: `15px solid ${statusColor}` }}
+      style={{ borderLeft: `20px solid ${statusColor}` }}
     >
       {text}
       <span className="status-text">{statusText}</span>

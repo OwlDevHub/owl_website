@@ -1,10 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Capriola&family=M+PLUS+Rounded+1c&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
 
 /*
-  font-family: "M PLUS Rounded 1c", serif;
-  font-family: "Capriola", serif;
   font-family: "Oswald", serif;
-  font-family: "Nunito", serif;
+  font-family: "Roboto Condensed", serif;
 */
 
 :root {
@@ -35,7 +33,7 @@
 
 * {
   user-select: none;
-  font-family: "Capriola", serif;
+  font-family: "Roboto Condensed", serif;
   font-weight: bolder;
   outline: none;
 }
@@ -58,32 +56,44 @@
   font-weight: 900;
 }
 
+.App {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
 .header {
   display: flex;
   position: fixed;
-  top: 15px;
-  height: 50px;
+  bottom: 20px;
+  height: 40px;
   z-index: 10000;
-  width: 60%;
-  left: calc(20% - 20px);
+  width: auto;
+  max-width: 90%;
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  text-align: center;
   background-color: var(--tr);
   backdrop-filter: blur(15px);
   color: var(--bg);
   border-radius: 15px;
+  padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
   transition: width 0.5s ease-in-out;
 }
 
-.header_title {
-  font-size: medium;
-}
-
 .header * {
+  font-family: "Oswald";
   font-weight: bolder;
   color: var(--fg);
 }
@@ -91,41 +101,40 @@
 .navbar_button {
   text-decoration: none;
   padding: auto;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   transition: color 0.5s;
-  height: 40px;
+  height: 100%;
   border-radius: 10px;
   background-color: transparent;
   border: none;
+  align-content: center;
+  text-align: center;
   font-size: medium;
   transition: all 0.5s ease-in-out;
 }
 
-.navbar_button i {
+.navbar_button * {
+  transition: all 0.5s ease-in-out;
   margin-right: 5px;
 }
 
 .navbar_button:hover {
-  background-color: var(--color2);
+  color: var(--purple);
+}
+
+.navbar_button:hover * {
+  color: var(--purple);
 }
 
 .app_logo {
   margin: 0px;
   padding: 0px;
-  width: 220px;
+  width: 70vw;
+  max-width: 500px;
   transition: transform 0.5s ease-in;
-  perspective: 1000px;
-}
-
-.app_logo path {
-  stroke: var(--fg);
-  background-color: var(--fg);
-}
-
-.app_logo circle {
-  stroke: var(--fg);
-  background-color: var(--fg);
 }
 
 html {
@@ -307,7 +316,6 @@ a .button:hover {
 }
 
 .footer p {
-  font-family: "Nunito", serif;
   font-size: small;
   color: var(--fg);
 }
@@ -325,7 +333,7 @@ a .button:hover {
 }
 
 h1 {
-  font-family: "Nunito", serif;
+  font-family: "Oswald", monospace;
   font-optical-sizing: auto;
   font-size: xx-large;
   color: var(--fg);
@@ -575,7 +583,9 @@ h3 {
 
 .square_block h1 {
   color: var(--fg);
+  font-family: "Oswald", monospace;
   font-size: large;
+  font-weight: bolder;
   padding: 0px;
   margin: 0px;
   width: 100%;
@@ -590,6 +600,7 @@ h3 {
 
 .square_block h2 {
   color: var(--fg);
+  font-family: "Oswald", monospace;
   line-height: 1.6rem;
   font-size: medium;
   font-weight: 1000;
@@ -601,6 +612,7 @@ h3 {
 
 .square_block h3 {
   color: var(--fg);
+  font-family: "Oswald", monospace;
   font-size: medium;
   font-weight: 100;
   padding: 0px;
@@ -611,7 +623,7 @@ h3 {
 }
 
 .big_text {
-  font-size: large;
+  font-size: x-large;
   font-weight: 1000;
   padding: 0px;
   margin: 0px;
@@ -651,6 +663,7 @@ h3 {
   text-align: left;
   align-items: center;
   align-content: center;
+  font-family: "Oswald", monospace;
 }
 
 .timeline-content * {
@@ -688,10 +701,6 @@ h3 {
     width: 1300px;
     border-radius: 20px;
   }
-
-  .app_logo {
-    width: 250px;
-  }
 }
 
 @media screen and (max-width: 700px) {
@@ -721,7 +730,6 @@ h3 {
 }
 
 @media screen and (max-height: 500px) and (max-width: 600px) {
-
   .square_block {
     width: 150px;
   }
@@ -739,12 +747,6 @@ h3 {
   }
 }
 
-@media screen and (min-width: 1500px) {
-  .app_logo {
-    width: 300px;
-  }
-}
-
 @media screen and (max-width: 1500px) {
   .content {
     width: 100%;
@@ -755,32 +757,11 @@ h3 {
   .sub_links_block {
     flex-direction: column;
   }
-
-  .header_title {
-    display: none;
-  }
-
-  .header {
-    justify-content: center;
-  }
 }
 
 @media screen and (max-width: 850px) {
-  .header {
-    width: 80%;
-    left: calc(10% - 20px);
-  }
-
   .username {
     font-size: 55px;
-  }
-
-  .header_title {
-    display: none;
-  }
-
-  .header {
-    justify-content: center;
   }
 
   .sub_links_block {
