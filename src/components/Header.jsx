@@ -13,20 +13,15 @@ const Header = () => {
 
   return (
     <header className="header animate__animated animate__fadeInRight">
-      <div className="header-left">
-        <h1 className="header_title">OWL - YOUR PRODUCTIVITY APP</h1>
-      </div>
-      <div className="header-left">
-        <a className="navbar_button" href="#about_app">
-          <FontAwesomeIcon icon={faLightbulb} /> INFO
-        </a>
-        <a className="navbar_button" href="#download_app">
-          <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
-        </a>
-        <button onClick={toggleTheme} className="navbar_button">
-          <FontAwesomeIcon icon={isDarkMode ? faMoon : faSun} />
-        </button>
-      </div>
+      <a className="navbar_button" href="#about_app">
+        <FontAwesomeIcon icon={faLightbulb} /> INFO
+      </a>
+      <a className="navbar_button" href="#download_app">
+        <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
+      </a>
+      <button onClick={toggleTheme} className="navbar_button">
+        <FontAwesomeIcon icon={isDarkMode ? faMoon : faSun} />
+      </button>
     </header>
   );
 };
