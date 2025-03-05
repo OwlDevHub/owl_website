@@ -23,14 +23,9 @@ const Contacts = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <motion.div
-    initial={{ opacity: 0, y: 100 }}
-    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-    transition={{ duration: 0.5 }}
-    className="contacts" id="contacts" ref={ref}>
+    <motion.div className="contacts" id="contacts" ref={ref}>
       <h1>CONTACTS</h1>
-      <motion.div
-      >
+      <motion.div>
         <div className="contacts_badge_block">
           {socials.map((social, index) => (
             <motion.a

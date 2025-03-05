@@ -13,23 +13,10 @@ export const SloganSection = () => {
 
   return (
     <div className="slogan_section" ref={ref}>
-      <motion.h1
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : 50 }}
-        transition={{ duration: 0.5 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <p
-          className="slogan-title"
-        >
-          OWL:
-        </p>
+      <motion.h1>
+        <p className="slogan-title">OWL:</p>
         {textLines.map((line, index) => (
-          <span
-            key={index}
-            className="slogan-line"
-          >
+          <span key={index} className="slogan-line">
             {line.text}
           </span>
         ))}
