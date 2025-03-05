@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLightbulb,
@@ -7,22 +7,37 @@ import {
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
 import useTheme from "../hooks/useTheme";
+import { motion, useInView } from "framer-motion";
 
 const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
-    <header className="header animate__animated animate__fadeInRight">
-      <a className="navbar_button" href="#about_app">
+    <motion.header className="header" ref={ref}
+    initial={{ opacity: 0, y: -40 }}
+    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
+    transition={{ duration: 0.5 }}>
+      <motion.a
+        className="navbar_button"
+        href="#about_app"
+      >
         <FontAwesomeIcon icon={faLightbulb} /> INFO
-      </a>
-      <a className="navbar_button" href="#download_app">
+      </motion.a>
+      <motion.a
+        className="navbar_button"
+        href="#download_app"
+      >
         <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
-      </a>
-      <button onClick={toggleTheme} className="navbar_button">
+      </motion.a>
+      <motion.button
+        onClick={toggleTheme}
+        className="navbar_button"
+      >
         <FontAwesomeIcon icon={isDarkMode ? faMoon : faSun} />
-      </button>
-    </header>
+      </motion.button>
+    </motion.header>
   );
 };
 

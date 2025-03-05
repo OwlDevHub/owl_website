@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import { HeroSection, SloganSection } from "./components/HeroSection";
+import { SloganSection } from "./components/SloganSection.jsx";
+import { HeroSection } from "./components/HeroSection";
 import { Features, Images } from "./components/Features";
 import DownloadSection from "./components/DownloadSection";
 import Contacts from "./components/Contacts";
@@ -12,7 +13,12 @@ import { DevelopmentProgressPage } from "./components/DevelopmentProgressPage";
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <div
+        className="App"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <Header />
         <main>
           <>

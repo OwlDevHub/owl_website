@@ -1,35 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const TimelineItem = ({ text, status }) => {
-  let statusColor;
-  let statusText;
-
-  switch (status) {
-    case "completed":
-      statusColor = "var(--green)";
-      statusText = "DONE";
-      break;
-    case "not_completed":
-      statusColor = "var(--red)";
-      statusText = "NS";
-      break;
-    case "in_progress":
-      statusColor = "var(--purple)";
-      statusText = "IN DEV";
-      break;
-    default:
-      statusColor = "var(--color1)";
-      statusText = "";
-  }
+  const statusColors = {
+    completed: "var(--green)",
+    not_completed: "var(--red)",
+    in_progress: "var(--purple)",
+  };
 
   return (
-    <div
+    <motion.div
       className="timeline-content"
-      style={{ borderLeft: `20px solid ${statusColor}` }}
+      style={{ borderLeft: `20px solid ${statusColors[status] || "var(--color1)"}` }}
+      initial={{ opacity: 0, x: 20 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
     >
       {text}
-      <span className="status-text">{statusText}</span>
-    </div>
+      <span className="status-text">{status === "completed" ? "DONE" : status === "not_completed" ? "NS" : "IN DEV"}</span>
+    </motion.div>
   );
 };
 
@@ -41,7 +32,7 @@ const Timeline = () => {
     { text: "Statistics Window", status: "completed" },
     { text: "The backend", status: "in_progress" },
     { text: "Databases", status: "in_progress" },
-    { text: "User  Registration", status: "in_progress" },
+    { text: "User Registration", status: "not_completed" },
     { text: "Create registration form", status: "in_progress" },
     { text: "Validate user data", status: "in_progress" },
     { text: "Implement email confirmation", status: "not_completed" },
@@ -59,17 +50,15 @@ const Timeline = () => {
   ];
 
   const [showAll, setShowAll] = useState(false);
-
-  const handleToggleTasks = () => {
-    setShowAll((prev) => !prev);
-  };
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="timeline hide-line">
-      {tasks.slice(0, showAll ? tasks.length : 5).map((task, index) => (
+    <div className="timeline hide-line" ref={ref}>
+      {tasks.slice(0, showAll ? tasks.length : 4).map((task, index) => (
         <TimelineItem key={index} text={task.text} status={task.status} />
       ))}
-      <button onClick={handleToggleTasks} className="show-more-button">
+      <button onClick={() => setShowAll((prev) => !prev)} className="show-more-button">
         {showAll ? "HIDE" : "SHOW ALL"}
       </button>
     </div>
@@ -77,14 +66,17 @@ const Timeline = () => {
 };
 
 export const DevelopmentProgressPage = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <div className="content">
-      <h1>
-        DEVELOPMENT
-        <br />
-        PROGRESS
-      </h1>
-      <Timeline />
-    </div>
-  );
+  <motion.div className="content" ref={ref}
+  initial={{ opacity: 0, x: -50 }}
+  animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : 50 }}
+  transition={{ duration: 0.5 }}
+>
+    <h1>DEVELOPMENT PROGRESS</h1>
+    <Timeline />
+  </motion.div>
+);
 };
