@@ -1,51 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 export const HeroSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <div className="main_block animate__animated animate__fadeInDown">
-      <img src="/imgs/app_icon.png" className="app_logo" />
+    <motion.div className="main_block" ref={ref}
+    initial={{ y: -100, opacity: 0 }}
+    animate={{ y: 0, opacity: isInView ? 1 : 0 }}
+    transition={{ duration: 0.5 }}
+    >
+      <h1 className="app-title"
+      >OWL</h1>
       <h2
-        style={{ fontSize: "x-large", marginTop: "50px", lineHeight: "45px" }}
+        style={{ fontSize: "x-large", marginTop: "0px" }}
       >
         Modern task and project manager
         <br />
         for your productivity
       </h2>
-    </div>
-  );
-};
-
-export const SloganSection = () => {
-  return (
-    <div
-      style={{
-        textAlign: "left",
-        height: "100%",
-        width: "100%",
-        alignItems: "center",
-        display: "flex",
-        padding: "0px",
-        margin: "0px",
-        justifyContent: "center",
-      }}
-    >
-      <h1 className="big_text">
-        <p
-          style={{
-            padding: "0px",
-            paddingBottom: "20px",
-            margin: "0px",
-            fontStyle: "italic",
-            fontSize: "xxx-large",
-            fontWeight: "1000",
-          }}
-        >
-          OWL:
-        </p>
-        - Your ideas
-        <br />- your organization
-        <br />- your freedom
-      </h1>
-    </div>
+    </motion.div>
   );
 };

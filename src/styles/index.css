@@ -72,7 +72,7 @@
 .header {
   display: flex;
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   height: 40px;
   z-index: 10000;
   width: auto;
@@ -96,6 +96,37 @@
   font-family: "Oswald";
   font-weight: bolder;
   color: var(--fg);
+}
+
+.app-title {
+  font-family: "Bebas Neue", monospace;
+  font-size: 30vw;
+  margin: 0px;
+  padding: 0px;
+}
+
+.slogan_section {
+  text-align: left;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.slogan-title {
+  padding: 0;
+  padding-bottom: 20px;
+  margin: 0;
+  font-style: italic;
+  font-size: xxx-large;
+  font-weight: 1000;
+}
+
+.slogan-line {
+  display: block;
 }
 
 .navbar_button {
@@ -206,7 +237,7 @@ body {
   color: var(--fg);
 }
 
-.contact_button i {
+.contact_button * {
   font-size: 30px;
   transition: transform 0.5s ease;
 }
@@ -642,6 +673,7 @@ h3 {
   width: auto;
   margin: 0px;
   padding: 0px;
+  transition: height 0.5s ease-in;
 }
 
 .timeline-container {
@@ -660,6 +692,7 @@ h3 {
   padding: 10px;
   margin: 10px;
   color: var(--bg);
+  position: relative;
   text-align: left;
   align-items: center;
   align-content: center;
@@ -701,6 +734,13 @@ h3 {
     width: 1300px;
     border-radius: 20px;
   }
+
+  .app-title {
+    font-size: 15vw;
+    margin: 0px;
+    padding: 0px;
+  }
+  
 }
 
 @media screen and (max-width: 700px) {
