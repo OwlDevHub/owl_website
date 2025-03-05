@@ -11,15 +11,21 @@ const TimelineItem = ({ text, status }) => {
   return (
     <motion.div
       className="timeline-content"
-      style={{ borderLeft: `20px solid ${statusColors[status] || "var(--color1)"}` }}
-      initial={{ opacity: 0, x: 20 }}
+      style={{
+        borderLeft: `20px solid ${statusColors[status] || "var(--color1)"}`,
+      }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
     >
       {text}
-      <span className="status-text">{status === "completed" ? "DONE" : status === "not_completed" ? "NS" : "IN DEV"}</span>
+      <span className="status-text">
+        {status === "completed"
+          ? "DONE"
+          : status === "not_completed"
+            ? "NS"
+            : "IN DEV"}
+      </span>
     </motion.div>
   );
 };
@@ -58,7 +64,10 @@ const Timeline = () => {
       {tasks.slice(0, showAll ? tasks.length : 4).map((task, index) => (
         <TimelineItem key={index} text={task.text} status={task.status} />
       ))}
-      <button onClick={() => setShowAll((prev) => !prev)} className="show-more-button">
+      <button
+        onClick={() => setShowAll((prev) => !prev)}
+        className="show-more-button"
+      >
         {showAll ? "HIDE" : "SHOW ALL"}
       </button>
     </div>
@@ -70,13 +79,9 @@ export const DevelopmentProgressPage = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-  <motion.div className="content" ref={ref}
-  initial={{ opacity: 0, x: -50 }}
-  animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : 50 }}
-  transition={{ duration: 0.5 }}
->
-    <h1>DEVELOPMENT PROGRESS</h1>
-    <Timeline />
-  </motion.div>
-);
+    <motion.div className="content">
+      <h1>DEVELOPMENT PROGRESS</h1>
+      <Timeline />
+    </motion.div>
+  );
 };
