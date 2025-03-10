@@ -23,9 +23,26 @@ const Contacts = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <motion.div className="contacts" id="contacts" ref={ref}>
-      <h1>CONTACTS</h1>
-      <motion.div>
+    <motion.div 
+      className="contacts" 
+      id="contacts" 
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
+      transition={{ duration: 0.8 }}
+    >
+      <motion.h1
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.5 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        CONTACTS
+      </motion.h1>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isInView ? 1 : 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+      >
         <div className="contacts_badge_block">
           {socials.map((social, index) => (
             <motion.a
@@ -33,9 +50,11 @@ const Contacts = () => {
               href={social.link}
               target="_blank"
               rel="noopener noreferrer"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -50 }}
+              transition={{ duration: 0.5, delay: index * 0.1 + 0.7 }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="contact_button">
                 <FontAwesomeIcon icon={social.icon} className="social-icon" />
@@ -47,9 +66,11 @@ const Contacts = () => {
           href="https://discord.gg/tnHSEc2cZv"
           className="btn-slide"
           style={{ marginTop: "30px" }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 300 }}
         >
           <span className="circle">
             <FontAwesomeIcon icon={faDiscord} />

@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import { SloganSection } from "./components/SloganSection.jsx";
 import { HeroSection } from "./components/HeroSection";
 import { Features, Images } from "./components/Features";
 import DownloadSection from "./components/DownloadSection";
@@ -27,7 +26,6 @@ const App = () => {
             <Images />
             <Features />
             <div className="spacer"></div>
-            <SloganSection />
             <DownloadSection />
             <div className="spacer"></div>
             <DevelopmentProgressPage />
