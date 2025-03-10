@@ -745,7 +745,7 @@ h3 {
 }
 
 .float-widget p {
-  font-size: x-large;
+  font-size: large;
   padding: 0px;
   margin: 0px;
   align-items: center;
@@ -792,7 +792,7 @@ h3 {
   }
 
   .float-widget {
-    zoom: 0.8;
+    zoom: 0.9;
   }
 
   .square_block h1 {
