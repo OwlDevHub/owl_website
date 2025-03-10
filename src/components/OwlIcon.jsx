@@ -1,3 +1,5 @@
+import "./../styles/owl_animation.css"
+
 const OwlIcon = () => (
   <svg
     className="app_logo"
@@ -9,7 +11,7 @@ const OwlIcon = () => (
     <defs id="defs1">
       <linearGradient id="swatch13">
         <stop
-          style={{ stopColor: "#000000", stopOpacity: 1 }}
+          style={{ stopColor: "#fff", stopOpacity: 1 }}
           offset={0}
           id="stop13"
         />

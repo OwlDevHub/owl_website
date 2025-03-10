@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SloganSection } from "./SloganSection";
+import OwlIcon from "./OwlIcon";
+
 export const HeroSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -13,8 +15,7 @@ export const HeroSection = () => {
     animate={{ y: 0, opacity: isInView ? 1 : 0 }}
     transition={{ duration: 0.5 }}
     >
-      <h1 className="app-title"
-      >OWL</h1>
+      <OwlIcon />
       <h2
         style={{ fontSize: "x-large", marginTop: "0px" }}
       >

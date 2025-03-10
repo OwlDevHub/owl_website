@@ -163,9 +163,20 @@
 .app_logo {
   margin: 0px;
   padding: 0px;
-  width: 70vw;
+  width: 50vw;
   max-width: 500px;
+  margin-bottom: 40px;
   transition: transform 0.5s ease-in;
+}
+
+.app_logo circle {
+  fill: var(--fg);
+  stroke: var(--fg);
+}
+
+.app_logo path {
+  fill: var(--fg);
+  stroke: var(--fg);
 }
 
 html {
