@@ -11,8 +11,8 @@ export const SloganSection = () => {
     <>
     <motion.div 
       className="float-widget" 
-      ref={ref} 
-      style={{ 
+      ref={ref}
+      style={{
         top: "10%", 
         right: "8%", 
         rotate: "-15deg",
@@ -28,7 +28,7 @@ export const SloganSection = () => {
       className="float-widget"
       ref={ref} 
       style={{ 
-        top: "15%", 
+        top: "15%",
         left: "10%", 
         rotate: "10deg",
       }}
