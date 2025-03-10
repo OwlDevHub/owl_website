@@ -726,22 +726,40 @@ h3 {
 .float-widget {
   aspect-ratio: 1/1;
   position: absolute;
-  width: 150px;
+  width: 120px;
   background-color: var(--tr);
   backdrop-filter: blur(10px);
   color: var(--fg);
-  padding: 10px;
+  padding: 20px;
   border-radius: 15px;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  align-content: center;
   text-align: center;
   font-size: xx-large;
   text-wrap: pretty;
   font-weight: lighter;
   font-family: "Bebas Neue", monospace;
+}
+
+.float-widget p {
+  font-size: x-large;
+  padding: 0px;
+  margin: 0px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Bebas Neue', monospace;
+}
+
+.float-widget .icon {
+  font-size: 30px;
+  margin: 0px;
+  padding: 15px;
+  flex: 1;
 }
 
 @media screen and (min-width: 1000px) {
