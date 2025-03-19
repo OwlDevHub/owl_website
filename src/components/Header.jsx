@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import useTheme from "../hooks/useTheme";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -25,12 +26,9 @@ const Header = () => {
       >
         <FontAwesomeIcon icon={faLightbulb} /> INFO
       </motion.a>
-      <motion.a
-        className="navbar_button"
-        href="#download_app"
-      >
+      <Link to="/download" className="navbar_button">
         <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
-      </motion.a>
+      </Link>
       <motion.button
         onClick={toggleTheme}
         className="navbar_button"

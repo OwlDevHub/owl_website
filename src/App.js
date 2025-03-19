@@ -8,6 +8,7 @@ import Contacts from "./components/Contacts";
 import Footer from "./components/Footer";
 import "./styles/index.css";
 import { DevelopmentProgressPage } from "./components/DevelopmentProgressPage";
+import DownloadPage from "./components/DownloadPage";
 
 const App = () => {
   return (
@@ -19,21 +20,36 @@ const App = () => {
         transition={{ duration: 0.5 }}
       >
         <Header />
-        <main>
-          <>
-            <HeroSection />
-            <div className="spacer"></div>
-            <Images />
-            <Features />
-            <div className="spacer"></div>
-            <DownloadSection />
-            <div className="spacer"></div>
-            <DevelopmentProgressPage />
-            <div className="spacer"></div>
-            <Contacts />
-            <div className="spacer"></div>
-          </>
-        </main>
+        <Routes>
+          <Route path="/download" element={<DownloadPage />} />
+          <Route
+            path="/"
+            element={
+              <main>
+                <>
+                  <HeroSection />
+                  <div className="spacer"></div>
+                  <Images />
+                  <Features />
+                  <div
+                    className="spacer"
+                    style={{
+                      maxHeight: "20px",
+                      minHeight: "20px",
+                      height: "20px",
+                    }}
+                  ></div>
+                  <DownloadSection />
+                  <div className="spacer"></div>
+                  <DevelopmentProgressPage />
+                  <div className="spacer"></div>
+                  <Contacts />
+                  <div className="spacer"></div>
+                </>
+              </main>
+            }
+          />
+        </Routes>
         <Footer />
       </div>
     </Router>
