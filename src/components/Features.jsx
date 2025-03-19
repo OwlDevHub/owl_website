@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
+import CustomSlider from "./ImageGallery"
+import images from "./../data/images";
 
 const features = [
   { icon: faPenRuler, text: "Custom\ndesign" },
@@ -57,23 +59,17 @@ export const Images = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="content" ref={ref}>
-      <motion.img
-        className="ui"
-        src="imgs/app_1.png"
-        alt="App interface"
-        initial={{ opacity: 0, y: -100 }}
-        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -100 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      />
-      <motion.img
-        className="ui"
-        src="imgs/app_2.png"
-        alt="App interface"
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      />
-    </div>
+    <motion.div
+    className="content"
+    ref={ref}
+    initial={{ opacity: 0, y: -100 }}
+    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -100 }}
+    transition={{ duration: 0.5, delay: 0.1 }}>
+      <CustomSlider>
+        {images.map((image, index) => {
+          return <img key={index} src={image.imgURL} alt={image.imgAlt} />;
+        })}
+      </CustomSlider>
+    </motion.div>
   );
 };

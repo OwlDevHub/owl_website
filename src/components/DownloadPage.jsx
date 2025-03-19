@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import '../styles/DownloadPage.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { motion, useInView } from "framer-motion";
