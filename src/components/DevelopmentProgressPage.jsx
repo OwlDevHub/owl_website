@@ -15,7 +15,7 @@ const TimelineItem = ({ text, status, index }) => {
         borderLeft: `20px solid ${statusColors[status] || "var(--color1)"}`,
       }}
       initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
+      animate={{ x: 0, opacity: 1 }} 
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
@@ -40,9 +40,9 @@ const Timeline = () => {
     { text: "Statistics Window", status: "completed" },
     { text: "The backend", status: "in_progress" },
     { text: "Databases", status: "in_progress" },
-    { text: "User Registration", status: "not_completed" },
     { text: "Create registration form", status: "in_progress" },
     { text: "Validate user data", status: "in_progress" },
+    { text: "User Registration", status: "not_completed" },
     { text: "Implement email confirmation", status: "not_completed" },
     { text: "API Implementation", status: "not_completed" },
     { text: "The Frontend + Backend bundle", status: "not_completed" },

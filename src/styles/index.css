@@ -457,6 +457,10 @@ h3 {
   margin-right: 10px;
 }
 
+.download_button {
+  font-size: medium;
+}
+
 .button_subblock {
   background-color: var(--bg);
   color: var(--fg);

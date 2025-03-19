@@ -23,21 +23,7 @@ const DownloadSection = () => {
         transition={{ duration: 0.5, delay: 0.3 }}
       >
         <motion.a
-          href="#"
-          className="purchase_button"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: isInView ? 0 : -100, opacity: isInView ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <h3>
-            <FontAwesomeIcon icon={faHeart} /> PURCHASE
-          </h3>
-          <h3 className="button_subblock">5$/mo</h3>
-        </motion.a>
-        <motion.a
-          href="https://github.com/Nighty3098/OWL_APP/releases"
+          href="/download"
           className="download_button"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -46,9 +32,9 @@ const DownloadSection = () => {
           transition={{ duration: 0.5, delay: 0.7 }}
         >
           <h3>
-            <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
+            <FontAwesomeIcon icon={faCloudArrowDown} /> BUY NOW
           </h3>
-          <h3 className="button_subblock">TRIAL</h3>
+          <h3 className="button_subblock">5$/mo</h3>
         </motion.a>
       </motion.div>
     </motion.div>
