@@ -8,15 +8,15 @@ const DownloadSection = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <motion.div 
-      className="download_app" 
-      id="download_app" 
+    <motion.div
+      className="download_app"
+      id="download_app"
       ref={ref}
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.div 
+      <motion.div
         className="download-buttons"
         initial={{ scale: 0.8 }}
         animate={{ scale: isInView ? 1 : 0.8 }}

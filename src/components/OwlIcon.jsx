@@ -1,4 +1,4 @@
-import "./../styles/owl_animation.css"
+import "./../styles/owl_animation.css";
 
 const OwlIcon = () => (
   <svg

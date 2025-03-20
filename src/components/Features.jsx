@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
-import CustomSlider from "./ImageGallery"
+import CustomSlider from "./ImageGallery";
 import images from "./../data/images";
 
 const features = [
@@ -60,11 +60,12 @@ export const Images = () => {
 
   return (
     <motion.div
-    className="content"
-    ref={ref}
-    initial={{ opacity: 0, y: -100 }}
-    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -100 }}
-    transition={{ duration: 0.5, delay: 0.1 }}>
+      className="content"
+      ref={ref}
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -100 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
       <CustomSlider>
         {images.map((image, index) => {
           return <img key={index} src={image.imgURL} alt={image.imgAlt} />;

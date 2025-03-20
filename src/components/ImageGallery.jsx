@@ -12,7 +12,7 @@ function CustomCarousel({ children }) {
         setTimeout(() => {
           slideNext();
           setSlideDone(true);
-        }, 5000)
+        }, 5000),
       );
     }
   }, [slideDone]);
