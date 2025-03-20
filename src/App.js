@@ -19,13 +19,13 @@ const App = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Header />
         <Routes>
           <Route path="/download" element={<DownloadPage />} />
           <Route
             path="/"
             element={
               <main>
+                <Header />
                 <>
                   <HeroSection />
                   <div className="spacer"></div>
