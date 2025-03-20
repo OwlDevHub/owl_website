@@ -23,9 +23,9 @@ const Contacts = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <motion.div 
-      className="contacts" 
-      id="contacts" 
+    <motion.div
+      className="contacts"
+      id="contacts"
       ref={ref}
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}

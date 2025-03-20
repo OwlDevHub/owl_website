@@ -16,23 +16,20 @@ const Header = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <motion.header className="header" ref={ref}
-    initial={{ opacity: 0, y: -40 }}
-    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
-    transition={{ duration: 0.5 }}>
-      <motion.a
-        className="navbar_button"
-        href="#about_app"
-      >
+    <motion.header
+      className="header"
+      ref={ref}
+      initial={{ opacity: 0, y: -40 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.a className="navbar_button" href="#about_app">
         <FontAwesomeIcon icon={faLightbulb} /> INFO
       </motion.a>
       <Link to="/download" className="navbar_button">
         <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
       </Link>
-      <motion.button
-        onClick={toggleTheme}
-        className="navbar_button"
-      >
+      <motion.button onClick={toggleTheme} className="navbar_button">
         <FontAwesomeIcon icon={isDarkMode ? faMoon : faSun} />
       </motion.button>
     </motion.header>

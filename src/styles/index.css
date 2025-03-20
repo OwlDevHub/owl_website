@@ -602,7 +602,7 @@ h3 {
   user-select: none;
   gap: 0px;
   opacity: 0;
-  zoom: 0.;
+  zoom: 0;
   background-color: transparent;
   transition: all 0.5s ease;
   box-shadow: 0 4px 6px transparent;
@@ -771,7 +771,7 @@ h3 {
   align-content: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Bebas Neue', monospace;
+  font-family: "Bebas Neue", monospace;
 }
 
 .float-widget .icon {
@@ -880,49 +880,49 @@ h3 {
 }
 
 .purchase-form {
-width: 80%;
-max-width: 400px;
-margin: 2rem auto;
-padding: 2rem;
-background: var(--tr);
-border-radius: 20px;
-backdrop-filter: blur(10px);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-align-content: center;
-text-align: center;
-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--tr);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
 .purchase-form input {
-width: 100%;
-padding: 0.8rem;
-margin-bottom: 1rem;
-border: 0px solid transparent;
-border-radius: 15px;
-background: var(--fg);
-color: var(--bg);
-outline: none;
-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 0px solid transparent;
+  border-radius: 15px;
+  background: var(--fg);
+  color: var(--bg);
+  outline: none;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
 .purchase-form input::placeholder {
-color: var(--bg);
+  color: var(--bg);
 }
 
 .card-details {
-width: 100%;
-padding: 0px;
-margin: 0px;
-gap: 1%;
-display: flex;
-flex-direction: row;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  gap: 1%;
+  display: flex;
+  flex-direction: row;
 }
 
 .card-details input {
-width: 50%;
+  width: 50%;
 }
 
 @media screen and (min-width: 1000px) {
