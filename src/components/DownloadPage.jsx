@@ -73,7 +73,7 @@ const DownloadPage = () => {
           required
         />
         <motion.button
-          className="download_button button"
+          className="purchase_button button"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.7 }}
@@ -82,6 +82,17 @@ const DownloadPage = () => {
             <FontAwesomeIcon icon={faCloudArrowDown} /> BUY NOW
           </h3>
           <h3 className="button_subblock">5$/mo</h3>
+        </motion.button>
+        <motion.button
+          className="download_button button"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
+          <h3>
+            <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
+          </h3>
+          <h3 className="button_subblock">TRIAL</h3>
         </motion.button>
       </motion.form>
     </motion.div>

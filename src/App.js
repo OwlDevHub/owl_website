@@ -20,7 +20,7 @@ const App = () => {
         transition={{ duration: 0.5 }}
       >
         <Routes>
-          <Route path="/download" element={<DownloadPage />} />
+          <Route path="/download" element={<DownloadPage /> } />
           <Route
             path="/"
             element={
@@ -53,12 +53,12 @@ const App = () => {
                   <div className="spacer"></div>
                   <Contacts />
                   <div className="spacer"></div>
+                  <Footer />
                 </>
               </main>
             }
           />
         </Routes>
-        <Footer />
       </div>
     </Router>
   );
