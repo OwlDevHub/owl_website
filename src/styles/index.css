@@ -6,22 +6,22 @@
 */
 
 :root {
-  --bg: hsl(220deg, 28%, 25%);
-  --fg: hsl(219deg, 7%, 91%);
-  --fg2: hsla(219deg, 7%, 91%, 0.9);
-  --color1: hsl(222deg, 28%, 32%);
-  --tr: hsla(222deg, 28%, 32%, 0.5);
+  --bg: hsl(219deg, 40%, 89%);
+  --fg: hsl(220deg, 28%, 25%);
+  --fg2: hsl(220deg, 28%, 25%, 0.5);
+  --color1: hsl(218deg, 3%, 96%);
+  --tr: hsla(219deg, 60%, 89%, 0.5);
   --red: hsl(354deg, 49%, 75%);
   --green: hsl(92deg, 26%, 75%);
   --purple: hsl(311deg, 21%, 71%);
 }
 
 :root.light {
-  --bg: hsl(219deg, 40%, 89%);
-  --fg: hsl(220deg, 28%, 25%);
-  --fg2: hsl(220deg, 28%, 25%, 0.5);
-  --color1: hsl(218deg, 3%, 96%);
-  --tr: hsla(219deg, 60%, 89%, 0.5);
+  --bg: hsl(220deg, 28%, 25%);
+  --fg: hsl(219deg, 7%, 91%);
+  --fg2: hsla(219deg, 7%, 91%, 0.9);
+  --color1: hsl(222deg, 28%, 32%);
+  --tr: hsla(222deg, 28%, 32%, 0.5);
   --red: hsl(354deg, 49%, 75%);
   --green: hsl(92deg, 26%, 75%);
   --purple: hsl(311deg, 21%, 71%);
@@ -637,6 +637,7 @@ h3 {
   width: 100%;
   height: 30%;
   text-align: center;
+  text-transform: uppercase;
   transition: color 0.5s ease;
 }
 
@@ -766,6 +767,7 @@ h3 {
   align-content: center;
   justify-content: center;
   text-align: center;
+  letter-spacing: 0.05rem;
   font-family: "Bebas Neue", monospace;
 }
 
@@ -794,14 +796,21 @@ h3 {
 
 .ui > button {
   background-color: transparent;
+  background-color: var(--bg);
+  margin: 10px;
+  padding: 10px;
+  width: 40px;
+  border-radius: 15px;
+  aspect-ratio: 1/1;
   outline: none;
   border: 0;
   color: var(--fg);
   font-size: 24px;
+  transition: all 0.5s ease-in-out;
 }
 
-.ui > button:active {
-  color: var(--purple);
+.ui > button:hover {
+  background-color: var(--purple);
 }
 
 .slider__btn-next {

@@ -18,7 +18,7 @@ export const HeroSection = () => {
         transition={{ duration: 0.5 }}
       >
         <OwlIcon />
-        <h2 style={{ fontSize: "x-large", marginTop: "0px" }}>
+        <h2 style={{ fontSize: "x-large", marginTop: "0px", fontFamily: "Bebas Neue", textTransform: "uppercase", fontWeight: "bolder", letterSpacing: "0.05rem" }}>
           Modern task and project manager
           <br />
           for your productivity
