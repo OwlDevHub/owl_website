@@ -6,22 +6,11 @@
 */
 
 :root {
-  --bg: hsl(219deg, 40%, 89%);
-  --fg: hsl(220deg, 28%, 25%);
-  --fg2: hsl(220deg, 28%, 25%, 0.5);
-  --color1: hsl(218deg, 3%, 96%);
-  --tr: hsla(219deg, 60%, 89%, 0.5);
-  --red: hsl(354deg, 49%, 75%);
-  --green: hsl(92deg, 26%, 75%);
-  --purple: hsl(311deg, 21%, 71%);
-}
-
-:root.light {
-  --bg: hsl(220deg, 28%, 25%);
-  --fg: hsl(219deg, 7%, 91%);
-  --fg2: hsla(219deg, 7%, 91%, 0.9);
-  --color1: hsl(222deg, 28%, 32%);
-  --tr: hsla(222deg, 28%, 32%, 0.5);
+  --bg: #222831;
+  --fg: #EEEEEE;
+  --fg2: #EEEEEE;
+  --color1: #31363F;
+  --tr: #31363F;
   --red: hsl(354deg, 49%, 75%);
   --green: hsl(92deg, 26%, 75%);
   --purple: hsl(311deg, 21%, 71%);
