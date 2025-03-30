@@ -6,11 +6,11 @@
 */
 
 :root {
-  --bg: #222831;
-  --fg: #EEEEEE;
-  --fg2: #EEEEEE;
-  --color1: #31363F;
-  --tr: #31363F;
+  --bg: hsl(216deg, 31%, 19%);
+  --fg: hsl(0deg, 0%, 93%);
+  --fg2: hsl(0deg, 0%, 93%);
+  --color1: hsl(219deg, 22%, 25%);
+  --tr: hsla(219deg, 22%, 25%, 0.7);
   --red: hsl(354deg, 49%, 75%);
   --green: hsl(92deg, 26%, 75%);
   --purple: hsl(311deg, 21%, 71%);
@@ -150,7 +150,7 @@ main {
 .app_logo {
   margin: 0px;
   padding: 0px;
-  width: 50vw;
+  width: 45vw;
   max-width: 500px;
   margin-bottom: 40px;
   transition: transform 0.5s ease-in;
@@ -351,14 +351,21 @@ a .button:hover {
 
 .main_block {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   align-content: center;
   width: 100%;
   margin: 0px;
   padding: 0px;
+  gap: 10%;
   height: 100vh;
+}
+
+.main_block h2 {
+  text-align: left;
+  font-size: 70px;
+  font-family: 'Bebas Neue', monospace;
 }
 
 h1 {
@@ -998,6 +1005,16 @@ h3 {
 
   .sub_links_block {
     flex-direction: column;
+  }
+
+  .main_block {
+    flex-direction: column-reverse;
+    gap: 0px;
+  }
+
+  .main_block h2 {
+    text-align: center;
+    font-size: xx-large;
   }
 }
 
