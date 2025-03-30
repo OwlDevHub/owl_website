@@ -17,12 +17,10 @@ export const HeroSection = () => {
         animate={{ y: 0, opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       >
-        <OwlIcon />
-        <h2 style={{ fontSize: "x-large", marginTop: "0px", fontFamily: "Bebas Neue", textTransform: "uppercase", fontWeight: "bolder", letterSpacing: "0.05rem" }}>
-          Modern task and project manager
-          <br />
-          for your productivity
+        <h2>
+          Meet Your<br />New Personal<br />Productivity App
         </h2>
+        <OwlIcon />
       </motion.div>
     </>
   );
