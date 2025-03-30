@@ -29,9 +29,6 @@ const Header = () => {
       <Link to="/download" className="navbar_button">
         <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
       </Link>
-      <motion.button onClick={toggleTheme} className="navbar_button">
-        <FontAwesomeIcon icon={isDarkMode ? faMoon : faSun} />
-      </motion.button>
     </motion.header>
   );
 };
