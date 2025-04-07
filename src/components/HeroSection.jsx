@@ -9,7 +9,6 @@ export const HeroSection = () => {
 
   return (
     <>
-      <SloganSection />
       <motion.div
         className="main_block"
         ref={ref}
@@ -17,9 +16,16 @@ export const HeroSection = () => {
         animate={{ y: 0, opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2>
-          Meet Your<br />New Personal<br />Productivity App
-        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0px", width: "auto", height: "auto", alignContent: "center", alignItems: "center", justifyContent: "center", textAlign: "center"}}>
+          <h2>
+            Meet Your
+            <br />
+            New Personal
+            <br />
+            Productivity App
+          </h2>
+          <SloganSection />
+        </div>
         <OwlIcon />
       </motion.div>
     </>

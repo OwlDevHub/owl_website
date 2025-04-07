@@ -1,19 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 /*
+  font-family: "Bebas Neue", sans-serif;
   font-family: "Oswald", serif;
   font-family: "Roboto Condensed", serif;
 */
 
 :root {
-  --bg: hsl(216deg, 31%, 19%);
+  --bg: hsl(216deg, 31%, 15%);
   --fg: hsl(0deg, 0%, 93%);
   --fg2: hsl(0deg, 0%, 93%);
   --color1: hsl(219deg, 22%, 25%);
   --tr: hsla(219deg, 22%, 25%, 0.7);
-  --red: hsl(354deg, 49%, 75%);
-  --green: hsl(92deg, 26%, 75%);
-  --purple: hsl(311deg, 21%, 71%);
+  --red: hsl(354, 71%, 77%);
+  --green: hsl(94, 45%, 74%);
+  --purple: hsl(313, 46%, 76%);
+  --yellow: hsl(56, 74%, 80%);
 }
 
 * {
@@ -364,14 +366,14 @@ a .button:hover {
 
 .main_block h2 {
   text-align: left;
-  font-size: 70px;
+  font-size: 90px;
   font-family: 'Bebas Neue', monospace;
 }
 
 h1 {
-  font-family: "Oswald", monospace;
+  font-family: "Bebas Neue", sans-serif;
   font-optical-sizing: auto;
-  font-size: xx-large;
+  font-size: xxx-large;
   color: var(--fg);
 }
 
@@ -426,7 +428,7 @@ h3 {
 
 .purchase_button,
 .download_button {
-  height: 45px;
+  height: 40px;
   width: 250px;
   margin: 10px;
   border-radius: 15px;
@@ -708,7 +710,9 @@ h3 {
   text-align: left;
   align-items: center;
   align-content: center;
-  font-family: "Oswald", monospace;
+  justify-content: center;
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", monospace;
 }
 
 .timeline-content * {
@@ -732,46 +736,6 @@ h3 {
   font-weight: 1000;
   width: 150px;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-.float-widget {
-  aspect-ratio: 1/1;
-  position: absolute;
-  width: 120px;
-  background-color: var(--tr);
-  backdrop-filter: blur(10px);
-  color: var(--fg);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: xx-large;
-  text-wrap: pretty;
-  font-weight: lighter;
-  font-family: "Bebas Neue", monospace;
-}
-
-.float-widget p {
-  font-size: large;
-  padding: 0px;
-  margin: 0px;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  text-align: center;
-  letter-spacing: 0.05rem;
-  font-family: "Bebas Neue", monospace;
-}
-
-.float-widget .icon {
-  font-size: 30px;
-  margin: 0px;
-  padding: 15px;
-  flex: 1;
 }
 
 .ui {
@@ -924,6 +888,69 @@ h3 {
   width: 50%;
 }
 
+.dock {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  height: 75px;
+  width: 280px;
+  min-width: 280px;
+  max-width: 100%;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: -1;
+}
+
+.dock-item {
+  aspect-ratio: 1/1;
+  height: 50px;
+  background-color: var(--red);
+  backdrop-filter: blur(10px);
+  color: var(--fg);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 15px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: xx-large;
+  text-wrap: pretty;
+  font-weight: lighter;
+  font-family: "Bebas Neue", monospace;
+  z-index: 10;
+}
+
+.dock-item p {
+  color: var(--bg);
+  font-size: large;
+  padding: 0px;
+  margin: 0px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.05rem;
+  font-family: "Bebas Neue", monospace;
+}
+
+.dock-item .icon {
+  color: var(--bg);
+  font-size: 30px;
+  margin: 0px;
+  padding: 10px;
+  flex: 0;
+}
+
 @media screen and (min-width: 1000px) {
   .ui {
     width: 900px;
@@ -942,19 +969,11 @@ h3 {
     margin: 0px;
     padding: 0px;
   }
-
-  .float-widget {
-    zoom: 1.3;
-  }
 }
 
 @media screen and (max-width: 700px) {
   .square_block {
     width: 120px;
-  }
-
-  .float-widget {
-    zoom: 0.9;
   }
 
   .square_block h1 {
@@ -975,6 +994,10 @@ h3 {
 
   .download_app {
     flex-direction: column;
+  }
+
+  .dock {
+    zoom: 0.8;
   }
 }
 
@@ -1014,17 +1037,13 @@ h3 {
 
   .main_block h2 {
     text-align: center;
-    font-size: xx-large;
+    font-size: xxx-large;
   }
 }
 
 @media screen and (max-width: 850px) {
   .username {
     font-size: 55px;
-  }
-
-  .float-widget {
-    display: none;
   }
 
   .sub_links_block {
