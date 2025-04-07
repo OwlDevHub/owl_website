@@ -39,7 +39,7 @@ const DownloadPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <h2>Purchase OWL</h2>
+        <h1>Purchase OWL</h1>
         <input
           type="email"
           name="email"
