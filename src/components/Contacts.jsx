@@ -31,54 +31,32 @@ const Contacts = () => {
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h1
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.5 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        CONTACTS
-      </motion.h1>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isInView ? 1 : 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      >
-        <div className="contacts_badge_block">
-          {socials.map((social, index) => (
-            <motion.a
-              key={index}
-              href={social.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -50 }}
-              transition={{ duration: 0.5 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <div className="contact_button">
-                <FontAwesomeIcon icon={social.icon} className="social-icon" />
-              </div>
-            </motion.a>
-          ))}
-        </div>
-        <motion.a
-          href="https://discord.gg/tnHSEc2cZv"
-          className="btn-slide"
-          style={{ marginTop: "30px" }}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isInView ? 1 : 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          style={{ alignItems: "right", alignContent: "right", display: "flex", flexDirection: "flex-end"}}
         >
-          <span className="circle">
-            <FontAwesomeIcon icon={faDiscord} />
-          </span>
-          <span className="title">DS SERVER</span>
-          <span className="title-hover">CLICK</span>
-        </motion.a>
-      </motion.div>
+          <div className="contacts_badge_block">
+            {socials.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -50 }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <div className="contact_button">
+                  <FontAwesomeIcon icon={social.icon} className="social-icon" />
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
     </motion.div>
   );
 };
