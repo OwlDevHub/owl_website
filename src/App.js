@@ -7,8 +7,8 @@ import DownloadSection from "./components/DownloadSection";
 import Contacts from "./components/Contacts";
 import Footer from "./components/Footer";
 import "./styles/index.css";
-import { DevelopmentProgressPage } from "./components/DevelopmentProgressPage";
 import DownloadPage from "./components/DownloadPage";
+import PrivacyPage from "./components/PrivacyPage"
 
 const App = () => {
   return (
@@ -21,6 +21,7 @@ const App = () => {
       >
         <Routes>
           <Route path="/download" element={<DownloadPage /> } />
+          <Route path="/privacy" element={<PrivacyPage /> } />
           <Route
             path="/"
             element={
@@ -47,9 +48,8 @@ const App = () => {
                       height: "20px",
                     }}
                   ></div>
-                  <DownloadSection />
                   <div className="spacer"></div>
-                  <DevelopmentProgressPage />
+                  <DownloadSection />
                   <div className="spacer"></div>
                   <Contacts />
                   <div className="spacer"></div>

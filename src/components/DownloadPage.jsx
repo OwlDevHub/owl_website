@@ -81,7 +81,7 @@ const DownloadPage = () => {
           <h3>
             <FontAwesomeIcon icon={faCloudArrowDown} /> BUY NOW
           </h3>
-          <h3 className="button_subblock">5$/mo</h3>
+          <h3 className="button_subblock">10$/mo</h3>
         </motion.button>
         <motion.button
           className="download_button button"

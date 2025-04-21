@@ -23,8 +23,8 @@ const Header = () => {
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
       transition={{ duration: 0.5 }}
     >
-      <motion.a className="navbar_button" href="#about_app">
-        <FontAwesomeIcon icon={faLightbulb} /> INFO
+      <motion.a className="navbar_button" href="/privacy">
+        <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
       </motion.a>
       <Link to="/download" className="navbar_button">
         <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD

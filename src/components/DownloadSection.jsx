@@ -16,6 +16,7 @@ const DownloadSection = () => {
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
       transition={{ duration: 0.8 }}
     >
+      <h1>Try It Out Today</h1>
       <motion.div
         className="download-buttons"
         initial={{ scale: 0.8 }}
@@ -34,7 +35,7 @@ const DownloadSection = () => {
           <h3>
             <FontAwesomeIcon icon={faCloudArrowDown} /> BUY NOW
           </h3>
-          <h3 className="button_subblock">5$/mo</h3>
+          <h3 className="button_subblock">10$/mo</h3>
         </motion.a>
       </motion.div>
     </motion.div>

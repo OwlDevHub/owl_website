@@ -7,11 +7,11 @@
 */
 
 :root {
-  --bg: hsl(216deg, 31%, 15%);
-  --fg: hsl(0deg, 0%, 93%);
+  --fg: hsl(216deg, 31%, 15%);
+  --bg: hsl(0deg, 0%, 93%);
   --fg2: hsl(0deg, 0%, 93%);
   --color1: hsl(219deg, 22%, 25%);
-  --tr: hsla(219deg, 22%, 25%, 0.7);
+  --tr: hsla(0, 0%, 80%, 0.7);
   --red: hsl(354, 71%, 77%);
   --green: hsl(94, 45%, 74%);
   --purple: hsl(313, 46%, 76%);
@@ -23,12 +23,6 @@
   font-family: "Roboto Condensed", serif;
   font-weight: bolder;
   outline: none;
-}
-
-.rights {
-  color: var(--fg);
-  font-size: medium;
-  font-weight: 800;
 }
 
 .selected-text {
@@ -82,9 +76,10 @@ main {
 }
 
 .header * {
-  font-family: "Oswald";
-  font-weight: bolder;
+  font-family: "Roboto Condensed";
+  font-weight: bold;
   color: var(--fg);
+  font-size: large;
 }
 
 .app-title {
@@ -121,12 +116,9 @@ main {
 .navbar_button {
   text-decoration: none;
   padding: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
   transition: color 0.5s;
   height: 100%;
+  width: 150px;
   border-radius: 10px;
   background-color: transparent;
   border: none;
@@ -142,11 +134,12 @@ main {
 }
 
 .navbar_button:hover {
-  color: var(--purple);
+  color: var(--bg);
+  background-color: var(--fg);
 }
 
-.navbar_button:hover * {
-  color: var(--purple);
+.navbar_button:hover  * * {
+  color: var(--bg);
 }
 
 .app_logo {
@@ -206,7 +199,8 @@ body {
 .contacts_badge_block {
   width: 100%;
   padding: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -240,6 +234,18 @@ body {
 .contact_button * {
   font-size: 30px;
   transition: transform 0.5s ease;
+}
+
+.sub_contacts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  gap: 0px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
 }
 
 .button {
@@ -341,7 +347,8 @@ a .button:hover {
 }
 
 .footer {
-  margin-bottom: 10px;
+  font-family: "Roboto Condensed", monospace;
+  margin-bottom: 50px;
   font-size: medium;
   color: var(--fg);
 }
@@ -366,8 +373,23 @@ a .button:hover {
 
 .main_block h2 {
   text-align: left;
-  font-size: 90px;
+  font-size: 120px;
   font-family: 'Bebas Neue', monospace;
+}
+
+.hero_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  height: 100vh;
+  min-height: 100%;
+  gap: 0px;
 }
 
 h1 {
@@ -445,7 +467,7 @@ h3 {
     width 0.5s,
     color 0.5s;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-  padding: 5px 20px 5px 20px;
+  padding: 5px 5px 5px 5px;
 }
 
 .purchase_button i,
@@ -464,20 +486,20 @@ h3 {
   height: 35px;
   text-align: center;
   font-weight: 1000;
-  padding: 0 10px;
+  padding: 0 15px;
   transition: background-color 0.5s;
 }
 
 .purchase_button:hover {
   width: 350px;
-  color: var(--bg);
+  color: var(--fg);
   background-color: var(--red);
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .download_button:hover {
   width: 350px;
-  color: var(--bg);
+  color: var(--fg);
   background-color: var(--green);
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
 }
@@ -495,10 +517,6 @@ h3 {
   margin: 10px;
   transition: 0.5s;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.btn-slide {
-  border: none;
 }
 
 .btn-slide:hover {
@@ -553,7 +571,7 @@ h3 {
   left: 90px;
   text-align: center;
   margin: 0 auto;
-  font-size: 16px;
+  font-size: medium;
   font-weight: bold;
   color: var(--bg);
   transition: 0.5s;
@@ -622,7 +640,7 @@ h3 {
 }
 
 .square_block:hover .emoji {
-  transform: scale(1.1) rotate(15deg);
+  transform: scale(1.2) rotate(10deg);
 }
 
 .square_block h1 {
@@ -759,7 +777,7 @@ h3 {
   background-color: var(--bg);
   margin: 10px;
   padding: 10px;
-  width: 40px;
+  width: 30px;
   border-radius: 15px;
   aspect-ratio: 1/1;
   outline: none;
@@ -868,6 +886,7 @@ h3 {
   color: var(--bg);
   outline: none;
   height: 20px;
+  font-size: large;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -913,7 +932,7 @@ h3 {
   height: 50px;
   background-color: var(--red);
   backdrop-filter: blur(10px);
-  color: var(--fg);
+  color: var(--bg);
   padding: 5px;
   margin: 5px;
   border-radius: 15px;
@@ -931,7 +950,7 @@ h3 {
 }
 
 .dock-item p {
-  color: var(--bg);
+  color: var(--fg);
   font-size: large;
   padding: 0px;
   margin: 0px;
@@ -944,7 +963,7 @@ h3 {
 }
 
 .dock-item .icon {
-  color: var(--bg);
+  color: var(--fg);
   font-size: 30px;
   margin: 0px;
   padding: 10px;
@@ -955,6 +974,34 @@ h3 {
   .ui {
     width: 900px;
     border-radius: 20px;
+  }
+
+  .header {
+    display: flex;
+    position: fixed;
+    top: 0px;
+    height: 60px;
+    z-index: 10000;
+    width: calc(100% - 40px);
+    min-width: calc(100% - 40px);
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    background-color: transparent;
+    backdrop-filter: none;
+    color: var(--bg);
+    margin: 0px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    box-shadow: none;
+    transition: width 0.5s ease-in-out;
+    gap: 20px;
+  }
+
+  .navbar_button {
+    height: 40px;
   }
 }
 
@@ -997,7 +1044,7 @@ h3 {
   }
 
   .dock {
-    zoom: 0.8;
+    display: none;
   }
 }
 
@@ -1035,8 +1082,12 @@ h3 {
     gap: 0px;
   }
 
+  .app_logo {
+    width: 300px;
+  }
+
   .main_block h2 {
-    text-align: center;
+    text-align: right;
     font-size: xxx-large;
   }
 }
@@ -1052,5 +1103,111 @@ h3 {
 
   .link_badge {
     width: 200px;
+  }
+}
+
+.privacy-container {
+  max-width: 896px;
+  margin: 0 auto;
+  background-color: var(--tr);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  padding: 2rem;
+}
+
+.privacy-container h1 {
+  font-size: xxx-large;
+  font-family: "Bebas Neue";
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 1.5rem;
+}
+
+.privacy-container .intro {
+  color: var(--fg);
+  font-size: medium;
+  margin-bottom: 1rem;
+  font-family: "Roboto Condensed";
+  line-height: 1.5;
+}
+
+.privacy-container section {
+  margin-bottom: 2rem;
+}
+
+.privacy-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 1rem;
+  font-family: "Oswald";
+}
+
+.privacy-container p {
+  color: var(--fg);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.privacy-container ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  color: var(--fg);
+  text-align: left;
+}
+
+.privacy-container ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.privacy-container ul li strong {
+  font-weight: bolder;
+}
+
+.privacy-container .contact {
+  margin-top: 0.5rem;
+}
+
+.privacy-container a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.privacy-container a:hover {
+  text-decoration: underline;
+}
+
+.privacy-container .last-updated {
+  color: var(--fg);
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .privacy-page {
+    padding: 2rem 0.5rem;
+  }
+
+  .privacy-container {
+    padding: 1.5rem;
+  }
+
+  .privacy-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .privacy-container h2 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .privacy-page {
+    padding: 4rem 1.5rem;
+  }
+
+  .privacy-container {
+    padding: 3rem;
   }
 }
