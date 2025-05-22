@@ -39,7 +39,7 @@ const DownloadPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <h1>Purchase OWL</h1>
+        <h1>Download OWL</h1>
         <input
           type="email"
           name="email"
@@ -48,52 +48,20 @@ const DownloadPage = () => {
           onChange={handleInputChange}
           required
         />
-        <input
-          type="text"
-          name="cardNumber"
-          placeholder="Card Number"
-          value={formData.cardNumber}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type="text"
-          name="expDate"
-          placeholder="MM/YY"
-          value={formData.expDate}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type="text"
-          name="cvv"
-          placeholder="CVV"
-          value={formData.cvv}
-          onChange={handleInputChange}
-          required
-        />
-        <motion.button
-          className="purchase_button button"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+
+        <button
+          className="download_button"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
           <h3>
-            <FontAwesomeIcon icon={faCloudArrowDown} /> BUY NOW
+            <FontAwesomeIcon icon={faCloudArrowDown} /> GET APP
           </h3>
-          <h3 className="button_subblock">10$/mo</h3>
-        </motion.button>
-        <motion.button
-          className="download_button button"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-        >
-          <h3>
-            <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
-          </h3>
-          <h3 className="button_subblock">TRIAL</h3>
-        </motion.button>
+          <h3 className="button_subblock">LINK</h3>
+        </button>
       </motion.form>
     </motion.div>
   );

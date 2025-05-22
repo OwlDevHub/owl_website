@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import "./styles/index.css";
 import DownloadPage from "./components/DownloadPage";
 import PrivacyPage from "./components/PrivacyPage"
+import TermsPage from "./components/TermsPage.jsx"
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Routes>
           <Route path="/download" element={<DownloadPage /> } />
           <Route path="/privacy" element={<PrivacyPage /> } />
+          <Route path="/terms" element={<TermsPage /> } />
           <Route
             path="/"
             element={
