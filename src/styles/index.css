@@ -120,6 +120,7 @@ main {
   height: 100%;
   width: 150px;
   border-radius: 10px;
+  color: var(--fg);
   background-color: transparent;
   border: none;
   align-content: center;
@@ -129,6 +130,7 @@ main {
 }
 
 .navbar_button * {
+  color: var(--fg);
   transition: all 0.5s ease-in-out;
   margin-right: 5px;
 }
@@ -248,48 +250,15 @@ body {
   width: 100%;
 }
 
-.button {
-  font-size: medium;
-  font-weight: 700;
-  background-color: var(--fg);
-  border-radius: 10px;
-  height: 40px;
-  width: 270px;
-  padding: 10px;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  text-align: center;
-  color: var(--bg);
-  cursor: pointer;
-  transition: all 0.5s;
-  outline: none;
-  text-decoration: none;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-}
-
-.button:hover {
-  background-color: var(--tr);
-  color: var(--fg);
-  width: 350px;
-}
-
-.button i {
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
 a {
   text-decoration: none;
 }
 
-a .button {
+a .button, .button {
   font-size: medium;
   font-weight: 700;
   background-color: var(--fg);
-  border-radius: 10px;
+  border-radius: 15px;
   width: 270px;
   height: 50px;
   padding: 10px;
@@ -307,6 +276,11 @@ a .button {
 }
 
 a .button:hover {
+  background-color: var(--tr);
+  width: 350px;
+}
+
+.button:hover {
   background-color: var(--tr);
   width: 350px;
 }
@@ -450,9 +424,10 @@ h3 {
 
 .purchase_button,
 .download_button {
-  height: 40px;
+  height: 50px;
   width: 250px;
   margin: 10px;
+  border: none;
   border-radius: 15px;
   background-color: var(--fg);
   color: var(--bg);
@@ -1129,10 +1104,12 @@ h3 {
   margin-bottom: 1rem;
   font-family: "Roboto Condensed";
   line-height: 1.5;
+  text-align: left;
 }
 
 .privacy-container section {
   margin-bottom: 2rem;
+  text-align: left;
 }
 
 .privacy-container h2 {
@@ -1141,12 +1118,14 @@ h3 {
   color: var(--fg);
   margin-bottom: 1rem;
   font-family: "Oswald";
+  text-align: left;
 }
 
 .privacy-container p {
   color: var(--fg);
   line-height: 1.6;
   margin-bottom: 0.5rem;
+  text-align: left;
 }
 
 .privacy-container ul {
@@ -1159,6 +1138,7 @@ h3 {
 .privacy-container ul li {
   margin-bottom: 0.5rem;
   line-height: 1.6;
+  text-align: left;
 }
 
 .privacy-container ul li strong {
@@ -1167,21 +1147,25 @@ h3 {
 
 .privacy-container .contact {
   margin-top: 0.5rem;
+  text-align: left;
 }
 
 .privacy-container a {
   color: var(--fg);
   text-decoration: none;
+  text-align: left;
 }
 
 .privacy-container a:hover {
   text-decoration: underline;
+  text-align: left;
 }
 
 .privacy-container .last-updated {
   color: var(--fg);
   font-size: 0.875rem;
   margin-top: 1rem;
+  text-align: left;
 }
 
 @media (max-width: 640px) {
