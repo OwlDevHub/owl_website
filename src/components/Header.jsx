@@ -3,15 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLightbulb,
   faCloudArrowDown,
-  faMoon,
-  faSun,
 } from "@fortawesome/free-solid-svg-icons";
-import useTheme from "../hooks/useTheme";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { isDarkMode, toggleTheme } = useTheme();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 

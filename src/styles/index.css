@@ -76,7 +76,7 @@ main {
 }
 
 .header * {
-  font-family: "Roboto Condensed";
+  font-family: "Roboto Condensed", monospace;
   font-weight: bold;
   color: var(--fg);
   font-size: large;
@@ -116,7 +116,6 @@ main {
 .navbar_button {
   text-decoration: none;
   padding: auto;
-  transition: color 0.5s;
   height: 100%;
   width: 150px;
   border-radius: 10px;
@@ -522,7 +521,7 @@ h3 {
 
 .btn-slide span.circle {
   display: block;
-  background-color: var(--purple);
+  background-color: var(--bg);
   color: var(--fg);
   position: absolute;
   float: left;
@@ -534,10 +533,6 @@ h3 {
   left: 0;
   transition: 0.5s;
   border-radius: 50%;
-}
-
-.btn-slide span.circle {
-  background-color: var(--bg);
 }
 
 .btn-slide span.title-hover,
@@ -560,11 +555,8 @@ h3 {
 
 .btn-slide span.title-hover {
   left: 80px;
-  opacity: 0;
-}
-
-.btn-slide span.title-hover {
   color: var(--bg);
+  opacity: 0;
 }
 
 .widget_blocks {
@@ -782,7 +774,6 @@ h3 {
   height: auto;
   overflow: hidden;
   object-fit: cover;
-  height: auto;
   transform: translateX(0);
   padding: 0px;
   margin: 0px;
@@ -1092,7 +1083,7 @@ h3 {
 
 .privacy-container h1 {
   font-size: xxx-large;
-  font-family: "Bebas Neue";
+  font-family: "Bebas Neue", serif;
   font-weight: 700;
   color: var(--fg);
   margin-bottom: 1.5rem;
@@ -1102,7 +1093,7 @@ h3 {
   color: var(--fg);
   font-size: medium;
   margin-bottom: 1rem;
-  font-family: "Roboto Condensed";
+  font-family: "Roboto Condensed", serif;
   line-height: 1.5;
   text-align: left;
 }
@@ -1117,7 +1108,7 @@ h3 {
   font-weight: 600;
   color: var(--fg);
   margin-bottom: 1rem;
-  font-family: "Oswald";
+  font-family: "Oswald", serif;
   text-align: left;
 }
 

@@ -48,7 +48,7 @@ const Contacts = () => {
         <div className="contacts_badge_block">
           {socials.map((social, index) => (
             <motion.a
-              key={index}
+              key={`${social.link}-${social.icon}`}
               href={social.link}
               target="_blank"
               rel="noopener noreferrer"
