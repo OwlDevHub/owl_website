@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { motion, useInView } from "framer-motion";
+import { faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 const DownloadPage = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
   const [formData, setFormData] = useState({
     cardNumber: "",
     expDate: "",
@@ -49,7 +48,7 @@ const DownloadPage = () => {
           required
         />
 
-        <button
+        <motion.button
           className="download_button"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -61,7 +60,7 @@ const DownloadPage = () => {
             <FontAwesomeIcon icon={faCloudArrowDown} /> GET APP
           </h3>
           <h3 className="button_subblock">LINK</h3>
-        </button>
+        </motion.button>
       </motion.form>
     </motion.div>
   );

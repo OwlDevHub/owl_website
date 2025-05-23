@@ -4,7 +4,6 @@ import {
   faPenRuler,
   faRotate,
   faComment,
-  faScrewdriverWrench,
   faDollarSign,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
@@ -31,7 +30,7 @@ export const Features = () => {
       <div className="widget_blocks" ref={ref}>
         {features.map((feature, index) => (
           <motion.div
-            key={index}
+            key={`${index}-${feature.icon}`}
             className="square_block"
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
@@ -42,7 +41,7 @@ export const Features = () => {
             </span>
             <h1>
               {feature.text.split("\n").map((line, i) => (
-                <React.Fragment key={i}>
+                <React.Fragment key={`${line}-${i}`}>
                   {line}
                   <br />
                 </React.Fragment>
@@ -68,9 +67,9 @@ export const Images = () => {
       transition={{ duration: 0.5, delay: 0.1 }}
     >
       <CustomSlider>
-        {images.map((image, index) => {
-          return <img key={index} src={image.imgURL} alt={image.imgAlt} />;
-        })}
+        {images.map((image) => (
+          <img key={image.imgURL} src={image.imgURL} alt={image.imgAlt} />
+        ))}
       </CustomSlider>
     </motion.div>
   );

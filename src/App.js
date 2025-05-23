@@ -10,11 +10,12 @@ import "./styles/index.css";
 import DownloadPage from "./components/DownloadPage";
 import PrivacyPage from "./components/PrivacyPage"
 import TermsPage from "./components/TermsPage.jsx"
+import {motion} from "framer-motion"
 
 const App = () => {
   return (
     <Router>
-      <div
+      <motion.div
         className="App"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -29,7 +30,7 @@ const App = () => {
             element={
               <main>
                 <Header />
-                <>
+                <div>
                   <HeroSection />
                   <div className="spacer"></div>
                   <Images />
@@ -56,12 +57,12 @@ const App = () => {
                   <Contacts />
                   <div className="spacer"></div>
                   <Footer />
-                </>
+                </div>
               </main>
             }
           />
         </Routes>
-      </div>
+      </motion.div>
     </Router>
   );
 };

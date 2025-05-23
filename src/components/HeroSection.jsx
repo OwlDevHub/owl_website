@@ -8,7 +8,7 @@ export const HeroSection = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <>
+    <div>
       <motion.div
         className="main_block"
         ref={ref}
@@ -28,6 +28,6 @@ export const HeroSection = () => {
         </div>
         <OwlIcon />
       </motion.div>
-    </>
+    </div>
   );
 };
