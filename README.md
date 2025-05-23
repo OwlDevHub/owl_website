@@ -1,16 +1,25 @@
-# OWL PROJECT HOMEPAGE
+<div align="center">
+<h1>OWL PROJECT HOMEPAGE</h1>
 
-![image](https://github.com/user-attachments/assets/552dab37-e563-40ed-b936-8c678a3bc55f)
+<br /><br />
 
-### Install:
+<img src="sc/2.png">
+<img src="sc/1.png">
+
+<br /><br />
+
+<img src="https://github.com/Nighty3098/DevIcons/blob/main/badges/badges_react.png?raw=true" width="60px" />
+<img src="https://github.com/Nighty3098/DevIcons/blob/main/badges/badges_javascript.png?raw=true" width="60px" />
+
+<br /><br />
+
+</div>
 
 ```bash
 
 git clone https://github.com/Nighty3098/owl_website
 cd owl_website
-npm install
-npm start
+yarn
+yarn start
 
 ```
-
-#### License: MIT
