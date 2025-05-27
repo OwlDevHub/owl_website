@@ -1,10 +1,9 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 
 const DownloadPage = () => {
-  const ref = useRef(null);
   const [formData, setFormData] = useState({
     cardNumber: "",
     expDate: "",

@@ -30,7 +30,6 @@ export const Features = () => {
       <div className="widget_blocks" ref={ref}>
         {features.map((feature, index) => (
           <motion.div
-            key={`${index}-${feature.icon}`}
             className="square_block"
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
@@ -68,7 +67,7 @@ export const Images = () => {
     >
       <CustomSlider>
         {images.map((image) => (
-          <img key={image.imgURL} src={image.imgURL} alt={image.imgAlt} />
+          <img src={image.imgURL} alt={image.imgAlt} />
         ))}
       </CustomSlider>
     </motion.div>

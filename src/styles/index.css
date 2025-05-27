@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/*
-  font-family: "Bebas Neue", sans-serif;
-  font-family: "Oswald", serif;
-  font-family: "Roboto Condensed", serif;
-*/
-
 :root {
   --fg: hsl(216deg, 31%, 15%);
   --bg: hsl(0deg, 0%, 93%);
@@ -545,12 +539,6 @@ h3 {
   font-weight: bold;
   color: var(--bg);
   transition: 0.5s;
-}
-
-.btn-slide span.title,
-.btn-slide span.title-hover {
-  color: var(--bg);
-  left: 80px;
 }
 
 .btn-slide span.title-hover {
