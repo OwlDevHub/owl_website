@@ -55,8 +55,6 @@ const Contacts = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -50 }}
               transition={{ duration: 0.5 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
             >
               <div className="contact_button">
                 <FontAwesomeIcon icon={social.icon} className="social-icon" />
@@ -65,32 +63,6 @@ const Contacts = () => {
           ))}
         </div>
       </motion.div>
-      <div className="spacer"></div>
-      <div style={{ width: "100%", display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", justifyContent: "center", gap: "10px"}}>
-      <motion.a
-        href="/terms"
-        className="navbar_button"
-        target="_blank"
-        style={{ width: "100%", height: "40px" }}
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: isInView ? 0 : 100, opacity: isInView ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <FontAwesomeIcon icon={faScaleBalanced} />
-        Terms of Use
-      </motion.a>
-      <motion.a
-        href="/privacy"
-        className="navbar_button"
-        target="_blank"
-        style={{ width: "100%", height: "40px" }}
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: isInView ? 0 : 100, opacity: isInView ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
-      </motion.a>
-      </div>
     </motion.div>
   );
 };
