@@ -24,7 +24,6 @@ export const HeroSection = () => {
             <br />
             Productivity App
           </h2>
-          <SloganSection />
         </div>
         <OwlIcon />
       </motion.div>

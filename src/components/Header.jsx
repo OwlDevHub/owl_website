@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLightbulb,
   faCloudArrowDown,
+  faScaleBalanced,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -19,6 +20,14 @@ const Header = () => {
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
       transition={{ duration: 0.5 }}
     >
+      <motion.a
+        href="/terms"
+        className="navbar_button"
+        target="_blank"
+      >
+        <FontAwesomeIcon icon={faScaleBalanced} />
+        Terms of Use
+      </motion.a>
       <motion.a className="navbar_button" href="/privacy" target="_blank">
         <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
       </motion.a>
