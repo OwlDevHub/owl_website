@@ -26,7 +26,7 @@ const Header = () => {
         target="_blank"
       >
         <FontAwesomeIcon icon={faScaleBalanced} />
-        Terms of Use
+        TERMS
       </motion.a>
       <motion.a className="navbar_button" href="/privacy" target="_blank">
         <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
