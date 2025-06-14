@@ -48,6 +48,19 @@ main {
   box-shadow: none;
 }
 
+.app_name {
+  background-color: var(--tr);
+  border: solid 5px var(--fg);
+  border-radius: 30px;
+  padding: 0px;
+  width: 100%;
+  height: auto;
+}
+
+.app_name h1 {
+  font-size: xxxx-large;
+}
+
 .header {
   display: flex;
   position: fixed;
@@ -69,6 +82,7 @@ main {
   padding-right: 20px;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
   transition: width 0.5s ease-in-out;
+  gap: 5px;
 }
 
 .header * {
@@ -490,7 +504,7 @@ h3 {
 }
 
 .btn-slide:hover {
-  background-color: var(--purple);
+  background-color: var(--fg);
 }
 
 .btn-slide:hover span.circle,
@@ -498,11 +512,11 @@ h3 {
   left: 100%;
   margin-left: -45px;
   background-color: var(--bg);
-  color: var(--purple);
+  color: var(--fg);
 }
 
 .btn-slide:hover span.circle2 {
-  color: var(--purple);
+  color: var(--fg);
 }
 
 .btn-slide:hover span.title {
@@ -744,10 +758,6 @@ h3 {
   transition: all 0.5s ease-in-out;
 }
 
-.ui > button:hover {
-  background-color: var(--purple);
-}
-
 .slider__btn-next {
   position: absolute;
   right: 0;
@@ -820,7 +830,6 @@ h3 {
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
-  background: var(--tr);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   display: flex;
@@ -829,7 +838,6 @@ h3 {
   justify-content: center;
   align-content: center;
   text-align: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
 .purchase-form input {
@@ -848,6 +856,24 @@ h3 {
 
 .purchase-form input::placeholder {
   color: var(--bg);
+}
+
+.back_btn {
+  aspect-ratio: 1/1;
+  height: 40px;
+  width: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  border-radius: 50%;
+  transition: all 0.5s ease-in-out;
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+}
+
+.back_btn:hover{
+  background-color: var(--fg);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-details {

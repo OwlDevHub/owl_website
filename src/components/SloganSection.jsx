@@ -8,7 +8,7 @@ import {
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const SloganSection = () => {
+export const Dock = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -53,3 +53,12 @@ export const SloganSection = () => {
     </div>
   );
 };
+
+export const RText = ({ text, angle }) => {
+  return (
+    <motion.div className="app_name" style={{ transform: `rotate(${angle}deg)` }}>
+      <h1>{text}</h1>
+    </motion.div>
+  );
+};
+
