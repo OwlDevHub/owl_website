@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faCloudArrowDown, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
 
 const DownloadPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     cardNumber: "",
     expDate: "",
@@ -58,9 +60,12 @@ const DownloadPage = () => {
           <h3>
             <FontAwesomeIcon icon={faCloudArrowDown} /> GET APP
           </h3>
-          <h3 className="button_subblock">LINK</h3>
+          <h3 className="button_subblock">TRIAL</h3>
         </motion.button>
       </motion.form>
+      <button className="button back_btn" onClick={() => navigate(-1)}>
+        <FontAwesomeIcon icon={faCaretLeft} />
+      </button>
     </motion.div>
   );
 };
