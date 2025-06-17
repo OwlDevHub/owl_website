@@ -26,6 +26,10 @@ const images = [
   {
     imgURL: "/imgs/7.png",
     imgAlt: "img-7",
+  },
+  {
+    imgURL: "/imgs/8.png",
+    imgAlt: "img-8",
   }
 ];
 
