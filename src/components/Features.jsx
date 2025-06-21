@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenRuler,
   faRotate,
-  faComment,
   faDollarSign,
   faUsers,
+  faWifi,
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
@@ -15,7 +15,7 @@ import images from "./../data/images";
 const features = [
   { icon: faPenRuler, text: "Custom\ndesign" },
   { icon: faRotate, text: "Fast\nsynchronization" },
-  { icon: faComment, text: "Instant\nnotifications" },
+  { icon: faWifi, text: "Offline\nmode" },
   { icon: faUsers, text: "Collaborative\nwork" },
   { icon: faDollarSign, text: "Free\ntrial version" },
   { icon: faApple, text: "Cross\nplatform" },
