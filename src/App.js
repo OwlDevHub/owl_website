@@ -11,6 +11,7 @@ import DownloadPage from "./components/DownloadPage";
 import PrivacyPage from "./components/PrivacyPage"
 import TermsPage from "./components/TermsPage.jsx"
 import {motion} from "framer-motion"
+import { Content, WIOF } from "./components/Content.jsx"
 
 const App = () => {
   return (
@@ -32,7 +33,6 @@ const App = () => {
                 <Header />
                 <div>
                   <HeroSection />
-                  <div className="spacer"></div>
                   <Images />
                   <div
                     className="spacer"
@@ -51,6 +51,8 @@ const App = () => {
                       height: "20px",
                     }}
                   ></div>
+                  <Content />
+                  <WIOF />
                   <div className="spacer"></div>
                   <DownloadSection />
                   <div className="spacer"></div>
