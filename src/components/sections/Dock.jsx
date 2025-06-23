@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { MOTION, MOTION_LIST } from '../../styles/motionConfig';
 
-export const Dock = () => {
+const Dock = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -51,12 +51,4 @@ export const Dock = () => {
   );
 };
 
-export const RText = ({ text, angle }) => {
-  const rotateClass = angle === 5 ? "rotate-5" : angle === -5 ? "rotate--5" : "rotate-0";
-  return (
-    <motion.div className={`app_name w-100 max-w-650 mb-50 mt-50 ${rotateClass}`} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={MOTION}>
-      <h1>{text}</h1>
-    </motion.div>
-  );
-};
-
+export default Dock; 

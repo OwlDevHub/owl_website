@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
   --fg: #292524;
@@ -51,15 +51,15 @@ main {
 .app_name {
   background-color: var(--tr);
   border: solid 5px var(--fg);
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.70);
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.7);
   border-radius: 30px;
   padding: 0px;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 40px;
+  margin-bottom: 40px;
   width: auto;
   height: auto;
-}
-
-.app_name h1 {
-  font-size: xxxx-large;
 }
 
 .header {
@@ -150,7 +150,7 @@ main {
   background-color: var(--fg);
 }
 
-.navbar_button:hover  * * {
+.navbar_button:hover * * {
   color: var(--bg);
 }
 
@@ -264,7 +264,8 @@ a {
   text-decoration: none;
 }
 
-a .button, .button {
+a .button,
+.button {
   font-size: medium;
   font-weight: 700;
   background-color: var(--fg);
@@ -358,7 +359,7 @@ a .button:hover {
 .main_block h2 {
   text-align: left;
   font-size: 100px;
-  font-family: 'Bebas Neue', monospace;
+  font-family: "Bebas Neue", monospace;
 }
 
 .hero_block {
@@ -869,7 +870,7 @@ h3 {
   left: 40px;
 }
 
-.back_btn:hover{
+.back_btn:hover {
   background-color: var(--fg);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
@@ -1041,7 +1042,7 @@ h3 {
     line-height: 2rem;
     flex-wrap: wrap;
     word-break: break-word;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -1125,7 +1126,9 @@ h3 {
   max-width: 896px;
   margin: 0 auto;
   background-color: var(--tr);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
   padding: 2rem;
 }
@@ -1269,7 +1272,8 @@ h3 {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 30px;
-  width: 100%;
+  width: 90vw;
+  max-width: 3000px;
   justify-content: center;
 }
 
@@ -1321,7 +1325,7 @@ h3 {
   justify-content: flex-start;
   align-content: center;
   width: calc(100% - 35px - 35px);
-  max-width: 420px;
+  max-width: 500px;
   height: auto;
   line-height: 1.6rem;
   font-size: 1rem;
@@ -1331,20 +1335,22 @@ h3 {
   padding: 35px;
   transition: all 0.5s ease-in-out;
   text-transform: uppercase;
-  gap: 30px;
+  gap: 20px;
   background: var(--tr);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .card-title {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   align-content: center;
   justify-content: center;
+  text-align: center;
+  gap: 20px;
 }
 
-.card-title  {
+.card-title {
   font-size: x-large;
 }
 
@@ -1356,7 +1362,7 @@ h3 {
 .card {
   font-family: Roboto;
 }
-  
+
 .card h2 {
   font-size: 1rem;
 }

@@ -9,10 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
-import CustomSlider from "./ImageGallery";
-import images from '../../data/images';
-import { RText } from "./SloganSection"
-import { MOTION, MOTION_LIST } from '../../styles/motionConfig';
+import RText from "./RText";
+import { MOTION_LIST } from '../../styles/motionConfig';
 
 const features = [
   { icon: faPenRuler, text: "Custom\ndesign" },
@@ -23,7 +21,7 @@ const features = [
   { icon: faApple, text: "Cross\nplatform" },
 ];
 
-export const Features = () => {
+const FeaturesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -57,23 +55,4 @@ export const Features = () => {
   );
 };
 
-export const Images = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <motion.div
-      className="content"
-      ref={ref}
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -100 }}
-      transition={MOTION}
-    >
-      <CustomSlider>
-        {images.map((image) => (
-          <img src={image.imgURL} alt={image.imgAlt} />
-        ))}
-      </CustomSlider>
-    </motion.div>
-  );
-};
+export default FeaturesSection; 
