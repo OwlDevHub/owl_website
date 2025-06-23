@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Dock, RText } from "./SloganSection";
-import OwlIcon from "./OwlIcon";
+import { OwlIcon } from '../ui';
 
 export const HeroSection = () => {
   const ref = useRef(null);
@@ -24,7 +23,6 @@ export const HeroSection = () => {
             <br />
             Productivity App
           </h2>
-          <RText text={"THE OWL"} angle={10} />
         </div>
         <OwlIcon />
       </motion.div>

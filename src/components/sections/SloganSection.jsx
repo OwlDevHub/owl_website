@@ -56,7 +56,7 @@ export const Dock = () => {
 
 export const RText = ({ text, angle }) => {
   return (
-    <motion.div className="app_name" style={{ transform: `rotate(${angle}deg)` }}>
+    <motion.div className="app_name" style={{ transform: `rotate(${angle}deg)`, width: "100%", maxWidth: "650px", marginBottom: "50px", marginTop: "50px" }}>
       <h1>{text}</h1>
     </motion.div>
   );

@@ -1,17 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import { HeroSection } from "./components/HeroSection";
-import { Features, Images } from "./components/Features";
-import DownloadSection from "./components/DownloadSection";
-import Contacts from "./components/Contacts";
-import Footer from "./components/Footer";
+import { Header, Footer } from "./components/layout";
+import { HeroSection, Features, Images, SloganSection, DownloadSection, Contacts, ImageGallery, Content, WIOF } from "./components/sections";
+import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import "./styles/index.css";
-import DownloadPage from "./components/DownloadPage";
-import PrivacyPage from "./components/PrivacyPage"
-import TermsPage from "./components/TermsPage.jsx"
 import {motion} from "framer-motion"
-import { Content, WIOF } from "./components/Content.jsx"
 
 const App = () => {
   return (
@@ -31,9 +24,9 @@ const App = () => {
             element={
               <main>
                 <Header />
-                <div>
+                <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", justifyContent: "center" }}>
                   <HeroSection />
-                  <Images />
+                  <Content />
                   <div
                     className="spacer"
                     style={{
@@ -46,13 +39,12 @@ const App = () => {
                   <div
                     className="spacer"
                     style={{
-                      maxHeight: "20px",
-                      minHeight: "20px",
-                      height: "20px",
+                      maxHeight: "60px",
+                      minHeight: "60px",
+                      height: "60px",
                     }}
                   ></div>
-                  <Content />
-                  <WIOF />
+                  <Images />
                   <div className="spacer"></div>
                   <DownloadSection />
                   <div className="spacer"></div>

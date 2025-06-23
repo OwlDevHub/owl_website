@@ -10,7 +10,8 @@ import {
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
 import CustomSlider from "./ImageGallery";
-import images from "./../data/images";
+import images from '../../data/images';
+import { RText } from "./SloganSection"
 
 const features = [
   { icon: faPenRuler, text: "Custom\ndesign" },
@@ -27,6 +28,7 @@ export const Features = () => {
 
   return (
     <div className="content">
+      <RText text={"FEATURES"} angle={-5} />
       <div className="widget_blocks" ref={ref}>
         {features.map((feature, index) => (
           <motion.div
@@ -61,8 +63,8 @@ export const Images = () => {
     <motion.div
       className="content"
       ref={ref}
-      initial={{ opacity: 0, y: -100 }}
-      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -100 }}
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -100 }}
       transition={{ duration: 0.5, delay: 0.1 }}
     >
       <CustomSlider>
