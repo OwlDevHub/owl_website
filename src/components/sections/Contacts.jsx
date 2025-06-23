@@ -38,12 +38,7 @@ const Contacts = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-        style={{
-          alignItems: "right",
-          alignContent: "right",
-          display: "flex",
-          flexDirection: "flex-end",
-        }}
+        className="flex flex-row flex-align-end flex-justify-end"
       >
         <div className="contacts_badge_block">
           {socials.map((social, index) => (

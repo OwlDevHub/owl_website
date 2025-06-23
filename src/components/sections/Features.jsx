@@ -36,6 +36,7 @@ export const Features = () => {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
+            key={feature.text}
           >
             <span className="emoji">
               <FontAwesomeIcon icon={feature.icon} />
