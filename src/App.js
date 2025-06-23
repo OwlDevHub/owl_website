@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/layout";
-import { HeroSection, Features, Images, SloganSection, DownloadSection, Contacts, ImageGallery, Content, WIOF } from "./components/sections";
+import { HeroSection, FeaturesSection, ImagesSection, Dock, DownloadSection, Contacts, ImageGallery, Content, WIOF } from "./components/sections";
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import "./styles/index.css";
 import {motion} from "framer-motion"
@@ -26,12 +26,12 @@ const App = () => {
                 <Header />
                 <div className="flex flex-col flex-center w-auto h-auto text-center">
                   <HeroSection />
+                  <div className="spacer"></div>
+                  <ImagesSection />
                   <Content />
                   <div className="spacer" style={{height: '20px', minHeight: '20px', maxHeight: '20px'}}></div>
-                  <Features />
+                  <FeaturesSection />
                   <div className="spacer" style={{height: '60px', minHeight: '60px', maxHeight: '60px'}}></div>
-                  <Images />
-                  <div className="spacer"></div>
                   <DownloadSection />
                   <div className="spacer"></div>
                   <Contacts />

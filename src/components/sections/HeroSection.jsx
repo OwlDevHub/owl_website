@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { OwlIcon } from '../ui';
 import { MOTION } from '../../styles/motionConfig';
 
-export const HeroSection = () => {
+const HeroSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -30,3 +30,5 @@ export const HeroSection = () => {
     </div>
   );
 };
+
+export default HeroSection;

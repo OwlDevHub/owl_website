@@ -1,9 +1,6 @@
 import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faLightbulb, faScaleBalanced,
-} from "@fortawesome/free-solid-svg-icons";
-import {
   faTelegram,
   faDiscord,
   faReddit,

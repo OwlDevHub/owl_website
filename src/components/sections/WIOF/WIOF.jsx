@@ -1,24 +1,29 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCode, faRocket, faUser, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
-import { MOTION, MOTION_LIST } from '../../../styles/motionConfig';
+import {
+  faCode,
+  faRocket,
+  faUser,
+  faGraduationCap,
+} from "@fortawesome/free-solid-svg-icons";
+import { MOTION, MOTION_LIST } from "../../../styles/motionConfig";
 
 const cards = [
   {
     icon: faCode,
     title: "Developers",
-    text: "automation of routine, flexible analytics"
+    text: "automation of routine, flexible analytics",
   },
   {
     icon: faRocket,
     title: "Businesses",
-    text: "control over projects, deadlines, and resources"
+    text: "control over projects, deadlines, and resources",
   },
   {
     icon: faUser,
     title: "Freelancers",
-    text: "personal efficiency, easy task and project tracking"
+    text: "personal efficiency, easy task and project tracking",
   },
 ];
 
@@ -44,7 +49,12 @@ const WIOF = () => {
             transition={MOTION_LIST(idx, 0.7)}
           >
             <div className="card-title">
-              <FontAwesomeIcon icon={card.icon} className="list-icon" /> {card.title}
+              <FontAwesomeIcon
+                icon={card.icon}
+                className="list-icon"
+                style={{ fontSize: "xxx-large" }}
+              />{" "}
+              {card.title}
             </div>
             {card.text}
           </motion.div>
@@ -54,4 +64,4 @@ const WIOF = () => {
   );
 };
 
-export default WIOF; 
+export default WIOF;

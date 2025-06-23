@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import WIOF from "../WIOF";
-import { RText } from "./../SloganSection"
+import RText from "../RText";
 import { MOTION } from '../../../styles/motionConfig';
 
 const Content = () => {
