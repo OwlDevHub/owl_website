@@ -12,6 +12,7 @@ import { motion, useInView } from "framer-motion";
 import CustomSlider from "./ImageGallery";
 import images from '../../data/images';
 import { RText } from "./SloganSection"
+import { MOTION, MOTION_LIST } from '../../styles/motionConfig';
 
 const features = [
   { icon: faPenRuler, text: "Custom\ndesign" },
@@ -35,7 +36,7 @@ export const Features = () => {
             className="square_block"
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={MOTION_LIST(index)}
             key={feature.text}
           >
             <span className="emoji">
@@ -66,7 +67,7 @@ export const Images = () => {
       ref={ref}
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -100 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
+      transition={MOTION}
     >
       <CustomSlider>
         {images.map((image) => (

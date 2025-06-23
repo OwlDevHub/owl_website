@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode, faRocket, faUser, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+import { MOTION, MOTION_LIST } from '../../../styles/motionConfig';
 
 const cards = [
   {
@@ -31,7 +32,7 @@ const WIOF = () => {
       ref={ref}
       initial={{ opacity: 0, y: -100 }}
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -100 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
+      transition={MOTION}
     >
       <div className="grid_1">
         {cards.map((card, idx) => (
@@ -40,7 +41,7 @@ const WIOF = () => {
             key={card.title}
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: isInView ? 0 : 100, opacity: isInView ? 1 : 0 }}
-            transition={{ duration: 0.5, delay: 0.7 + idx * 0.1 }}
+            transition={MOTION_LIST(idx, 0.7)}
           >
             <div className="card-title">
               <FontAwesomeIcon icon={card.icon} className="list-icon" /> {card.title}

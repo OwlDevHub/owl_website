@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import WIOF from "../WIOF";
 import { RText } from "./../SloganSection"
+import { MOTION } from '../../../styles/motionConfig';
 
 const Content = () => {
   const ref = useRef(null);
@@ -13,7 +14,7 @@ const Content = () => {
       ref={ref}
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : 100 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
+      transition={MOTION}
     >
       <RText text={"THE OWL"} angle={5} />
       <br />
