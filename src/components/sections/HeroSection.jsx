@@ -15,7 +15,7 @@ export const HeroSection = () => {
         animate={{ y: 0, opacity: isInView ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "0px", width: "auto", height: "auto", alignContent: "center", alignItems: "center", justifyContent: "center", textAlign: "center"}}>
+        <div className="flex flex-col flex-center gap-0 w-auto h-auto text-center">
           <h2>
             Meet Your
             <br />

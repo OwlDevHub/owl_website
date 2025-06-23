@@ -24,26 +24,12 @@ const App = () => {
             element={
               <main>
                 <Header />
-                <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", justifyContent: "center" }}>
+                <div className="flex flex-col flex-center w-auto h-auto text-center">
                   <HeroSection />
                   <Content />
-                  <div
-                    className="spacer"
-                    style={{
-                      maxHeight: "20px",
-                      minHeight: "20px",
-                      height: "20px",
-                    }}
-                  ></div>
+                  <div className="spacer" style={{height: '20px', minHeight: '20px', maxHeight: '20px'}}></div>
                   <Features />
-                  <div
-                    className="spacer"
-                    style={{
-                      maxHeight: "60px",
-                      minHeight: "60px",
-                      height: "60px",
-                    }}
-                  ></div>
+                  <div className="spacer" style={{height: '60px', minHeight: '60px', maxHeight: '60px'}}></div>
                   <Images />
                   <div className="spacer"></div>
                   <DownloadSection />
