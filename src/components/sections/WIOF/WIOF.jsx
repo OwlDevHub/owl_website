@@ -25,6 +25,11 @@ const cards = [
     title: "Freelancers",
     text: "personal efficiency, easy task and project tracking",
   },
+  {
+    icon: faUser,
+    title: "Education",
+    text: "allows you to track students' progress and activity",
+  },
 ];
 
 const WIOF = () => {
@@ -49,11 +54,6 @@ const WIOF = () => {
             transition={MOTION_LIST(idx, 0.7)}
           >
             <div className="card-title">
-              <FontAwesomeIcon
-                icon={card.icon}
-                className="list-icon"
-                style={{ fontSize: "xxx-large" }}
-              />{" "}
               {card.title}
             </div>
             {card.text}

@@ -18,11 +18,11 @@ const HeroSection = () => {
       >
         <div className="flex flex-col flex-center gap-0 w-auto h-auto text-center">
           <h2>
-            Meet Your
+            Meet Your New
             <br />
-            New Personal
+            Personal Productivity
             <br />
-            Productivity App
+            App
           </h2>
         </div>
         <OwlIcon />

@@ -1270,7 +1270,7 @@ h3 {
 
 .grid_1 {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   gap: 30px;
   width: 90vw;
   max-width: 3000px;
@@ -1351,7 +1351,7 @@ h3 {
 }
 
 .card-title {
-  font-size: x-large;
+  font-size: xx-large;
 }
 
 .card:hover {
