@@ -10,7 +10,7 @@ const Content = () => {
 
   return (
     <motion.div
-      className="content enhanced-content"
+      className="content enhanced-content large_block"
       ref={ref}
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : 100 }}

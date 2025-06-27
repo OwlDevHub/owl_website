@@ -54,7 +54,7 @@ function CustomCarousel({ children }) {
       {React.Children.map(children, (item, index) => (
         <div
           className={"slider__item slider__item-active-" + (activeIndex + 1)}
-          key={item.id} {...item}
+          key={index}
         >
           {item}
         </div>

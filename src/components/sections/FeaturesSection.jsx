@@ -26,7 +26,7 @@ const FeaturesSection = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="content">
+    <div className="content large_block">
       <RText text={"FEATURES"} angle={-5} />
       <div className="widget_blocks" ref={ref}>
         {features.map((feature, index) => (

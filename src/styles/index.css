@@ -93,6 +93,64 @@ main {
   font-size: large;
 }
 
+.mobile-header {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  z-index: 1200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 70px;
+  right: 0px;
+  background: var(--bg);
+  color: var(--fg);
+  width: calc(200px - 10px - 10px);
+  padding: 10px;
+  border-radius: 24px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 0;
+  margin-right: 0;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.mobile-header-content {
+  height: 40px;
+  width: 40px;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.mobile-burger {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
 .app-title {
   font-family: "Bebas Neue", monospace;
   font-size: 30vw;
@@ -129,6 +187,7 @@ main {
   padding: auto;
   height: 100%;
   width: 130px;
+  height: 40px;
   border-radius: 10px;
   color: var(--fg);
   background-color: transparent;
@@ -664,6 +723,12 @@ h3 {
   text-transform: uppercase;
 }
 
+.large_block {
+  height: auto;
+  min-height: 100vh;
+  max-height: 100%;
+}
+
 .status-text {
   float: right;
   font-weight: bold;
@@ -1046,6 +1111,8 @@ h3 {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    zoom: 0.8;
+    min-width: 100%;
   }
 }
 
@@ -1335,9 +1402,10 @@ h3 {
   padding: 35px;
   transition: all 0.5s ease-in-out;
   text-transform: uppercase;
-  gap: 20px;
+  gap: 0px;
   background: var(--tr);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  zoom: 0.85;
 }
 
 .card-title {
@@ -1347,11 +1415,15 @@ h3 {
   align-content: center;
   justify-content: center;
   text-align: center;
-  gap: 20px;
+  gap: 5px;
 }
 
 .card-title {
   font-size: xx-large;
+}
+
+.card-title p {
+  font-size: x-large;
 }
 
 .card:hover {

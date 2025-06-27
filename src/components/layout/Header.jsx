@@ -1,41 +1,124 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLightbulb,
   faCloudArrowDown,
   faScaleBalanced,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { MOTION } from "../../styles/motionConfig";
 
 const Header = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  return (
-    <motion.header
-      className="header"
-      ref={ref}
-      initial={{ opacity: 0, y: -40 }}
-      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
-      transition={{ duration: 0.5 }}
-    >
-      <motion.a
-        href="/terms"
-        className="navbar_button"
-        target="_blank"
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const mobileMenuVariants = {
+    hidden: { x: "100%", opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 200, damping: 25 },
+    },
+    exit: { x: "100%", opacity: 0, transition: { duration: 0.2 } },
+  };
+
+  if (isMobile) {
+    return (
+      <motion.header
+        className="header mobile-header"
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={MOTION}
       >
-        <FontAwesomeIcon icon={faScaleBalanced} />
-        TERMS
-      </motion.a>
-      <motion.a className="navbar_button" href="/privacy" target="_blank">
-        <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
-      </motion.a>
-      <Link to="/download" className="navbar_button">
-        <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
-      </Link>
-    </motion.header>
-  );
+        <div className="header-content mobile-header-content">
+          <button
+            className="mobile-burger"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            aria-label="Open menu"
+            style={{ marginLeft: "auto" }}
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+        </div>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              className="mobile-menu-overlay"
+              onClick={() => setMobileMenuOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                className="mobile-menu"
+                onClick={(e) => e.stopPropagation()}
+                variants={mobileMenuVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <a
+                  href="/terms"
+                  className="navbar_button"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <FontAwesomeIcon icon={faScaleBalanced} /> TERMS
+                </a>
+                <a
+                  href="/privacy"
+                  className="navbar_button"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
+                </a>
+                <a
+                  href="/download"
+                  className="navbar_button"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
+                </a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    );
+  } else {
+    return (
+      <motion.header
+        className="header"
+        ref={ref}
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
+        transition={MOTION}
+      >
+        <motion.a href="/terms" className="navbar_button" target="_blank">
+          <FontAwesomeIcon icon={faScaleBalanced} />
+          TERMS
+        </motion.a>
+        <motion.a className="navbar_button" href="/privacy" target="_blank">
+          <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
+        </motion.a>
+        <Link to="/download" className="navbar_button">
+          <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
+        </Link>
+      </motion.header>
+    );
+  }
 };
 
 export default Header;
