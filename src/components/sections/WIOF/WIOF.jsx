@@ -54,7 +54,8 @@ const WIOF = () => {
             transition={MOTION_LIST(idx, 0.7)}
           >
             <div className="card-title">
-              {card.title}
+            <FontAwesomeIcon icon={card.icon} /> 
+            <p>{card.title}</p>
             </div>
             {card.text}
           </motion.div>

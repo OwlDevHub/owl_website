@@ -18,7 +18,7 @@ const ImagesSection = () => {
     >
       <CustomSlider>
         {images.map((image) => (
-          <img src={image.imgURL} alt={image.imgAlt} />
+          <img src={image.imgURL} alt={image.imgAlt} key={image.imgURL} />
         ))}
       </CustomSlider>
     </motion.div>

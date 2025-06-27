@@ -27,14 +27,12 @@ const App = () => {
                 <div className="flex flex-col flex-center w-auto h-auto text-center">
                   <HeroSection />
                   <div className="spacer"></div>
-                  <ImagesSection />
                   <Content />
                   <div className="spacer" style={{height: '20px', minHeight: '20px', maxHeight: '20px'}}></div>
+                  <ImagesSection />
                   <FeaturesSection />
                   <div className="spacer" style={{height: '60px', minHeight: '60px', maxHeight: '60px'}}></div>
                   <DownloadSection />
-                  <div className="spacer"></div>
-                  <Contacts />
                   <div className="spacer"></div>
                   <Footer />
                 </div>
