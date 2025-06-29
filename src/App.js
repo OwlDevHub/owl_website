@@ -1,10 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/layout";
-import { HeroSection, FeaturesSection, ImagesSection, Dock, DownloadSection, Contacts, ImageGallery, Content, WIOF } from "./components/sections";
+import {
+  HeroSection,
+  FeaturesSection,
+  ImagesSection,
+  DownloadSection,
+  Content,
+} from "./components/sections";
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import "./styles/index.css";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
 const App = () => {
   return (
@@ -16,9 +22,9 @@ const App = () => {
         transition={{ duration: 0.5 }}
       >
         <Routes>
-          <Route path="/download" element={<DownloadPage /> } />
-          <Route path="/privacy" element={<PrivacyPage /> } />
-          <Route path="/terms" element={<TermsPage /> } />
+          <Route path="/download" element={<DownloadPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route
             path="/"
             element={
@@ -28,10 +34,24 @@ const App = () => {
                   <HeroSection />
                   <div className="spacer"></div>
                   <Content />
-                  <div className="spacer" style={{height: '20px', minHeight: '20px', maxHeight: '20px'}}></div>
+                  <div
+                    className="spacer"
+                    style={{
+                      height: "20px",
+                      minHeight: "20px",
+                      maxHeight: "20px",
+                    }}
+                  ></div>
                   <ImagesSection />
                   <FeaturesSection />
-                  <div className="spacer" style={{height: '60px', minHeight: '60px', maxHeight: '60px'}}></div>
+                  <div
+                    className="spacer"
+                    style={{
+                      height: "60px",
+                      minHeight: "60px",
+                      maxHeight: "60px",
+                    }}
+                  ></div>
                   <DownloadSection />
                   <div className="spacer"></div>
                   <Footer />
