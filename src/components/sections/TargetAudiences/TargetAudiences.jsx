@@ -26,13 +26,13 @@ const cards = [
     text: "personal efficiency, easy task and project tracking",
   },
   {
-    icon: faUser,
+    icon: faGraduationCap,
     title: "Education",
     text: "allows you to track students' progress and activity",
   },
 ];
 
-const WIOF = () => {
+const TargetAudiences = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -54,8 +54,8 @@ const WIOF = () => {
             transition={MOTION_LIST(idx, 0.7)}
           >
             <div className="card-title">
-            <FontAwesomeIcon icon={card.icon} /> 
-            <p>{card.title}</p>
+              <FontAwesomeIcon icon={card.icon} />
+              <p>{card.title}</p>
             </div>
             {card.text}
           </motion.div>
@@ -65,4 +65,4 @@ const WIOF = () => {
   );
 };
 
-export default WIOF;
+export default TargetAudiences;

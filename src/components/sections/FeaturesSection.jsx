@@ -10,7 +10,7 @@ import {
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
 import RText from "./RText";
-import { MOTION_LIST } from '../../styles/motionConfig';
+import { MOTION_LIST } from "../../styles/motionConfig";
 
 const features = [
   { icon: faPenRuler, text: "Custom\ndesign" },
@@ -35,14 +35,13 @@ const FeaturesSection = () => {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
             transition={MOTION_LIST(index)}
-            key={feature.text}
           >
             <span className="emoji">
               <FontAwesomeIcon icon={feature.icon} />
             </span>
             <h1>
               {feature.text.split("\n").map((line, i) => (
-                <React.Fragment key={`${line}-${i}`}>
+                <React.Fragment>
                   {line}
                   <br />
                 </React.Fragment>
@@ -55,4 +54,4 @@ const FeaturesSection = () => {
   );
 };
 
-export default FeaturesSection; 
+export default FeaturesSection;

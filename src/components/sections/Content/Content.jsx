@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import WIOF from "../WIOF";
+import TargetAudiences from "../TargetAudiences";
 import RText from "../RText";
-import { MOTION } from '../../../styles/motionConfig';
+import { MOTION } from "../../../styles/motionConfig";
 
 const Content = () => {
   const ref = useRef(null);
@@ -18,10 +18,13 @@ const Content = () => {
     >
       <RText text={"THE OWL"} angle={5} />
       <br />
-      <h2>OWL is a powerful and intuitive platform for managing projects, tasks, and teams, created specifically for developers and IT teams.</h2>
-      <WIOF />
+      <h2>
+        OWL is a powerful and intuitive platform for managing projects, tasks,
+        and teams, created specifically for developers and IT teams.
+      </h2>
+      <TargetAudiences />
     </motion.div>
   );
 };
 
-export default Content; 
+export default Content;
