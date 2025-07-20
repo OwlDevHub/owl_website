@@ -54,7 +54,7 @@ function CustomCarousel({ children }) {
       {React.Children.map(children, (item, index) => (
         <div
           className={"slider__item slider__item-active-" + (activeIndex + 1)}
-          key={index}
+          key={item.key || (item.props && item.props.id) || `slider-item-${activeIndex}-${Math.random()}`}
         >
           {item}
         </div>

@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MOTION } from "../../styles/motionConfig";
+import PropTypes from "prop-types";
 
-const RText = ({ text, angle }) => {
+const RText = (props) => {
+  const { text, angle } = props;
   return (
     <motion.div
       style={{ rotate: angle, maxWidth: "200px" }}
@@ -14,6 +16,11 @@ const RText = ({ text, angle }) => {
       <h1>{text}</h1>
     </motion.div>
   );
+};
+
+RText.propTypes = {
+  text: PropTypes.string.isRequired,
+  angle: PropTypes.number.isRequired,
 };
 
 export default RText;

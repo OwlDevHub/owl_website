@@ -29,26 +29,30 @@ const FeaturesSection = () => {
     <div className="content large_block">
       <RText text={"FEATURES"} angle={-5} />
       <div className="widget_blocks" ref={ref}>
-        {features.map((feature, index) => (
-          <motion.div
-            className="square_block"
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-            transition={MOTION_LIST(index)}
-          >
-            <span className="emoji">
-              <FontAwesomeIcon icon={feature.icon} />
-            </span>
-            <h1>
-              {feature.text.split("\n").map((line, i) => (
-                <React.Fragment>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
-            </h1>
-          </motion.div>
-        ))}
+        {features.map((feature) => {
+          const key = `${feature.text}-${feature.icon.iconName || feature.icon.prefix}`;
+          return (
+            <motion.div
+              key={key}
+              className="square_block"
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
+              transition={MOTION_LIST(features.findIndex(f => f === feature))}
+            >
+              <span className="emoji">
+                <FontAwesomeIcon icon={feature.icon} />
+              </span>
+              <h1>
+                {feature.text.split("\n").map((line) => (
+                  <React.Fragment key={line}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </h1>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
