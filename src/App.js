@@ -34,24 +34,10 @@ const App = () => {
                   <HeroSection />
                   <div className="spacer"></div>
                   <Content />
-                  <div
-                    className="spacer"
-                    style={{
-                      height: "20px",
-                      minHeight: "20px",
-                      maxHeight: "20px",
-                    }}
-                  ></div>
                   <ImagesSection />
+                  <div className="spacer"></div>
                   <FeaturesSection />
-                  <div
-                    className="spacer"
-                    style={{
-                      height: "60px",
-                      minHeight: "60px",
-                      maxHeight: "60px",
-                    }}
-                  ></div>
+                  <div className="spacer"></div>
                   <DownloadSection />
                   <div className="spacer"></div>
                   <Footer />
