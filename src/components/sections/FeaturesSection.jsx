@@ -9,7 +9,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
-import RText from "./RText";
 import { MOTION_LIST } from "../../styles/motionConfig";
 
 const features = [
@@ -26,8 +25,8 @@ const FeaturesSection = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="content large_block">
-      <RText text={"FEATURES"} angle={-5} />
+    <div className="content">
+      <h1>FEATURES</h1>
       <div className="widget_blocks" ref={ref}>
         {features.map((feature) => {
           const key = `${feature.text}-${feature.icon.iconName || feature.icon.prefix}`;
