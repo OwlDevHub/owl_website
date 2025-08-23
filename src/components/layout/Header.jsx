@@ -48,7 +48,7 @@ const Header = () => {
             className="mobile-burger"
             onClick={() => setMobileMenuOpen((v) => !v)}
             aria-label="Open menu"
-            style={{ marginLeft: "auto" }}
+            style={{ marginLeft: "auto", color: "var(--fg)" }}
           >
             <FontAwesomeIcon icon={faBars} />
           </button>
