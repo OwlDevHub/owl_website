@@ -94,33 +94,43 @@ main {
   position: fixed;
   top: 0;
   right: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: transparent;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
   z-index: 2000;
+  backdrop-filter: blur(3px);
 }
 
 .mobile-menu {
   position: fixed;
-  top: 80px;
-  right: 20px;
   background: var(--bg);
   color: var(--fg);
-  width: calc(200px - 10px - 10px);
+  height: calc(250px - 10px - 10px);
+  width: calc(300px - 10px - 10px);
   padding: 10px;
   border-radius: 24px;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
   margin-top: 0;
   margin-right: 0;
   align-items: center;
   align-content: center;
   justify-content: center;
+}
+
+.mobile-menu .navbar_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .mobile-header-content {
@@ -530,8 +540,8 @@ h3 {
 
 .download_button:hover {
   width: 350px;
+  background-color: var(--tr);
   color: var(--fg);
-  background-color: var(--green);
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
 }
 
@@ -1014,8 +1024,7 @@ h3 {
   align-items: center;
   align-content: center;
   text-align: center;
-  background-color: transparent;
-  backdrop-filter: blur(100px);
+  background-color: var(--bg);
   color: var(--bg);
   margin: 0px;
   padding: 5px;
