@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { MOTION } from "../../../styles/motionConfig";
+import { MOTION } from "./../../styles/motionConfig";
 
 const Content = () => {
   const ref = useRef(null);
