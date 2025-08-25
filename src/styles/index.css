@@ -993,7 +993,7 @@ h3 {
 }
 
 .dock-item p {
-  color: var(--fg);
+  color: var(--bg);
   font-size: large;
   padding: 0px;
   margin: 0px;
@@ -1005,7 +1005,7 @@ h3 {
 }
 
 .dock-item .icon {
-  color: var(--fg);
+  color: var(--bg);
   font-size: 30px;
   margin: 0px;
   padding: 10px;
@@ -1658,4 +1658,20 @@ h3 {
 }
 .rotate--5 {
   transform: rotate(-5deg);
+}
+
+.bg-yellow {
+  background-color: var(--yellow);
+}
+
+.bg-red {
+  background-color: var(--red);
+}
+
+.bg-green {
+  background-color: var(--green);
+}
+
+.bg-purple {
+  background-color: var(--purple);
 }
