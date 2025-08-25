@@ -26,7 +26,6 @@ const DownloadSection = () => {
         <motion.a
           href="/download"
           className="download_button"
-          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: isInView ? 0 : 100, opacity: isInView ? 1 : 0 }}
