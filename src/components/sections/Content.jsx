@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import ImagesSection from "./ImagesSection";
 import { MOTION } from "./../../styles/motionConfig";
 
 const Content = () => {
@@ -19,6 +20,7 @@ const Content = () => {
         OWL is a powerful and intuitive platform for managing projects, tasks,
         and teams, created specifically for developers and IT teams.
       </p>
+      <ImagesSection />
     </motion.div>
   );
 };

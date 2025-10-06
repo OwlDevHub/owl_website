@@ -25,7 +25,10 @@ const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="content">
+    <div
+      className="content"
+      style={{ maxHeight: "100%", minHeight: "100vh", height: "100vh" }}
+    >
       <h1>{title}</h1>
       <div className="widget_blocks" ref={ref}>
         {items.map((feature, idx) => {

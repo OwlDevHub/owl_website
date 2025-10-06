@@ -4,7 +4,6 @@ import { Header, Footer } from "./components/layout";
 import {
   HeroSection,
   FeaturesSection,
-  ImagesSection,
   DownloadSection,
   Content,
 } from "./components/sections";
@@ -33,7 +32,6 @@ const App = () => {
                 <div className="flex flex-col flex-center w-auto h-auto text-center page-stack">
                   <HeroSection />
                   <Content />
-                  <ImagesSection />
                   <FeaturesSection />
                   <DownloadSection />
                   <Footer />
