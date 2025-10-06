@@ -861,7 +861,7 @@ h3 {
 
 .ui {
   position: relative;
-  width: 90%;
+  width: 90vw;
   border-radius: 15px;
   padding: 0px;
   margin: 0px;
@@ -1131,7 +1131,7 @@ input::placeholder {
 @media screen and (max-width: 700px) {
   .square_block {
     width: 120px;
-    zoom: 0.9;
+    zoom: 0.75;
   }
 
   .content-text {
@@ -1139,15 +1139,15 @@ input::placeholder {
   }
 
   .square_block h1 {
-    font-size: medium;
+    font-size: 1rem;
   }
 
   .square_block h2 {
-    font-size: small;
+    font-size: 1rem;
   }
 
   .square_block h3 {
-    font-size: small;
+    font-size: 1rem;
   }
 
   .widget_blocks {
@@ -1412,7 +1412,7 @@ input::placeholder {
 
 .enhanced-content p {
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 2rem;
   margin: 0px;
   padding: 0px;
