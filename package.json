@@ -15,7 +15,6 @@
     "@vercel/speed-insights": "^1.1.0",
     "framer-motion": "^12.4.10",
     "motion-dom": "^12.4.10",
-    "nord": "^0.2.1",
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
