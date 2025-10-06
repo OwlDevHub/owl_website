@@ -47,7 +47,7 @@
 .download-input {
   padding: 10px;
   width: calc(100% - 10px);
-  height: 20px;
+  height: 30px;
   box-shadow: var(--shadow-lg);
   margin: var(--space-0);
   border-radius: var(--radius);
@@ -137,8 +137,8 @@ main {
 
 .mobile-header {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: 15px;
+  top: 15px;
   width: 50px;
   height: 50px;
   background-color: var(--tr);
@@ -561,7 +561,7 @@ h3 {
 
 .purchase_button,
 .download_button {
-  height: 40px;
+  height: 50px;
   padding: 10px;
   width: auto;
   border: none;
