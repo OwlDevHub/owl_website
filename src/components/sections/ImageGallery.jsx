@@ -1,88 +1,78 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 
-function CustomCarousel({ children }) {
+function CustomCarousel({ children, intervalMs = 2500 }) {
+  const slides = useMemo(() => React.Children.toArray(children), [children]);
+  const count = slides.length;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slideDone, setSlideDone] = useState(true);
-  const [timeID, setTimeID] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
 
-  useEffect(() => {
-    if (slideDone) {
-      setSlideDone(false);
-      setTimeID(
-        setTimeout(() => {
-          slideNext();
-          setSlideDone(true);
-        }, 5000),
-      );
-    }
-  }, [slideDone]);
+  const clampIndex = (index) => {
+    if (count === 0) return 0;
+    if (index < 0) return count - 1;
+    if (index >= count) return 0;
+    return index;
+  };
 
   const slideNext = () => {
-    setActiveIndex((val) => {
-      const count = React.Children.count(children);
-      return val >= count - 1 ? 0 : val + 1;
-    });
+    setActiveIndex((prev) => clampIndex(prev + 1));
   };
 
   const slidePrev = () => {
-    setActiveIndex((val) => {
-      const count = React.Children.count(children);
-      return val <= 0 ? count - 1 : val - 1;
-    });
+    setActiveIndex((prev) => clampIndex(prev - 1));
   };
 
-  const AutoPlayStop = () => {
-    if (timeID > 0) {
-      clearTimeout(timeID);
-      setSlideDone(false);
-    }
-  };
-
-  const AutoPlayStart = () => {
-    if (!slideDone) {
-      setSlideDone(true);
-    }
-  };
+  useEffect(() => {
+    if (count <= 1) return;
+    if (isPaused) return;
+    const id = setInterval(() => {
+      setActiveIndex((prev) => clampIndex(prev + 1));
+    }, intervalMs);
+    return () => clearInterval(id);
+  }, [count, isPaused, intervalMs]);
 
   return (
     <div
       className="ui"
-      onMouseEnter={AutoPlayStop}
-      onMouseLeave={AutoPlayStart}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
-      {React.Children.map(children, (item, index) => (
-        <div
-          className={"slider__item slider__item-active-" + (activeIndex + 1)}
-          key={item.key || item.props?.id || `slider-item-${activeIndex}-${Math.random()}`}
-        >
-          {item}
-        </div>
-      ))}
-      <button
-        className="slider__btn-next"
-        onClick={(e) => {
-          e.preventDefault();
-          slideNext();
-        }}
+      <div
+        className="slider__track"
+        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
-        {" "}
-      </button>
+        {slides.map((item, index) => (
+          <div
+            className="slider__item"
+            key={item.key ?? item.props?.id ?? `slider-item-${index}`}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
       <button
         className="slider__btn-prev"
         onClick={(e) => {
           e.preventDefault();
           slidePrev();
         }}
-      >
-        {" "}
-      </button>
+        aria-label="Previous slide"
+      ></button>
+      <button
+        className="slider__btn-next"
+        onClick={(e) => {
+          e.preventDefault();
+          slideNext();
+        }}
+        aria-label="Next slide"
+      ></button>
     </div>
   );
 }
 
 CustomCarousel.propTypes = {
   children: PropTypes.node.isRequired,
+  intervalMs: PropTypes.number,
 };
 
 export default CustomCarousel;
