@@ -5,4 +5,3 @@ export { default as Content } from "./Content";
 export { default as FeaturesSection } from "./FeaturesSection";
 export { default as ImagesSection } from "./ImagesSection";
 export { default as HeroSection } from "./HeroSection";
-export { default as Dock } from "./Dock";

@@ -11,24 +11,24 @@ import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
 import { MOTION_LIST } from "../../styles/motionConfig";
 
-const features = [
+const defaultFeatures = [
   { icon: faPenRuler, text: "Custom\ndesign" },
-  { icon: faRotate, text: "Fast\nsynchronization" },
+  { icon: faRotate, text: "Fast\nsync" },
   { icon: faWifi, text: "Offline\nmode" },
   { icon: faUsers, text: "Collaborative\nwork" },
-  { icon: faDollarSign, text: "Free\ntrial version" },
+  { icon: faDollarSign, text: "Free\ntrial" },
   { icon: faApple, text: "Cross\nplatform" },
 ];
 
-const FeaturesSection = () => {
+const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
     <div className="content">
-      <h1>FEATURES</h1>
+      <h1>{title}</h1>
       <div className="widget_blocks" ref={ref}>
-        {features.map((feature) => {
+        {items.map((feature, idx) => {
           const key = `${feature.text}-${feature.icon.iconName || feature.icon.prefix}`;
           return (
             <motion.div
@@ -36,7 +36,7 @@ const FeaturesSection = () => {
               className="square_block"
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-              transition={MOTION_LIST(features.findIndex((f) => f === feature))}
+              transition={MOTION_LIST(idx)}
             >
               <span className="emoji">
                 <FontAwesomeIcon icon={feature.icon} />

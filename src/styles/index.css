@@ -13,6 +13,72 @@
   --yellow: #dbbc7f;
 }
 
+/* Design tokens: spacing and radii */
+:root {
+  /* spacing scale */
+  --space: 16px; /* base unit */
+  --space-0: 0px;
+  --space-1: calc(var(--space) * 0.5); /* 8px */
+  --space-2: var(--space); /* 16px */
+  --space-3: calc(var(--space) * 1.5); /* 24px */
+  --space-4: calc(var(--space) * 2); /* 32px */
+  --space-5: calc(var(--space) * 2.5); /* 40px */
+  --space-6: calc(var(--space) * 3); /* 48px */
+
+  /* radii scale */
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-md: 20px;
+  --radius-lg: 24px;
+  --radius-xl: 30px;
+  --radius-round: 50%;
+
+  /* layout tokens */
+  --form-width: 350px;
+  --control-height: 40px;
+  --gap-form: var(--space-2);
+  --shadow-lg: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Download form utilities using only CSS variables */
+.download-form {
+  display: flex;
+  flex-direction: column;
+  width: var(--form-width);
+  max-width: var(--form-width);
+  gap: var(--gap-form);
+}
+
+.download-input {
+  padding: 10px;
+  width: calc(100% - 10px);
+  height: 20px; /* keep input inner height; container controls overall */
+  box-shadow: var(--shadow-lg);
+  margin: var(--space-0);
+  border-radius: var(--radius);
+}
+
+.download-submit {
+  padding: 10px;
+  height: 20px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  margin: 0px;
+}
+
+.status-success {
+  color: var(--green);
+  font-size: 1rem;
+  line-height: 2rem;
+  font-family: "Fira Mono";
+}
+
+.status-error {
+  color: var(--red);
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
 * {
   user-select: none;
   font-family: "Fira Mono", serif;
@@ -128,7 +194,7 @@ main {
   flex-direction: row;
   align-items: center;
   align-content: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -216,8 +282,8 @@ main {
 .app_logo {
   margin: 0px;
   padding: 0px;
-  width: 45vw;
-  max-width: 500px;
+  width: 30vw;
+  max-width: 350px;
   margin-bottom: 40px;
   transition: transform 0.5s ease-in;
 }
@@ -417,7 +483,7 @@ a .button:hover {
 
 .main_block h2 {
   text-align: left;
-  font-size: 100px;
+  font-size: 70px;
   font-family: "Bungee", monospace;
 }
 
@@ -480,10 +546,19 @@ h3 {
   align-items: center;
 }
 
+.download-buttons h3 {
+  font-size: 1rem;
+  line-height: 2rem;
+  font-family: "Fira Mono", monospace;
+}
+
 .download_app {
   display: flex;
   flex-direction: column;
   min-width: 100%;
+  height: 100vh;
+  max-height: 100%;
+  min-height: 100vh;
   justify-content: center;
   align-items: center;
   align-content: center;
@@ -492,8 +567,8 @@ h3 {
 .purchase_button,
 .download_button {
   height: 40px;
-  width: 250px;
-  margin: 10px;
+  padding: 10px;
+  width: auto;
   border: none;
   border-radius: 15px;
   background-color: var(--fg);
@@ -508,8 +583,7 @@ h3 {
     box-shadow 0.5s,
     width 0.5s,
     color 0.5s;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-  padding: 5px 5px 5px 5px;
+  box-shadow: var(--shadow-lg);
 }
 
 .purchase_button i,
@@ -540,7 +614,6 @@ h3 {
 }
 
 .download_button:hover {
-  width: 350px;
   background-color: var(--tr);
   color: var(--fg);
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
@@ -1144,7 +1217,7 @@ input::placeholder {
   }
 }
 
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 1500px) {
   .content {
     width: 100%;
     margin: 0px;
@@ -1161,12 +1234,12 @@ input::placeholder {
   }
 
   .app_logo {
-    width: 300px;
+    width: 200px;
   }
 
   .main_block h2 {
     text-align: center;
-    font-size: xx-large;
+    font-size: x-large;
   }
 }
 
@@ -1273,11 +1346,28 @@ input::placeholder {
   text-align: left;
 }
 
-@media (max-width: 640px) {
-  .privacy-page {
-    padding: 2rem 0.5rem;
-  }
+.privacy-page * {
+  user-select: text;
+}
 
+.privacy-page h1,
+.privacy-page h2 {
+  font-family: "Bungee", monospace;
+}
+
+.privacy-page p {
+  font-size: 1rem;
+  line-height: 2rem;
+  font-family: "Fira Mono", monospace;
+}
+
+.privacy-page * {
+  font-size: 1rem;
+  line-height: 2rem;
+  font-family: "Fira Mono", monospace;
+}
+
+@media (max-width: 640px) {
   .privacy-container {
     padding: 1.5rem;
   }
@@ -1304,7 +1394,7 @@ input::placeholder {
 .enhanced-content {
   background: transparent;
   padding: 40px 32px;
-  margin: 40px auto;
+  margin: 0 auto;
   width: 75%;
   max-width: 900px;
   display: flex;
@@ -1312,7 +1402,7 @@ input::placeholder {
   align-items: center;
   text-align: center;
   justify-content: center;
-  gap: 10px;
+  gap: var(--space-2);
 }
 
 .enhanced-content h2 {
@@ -1320,6 +1410,19 @@ input::placeholder {
   max-width: 1000px;
   font-size: x-large;
   line-height: 2.5rem;
+}
+
+.enhanced-content p {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 2rem;
+  margin: 0px;
+  padding: 0px;
+}
+
+.enhanced-content h1 {
+  margin: 0px;
+  padding: 0px;
 }
 
 .flex_1 {
@@ -1363,6 +1466,10 @@ input::placeholder {
     font-size: 2.2rem;
     margin-bottom: 7px;
     display: block;
+  }
+
+  .enhanced-content p {
+    font-size: 0.8rem;
   }
 }
 

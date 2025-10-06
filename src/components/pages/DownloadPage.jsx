@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudArrowDown, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCloudArrowDown,
+  faCaretLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const DownloadPage = () => {
   const navigate = useNavigate();
@@ -15,7 +18,6 @@ const DownloadPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Payment submitted:", formData);
   };
 
   const handleInputChange = (e) => {
