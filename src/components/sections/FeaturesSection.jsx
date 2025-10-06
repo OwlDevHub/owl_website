@@ -12,7 +12,7 @@ import { motion, useInView } from "framer-motion";
 import { MOTION_LIST } from "../../styles/motionConfig";
 
 const defaultFeatures = [
-  { icon: faPenRuler, text: "Custom\ndesign" },
+  { icon: faPenRuler, text: "Minimalistic\ndesign" },
   { icon: faRotate, text: "Fast\nsync" },
   { icon: faWifi, text: "Offline\nmode" },
   { icon: faUsers, text: "Collaborative\nwork" },
