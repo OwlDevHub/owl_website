@@ -13,19 +13,16 @@
   --yellow: #dbbc7f;
 }
 
-/* Design tokens: spacing and radii */
 :root {
-  /* spacing scale */
-  --space: 16px; /* base unit */
+  --space: 32px;
   --space-0: 0px;
-  --space-1: calc(var(--space) * 0.5); /* 8px */
-  --space-2: var(--space); /* 16px */
-  --space-3: calc(var(--space) * 1.5); /* 24px */
-  --space-4: calc(var(--space) * 2); /* 32px */
-  --space-5: calc(var(--space) * 2.5); /* 40px */
-  --space-6: calc(var(--space) * 3); /* 48px */
+  --space-1: calc(var(--space) * 0.5);
+  --space-2: calc(var(--space) * 2);
+  --space-3: calc(var(--space) * 2.5);
+  --space-4: calc(var(--space) * 3);
+  --space-5: calc(var(--space) * 3.5);
+  --space-6: calc(var(--space) * 4);
 
-  /* radii scale */
   --radius-sm: 10px;
   --radius: 16px;
   --radius-md: 20px;
@@ -33,26 +30,24 @@
   --radius-xl: 30px;
   --radius-round: 50%;
 
-  /* layout tokens */
   --form-width: 350px;
   --control-height: 40px;
   --gap-form: var(--space-2);
   --shadow-lg: 0px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Download form utilities using only CSS variables */
 .download-form {
   display: flex;
   flex-direction: column;
   width: var(--form-width);
   max-width: var(--form-width);
-  gap: var(--gap-form);
+  gap: var(--space-1);
 }
 
 .download-input {
   padding: 10px;
   width: calc(100% - 10px);
-  height: 20px; /* keep input inner height; container controls overall */
+  height: 20px;
   box-shadow: var(--shadow-lg);
   margin: var(--space-0);
   border-radius: var(--radius);
@@ -702,6 +697,7 @@ h3 {
 
 .square_block {
   width: 150px;
+  height: 150px;
   aspect-ratio: 1/1;
   border-radius: 20px;
   margin: 0px;
@@ -1392,9 +1388,8 @@ input::placeholder {
 }
 
 .enhanced-content {
-  background: transparent;
-  padding: 40px 32px;
-  margin: 0 auto;
+  margin: 0px;
+  padding: 0px;
   width: 75%;
   max-width: 900px;
   display: flex;
@@ -1403,6 +1398,9 @@ input::placeholder {
   text-align: center;
   justify-content: center;
   gap: var(--space-2);
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100%;
 }
 
 .enhanced-content h2 {
