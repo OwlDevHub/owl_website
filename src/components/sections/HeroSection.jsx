@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { OwlIcon } from '../ui';
-import { MOTION } from '../../styles/motionConfig';
+import { OwlIcon } from "../ui";
+import { MOTION } from "../../styles/motionConfig";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -16,6 +16,25 @@ const HeroSection = () => {
         animate={{ y: 0, opacity: isInView ? 1 : 0 }}
         transition={MOTION}
       >
+        <motion.a
+          href="#download_app"
+          style={{
+            backgroundColor: "var(--green)",
+            padding: "var(--space-1)",
+            borderRadius: "0px",
+            color: "var(--bg)",
+            fontSize: "1rem",
+            lineHeight: "2rem",
+            position: "absolute",
+            top: "80px",
+            width: "calc(100% - var(--space-1) - var(--space-1))",
+          }}
+        >
+          <div className="notify">
+            The service is currently under development. You can submit a request
+            and receive a notification when we launch it.
+          </div>
+        </motion.a>
         <div className="flex flex-col flex-center gap-0 w-auto h-auto text-center">
           <h2>
             Meet Your New
