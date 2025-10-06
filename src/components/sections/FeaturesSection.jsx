@@ -36,7 +36,7 @@ const FeaturesSection = () => {
               className="square_block"
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-              transition={MOTION_LIST(features.findIndex(f => f === feature))}
+              transition={MOTION_LIST(features.findIndex((f) => f === feature))}
             >
               <span className="emoji">
                 <FontAwesomeIcon icon={feature.icon} />

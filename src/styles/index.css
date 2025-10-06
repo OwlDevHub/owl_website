@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap");
 
 :root {
-  --fg: #D3C6AA;
-  --bg: #1E2326;
-  --fg2: #5C6A72;
-  --color1: #A7C080;
-  --tr: #272E33;
-  --red: #E67E80;
-  --green: #A7C080;
-  --purple: #D699B6;
-  --yellow: #DBBC7F;
+  --fg: #d3c6aa;
+  --bg: #1e2326;
+  --fg2: #5c6a72;
+  --color1: #a7c080;
+  --tr: #272e33;
+  --red: #e67e80;
+  --green: #a7c080;
+  --purple: #d699b6;
+  --yellow: #dbbc7f;
 }
 
 * {
@@ -392,8 +392,9 @@ a .button:hover {
 
 .footer {
   margin-bottom: 50px;
-  font-size: medium;
+  font-size: 1rem;
   color: var(--fg);
+  line-height: 2rem;
 }
 
 .footer p {
@@ -673,7 +674,7 @@ h3 {
 
 .square_block h1 {
   color: var(--fg);
-  font-family: "Oswald", monospace;
+  font-family: "Fira Mono", serif;
   font-size: medium;
   font-weight: bolder;
   padding: 0px;
@@ -902,9 +903,9 @@ h3 {
   text-align: center;
 }
 
-.purchase-form input {
+input {
   width: 100%;
-  padding: 0.8rem;
+  padding: 10px;
   margin-bottom: 1rem;
   border: 0px solid transparent;
   border-radius: 15px;
@@ -913,10 +914,9 @@ h3 {
   outline: none;
   height: 20px;
   font-size: large;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-.purchase-form input::placeholder {
+input::placeholder {
   color: var(--bg);
 }
 
