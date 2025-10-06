@@ -85,7 +85,7 @@ const Header = () => {
                   <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
                 </a>
                 <a
-                  href="/download"
+                  href="#download_app"
                   className="navbar_button"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -113,9 +113,9 @@ const Header = () => {
         <motion.a className="navbar_button" href="/privacy" target="_blank">
           <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
         </motion.a>
-        <Link to="/download" className="navbar_button">
+        <motion.a href="#download_app" className="navbar_button">
           <FontAwesomeIcon icon={faCloudArrowDown} /> DOWNLOAD
-        </Link>
+        </motion.a>
       </motion.header>
     );
   }
