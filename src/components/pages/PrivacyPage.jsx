@@ -16,7 +16,7 @@ const PrivacyPage: React.FC = () => {
         </p>
         <ul>
           <li><strong>Account Information:</strong> When you register, we collect your email address, name, and a securely hashed password. Your role (e.g., User or Admin) is stored to manage access permissions. We also record your account creation timestamp and last login time.</li>
-          <li><strong>Subscription Information:</strong> If you subscribe to a plan (e.g., Free, Pro, Premium, or DEEV), we store details such as the plan name, start and end dates, and subscription status (e.g., active or inactive).</li>
+          <li><strong>Subscription Information:</strong> If you subscribe to a plan (e.g., Free, Pro, Premium), we store details such as the plan name, start and end dates, and subscription status (e.g., active or inactive).</li>
           <li><strong>Project and Task Data:</strong> You may create projects, boards, columns, and tasks. We store project titles, descriptions, deadlines, priorities, links, and board associations, as well as board titles, column titles, colors, task content, completion status, and their respective creation and update timestamps.</li>
           <li><strong>Usage Information:</strong> We log your IP addresses and login times to monitor account activity and ensure security.</li>
         </ul>
@@ -29,7 +29,7 @@ const PrivacyPage: React.FC = () => {
         </p>
         <ul>
           <li>Authenticate your account and provide access to the application.</li>
-          <li>Manage your subscriptions and deliver features associated with your plan (e.g., Free, Pro, Premium, or DEEV).</li>
+          <li>Manage your subscriptions and deliver features associated with your plan (e.g., Free, Pro or Premium).</li>
           <li>Enable you to create, organize, and track projects, boards, columns, and tasks.</li>
           <li>Monitor account activity to detect and prevent unauthorized access or suspicious behavior.</li>
           <li>Improve our services by analyzing usage patterns in aggregated, anonymized form.</li>
