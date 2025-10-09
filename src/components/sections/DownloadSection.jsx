@@ -90,16 +90,14 @@ const DownloadSection = () => {
         />
         <motion.button
           type="submit"
-          className="download-submit download_button"
+          className="download_button"
           whileTap={{ scale: 0.95 }}
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: isInView ? 0 : 50, opacity: isInView ? 1 : 0 }}
           transition={{ duration: 0.5, delay: 0.7 }}
           disabled={status === "sending"}
         >
-          <h3>
-            <FontAwesomeIcon icon={faRocket} /> NOTIFY ME
-          </h3>
+          <FontAwesomeIcon icon={faRocket} /> NOTIFY ME
         </motion.button>
         {status === "success" && (
           <h3 className="status-success">
