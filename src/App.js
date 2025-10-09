@@ -6,6 +6,7 @@ import {
   FeaturesSection,
   DownloadSection,
   Content,
+  SupportSection,
 } from "./components/sections";
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import "./styles/index.css";
@@ -34,6 +35,7 @@ const App = () => {
                   <Content />
                   <FeaturesSection />
                   <DownloadSection />
+                  <SupportSection />
                   <Footer />
                 </div>
               </main>
