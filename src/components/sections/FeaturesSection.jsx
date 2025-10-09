@@ -29,7 +29,13 @@ const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
       className="content"
       style={{ maxHeight: "100%", minHeight: "100vh", height: "100vh" }}
     >
-      <h1>{title}</h1>
+      <motion.h1
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
+      >
+        {title}
+      </motion.h1>
       <div className="widget_blocks" ref={ref}>
         {items.map((feature, idx) => {
           const key = `${feature.text}-${feature.icon.iconName || feature.icon.prefix}`;

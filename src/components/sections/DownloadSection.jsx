@@ -65,17 +65,14 @@ const DownloadSection = () => {
       animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
       transition={{ duration: 0.8 }}
     >
-      <h1>
+      <motion.h1>
         Get notified
         <br />
         when we launch
-      </h1>
+      </motion.h1>
       <motion.form
         onSubmit={handleSubmit}
         className="download-buttons download-form"
-        initial={{ scale: 0.8 }}
-        animate={{ scale: isInView ? 1 : 0.8 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
       >
         <motion.input
           type="email"
@@ -83,18 +80,12 @@ const DownloadSection = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="ENTER YOUR EMAIL"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: isInView ? 0 : 50, opacity: isInView ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
           className="download-input"
         />
         <motion.button
           type="submit"
           className="download_button"
           whileTap={{ scale: 0.95 }}
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: isInView ? 0 : 50, opacity: isInView ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
           disabled={status === "sending"}
         >
           <FontAwesomeIcon icon={faRocket} /> NOTIFY ME

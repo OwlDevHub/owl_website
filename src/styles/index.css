@@ -1069,6 +1069,8 @@ input::placeholder {
   border-radius: 1.25rem;
   margin: 0px;
   padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   display: flex;
   flex-direction: column;
   align-content: center;
