@@ -32,9 +32,13 @@ const App = () => {
                 <Header />
                 <div className="flex flex-col flex-center w-auto h-auto text-center page-stack">
                   <HeroSection />
+                  <div className="spacer"></div>
                   <Content />
+                  <div className="spacer"></div>
                   <FeaturesSection />
+                  <div className="spacer"></div>
                   <DownloadSection />
+                  <div className="spacer"></div>
                   <Footer />
                 </div>
               </main>
