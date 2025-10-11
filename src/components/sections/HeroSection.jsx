@@ -21,7 +21,7 @@ const NotifyLink = () => {
         position: "absolute",
         top: "80px",
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        whiteSpace: "wrap",
         display: "block",
         width: "calc(100vw - var(--space-1) - var(--space-1))"
       }}
