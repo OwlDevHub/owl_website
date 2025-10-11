@@ -35,7 +35,6 @@ const App = () => {
                   <Content />
                   <FeaturesSection />
                   <DownloadSection />
-                  <SupportSection />
                   <Footer />
                 </div>
               </main>
