@@ -1129,7 +1129,8 @@ input::placeholder {
 }
 
 .privacy-container h1 {
-  font-size: xxx-large;
+  font-size: 3rem;
+  line-height: 6rem;
   font-family: "Fira Mono", serif;
   font-weight: 700;
   color: var(--fg);
@@ -1151,7 +1152,8 @@ input::placeholder {
 }
 
 .privacy-container h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  line-height: 4rem;
   font-weight: 600;
   color: var(--fg);
   margin-bottom: 1rem;

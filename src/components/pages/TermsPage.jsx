@@ -2,8 +2,8 @@ import React from 'react';
 
 const TermsOfService: React.FC = () => {
   return (
-    <div className="terms-page">
-      <div className="terms-container">
+    <div className="privacy-page">
+      <div className="privacy-container">
         <h1>Terms of Service</h1>
         
         <section>
