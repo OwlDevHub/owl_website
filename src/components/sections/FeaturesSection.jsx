@@ -26,8 +26,7 @@ const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
 
   return (
     <div
-      className="content"
-      style={{ maxHeight: "100%", minHeight: "100vh", height: "100vh" }}
+      className="content features_section"
     >
       <motion.h1
         transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
