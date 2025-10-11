@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import { HeroSection } from "./components/HeroSection";
-import { Features, Images } from "./components/Features";
-import DownloadSection from "./components/DownloadSection";
-import Contacts from "./components/Contacts";
-import Footer from "./components/Footer";
+import { Header, Footer } from "./components/layout";
+import {
+  HeroSection,
+  FeaturesSection,
+  DownloadSection,
+  Content,
+  SupportSection,
+} from "./components/sections";
+import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import "./styles/index.css";
-import DownloadPage from "./components/DownloadPage";
-import PrivacyPage from "./components/PrivacyPage"
-import TermsPage from "./components/TermsPage.jsx"
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
 const App = () => {
   return (
@@ -22,40 +22,19 @@ const App = () => {
         transition={{ duration: 0.5 }}
       >
         <Routes>
-          <Route path="/download" element={<DownloadPage /> } />
-          <Route path="/privacy" element={<PrivacyPage /> } />
-          <Route path="/terms" element={<TermsPage /> } />
+          <Route path="/download" element={<DownloadPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route
             path="/"
             element={
               <main>
                 <Header />
-                <div>
+                <div className="flex flex-col flex-center w-auto h-auto text-center page-stack">
                   <HeroSection />
-                  <div className="spacer"></div>
-                  <Images />
-                  <div
-                    className="spacer"
-                    style={{
-                      maxHeight: "20px",
-                      minHeight: "20px",
-                      height: "20px",
-                    }}
-                  ></div>
-                  <Features />
-                  <div
-                    className="spacer"
-                    style={{
-                      maxHeight: "20px",
-                      minHeight: "20px",
-                      height: "20px",
-                    }}
-                  ></div>
-                  <div className="spacer"></div>
+                  <Content />
+                  <FeaturesSection />
                   <DownloadSection />
-                  <div className="spacer"></div>
-                  <Contacts />
-                  <div className="spacer"></div>
                   <Footer />
                 </div>
               </main>
