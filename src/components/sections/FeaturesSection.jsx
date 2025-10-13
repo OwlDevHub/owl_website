@@ -10,6 +10,7 @@ import {
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
 import { MOTION_LIST } from "../../styles/motionConfig";
+import PropTypes from "prop-types";
 
 const defaultFeatures = [
   { icon: faPenRuler, text: "Minimalistic\ndesign" },
@@ -25,9 +26,7 @@ const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div
-      className="content features_section"
-    >
+    <div className="content features_section">
       <motion.h1
         transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
         initial={{ opacity: 0, y: 100 }}
@@ -63,6 +62,16 @@ const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
       </div>
     </div>
   );
+};
+
+FeaturesSection.propTypes = {
+  title: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      icon: PropTypes.object.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+  ),
 };
 
 export default FeaturesSection;

@@ -40,11 +40,14 @@ function CustomCarousel({ children, intervalMs = 2500 }) {
       <div
         className="slider__track"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        aria-live="polite"
+        aria-atomic="true"
       >
         {slides.map((item, index) => (
           <div
             className="slider__item"
             key={item.key ?? item.props?.id ?? `slider-item-${index}`}
+            aria-hidden={activeIndex !== index}
           >
             {item}
           </div>
