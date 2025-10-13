@@ -1,8 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TermsOfService: React.FC = () => {
   return (
     <div className="privacy-page">
+      <header className="header" style={{ width: "calc(100% - 10px - 10px)", padding: "10px", margin: "0px", display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", justifyContent: "center" }}>
+        <Link to="/" className='navbar_button' style={{ width: "auto", padding: "0px 20px 0px 20px" }}>
+          ← Back to Home
+        </Link>
+      </header>
+      <div className='sspacer' style={{ height: "100px" }}></div>
       <div className="privacy-container">
         <h1>Terms of Service</h1>
         

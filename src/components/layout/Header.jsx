@@ -106,11 +106,11 @@ const Header = () => {
         animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -40 }}
         transition={MOTION}
       >
-        <motion.a href="/terms" className="navbar_button" target="_blank">
+        <motion.a href="/terms" className="navbar_button">
           <FontAwesomeIcon icon={faScaleBalanced} />
           TERMS
         </motion.a>
-        <motion.a className="navbar_button" href="/privacy" target="_blank">
+        <motion.a className="navbar_button" href="/privacy">
           <FontAwesomeIcon icon={faLightbulb} /> PRIVACY
         </motion.a>
         <motion.a href="#download_app" className="navbar_button">
