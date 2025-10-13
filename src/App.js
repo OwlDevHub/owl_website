@@ -6,7 +6,6 @@ import {
   FeaturesSection,
   DownloadSection,
   Content,
-  SupportSection,
 } from "./components/sections";
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import "./styles/index.css";

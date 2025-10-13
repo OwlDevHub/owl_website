@@ -7,7 +7,6 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
 import { MOTION } from "../../styles/motionConfig";
 
 const Header = () => {

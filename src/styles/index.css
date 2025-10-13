@@ -462,13 +462,6 @@ a .button:hover {
   color: var(--fg);
 }
 
-.spacer {
-  min-height: 9.375rem;
-  max-height: 9.375rem;
-  background-color: transparent;
-  border: none;
-}
-
 .footer {
   margin-bottom: 3.125rem;
   font-size: var(--font-small);
@@ -1042,7 +1035,7 @@ input::placeholder {
   color: var(--green);
   font-size: var(--font-medium);
   line-height: 2rem;
-  font-family: "Fira Mono";
+  font-family: "Fira Mono", monospace;
 }
 
 .status-error {
@@ -1066,7 +1059,6 @@ input::placeholder {
   width: auto;
   height: 10rem;
   aspect-ratio: auto;
-  border-radius: 1.25rem;
   margin: 0px;
   padding: 1rem;
   padding-left: 2rem;
@@ -1221,10 +1213,6 @@ input::placeholder {
   margin: 0px;
 }
 
-.privacy-container * {
-  user-select: text;
-}
-
 .privacy-container h1,
 .privacy-container h2 {
   font-family: "Bungee", monospace;
@@ -1240,6 +1228,7 @@ input::placeholder {
   font-size: var(--font-medium);
   line-height: 2rem;
   font-family: "Fira Mono", monospace;
+  user-select: text;
 }
 
 .enhanced-content {
@@ -1641,6 +1630,7 @@ input::placeholder {
     height: 100%;
     max-height: 100%;
     min-height: 100%;
+    flex-direction: column;
   }
 
   .notify {
@@ -1722,10 +1712,6 @@ input::placeholder {
 
   .widget_blocks {
     grid-template-columns: auto auto;
-  }
-
-  .download_app {
-    flex-direction: column;
   }
 
   .content-list {
