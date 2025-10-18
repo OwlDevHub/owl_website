@@ -5,7 +5,7 @@ import {
   faRotate,
   faDollarSign,
   faUsers,
-  faWifi,
+  faTerminal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { motion, useInView } from "framer-motion";
@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 const defaultFeatures = [
   { icon: faPenRuler, text: "Minimalistic\ndesign" },
   { icon: faRotate, text: "Fast\nsync" },
-  { icon: faWifi, text: "Offline\nmode" },
+  { icon: faTerminal, text: "CLI\nmode" },
   { icon: faUsers, text: "Collaborative\nwork" },
   { icon: faDollarSign, text: "Free\ntrial" },
   { icon: faApple, text: "Cross\nplatform" },
