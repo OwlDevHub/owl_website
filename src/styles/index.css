@@ -1122,9 +1122,10 @@ input::placeholder {
 
 .privacy-container {
   max-width: 56rem;
-  margin: 0 auto;
   border-radius: 1.875rem;
-  padding: 2rem;
+  width: calc(100% - 30px - 30px);
+  padding: 30px;
+  margin: 0px;
 }
 
 .privacy-container h1 {
@@ -1157,13 +1158,6 @@ input::placeholder {
   color: var(--fg);
   margin-bottom: 1rem;
   font-family: "Oswald", serif;
-  text-align: left;
-}
-
-.privacy-container p {
-  color: var(--fg);
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
   text-align: left;
 }
 
@@ -1207,12 +1201,6 @@ input::placeholder {
   text-align: left;
 }
 
-.privacy-container {
-  width: calc(100% - 30px - 30px);
-  padding: 30px;
-  margin: 0px;
-}
-
 .privacy-container h1,
 .privacy-container h2 {
   font-family: "Bungee", monospace;
@@ -1220,8 +1208,11 @@ input::placeholder {
 
 .privacy-container p {
   font-size: var(--font-medium);
-  line-height: 2rem;
   font-family: "Fira Mono", monospace;
+  color: var(--fg);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  text-align: left;
 }
 
 .privacy-container * {
