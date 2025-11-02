@@ -1044,6 +1044,12 @@ input::placeholder {
   line-height: 2rem;
 }
 
+.status-wait {
+  color: var(--yellow);
+  font-size: var(--font-medium);
+  line-height: 2rem;
+}
+
 .support_grid {
   display: grid;
   grid-template-columns: auto;

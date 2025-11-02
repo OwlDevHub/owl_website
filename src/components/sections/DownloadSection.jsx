@@ -90,6 +90,9 @@ const DownloadSection = () => {
         >
           <FontAwesomeIcon icon={faRocket} /> NOTIFY ME
         </motion.button>
+        {status === "sending" && (
+          <h3 className="status-wait">Sending a request. Please wait</h3>
+        )}
         {status === "success" && (
           <h3 className="status-success">
             Thanks! You have been added to the waiting list.
