@@ -1678,8 +1678,8 @@ input::placeholder {
 
   .support_block {
     width: 18.75rem;
-    height: calc(auto + 1.25rem);
-    aspect-ratio: auto;
+    height: auto;
+    min-height: 1.25rem;
     border-radius: 1.25rem;
     margin: 0px;
     padding: 1.875rem;

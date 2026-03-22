@@ -1,32 +1,32 @@
 import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 
+const clampIndex = (index, count) => {
+  if (count === 0) return 0;
+  if (index < 0) return count - 1;
+  if (index >= count) return 0;
+  return index;
+};
+
 function CustomCarousel({ children, intervalMs = 2500 }) {
   const slides = useMemo(() => React.Children.toArray(children), [children]);
   const count = slides.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const clampIndex = (index) => {
-    if (count === 0) return 0;
-    if (index < 0) return count - 1;
-    if (index >= count) return 0;
-    return index;
-  };
-
   const slideNext = () => {
-    setActiveIndex((prev) => clampIndex(prev + 1));
+    setActiveIndex((prev) => clampIndex(prev + 1, count));
   };
 
   const slidePrev = () => {
-    setActiveIndex((prev) => clampIndex(prev - 1));
+    setActiveIndex((prev) => clampIndex(prev - 1, count));
   };
 
   useEffect(() => {
     if (count <= 1) return;
     if (isPaused) return;
     const id = setInterval(() => {
-      setActiveIndex((prev) => clampIndex(prev + 1));
+      setActiveIndex((prev) => clampIndex(prev + 1, count));
     }, intervalMs);
     return () => clearInterval(id);
   }, [count, isPaused, intervalMs]);
