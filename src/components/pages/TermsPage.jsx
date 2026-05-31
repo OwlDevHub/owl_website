@@ -1,18 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TermsOfService: React.FC = () => {
+const TermsOfService = () => {
   return (
     <div className="privacy-page">
-      <header className="header" style={{ width: "calc(100% - 10px - 10px)", padding: "10px", margin: "0px", display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", justifyContent: "center" }}>
-        <Link to="/" className='navbar_button' style={{ width: "auto", padding: "0px 20px 0px 20px" }}>
-          ← Back to Home
-        </Link>
-      </header>
-      <div className='sspacer' style={{ height: "100px" }}></div>
       <div className="privacy-container">
+        <Link to="/" className="back-link">← Back to Home</Link>
         <h1>Terms of Service</h1>
-        
+
         <section>
           <h2>1. General Provisions</h2>
           <p>1.1. These Terms of Service (hereinafter "Terms") govern the relationship between users (hereinafter "User") and the operator of the service (hereinafter "Service"), provided through the web platform, mobile applications, or API.</p>

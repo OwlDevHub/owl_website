@@ -1,12 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
-import { motion, useInView } from "framer-motion";
 
 const DownloadSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   const [email, setEmail] = useState("");
   const [ipAddr, setIpAddr] = useState("");
   const [status, setStatus] = useState(null);
@@ -24,13 +20,11 @@ const DownloadSection = () => {
         console.log(err);
       }
     };
-
     fetchIpAddress();
   }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     setStatus("sending");
 
     const deviceInfo =
@@ -57,52 +51,37 @@ const DownloadSection = () => {
   };
 
   return (
-    <motion.div
-      className="download_app"
-      id="download_app"
-      ref={ref}
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-      transition={{ duration: 0.8 }}
-    >
-      <motion.h1>
-        Get notified
-        <br />
-        when we launch
-      </motion.h1>
-      <motion.form
-        onSubmit={handleSubmit}
-        className="download-buttons download-form"
-      >
-        <motion.input
+    <div className="download" id="download_app">
+      <h2>GET NOTIFIED WHEN WE LAUNCH</h2>
+      <form onSubmit={handleSubmit} className="download-form">
+        <input
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="ENTER YOUR EMAIL"
+          placeholder="Enter your email"
           className="download-input"
         />
-        <motion.button
+        <button
           type="submit"
-          className="download_button"
-          whileTap={{ scale: 0.95 }}
+          className="download-button"
           disabled={status === "sending"}
         >
-          <FontAwesomeIcon icon={faRocket} /> NOTIFY ME
-        </motion.button>
+          <FontAwesomeIcon icon={faRocket} /> Notify me
+        </button>
         {status === "sending" && (
-          <h3 className="status-wait">Sending a request. Please wait</h3>
+          <p className="status-wait">Sending a request. Please wait</p>
         )}
         {status === "success" && (
-          <h3 className="status-success">
+          <p className="status-success">
             Thanks! You have been added to the waiting list.
-          </h3>
+          </p>
         )}
         {status === "error" && (
-          <h3 className="status-error">Error when sending. Try again later.</h3>
+          <p className="status-error">Error when sending. Try again later.</p>
         )}
-      </motion.form>
-    </motion.div>
+      </form>
+    </div>
   );
 };
 

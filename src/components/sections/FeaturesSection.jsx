@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenRuler,
@@ -8,57 +8,47 @@ import {
   faTerminal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
-import { motion, useInView } from "framer-motion";
-import { MOTION_LIST } from "../../styles/motionConfig";
 import PropTypes from "prop-types";
 
 const defaultFeatures = [
-  { icon: faPenRuler, text: "Minimalistic\ndesign" },
-  { icon: faRotate, text: "Fast\nsync" },
-  { icon: faTerminal, text: "CLI\nmode" },
-  { icon: faUsers, text: "Collaborative\nwork" },
-  { icon: faDollarSign, text: "Free\ntrial" },
-  { icon: faApple, text: "Cross\nplatform" },
+  {
+    icon: faPenRuler,
+    text: "Minimalistic design",
+    desc: "Clean and intuitive interface",
+  },
+  {
+    icon: faRotate,
+    text: "Fast sync",
+    desc: "Real-time updates across devices",
+  },
+  {
+    icon: faTerminal,
+    text: "CLI mode",
+    desc: "Powerful command-line interface",
+  },
+  {
+    icon: faUsers,
+    text: "Collaborative work",
+    desc: "Work together seamlessly",
+  },
+  { icon: faDollarSign, text: "Free trial", desc: "Try before you commit" },
+  { icon: faApple, text: "Cross platform", desc: "Works everywhere you do" },
 ];
 
 const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   return (
-    <div className="content features_section">
-      <motion.h1
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-      >
-        {title}
-      </motion.h1>
-      <div className="widget_blocks" ref={ref}>
-        {items.map((feature, idx) => {
-          const key = `${feature.text}-${feature.icon.iconName || feature.icon.prefix}`;
-          return (
-            <motion.div
-              key={key}
-              className="square_block"
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
-              transition={MOTION_LIST(idx)}
-            >
-              <span className="emoji">
-                <FontAwesomeIcon icon={feature.icon} />
-              </span>
-              <h1>
-                {feature.text.split("\n").map((line) => (
-                  <React.Fragment key={line}>
-                    {line}
-                    <br />
-                  </React.Fragment>
-                ))}
-              </h1>
-            </motion.div>
-          );
-        })}
+    <div className="features">
+      <h2>{title}</h2>
+      <div className="feature-grid">
+        {items.map((feature, idx) => (
+          <div key={idx} className="feature-card">
+            <div className="icon">
+              <FontAwesomeIcon icon={feature.icon} />
+            </div>
+            <h3>{feature.text}</h3>
+            <p>{feature.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -70,6 +60,7 @@ FeaturesSection.propTypes = {
     PropTypes.shape({
       icon: PropTypes.object.isRequired,
       text: PropTypes.string.isRequired,
+      desc: PropTypes.string,
     }),
   ),
 };
