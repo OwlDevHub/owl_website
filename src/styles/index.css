@@ -325,6 +325,7 @@ input {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-sm);
+  width: 100%;
 }
 
 .feature-card {
@@ -604,7 +605,7 @@ input {
   max-width: 50rem;
   width: 85%;
   display: grid;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .privacy-container h1 {
@@ -613,12 +614,12 @@ input {
 
 .privacy-container h2 {
   font-size: var(--text-sub);
-  margin-top: var(--space-xs);
+  margin-top: var(--space-sm);
 }
 
 .privacy-container p,
 .privacy-container li {
-  line-height: 1.6;
+  line-height: 1.9;
   font-size: var(--text-base);
 }
 
