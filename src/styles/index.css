@@ -192,7 +192,7 @@ main {
   position: fixed;
   right: 0.9375rem;
   top: 0.9375rem;
-  width: 3.125rem;
+  width: auto;
   height: 3.125rem;
   background-color: var(--tr);
   border-radius: 1.25rem;
@@ -210,23 +210,20 @@ main {
   right: 0;
   width: 100vw;
   height: 100vh;
-  background: transparent;
+  background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  backdrop-filter: blur(0.1875rem);
 }
 
 .mobile-menu {
   position: fixed;
-  background: var(--bg);
   color: var(--fg);
-  height: calc(15.625rem - 0.625rem - 0.625rem);
-  width: calc(18.75rem - 0.625rem - 0.625rem);
+  height: 100%;
+  width: 100%;
   padding: 0.625rem;
   border-radius: 1.5rem;
-  box-shadow: 0px 0px 2.5rem rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   gap: 0.9375rem;
@@ -235,6 +232,25 @@ main {
   align-items: center;
   align-content: center;
   justify-content: center;
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: var(--fg);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.mobile-menu h1 {
+  font-size: 50px;
+  width: auto;
+  text-align: left;
 }
 
 .mobile-menu .navbar_button {
@@ -247,10 +263,16 @@ main {
   padding-right: 1.25rem;
 }
 
+.mobile-menu .navbar_button svg {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
 .mobile-header-content {
   height: 2.5rem;
-  width: 2.5rem;
-  padding: 0px;
+  width: 5rem;
+  padding: 20px;
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -265,6 +287,11 @@ main {
   border: none;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
 }
 
 .app-title {
@@ -552,9 +579,9 @@ a .button:hover {
 
 .purchase_button,
 .download_button {
-  height: 3.125rem;
-  padding: 1.625rem;
+  padding: 1rem;
   width: auto;
+  height: 2.75rem;
   border: none;
   border-radius: 0.9375rem;
   background-color: var(--fg);
@@ -1017,7 +1044,7 @@ input::placeholder {
 .download-input {
   padding: 0.625rem;
   width: calc(100% - 0.625rem);
-  height: 1.875rem;
+  height: 1.5rem;
   box-shadow: var(--shadow-lg);
   margin: var(--space-0);
   border-radius: var(--radius);
@@ -1025,7 +1052,7 @@ input::placeholder {
 
 .download-submit {
   padding: 0.625rem;
-  height: 1.25rem;
+  height: 1.5rem;
   width: 100%;
   box-shadow: var(--shadow-lg);
   margin: 0px;
@@ -1385,7 +1412,6 @@ input::placeholder {
   height: 100vh;
 }
 
-/* === Utility Classes for Unified Style === */
 .flex {
   display: flex;
 }
@@ -1641,13 +1667,13 @@ input::placeholder {
 
   .features_section {
     max-height: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     height: 100%;
   }
 
   .enhanced-content {
     max-height: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     height: 100%;
   }
 
@@ -1814,7 +1840,7 @@ input::placeholder {
 
   .main_block h2 {
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 

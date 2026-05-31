@@ -5,6 +5,7 @@ import {
   faCloudArrowDown,
   faScaleBalanced,
   faBars,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { MOTION } from "../../styles/motionConfig";
@@ -46,9 +47,10 @@ const Header = () => {
           <button
             className="mobile-burger"
             onClick={() => setMobileMenuOpen((v) => !v)}
-            aria-label="Open menu"
             style={{ marginLeft: "auto", color: "var(--fg)" }}
           >
+            {" "}
+            OWL
             <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
@@ -69,6 +71,13 @@ const Header = () => {
                 animate="visible"
                 exit="exit"
               >
+                <button
+                  className="mobile-menu-close"
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <FontAwesomeIcon icon={faXmark} />
+                </button>
                 <a
                   href="/terms"
                   className="navbar_button"
