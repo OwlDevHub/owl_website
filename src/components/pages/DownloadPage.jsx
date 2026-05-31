@@ -26,7 +26,7 @@ const DownloadPage = () => {
   return (
     <div className="download-page">
       <form className="purchase-form" onSubmit={handleSubmit}>
-        <h1>Download OWL</h1>
+        <h1 className="about-badge">Download OWL</h1>
         <input
           type="email"
           name="email"
@@ -35,7 +35,11 @@ const DownloadPage = () => {
           onChange={handleInputChange}
           required
         />
-        <button type="submit" className="download-button" style={{ width: "100%" }}>
+        <button
+          type="submit"
+          className="download-button"
+          style={{ width: "100%" }}
+        >
           <FontAwesomeIcon icon={faCloudArrowDown} /> GET APP TRIAL
         </button>
       </form>

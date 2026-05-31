@@ -9,7 +9,6 @@ const HeroSection = () => {
           <h1>Meet Your New Personal Productivity App</h1>
           <ul className="hero-tags">
             <li>Early Access</li>
-            <li>Cross Platform</li>
             <li>Free Trial</li>
           </ul>
         </div>

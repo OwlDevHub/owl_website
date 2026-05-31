@@ -114,6 +114,10 @@ button {
   width: 100%;
 }
 
+button svg {
+  margin-right: 5px;
+}
+
 input {
   width: 100%;
   height: var(--height-sm);
