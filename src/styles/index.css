@@ -1,7 +1,7 @@
 :root {
   --bg: #101010;
-  --fg: #c8c3c3;
-  --pr: #e8e3e3;
+  --fg: #b0abab;
+  --pr: #b0abaa;
   --ab: linear-gradient(to bottom right, #1a1a1a, #151515);
   --hw: linear-gradient(to bottom right, #1f1f1f, #1a1a1a);
   --green: #a7c080;
@@ -362,12 +362,28 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-content: center;
   text-align: center;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   width: 100%;
-  height: 100%;
   min-height: 100vh;
+  justify-content: center;
+}
+
+.about-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.about-badge {
+  background: var(--ab);
+  padding: 0.2em 0.8em;
+  border-radius: var(--radius-lg);
+  font-size: var(--text-xl);
+  color: var(--fg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .about h2 {
@@ -375,9 +391,16 @@ input {
 }
 
 .about p {
-  line-height: 1.6;
-  max-width: var(--main-max);
-  justify-self: center;
+  line-height: 1.7;
+  max-width: 550px;
+  color: var(--fg);
+  font-size: var(--text-sm);
+}
+
+.about-divider {
+  width: 3em;
+  height: 1px;
+  background: var(--ab);
 }
 
 .slider-section {
@@ -410,6 +433,7 @@ input {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: var(--radius-md);
 }
 
 .ui > button {
@@ -418,14 +442,22 @@ input {
   transform: translateY(-50%);
   background: var(--ab);
   border: none;
-  width: var(--height-md);
-  height: var(--height-md);
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: var(--fg);
   transition: var(--transition);
-  opacity: 0.7;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.ui:hover > button {
+  opacity: 0.8;
 }
 
 .ui > button:hover {
@@ -434,11 +466,35 @@ input {
 }
 
 .slider__btn-next {
-  right: 0.5em;
+  right: 0.75em;
 }
 
 .slider__btn-prev {
-  left: 0.5em;
+  left: 0.75em;
+}
+
+.slider__dots {
+  display: flex;
+  gap: 0.4em;
+  justify-content: center;
+  margin-top: 0.75em;
+}
+
+.slider__dot {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  border: none;
+  background: var(--ab);
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+}
+
+.slider__dot.active {
+  background: var(--fg);
+  width: 1.2em;
+  border-radius: 0.25em;
 }
 
 .download {

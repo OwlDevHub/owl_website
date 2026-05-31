@@ -60,7 +60,9 @@ function CustomCarousel({ children, intervalMs = 2500 }) {
           slidePrev();
         }}
         aria-label="Previous slide"
-      ></button>
+      >
+        &#8249;
+      </button>
       <button
         className="slider__btn-next"
         onClick={(e) => {
@@ -68,7 +70,19 @@ function CustomCarousel({ children, intervalMs = 2500 }) {
           slideNext();
         }}
         aria-label="Next slide"
-      ></button>
+      >
+        &#8250;
+      </button>
+      <div className="slider__dots">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            className={`slider__dot${index === activeIndex ? " active" : ""}`}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

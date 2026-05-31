@@ -38,7 +38,7 @@ const defaultFeatures = [
 const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
   return (
     <div className="features">
-      <h2>{title}</h2>
+      <h2 className="about-badge">{title}</h2>
       <div className="feature-grid">
         {items.map((feature, idx) => (
           <div key={idx} className="feature-card">

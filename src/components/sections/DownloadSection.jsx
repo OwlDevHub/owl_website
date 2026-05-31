@@ -52,7 +52,7 @@ const DownloadSection = () => {
 
   return (
     <div className="download" id="download_app">
-      <h2>GET NOTIFIED WHEN WE LAUNCH</h2>
+      <h2 className="about-badge">GET NOTIFIED WHEN WE LAUNCH</h2>
       <form onSubmit={handleSubmit} className="download-form">
         <input
           type="email"
