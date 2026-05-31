@@ -34,7 +34,6 @@ const Header = () => {
             <div
               className="mobile-menu"
               onClick={(e) => e.stopPropagation()}
-              style={{ position: "relative" }}
             >
               <button
                 className="mobile-menu-close"
