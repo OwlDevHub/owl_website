@@ -51,7 +51,6 @@ const FeaturesSection = ({ title = "Features", items = defaultFeatures }) => {
         <Reveal>
           <div className="section-header">
             <span className="section-label">Why OWL</span>
-            <h2 className="section-title">{title}</h2>
             <p className="section-desc">
               Everything you need to stay productive, nothing you don't.
             </p>

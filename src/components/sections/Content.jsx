@@ -8,7 +8,6 @@ const Content = () => {
         <Reveal>
           <div className="section-header">
             <span className="section-label">About OWL</span>
-            <h2 className="section-title">Built for modern teams</h2>
             <p className="section-desc">
               We believe productivity tools should be fast, beautiful, and
               frictionless. OWL brings all your work together.

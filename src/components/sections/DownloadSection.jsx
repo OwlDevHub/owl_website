@@ -253,7 +253,6 @@ const DownloadSection = () => {
         <Reveal>
           <div className="section-header">
             <span className="section-label">Early Access</span>
-            <h2 className="section-title">Get notified when we launch</h2>
             <p className="section-desc">
               Be the first to try OWL. Drop your email and we'll let you know
               when it's ready.

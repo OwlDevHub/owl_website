@@ -30,13 +30,10 @@ const HeroSection = () => {
         animate="visible"
       >
         <div className="hero-text">
-          <motion.div className="hero-badge" variants={itemVariants}>
-            <span>✦</span>
-            Early Access — Free Trial
-          </motion.div>
-
           <motion.h1 variants={itemVariants}>
-            Meet Your New <span>Productivity</span> OS
+            Meet Your New
+            <br />
+            <span>Productivity</span> OS
           </motion.h1>
 
           <motion.p className="hero-sub" variants={itemVariants}>
@@ -53,16 +50,6 @@ const HeroSection = () => {
             </a>
           </motion.div>
         </div>
-
-        <motion.div className="hero-visual" variants={itemVariants}>
-          <div className="hero-icon-frame">
-            <div className="hero-icon-glow" />
-            <div className="hero-icon-inner hero-float">
-              <OwlIcon />
-            </div>
-          </div>
-          <div className="hero-visual-label">OWL — Project OS</div>
-        </motion.div>
       </motion.div>
     </div>
   );
