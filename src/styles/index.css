@@ -1,14 +1,16 @@
 :root {
-  --bg: #101010;
-  --fg: #b0abab;
-  --pr: #b0abaa;
-  --ab: linear-gradient(to bottom right, #1a1a1a, #151515);
-  --hw: linear-gradient(to bottom right, #1f1f1f, #1a1a1a);
+  --bg: #2d353b;
+  --fg: #d3c6aa;
+  --pr: #a7c080;
+
+  --ab: #394449;
+  --hw: linear-gradient(to bottom right, #434f55, #394449);
+
   --green: #a7c080;
   --red: #e67e80;
   --yellow: #dbbc7f;
-  --subtle: #666;
-  --muted: #888;
+  --subtle: #4f5b58;
+  --muted: #859289;
 
   --text-base: 0.95rem;
   --text-sm: 0.85rem;
@@ -17,28 +19,23 @@
   --text-xl: 1.5rem;
   --text-heading: 1.8rem;
   --text-sub: 1.2rem;
-
   --space-xs: 0.5em;
   --space-sm: 1em;
   --space-md: 1.5em;
   --space-lg: 2em;
   --space-xl: 4em;
   --space-xxl: 5em;
-
   --height-sm: 35px;
   --height-md: 2rem;
   --height-lg: 2.5rem;
-
   --radius-sm: 0.5em;
   --radius-md: 0.8em;
   --radius-lg: 1em;
   --radius-xl: 1.5em;
   --radius-full: 2em;
-
   --main-width: 50%;
   --main-max: 600px;
   --logo-size: 6em;
-
   --transition: 100ms ease-out;
 }
 
@@ -85,10 +82,11 @@ body {
 }
 
 main {
+  height: 100%;
   display: grid;
   gap: var(--space-xl);
   width: var(--main-width);
-  padding: var(--space-xxl) 0;
+  padding: 0;
   justify-items: center;
   text-align: center;
 }
@@ -268,7 +266,6 @@ input {
   width: var(--logo-size);
   border-radius: var(--radius-sm);
   flex-shrink: 0;
-  background-color: var(--ab);
   padding: var(--space-xs);
 }
 
@@ -367,12 +364,13 @@ input {
 
 .feature-card .icon {
   font-size: var(--text-xl);
+  margin: var(--space-xs);
 }
 
 .feature-card h3 {
-  font-size: var(--text-sm);
+  font-size: var(--text-sl);
   font-weight: 600;
-  color: var(--pr);
+  color: var(--fg);
 }
 
 .feature-card p {
@@ -564,7 +562,6 @@ input {
   border-radius: var(--radius-full);
   border: none;
   background: var(--ab);
-  color: var(--pr);
   cursor: pointer;
   font-weight: 600;
   transition: var(--transition);
@@ -600,6 +597,12 @@ input {
 }
 
 .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100px;
   text-align: center;
   font-size: 0.57em;
   color: var(--subtle);
