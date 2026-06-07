@@ -57,9 +57,9 @@ const FeaturesSection = ({ title = "Features", items = defaultFeatures }) => {
             </p>
           </div>
         </Reveal>
-        <RevealStagger className="feature-grid" staggerDelay={0.08}>
+        <RevealStagger className="feature-grid" staggerDelay={0.06}>
           {items.map((feature, idx) => (
-            <RevealItem key={idx} className="feature-card" variant="scaleIn">
+            <RevealItem key={idx} className="feature-card" variant="fadeUp">
               <div className="feature-icon">
                 <FontAwesomeIcon icon={feature.icon} />
               </div>

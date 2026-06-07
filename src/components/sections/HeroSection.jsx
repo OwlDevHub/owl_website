@@ -2,22 +2,21 @@ import { motion } from "framer-motion";
 import { OwlIcon } from "../ui";
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
@@ -30,7 +29,7 @@ const HeroSection = () => {
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="hero-text" variants={containerVariants}>
+        <div className="hero-text">
           <motion.div className="hero-badge" variants={itemVariants}>
             <span>✦</span>
             Early Access — Free Trial
@@ -53,25 +52,16 @@ const HeroSection = () => {
               Explore Features
             </a>
           </motion.div>
-        </motion.div>
+        </div>
 
         <motion.div className="hero-visual" variants={itemVariants}>
           <div className="hero-icon-frame">
             <div className="hero-icon-glow" />
-            <motion.div
-              className="hero-icon-inner"
-              animate={{
-                y: [0, -6, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
+            <div className="hero-icon-inner hero-float">
               <OwlIcon />
-            </motion.div>
+            </div>
           </div>
+          <div className="hero-visual-label">OWL — Project OS</div>
         </motion.div>
       </motion.div>
     </div>

@@ -412,6 +412,7 @@ button {
   inset: -20px;
   border-radius: 50%;
   animation: heroPulse 3s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .hero-icon-inner {
@@ -422,6 +423,16 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
+}
+
+.hero-float {
+  animation: heroFloat 4s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .hero-icon-inner .app_logo {
@@ -544,7 +555,8 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  transition: var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  will-change: transform;
 }
 
 .feature-card:hover {
@@ -595,6 +607,7 @@ button {
 .slider__track {
   display: flex;
   transition: transform 0.5s ease;
+  will-change: transform;
 }
 
 .slider__item {
@@ -682,6 +695,7 @@ button {
   flex-direction: column;
   align-items: center;
   gap: var(--space-lg);
+  will-change: transform, opacity;
 }
 
 .download-card h2 {
@@ -987,5 +1001,23 @@ button {
   .footer-inner {
     flex-direction: column;
     gap: var(--space-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-float {
+    animation: none;
+  }
+  .hero-icon-glow {
+    animation: none;
+    opacity: 0.6;
+  }
+  .feature-card {
+    will-change: auto;
   }
 }
