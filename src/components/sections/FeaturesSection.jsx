@@ -14,41 +14,57 @@ const defaultFeatures = [
   {
     icon: faPenRuler,
     text: "Minimalistic design",
-    desc: "Clean and intuitive interface",
+    desc: "Clean and intuitive interface that gets out of your way. No clutter, just focus.",
   },
   {
     icon: faRotate,
     text: "Fast sync",
-    desc: "Real-time updates across devices",
+    desc: "Real-time updates across all your devices. Changes propagate in milliseconds.",
   },
   {
     icon: faTerminal,
     text: "CLI mode",
-    desc: "Powerful command-line interface",
+    desc: "Powerful command-line interface for advanced users who live in the terminal.",
   },
   {
     icon: faUsers,
     text: "Collaborative work",
-    desc: "Work together seamlessly",
+    desc: "Work together seamlessly with real-time collaboration and shared workspaces.",
   },
-  { icon: faDollarSign, text: "Free trial", desc: "Try before you commit" },
-  { icon: faApple, text: "Cross platform", desc: "Works everywhere you do" },
+  {
+    icon: faDollarSign,
+    text: "Free trial",
+    desc: "Try before you commit. Full access, no credit card required.",
+  },
+  {
+    icon: faApple,
+    text: "Cross platform",
+    desc: "Works everywhere you do — macOS, Windows, Linux, and mobile.",
+  },
 ];
 
-const FeaturesSection = ({ title = "FEATURES", items = defaultFeatures }) => {
+const FeaturesSection = ({ title = "Features", items = defaultFeatures }) => {
   return (
-    <div className="features">
-      <h2 className="about-badge">{title}</h2>
-      <div className="feature-grid">
-        {items.map((feature, idx) => (
-          <div key={idx} className="feature-card">
-            <div className="icon">
-              <FontAwesomeIcon icon={feature.icon} />
+    <div className="section" id="features">
+      <div className="section-inner">
+        <div className="section-header">
+          <span className="section-label">Why OWL</span>
+          <h2 className="section-title">{title}</h2>
+          <p className="section-desc">
+            Everything you need to stay productive, nothing you don't.
+          </p>
+        </div>
+        <div className="feature-grid">
+          {items.map((feature, idx) => (
+            <div key={idx} className="feature-card">
+              <div className="feature-icon">
+                <FontAwesomeIcon icon={feature.icon} />
+              </div>
+              <h3>{feature.text}</h3>
+              <p>{feature.desc}</p>
             </div>
-            <h3>{feature.text}</h3>
-            <p>{feature.desc}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

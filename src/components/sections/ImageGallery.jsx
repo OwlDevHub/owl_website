@@ -8,7 +8,7 @@ const clampIndex = (index, count) => {
   return index;
 };
 
-function CustomCarousel({ children, intervalMs = 2500 }) {
+function CustomCarousel({ children, intervalMs = 3000 }) {
   const slides = useMemo(() => React.Children.toArray(children), [children]);
   const count = slides.length;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -33,46 +33,50 @@ function CustomCarousel({ children, intervalMs = 2500 }) {
 
   return (
     <div
-      className="ui"
+      className="ui slider-section"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div
-        className="slider__track"
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {slides.map((item, index) => (
-          <div
-            className="slider__item"
-            key={item.key ?? item.props?.id ?? `slider-item-${index}`}
-            aria-hidden={activeIndex !== index}
-          >
-            {item}
-          </div>
-        ))}
+      <div className="slider-viewport">
+        <div
+          className="slider__track"
+          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {slides.map((item, index) => (
+            <div
+              className="slider__item"
+              key={item.key ?? item.props?.id ?? `slider-item-${index}`}
+              aria-hidden={activeIndex !== index}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
       </div>
-      <button
-        className="slider__btn-prev"
-        onClick={(e) => {
-          e.preventDefault();
-          slidePrev();
-        }}
-        aria-label="Previous slide"
-      >
-        &#8249;
-      </button>
-      <button
-        className="slider__btn-next"
-        onClick={(e) => {
-          e.preventDefault();
-          slideNext();
-        }}
-        aria-label="Next slide"
-      >
-        &#8250;
-      </button>
+      <div className="slider-controls">
+        <button
+          className="slider-btn slider__btn-prev"
+          onClick={(e) => {
+            e.preventDefault();
+            slidePrev();
+          }}
+          aria-label="Previous slide"
+        >
+          &#8249;
+        </button>
+        <button
+          className="slider-btn slider__btn-next"
+          onClick={(e) => {
+            e.preventDefault();
+            slideNext();
+          }}
+          aria-label="Next slide"
+        >
+          &#x203A;
+        </button>
+      </div>
       <div className="slider__dots">
         {slides.map((_, index) => (
           <button
