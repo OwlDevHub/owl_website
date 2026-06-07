@@ -504,7 +504,7 @@ button {
   border-radius: var(--radius-full);
   background: var(--surface);
   border: 1px solid var(--border);
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
   font-weight: 600;
   color: var(--pr);
   text-transform: uppercase;
@@ -984,7 +984,7 @@ button {
     gap: var(--space-xl);
   }
   .hero h1 {
-    font-size: var(--text-3xl);
+    font-size: var(--text-4xl);
   }
 }
 
@@ -998,7 +998,7 @@ button {
     grid-template-columns: 1fr;
   }
   .hero h1 {
-    font-size: var(--text-3xl);
+    font-size: var(--text-4xl);
   }
   .download-card {
     max-width: none;
