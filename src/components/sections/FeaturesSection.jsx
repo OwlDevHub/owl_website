@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import PropTypes from "prop-types";
+import { Reveal, RevealStagger, RevealItem } from "../ui/Reveal";
 
 const defaultFeatures = [
   {
@@ -47,24 +48,26 @@ const FeaturesSection = ({ title = "Features", items = defaultFeatures }) => {
   return (
     <div className="section" id="features">
       <div className="section-inner">
-        <div className="section-header">
-          <span className="section-label">Why OWL</span>
-          <h2 className="section-title">{title}</h2>
-          <p className="section-desc">
-            Everything you need to stay productive, nothing you don't.
-          </p>
-        </div>
-        <div className="feature-grid">
+        <Reveal>
+          <div className="section-header">
+            <span className="section-label">Why OWL</span>
+            <h2 className="section-title">{title}</h2>
+            <p className="section-desc">
+              Everything you need to stay productive, nothing you don't.
+            </p>
+          </div>
+        </Reveal>
+        <RevealStagger className="feature-grid" staggerDelay={0.08}>
           {items.map((feature, idx) => (
-            <div key={idx} className="feature-card">
+            <RevealItem key={idx} className="feature-card" variant="scaleIn">
               <div className="feature-icon">
                 <FontAwesomeIcon icon={feature.icon} />
               </div>
               <h3>{feature.text}</h3>
               <p>{feature.desc}</p>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     </div>
   );

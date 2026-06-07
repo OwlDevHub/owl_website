@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
+import { Reveal } from "../ui/Reveal";
 
 const DownloadSection = () => {
   const [email, setEmail] = useState("");
@@ -249,48 +250,54 @@ const DownloadSection = () => {
   return (
     <div className="section" id="download_app">
       <div className="section-inner">
-        <div className="section-header">
-          <span className="section-label">Early Access</span>
-          <h2 className="section-title">Get notified when we launch</h2>
-          <p className="section-desc">
-            Be the first to try OWL. Drop your email and we'll let you know
-            when it's ready.
-          </p>
-        </div>
-        <div className="download-card">
-          <h2>Join the waitlist</h2>
-          <p>
-            Early adopters get exclusive access and a special launch discount.
-          </p>
-          <form onSubmit={handleSubmit} className="download-form">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="download-input"
-            />
-            <button
-              type="submit"
-              className="download-button"
-              disabled={status === "sending"}
-            >
-              <FontAwesomeIcon icon={faRocket} /> Notify me
-            </button>
-          </form>
-          {status === "sending" && (
-            <p className="status-wait">Sending a request. Please wait</p>
-          )}
-          {status === "success" && (
-            <p className="status-success">
-              Thanks! You have been added to the waiting list.
+        <Reveal>
+          <div className="section-header">
+            <span className="section-label">Early Access</span>
+            <h2 className="section-title">Get notified when we launch</h2>
+            <p className="section-desc">
+              Be the first to try OWL. Drop your email and we'll let you know
+              when it's ready.
             </p>
-          )}
-          {status === "error" && (
-            <p className="status-error">Error when sending. Try again later.</p>
-          )}
-        </div>
+          </div>
+        </Reveal>
+        <Reveal variant="scaleIn">
+          <div className="download-card">
+            <h2>Join the waitlist</h2>
+            <p>
+              Early adopters get exclusive access and a special launch discount.
+            </p>
+            <form onSubmit={handleSubmit} className="download-form">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="download-input"
+              />
+              <button
+                type="submit"
+                className="download-button"
+                disabled={status === "sending"}
+              >
+                <FontAwesomeIcon icon={faRocket} /> Notify me
+              </button>
+            </form>
+            {status === "sending" && (
+              <p className="status-wait">Sending a request. Please wait</p>
+            )}
+            {status === "success" && (
+              <p className="status-success">
+                Thanks! You have been added to the waiting list.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="status-error">
+                Error when sending. Try again later.
+              </p>
+            )}
+          </div>
+        </Reveal>
       </div>
     </div>
   );

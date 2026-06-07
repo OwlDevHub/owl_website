@@ -400,8 +400,8 @@ button {
 
 .hero-icon-frame {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: 300px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -411,18 +411,13 @@ button {
   position: absolute;
   inset: -20px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--pr) 25%, transparent) 0%,
-    transparent 70%
-  );
   animation: heroPulse 3s ease-in-out infinite;
 }
 
 .hero-icon-inner {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border-radius: 32px;
   display: flex;
   align-items: center;
@@ -430,7 +425,7 @@ button {
 }
 
 .hero-icon-inner .app_logo {
-  width: 90px;
+  width: 170px;
   height: auto;
 }
 

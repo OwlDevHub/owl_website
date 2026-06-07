@@ -1,20 +1,23 @@
+import { Reveal, RevealStagger, RevealItem } from "../ui/Reveal";
 import ImagesSection from "./ImagesSection";
 
 const Content = () => {
   return (
     <div className="section" id="about">
       <div className="section-inner">
-        <div className="section-header">
-          <span className="section-label">About OWL</span>
-          <h2 className="section-title">Built for modern teams</h2>
-          <p className="section-desc">
-            We believe productivity tools should be fast, beautiful, and
-            frictionless. OWL brings all your work together.
-          </p>
-        </div>
+        <Reveal>
+          <div className="section-header">
+            <span className="section-label">About OWL</span>
+            <h2 className="section-title">Built for modern teams</h2>
+            <p className="section-desc">
+              We believe productivity tools should be fast, beautiful, and
+              frictionless. OWL brings all your work together.
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="about-grid">
-          <div className="about-text">
+        <RevealStagger className="about-grid" staggerDelay={0.15}>
+          <RevealItem className="about-text">
             <p>
               OWL is a powerful and intuitive platform for managing projects,
               tasks, and teams, created specifically for developers and IT teams
@@ -25,14 +28,11 @@ const Content = () => {
               interface, OWL helps you focus on what matters — building great
               products.
             </p>
-
-
-          </div>
-
-          <div className="about-visual">
+          </RevealItem>
+          <RevealItem className="about-visual">
             <ImagesSection />
-          </div>
-        </div>
+          </RevealItem>
+        </RevealStagger>
       </div>
     </div>
   );
