@@ -8,7 +8,7 @@ const PrivacyPage = () => {
         <Link to="/" className="back-link">← Back to Home</Link>
         <h1>Privacy Policy</h1>
         <p>
-          We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our application. By using our service, you agree to the practices described in this policy.
+          We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use OWL. By using our service, you agree to the practices described in this policy.
         </p>
 
         <section>
@@ -17,10 +17,19 @@ const PrivacyPage = () => {
             We collect the following types of information to provide and improve our services:
           </p>
           <ul>
-            <li><strong>Account Information:</strong> When you register, we collect your email address, name, and a securely hashed password. Your role (e.g., User or Admin) is stored to manage access permissions. We also record your account creation timestamp and last login time.</li>
-            <li><strong>Subscription Information:</strong> If you subscribe to a plan (e.g., Free, Pro, Premium), we store details such as the plan name, start and end dates, and subscription status (e.g., active or inactive).</li>
-            <li><strong>Project and Task Data:</strong> You may create projects, boards, columns, and tasks. We store project titles, descriptions, deadlines, priorities, links, and board associations, as well as board titles, column titles, colors, task content, completion status, and their respective creation and update timestamps.</li>
-            <li><strong>Usage Information:</strong> We log your IP addresses and login times to monitor account activity and ensure security.</li>
+            <li><strong>Account Information:</strong> When you register, we collect your email address, name, and a securely hashed password (plain-text passwords are never stored). Your role (default: "User") is stored to manage access permissions. We also record your account creation timestamp and last login time.</li>
+            <li><strong>Subscription Information:</strong> If you subscribe to a plan (Free, Pro at $5.90/30d, or Premium at $8.90/30d), we store the plan name, start date, end date, and subscription status ("active" or "inactive").</li>
+            <li><strong>Project and Task Data:</strong> You may create projects, boards, columns, and tasks. We store:
+              <ul>
+                <li><strong>Projects:</strong> title, description, deadline, status, priority, link, board association, order, creation and update timestamps.</li>
+                <li><strong>Boards:</strong> title and order.</li>
+                <li><strong>Columns:</strong> title, color, and order.</li>
+                <li><strong>Tasks:</strong> content, completion status, deadline, order, color, creation and update timestamps.</li>
+                <li><strong>Members:</strong> project membership role ("MEMBER" or "OWNER") and join date.</li>
+              </ul>
+            </li>
+            <li><strong>Login History:</strong> When you log in, we record your IP address, user agent, app version, screen resolution, timezone, platform (e.g., Windows, macOS, Linux), and login time.</li>
+            <li><strong>Settings:</strong> We store your preferences including theme, language, font, pomodoro timer intervals (work and break time), profile visibility, and animation preferences.</li>
           </ul>
         </section>
 
@@ -31,8 +40,8 @@ const PrivacyPage = () => {
           </p>
           <ul>
             <li>Authenticate your account and provide access to the application.</li>
-            <li>Manage your subscriptions and deliver features associated with your plan (e.g., Free, Pro or Premium).</li>
-            <li>Enable you to create, organize, and track projects, boards, columns, and tasks.</li>
+            <li>Manage your subscriptions and deliver features associated with your plan (Free, Pro or Premium).</li>
+            <li>Enable you to create, organize, and track projects, boards, columns, and tasks with team members.</li>
             <li>Monitor account activity to detect and prevent unauthorized access or suspicious behavior.</li>
             <li>Improve our services by analyzing usage patterns in aggregated, anonymized form.</li>
           </ul>
@@ -44,9 +53,9 @@ const PrivacyPage = () => {
             We implement the following measures to safeguard your data:
           </p>
           <ul>
-            <li><strong>Password Security:</strong> Your password is stored as a secure hash, making it unreadable even to us.</li>
+            <li><strong>Password Security:</strong> Your password is stored as a secure hash (via Werkzeug), making it unreadable even to us.</li>
             <li><strong>Encrypted Communication:</strong> API requests between the application and our servers are encrypted using HTTPS.</li>
-            <li><strong>Access Controls:</strong> Only authorized personnel have access to our servers, and user data access is restricted based on roles (e.g., User or Admin).</li>
+            <li><strong>Access Controls:</strong> Only authorized personnel have access to our servers, and user data access is restricted based on roles (User or Admin). Banned users are flagged and denied access.</li>
             <li><strong>Regular Audits:</strong> We conduct security audits to identify and address potential vulnerabilities.</li>
           </ul>
         </section>
@@ -69,9 +78,9 @@ const PrivacyPage = () => {
             You have the following rights regarding your data:
           </p>
           <ul>
-            <li><strong>Access:</strong> You can request a copy of your personal data, including account details, subscriptions, projects, boards, columns, and tasks.</li>
-            <li><strong>Correction:</strong> You can update your email address or username via the application settings.</li>
-            <li><strong>Deletion:</strong> You can request deletion of your account and associated data (e.g., projects, boards, tasks, and login history) by contacting us.</li>
+            <li><strong>Access:</strong> You can request a copy of your personal data, including account details, subscriptions, projects, boards, columns, tasks, login history, and settings.</li>
+            <li><strong>Correction:</strong> You can update your email address, username, or preferences (theme, language, font, pomodoro intervals, visibility) via the application settings.</li>
+            <li><strong>Deletion:</strong> You can request deletion of your account and associated data (projects, boards, columns, tasks, login history, settings) by contacting us.</li>
             <li><strong>Opt-Out:</strong> You can manage your subscription preferences to cancel or change plans (e.g., switch from Pro to Free).</li>
           </ul>
           <p>
@@ -82,7 +91,7 @@ const PrivacyPage = () => {
         <section>
           <h2>6. Data Retention</h2>
           <p>
-            We retain your data for as long as your account is active or as needed to provide services. If you delete your account, we will remove your personal data, including account information, subscriptions, projects, boards, columns, tasks, and login history, from our servers, except where retention is required by law (e.g., for audit or tax purposes). Anonymized project and task data may be retained for analytical purposes.
+            We retain your data for as long as your account is active or as needed to provide services. If you delete your account, we will remove your personal data, including account information, subscriptions, projects, boards, columns, tasks, login history, and settings from our servers, except where retention is required by law (e.g., for audit or tax purposes). Anonymized project and task data may be retained for analytical purposes.
           </p>
         </section>
 
@@ -94,7 +103,7 @@ const PrivacyPage = () => {
         </section>
 
         <p className="last-updated">
-          Last updated: May 22, 2025
+          Last updated: June 8, 2026
         </p>
       </div>
     </div>

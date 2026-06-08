@@ -10,36 +10,41 @@ const TermsOfService = () => {
 
         <section>
           <h2>1. General Provisions</h2>
-          <p>1.1. These Terms of Service (hereinafter "Terms") govern the relationship between users (hereinafter "User") and the operator of the service (hereinafter "Service"), provided through the web platform, mobile applications, or API.</p>
+          <p>1.1. These Terms of Service (hereinafter "Terms") govern the relationship between users (hereinafter "User") and the operator of the service (hereinafter "OWL" or "Service"), provided through the web platform, CLI tools, and API.</p>
           <p>1.2. By using the Service, the User fully and unconditionally agrees to these Terms.</p>
           <p>1.3. The Service reserves the right to amend these Terms at any time. We will notify Users of significant changes via email at least 30 days before they take effect. Continued use of the Service after changes constitutes acceptance of the updated Terms.</p>
         </section>
 
         <section>
           <h2>2. Registration and Account</h2>
-          <p>2.1. To access the full functionality of the Service, the User must register by providing accurate information (e.g., name, email address, password).</p>
+          <p>2.1. To access the full functionality of the Service, the User must register by providing accurate information (name, email address, password). A password hash is stored securely — the Service never stores plain-text passwords.</p>
           <p>2.2. The User is responsible for maintaining the confidentiality of their account credentials. The Service is not liable for unauthorized access to the User's account due to loss of credentials.</p>
           <p>2.3. The Service is available to Users of all ages. Users under 16 years of age must obtain parental consent to use the Service in accordance with GDPR requirements.</p>
-          <p>2.4. The Service reserves the right to refuse registration or suspend an account without explanation if the User's actions violate these Terms.</p>
+          <p>2.4. Upon registration, a Free subscription plan is automatically assigned to the User. The Service reserves the right to refuse registration or suspend an account without explanation if the User's actions violate these Terms.</p>
         </section>
 
         <section>
           <h2>3. Use of the Service</h2>
-          <p>3.1. The User agrees to use the Service only for lawful purposes and in compliance with the laws of their jurisdiction.</p>
+          <p>3.1. OWL provides project and task management features including kanban boards, columns, tasks, project collaboration, and CLI integration. The User agrees to use the Service only for lawful purposes and in compliance with the laws of their jurisdiction.</p>
           <p>3.2. The following actions are prohibited:</p>
           <ul>
             <li>Using the Service to distribute malware, spam, or other illegal content</li>
             <li>Attempting to gain unauthorized access to the Service's systems or other Users' data</li>
-            <li>Copying, modifying, or distributing the Service's software or content without written permission from the operator</li>
+            <li>Copying, modifying, reverse-engineering, or distributing the Service's software or content without written permission from the operator</li>
           </ul>
-          <p>3.3. Some features of the Service may only be available with a paid subscription or upon meeting specific conditions.</p>
+          <p>3.3. Some features of the Service may only be available with a paid subscription (Pro or Premium plans) or upon meeting specific conditions.</p>
         </section>
 
         <section>
           <h2>4. Paid Services</h2>
-          <p>4.1. The Service offers both free and paid features. Information about the cost of paid services is available on the Service's website or application.</p>
+          <p>4.1. The Service offers three subscription plans:</p>
+          <ul>
+            <li><strong>Free</strong> — $0.00/30 days: Basic access to core features with limits on usage and data volume.</li>
+            <li><strong>Pro</strong> — $5.90/30 days: Enhanced features for professional users, including prioritized support and increased limits.</li>
+            <li><strong>Premium</strong> — $8.90/30 days: Full access to all app features, including exclusive content and personalized settings.</li>
+          </ul>
           <p>4.2. Payments are processed through designated payment systems. The User must provide accurate payment information.</p>
-          <p>4.3. All payments for subscription services are final and non-refundable, except where required by applicable law.</p>
+          <p>4.3. All payments for subscription services are final and non-refundable, except where required by applicable law. Subscription status can be "active" or "inactive".</p>
           <p>4.4. The Service is not responsible for disruptions in payment systems or banking services.</p>
         </section>
 
@@ -66,7 +71,7 @@ const TermsOfService = () => {
 
         <section>
           <h2>8. Termination of Access</h2>
-          <p>8.1. The Service may suspend or terminate a User's access for violating these Terms.</p>
+          <p>8.1. The Service may suspend or terminate a User's access for violating these Terms. Banned users are marked with the <code>is_banned</code> flag and lose access to all data.</p>
           <p>8.2. The User may stop using the Service at any time by deleting their account as per the instructions provided in the settings. Upon account deletion, personal data will be processed in accordance with our Privacy Policy and GDPR requirements.</p>
         </section>
 
@@ -90,7 +95,7 @@ const TermsOfService = () => {
           <p>11.3. These Terms are drafted in English. In case of translation into other languages, the English version prevails.</p>
         </section>
 
-        <p className="last-updated">Last updated: May 22, 2025</p>
+        <p className="last-updated">Last updated: June 8, 2026</p>
       </div>
     </div>
   );
