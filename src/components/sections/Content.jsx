@@ -15,16 +15,15 @@ const Content = () => {
           </div>
         </Reveal>
 
-        <RevealStagger className="about-grid" staggerDelay={0.15}>
-          <RevealItem className="about-visual">
-            <ImagesSection />
-          </RevealItem>
-          <RevealItem className="about-text">
+        <RevealStagger className="about-text" staggerDelay={0.15}>
+          <RevealItem>
             <p>
               OWL is a powerful and intuitive platform for managing projects,
               tasks, and teams, created specifically for developers and IT teams
               who demand efficiency without the bloat.
             </p>
+          </RevealItem>
+          <RevealItem>
             <p>
               With real-time sync, CLI integration, and a clean minimal
               interface, OWL helps you focus on what matters — building great
@@ -32,6 +31,12 @@ const Content = () => {
             </p>
           </RevealItem>
         </RevealStagger>
+
+        <Reveal>
+          <div className="about-visual">
+            <ImagesSection />
+          </div>
+        </Reveal>
       </div>
     </div>
   );
