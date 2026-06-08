@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { OwlIcon } from "../ui";
 
 const containerVariants = {
   hidden: {},
