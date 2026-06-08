@@ -56,7 +56,7 @@ const CustomCursor = () => {
 
   return (
     <motion.div
-      className={`custom-cursor${label ? " is-hovering" : ""}`}
+      className={`custom-cursor${label ? " is-hovering" : " custom-cursor--invert"}`}
       style={{
         position: "fixed",
         top: 0,
