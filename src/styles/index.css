@@ -52,6 +52,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Iosevka Charon", monospace;
+  user-select: none;
 }
 
 html {
@@ -67,6 +68,7 @@ body {
   color: var(--fg);
   font-size: var(--text-base);
   line-height: 1.6;
+  cursor: none;
 }
 
 #root {
@@ -1020,6 +1022,20 @@ button {
     flex-direction: column;
     gap: var(--space-sm);
   }
+}
+
+/* ===== CUSTOM CURSOR ===== */
+* {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  translate: -50% -50%;
+  transition:
+    width 0.2s,
+    height 0.2s,
+    border-radius 0.2s,
+    background-color 0.2s;
 }
 
 @media (prefers-reduced-motion: reduce) {

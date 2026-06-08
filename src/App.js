@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/layout";
+import CustomCursor from "./components/ui/CustomCursor";
 import {
   HeroSection,
   FeaturesSection,
@@ -14,6 +15,7 @@ import "./styles/index.css";
 const App = () => {
   return (
     <Router>
+      <CustomCursor />
       <SmoothScroll>
         <Routes>
           <Route path="/download" element={<DownloadPage />} />
