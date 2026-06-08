@@ -23,14 +23,14 @@
   --text-xl: 1.75rem;
   --text-2xl: 2.25rem;
   --text-3xl: 3rem;
-  --text-4xl: 3.75rem;
-  --text-5xl: 5rem;
+  --text-4xl: 5rem;
+  --text-5xl: 8rem;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 2rem;
-  --space-xl: 3rem;
+  --space-xl: 2.5rem;
   --space-2xl: 5rem;
   --space-3xl: 8rem;
 
@@ -63,11 +63,6 @@ html {
 
 body {
   min-height: 100vh;
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
   background: var(--bg);
   color: var(--fg);
   font-size: var(--text-base);
@@ -354,7 +349,10 @@ button {
 
 .hero h1 span {
   font-family: "Caveat", cursive;
-  color: var(--pr);
+  background-color: var(--pr);
+  color: var(--bg);
+  padding: 0rem 2rem 0rem 2rem;
+  border-radius: var(--radius-lg);
 }
 
 .hero-sub {
@@ -943,7 +941,6 @@ button {
   background: var(--ab);
 }
 
-/* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -968,7 +965,6 @@ button {
   animation: fadeUp 0.6s ease forwards;
 }
 
-/* ===== RESPONSIVE ===== */
 @media screen and (max-width: 1200px) {
   .hero-content {
     grid-template-columns: 1fr;
@@ -1001,9 +997,11 @@ button {
 
 @media screen and (max-width: 600px) {
   :root {
-    --text-4xl: 2.5rem;
-    --text-3xl: 2rem;
-    --text-2xl: 1.5rem;
+    --text-4xl: 3.2rem;
+    --text-3xl: 2.5rem;
+    --text-2xl: 2rem;
+    --text-lg: 1rem;
+    --text-base: 0.9rem;
   }
   .feature-grid {
     grid-template-columns: 1fr;
