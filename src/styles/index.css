@@ -1036,6 +1036,7 @@ button {
     height 0.2s,
     border-radius 0.2s,
     background-color 0.2s;
+  mix-blend-mode: difference;
 }
 
 @media (prefers-reduced-motion: reduce) {
