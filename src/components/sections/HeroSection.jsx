@@ -33,7 +33,9 @@ const HeroSection = () => {
           <motion.h1 variants={itemVariants}>
             Meet Your New
             <br />
-            <span>Productivity</span> OS
+            <span>PRODUCTIVITY</span>
+            <br />
+            System
           </motion.h1>
 
           <motion.p className="hero-sub" variants={itemVariants}>

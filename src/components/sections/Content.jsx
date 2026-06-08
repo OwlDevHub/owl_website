@@ -16,6 +16,9 @@ const Content = () => {
         </Reveal>
 
         <RevealStagger className="about-grid" staggerDelay={0.15}>
+          <RevealItem className="about-visual">
+            <ImagesSection />
+          </RevealItem>
           <RevealItem className="about-text">
             <p>
               OWL is a powerful and intuitive platform for managing projects,
@@ -27,9 +30,6 @@ const Content = () => {
               interface, OWL helps you focus on what matters — building great
               products.
             </p>
-          </RevealItem>
-          <RevealItem className="about-visual">
-            <ImagesSection />
           </RevealItem>
         </RevealStagger>
       </div>
