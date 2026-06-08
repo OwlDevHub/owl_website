@@ -1036,10 +1036,7 @@ button {
     height 0.2s,
     border-radius 0.2s,
     background-color 0.2s;
-}
-
-.custom-cursor--invert {
-  mix-blend-mode: difference;
+  border: 1px solid var(--bg);
 }
 
 @media (prefers-reduced-motion: reduce) {
