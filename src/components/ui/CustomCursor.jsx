@@ -2,9 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const CustomCursor = () => {
+  const [canHover, setCanHover] = useState(false);
   const [label, setLabel] = useState(null);
   const [iconHTML, setIconHTML] = useState(null);
   const iconRef = useRef(null);
+
+  useEffect(() => {
+    setCanHover(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+  }, []);
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -53,6 +58,8 @@ const CustomCursor = () => {
       document.removeEventListener("mouseover", over);
     };
   }, [mouseX, mouseY]);
+
+  if (!canHover) return null;
 
   return (
     <motion.div

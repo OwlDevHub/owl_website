@@ -1038,6 +1038,12 @@ button {
     background-color 0.2s;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
