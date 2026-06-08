@@ -4,7 +4,6 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 const CustomCursor = () => {
   const [label, setLabel] = useState(null);
   const [iconHTML, setIconHTML] = useState(null);
-  const [isVisible, setIsVisible] = useState(true);
   const iconRef = useRef(null);
 
   const mouseX = useMotionValue(-100);
@@ -74,7 +73,7 @@ const CustomCursor = () => {
         alignItems: "center",
         justifyContent: "center",
         gap: iconHTML ? 6 : 0,
-        opacity: isVisible ? 1 : 0,
+        opacity: 1,
         fontFamily: "Bebas Neue, sans-serif",
         fontSize: 13,
         letterSpacing: 2,
