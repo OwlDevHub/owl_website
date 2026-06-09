@@ -1557,7 +1557,11 @@ button {
 .light .hero-cta-primary,
 .light .hero h1 span,
 .light .download-button {
-  color: #f8efd8;
+  color: var(--fg);
+}
+
+.light .hero h1 span {
+  color: var(--bg);
 }
 
 .light .feature-card:hover {

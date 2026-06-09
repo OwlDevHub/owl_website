@@ -13,10 +13,12 @@ import {
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import SmoothScroll from "./components/SmoothScroll";
 import "./styles/index.css";
+import ThemeInitializer from "./components/ThemeInitializer";
 
 const App = () => {
   return (
     <Router>
+      <ThemeInitializer />
       <div className="noise-overlay" />
       <div className="dot-grid" />
       <CustomCursor />
