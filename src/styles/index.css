@@ -1756,6 +1756,8 @@ button {
   .download-button {
     width: 100%;
     justify-content: center;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
   }
   .about-text p {
     font-size: var(--text-sm);
