@@ -19,6 +19,10 @@ const DownloadPage = () => {
     e.preventDefault();
   };
 
+  const handleDownload = (platform) => {
+    window.location.href = `https://github.com/OwlDevHub/OWL_APP/releases/latest/download/${platform}`;
+  };
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -66,16 +70,29 @@ const DownloadPage = () => {
               ease: [0.25, 0.1, 0.25, 1],
             }}
           >
-            <button type="submit" className="download-button">
+            <button
+              className="download-button"
+              onClick={() => handleDownload("owl.exe")}
+            >
               <FontAwesomeIcon icon={faMicrosoft} /> WINDOWS
             </button>
-            <button type="submit" className="download-button">
+            <button
+              className="download-button"
+              onClick={() => handleDownload("owl.dmg")}
+            >
               <FontAwesomeIcon icon={faApple} /> MAC
             </button>
-            <button type="submit" className="download-button">
+            <button
+              className="download-button"
+              onClick={() => handleDownload("owl.AppImage")}
+            >
               <FontAwesomeIcon icon={faLinux} /> LINUX
             </button>
-            <button type="submit" className="download-button" disabled>
+            <button
+              className="download-button"
+              onClick={() => handleDownload("owl.apk")}
+              disabled
+            >
               <FontAwesomeIcon icon={faAndroid} /> ANDROID
             </button>
           </motion.div>

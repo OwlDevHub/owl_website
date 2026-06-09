@@ -1180,7 +1180,7 @@ button {
   border-radius: var(--radius-full);
   border: 1px solid var(--pr);
   background: transparent;
-  color: var(--pr);
+  color: var(--fg);
   font-weight: 600;
   font-size: var(--text-sm);
   white-space: nowrap;
