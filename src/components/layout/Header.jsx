@@ -1,19 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { OwlIcon } from "../ui";
+
+const useTheme = () => {
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved === "light") {
+      setIsDark(false);
+      document.documentElement.classList.add("light");
+    }
+  }, []);
+
+  const toggle = useCallback(() => {
+    setIsDark((prev) => {
+      const next = !prev;
+      document.documentElement.classList.toggle("light", !next);
+      localStorage.setItem("theme", next ? "dark" : "light");
+      return next;
+    });
+  }, []);
+
+  return { isDark, toggle };
+};
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { isDark, toggle: toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
     handleResize();
+    handleScroll();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const links = [
@@ -29,7 +62,7 @@ const Header = () => {
   if (isMobile) {
     return (
       <>
-        <header className="mobile-header">
+        <header className={`mobile-header${scrolled ? " scrolled" : ""}`}>
           <a href="/" className="header-logo">
             <OwlIcon />
             OWL
@@ -64,6 +97,13 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
+              <button
+                className="header-cta"
+                onClick={() => { toggleTheme(); setMenuOpen(false); }}
+                style={{ background: "none", border: "1px solid var(--border)", color: "var(--fg)" }}
+              >
+                <FontAwesomeIcon icon={isDark ? faSun : faMoon} /> {isDark ? "Light" : "Dark"}
+              </button>
             </div>
           </div>
         )}
@@ -72,7 +112,7 @@ const Header = () => {
   }
 
   return (
-    <header className="header">
+    <header className={`header${scrolled ? " scrolled" : ""}`}>
       <div className="header-inner">
         <a href="/" className="header-logo">
           <OwlIcon />
@@ -84,6 +124,9 @@ const Header = () => {
           <a href="#download_app">Download</a>
           <a href="/terms">Terms</a>
           <a href="/privacy">Privacy</a>
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+            <FontAwesomeIcon icon={isDark ? faMoon : faSun} />
+          </button>
           <a className="header-cta" href="#download_app">
             Get Early Access
           </a>

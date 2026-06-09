@@ -7,6 +7,7 @@ import {
   FeaturesSection,
   DownloadSection,
   Content,
+  Contacts,
 } from "./components/sections";
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import SmoothScroll from "./components/SmoothScroll";
@@ -30,6 +31,7 @@ const App = () => {
                 <Content />
                 <FeaturesSection />
                 <DownloadSection />
+                <Contacts />
                 <Footer />
               </main>
             }
