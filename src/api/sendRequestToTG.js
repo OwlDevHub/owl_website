@@ -152,8 +152,7 @@ export function getPerformanceInfo() {
     info = {
       ...info,
       pageLoadTime: timing.loadEventEnd - timing.navigationStart,
-      domReadyTime:
-        timing.domContentLoadedEventEnd - timing.navigationStart,
+      domReadyTime: timing.domContentLoadedEventEnd - timing.navigationStart,
     };
   }
 

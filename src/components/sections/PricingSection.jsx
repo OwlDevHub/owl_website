@@ -6,7 +6,8 @@ const plans = [
     name: "Free",
     price: 0.0,
     duration_days: 30,
-    about: "Free basic access to the app's core features with limits on usage and data volume",
+    about:
+      "Free basic access to the app's core features with limits on usage and data volume",
     cta: "Get Started",
     featured: false,
   },
@@ -14,7 +15,8 @@ const plans = [
     name: "Pro",
     price: 5.9,
     duration_days: 30,
-    about: "Enhanced features for professional users, including prioritized support and increased limits",
+    about:
+      "Enhanced features for professional users, including prioritized support and increased limits",
     cta: "Try Pro",
     featured: true,
   },
@@ -22,7 +24,8 @@ const plans = [
     name: "Premium",
     price: 8.9,
     duration_days: 30,
-    about: "Full access to all app features, including exclusive content and personalized settings",
+    about:
+      "Full access to all app features, including exclusive content and personalized settings",
     cta: "Go Premium",
     featured: false,
   },
@@ -64,7 +67,9 @@ const PricingSection = () => {
                   <div className="pricing-amount">
                     <span className="pricing-currency">$</span>
                     <span className="pricing-value">{plan.price}</span>
-                    <span className="pricing-period">/ {plan.duration_days} days</span>
+                    <span className="pricing-period">
+                      / {plan.duration_days} days
+                    </span>
                   </div>
                   <p className="pricing-desc">{plan.about}</p>
                   <a

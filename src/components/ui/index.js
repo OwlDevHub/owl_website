@@ -1,1 +1,1 @@
-export { default as OwlIcon } from './OwlIcon'; 
+export { default as OwlIcon } from "./OwlIcon";

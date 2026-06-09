@@ -16,4 +16,4 @@ export function MOTION_LIST(index = 0, baseDelay = 0.1) {
     delay: baseDelay + index * 0.1,
     ease: [0.4, 0, 0.2, 1],
   };
-} 
+}

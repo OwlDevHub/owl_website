@@ -56,6 +56,7 @@ Each React component now lives in its own file for clarity and maintainability. 
 - `HeroSection.jsx` — main hero block
 
 This modular approach makes it easier to:
+
 - Find and edit components
 - Reuse and test components
 - Scale the project

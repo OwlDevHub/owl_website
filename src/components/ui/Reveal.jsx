@@ -20,12 +20,7 @@ const VARIANTS = {
   },
 };
 
-const Reveal = ({
-  children,
-  variant = "fadeUp",
-  className,
-  as = "div",
-}) => {
+const Reveal = ({ children, variant = "fadeUp", className, as = "div" }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
   const v = VARIANTS[variant];
@@ -44,11 +39,7 @@ const Reveal = ({
   );
 };
 
-const RevealStagger = ({
-  children,
-  className,
-  staggerDelay = 0.06,
-}) => {
+const RevealStagger = ({ children, className, staggerDelay = 0.06 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
 
