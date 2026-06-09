@@ -1,15 +1,64 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+
+const DEVTOOLS_THRESHOLD = 160;
+
+const useDevToolsDetector = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const check = useCallback(() => {
+    const widthDiff = window.outerWidth - window.innerWidth;
+    const heightDiff = window.outerHeight - window.innerHeight;
+    return widthDiff > DEVTOOLS_THRESHOLD || heightDiff > DEVTOOLS_THRESHOLD;
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(check());
+
+    const onResize = () => setIsOpen(check());
+    window.addEventListener("resize", onResize);
+
+    const interval = setInterval(() => setIsOpen(check()), 1000);
+
+    const onKeyDown = (e) => {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey &&
+          e.shiftKey &&
+          ["I", "C", "J"].includes(e.key.toUpperCase())) ||
+        (e.ctrlKey && e.key.toUpperCase() === "U")
+      ) {
+        setTimeout(() => setIsOpen(check()), 500);
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      clearInterval(interval);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [check]);
+
+  return isOpen;
+};
 
 const CustomCursor = () => {
   const [canHover, setCanHover] = useState(false);
   const [label, setLabel] = useState(null);
   const [iconHTML, setIconHTML] = useState(null);
   const iconRef = useRef(null);
+  const devToolsOpen = useDevToolsDetector();
 
   useEffect(() => {
-    setCanHover(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+    setCanHover(
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches,
+    );
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("devtools-open", devToolsOpen);
+  }, [devToolsOpen]);
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -31,6 +80,19 @@ const CustomCursor = () => {
         setIconHTML(iconEl ? iconEl.innerHTML : null);
         return;
       }
+      const navLink = e.target.closest(".header-nav a");
+      if (navLink) {
+        setLabel("\u2192");
+        setIconHTML(null);
+        return;
+      }
+      const downloadBtn = e.target.closest(".download-button");
+      if (downloadBtn) {
+        const iconEl = downloadBtn.querySelector("svg");
+        setLabel("NOTIFY ME");
+        setIconHTML(iconEl ? iconEl.outerHTML : null);
+        return;
+      }
       const interactive = e.target.closest(
         "a, button, textarea, select, [role=button], [role=link]",
       );
@@ -40,9 +102,8 @@ const CustomCursor = () => {
         } else if (interactive.matches(".slider__btn-next")) {
           setLabel("NEXT");
         } else {
-          const txt =
-            interactive.textContent || interactive.innerText || "";
-          setLabel(txt.trim().slice(0, 16) || "CLICK");
+          const txt = interactive.textContent || interactive.innerText || "";
+          setLabel(txt.trim().slice(0, 16) || "");
         }
       } else {
         setLabel(null);
@@ -59,7 +120,7 @@ const CustomCursor = () => {
     };
   }, [mouseX, mouseY]);
 
-  if (!canHover) return null;
+  if (!canHover || devToolsOpen) return null;
 
   return (
     <motion.div
@@ -70,7 +131,7 @@ const CustomCursor = () => {
         left: 0,
         x: springX,
         y: springY,
-        width: label ? (iconHTML ? 40 : 140) : 20,
+        width: label ? (iconHTML ? 40 : label === "\u2192" ? 40 : 130) : 20,
         height: label ? 40 : 20,
         borderRadius: label ? 18 : "50%",
         backgroundColor: "var(--fg)",

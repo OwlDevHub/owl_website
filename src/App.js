@@ -6,6 +6,7 @@ import {
   HeroSection,
   FeaturesSection,
   DownloadSection,
+  PricingSection,
   Content,
   Contacts,
 } from "./components/sections";
@@ -16,6 +17,8 @@ import "./styles/index.css";
 const App = () => {
   return (
     <Router>
+      <div className="noise-overlay" />
+      <div className="dot-grid" />
       <CustomCursor />
       <SmoothScroll>
         <Routes>
@@ -30,6 +33,7 @@ const App = () => {
                 <HeroSection />
                 <Content />
                 <FeaturesSection />
+                <PricingSection />
                 <DownloadSection />
                 <Contacts />
                 <Footer />

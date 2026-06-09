@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faXmark,
+  faSun,
+  faMoon,
+} from "@fortawesome/free-solid-svg-icons";
 import { OwlIcon } from "../ui";
 
 const useTheme = () => {
@@ -81,10 +86,7 @@ const Header = () => {
             className="mobile-menu-overlay"
             onClick={() => setMenuOpen(false)}
           >
-            <div
-              className="mobile-menu"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
               <button
                 className="mobile-menu-close"
                 onClick={() => setMenuOpen(false)}
@@ -99,10 +101,18 @@ const Header = () => {
               ))}
               <button
                 className="header-cta"
-                onClick={() => { toggleTheme(); setMenuOpen(false); }}
-                style={{ background: "none", border: "1px solid var(--border)", color: "var(--fg)" }}
+                onClick={() => {
+                  toggleTheme();
+                  setMenuOpen(false);
+                }}
+                style={{
+                  background: "none",
+                  border: "1px solid var(--border)",
+                  color: "var(--fg)",
+                }}
               >
-                <FontAwesomeIcon icon={isDark ? faSun : faMoon} /> {isDark ? "Light" : "Dark"}
+                <FontAwesomeIcon icon={isDark ? faSun : faMoon} />{" "}
+                {isDark ? "Light" : "Dark"}
               </button>
             </div>
           </div>
@@ -124,12 +134,16 @@ const Header = () => {
           <a href="#download_app">Download</a>
           <a href="/terms">Terms</a>
           <a href="/privacy">Privacy</a>
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            <FontAwesomeIcon icon={isDark ? faMoon : faSun} />
-          </button>
           <a className="header-cta" href="#download_app">
             Get Early Access
           </a>
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            <FontAwesomeIcon icon={isDark ? faMoon : faSun} />
+          </button>
         </nav>
       </div>
     </header>

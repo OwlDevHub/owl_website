@@ -1,5 +1,5 @@
 export { default as DownloadSection } from "./DownloadSection";
-
+export { default as PricingSection } from "./PricingSection";
 export { default as ImageGallery } from "./ImageGallery";
 export { default as Content } from "./Content";
 export { default as FeaturesSection } from "./FeaturesSection";
