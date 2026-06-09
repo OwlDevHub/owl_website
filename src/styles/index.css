@@ -412,7 +412,7 @@ button {
   padding: var(--space-2xl);
 }
 
-.mobile-menu a {
+.mobile-menu .mobile-nav-button {
   font-size: var(--text-2xl);
   font-weight: 600;
   color: var(--fg);
@@ -421,7 +421,7 @@ button {
     transform var(--transition);
 }
 
-.mobile-menu a:hover {
+.mobile-menu .mobile-nav-button:hover {
   color: var(--pr);
   transform: scale(1.05);
 }

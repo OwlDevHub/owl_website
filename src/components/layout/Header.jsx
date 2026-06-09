@@ -95,17 +95,22 @@ const Header = () => {
                 <FontAwesomeIcon icon={faXmark} />
               </button>
               {links.map((link) => (
-                <a key={link.href} href={link.href} onClick={handleNavClick}>
+                <a
+                  className="mobile-nav-button"
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleNavClick}
+                >
                   {link.label}
                 </a>
               ))}
               <button
-                className="mobile-theme-toggle"
+                className="mobile-nav-button mobile-theme-toggle"
                 onClick={() => {
                   toggleTheme();
                 }}
               >
-                <a>Theme: {isDark ? "Light" : "Dark"}</a>
+                Theme: {isDark ? "Light" : "Dark"}
               </button>
             </div>
           </div>
