@@ -23,6 +23,15 @@ const Content = () => {
               who demand efficiency without the bloat.
             </p>
           </RevealItem>
+
+          <RevealItem>
+            <Reveal>
+              <div className="about-visual">
+                <ImagesSection />
+              </div>
+            </Reveal>
+          </RevealItem>
+
           <RevealItem>
             <p>
               With real-time sync, CLI integration, and a clean minimal
@@ -31,12 +40,6 @@ const Content = () => {
             </p>
           </RevealItem>
         </RevealStagger>
-
-        <Reveal>
-          <div className="about-visual">
-            <ImagesSection />
-          </div>
-        </Reveal>
       </div>
     </div>
   );

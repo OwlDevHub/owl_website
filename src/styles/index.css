@@ -498,11 +498,7 @@ button {
 
 .hero h1 span {
   font-family: "Caveat", cursive;
-  background: linear-gradient(
-    135deg,
-    var(--pr),
-    color-mix(in srgb, var(--pr) 70%, white)
-  );
+  background: linear-gradient(135deg, var(--pr));
   color: var(--bg);
   padding: 0rem 2rem 0rem 2rem;
   border-radius: var(--radius-lg);
@@ -741,6 +737,15 @@ button {
   font-size: var(--text-base);
 }
 
+.contacts-section {
+  display: flex;
+  margin: 0px;
+  justify-content: center;
+  padding: 0px;
+  align-items: center;
+  align-content: center;
+}
+
 /* ===== ABOUT ===== */
 .about-text {
   display: flex;
@@ -848,6 +853,9 @@ button {
 }
 
 /* ===== PRICING ===== */
+.pricing-dots {
+  display: none;
+}
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1558,40 +1566,103 @@ button {
   }
 }
 
+@media screen and (min-width: 601px) {
+  .about-text > :nth-child(1) {
+    order: 1;
+  }
+  .about-text > :nth-child(3) {
+    order: 2;
+  }
+  .about-text > :nth-child(2) {
+    order: 3;
+  }
+}
+
 @media screen and (max-width: 600px) {
   :root {
-    --text-4xl: 3rem;
-    --text-3xl: 2.25rem;
-    --text-2xl: 1.75rem;
-    --text-xl: 1.5rem;
+    --text-5xl: 4rem;
+    --text-4xl: 2.75rem;
+    --text-3xl: 2rem;
+    --text-2xl: 1.5rem;
+    --text-xl: 1.35rem;
     --text-lg: 1rem;
     --text-base: 0.9rem;
     --text-sm: 0.8rem;
-    --space-3xl: 4rem;
-    --space-2xl: 3rem;
-    --space-xl: 2rem;
-    --space-lg: 1.5rem;
+    --space-3xl: 3.5rem;
+    --space-2xl: 2.5rem;
+    --space-xl: 1.75rem;
+    --space-lg: 1.25rem;
+    --space-md: 0.85rem;
+  }
+
+  .hero h1 {
+    line-height: 1.7;
+  }
+
+  .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: var(--space-xl);
+  }
+  .hero-content {
+    gap: var(--space-lg);
+  }
+  .hero-icon-frame {
+    width: 200px;
+    height: 200px;
+  }
+  .hero-icon-inner {
+    width: 140px;
+    height: 140px;
+  }
+  .hero-icon-inner .app_logo {
+    width: 80px;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-cta-primary,
+  .hero-cta-secondary {
+    width: 100%;
+    text-align: center;
   }
   .feature-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
   }
-  .hero h1 {
-    font-size: var(--text-4xl);
+  .feature-card {
+    padding: var(--space-md) var(--space-lg);
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-md);
   }
-  .hero-icon-frame {
-    width: 240px;
-    height: 240px;
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-base);
+    flex-shrink: 0;
+    margin-bottom: 0;
   }
-  .hero-icon-inner {
-    width: 160px;
-    height: 160px;
+  .feature-card h3 {
+    font-size: var(--text-base);
+    margin-bottom: 0;
   }
-  .hero-icon-inner .app_logo {
-    width: 90px;
+  .feature-card p {
+    display: none;
+  }
+  .section-header {
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+  .section-label {
+    font-size: var(--text-2xl);
+    padding: 0.2rem 1.25rem;
   }
   .download-card {
     max-width: none;
     width: 100%;
+    padding: var(--space-xl);
   }
   .download-form {
     flex-direction: column;
@@ -1604,13 +1675,61 @@ button {
     width: 100%;
     justify-content: center;
   }
+  .about-text p {
+    font-size: var(--text-sm);
+  }
+
   .footer-inner {
     flex-direction: column;
     gap: var(--space-sm);
     text-align: center;
   }
+  .pricing-scroll-wrap {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * var(--space-lg));
+    width: auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+  .pricing-scroll-wrap::-webkit-scrollbar {
+    display: none;
+  }
   .pricing-grid {
+    display: flex;
     max-width: none;
+    padding: 0;
+  }
+  .pricing-grid > * {
+    flex: 0 0 100vw;
+    scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 0 var(--space-lg);
+  }
+  .pricing-card {
+    width: 100%;
+    max-width: 380px;
+  }
+  .pricing-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: var(--space-sm);
+  }
+  .pricing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .pricing-dot.active {
+    background: var(--pr);
+    transform: scale(1.4);
   }
 }
 

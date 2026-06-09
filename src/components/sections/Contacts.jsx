@@ -11,7 +11,11 @@ import { Reveal } from "../ui/Reveal";
 const socials = [
   { icon: faTelegram, link: "https://t.me/Night3098", label: "Telegram" },
   { icon: faDiscord, link: "https://discord.gg/#9707", label: "Discord" },
-  { icon: faReddit, link: "https://www.reddit.com/user/DEVELOPER0x31/", label: "Reddit" },
+  {
+    icon: faReddit,
+    link: "https://www.reddit.com/user/DEVELOPER0x31/",
+    label: "Reddit",
+  },
   {
     icon: faSignalMessenger,
     link: "https://signal.me/#eu/XJMqmO9JXZQCwYJIpzjOS741ZnGsLYOQhGqMfpS4lB-8PTSQVmRAbqFIvOrepYiK",
@@ -21,7 +25,7 @@ const socials = [
 
 const Contacts = () => {
   return (
-    <div className="section" style={{ paddingTop: 0 }}>
+    <div className="section contacts-section" style={{ paddingTop: 0 }}>
       <div className="section-inner">
         <Reveal>
           <div className="contacts">
