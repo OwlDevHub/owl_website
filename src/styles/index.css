@@ -1678,6 +1678,11 @@ button {
     font-size: var(--text-4xl);
   }
 
+  .hero-content h1 span {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .hero {
     min-height: 100vh;
     min-height: 100dvh;
