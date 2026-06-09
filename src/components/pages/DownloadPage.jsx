@@ -1,52 +1,90 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import {
-  faCloudArrowDown,
-  faCaretLeft,
-} from "@fortawesome/free-solid-svg-icons";
+  faApple,
+  faMicrosoft,
+  faLinux,
+  faAndroid,
+} from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { getCachedVersion } from "./../../api/github_release";
+import { motion } from "framer-motion";
 
 const DownloadPage = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-  });
+  const currentAppVersion = getCachedVersion();
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.15,
+      },
+    },
   };
 
   return (
-    <div className="download-page">
+    <motion.div className="hero">
       <form className="purchase-form" onSubmit={handleSubmit}>
-        <h1 className="about-badge">Download OWL</h1>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-        />
-        <button
-          type="submit"
-          className="download-button"
-          style={{ width: "100%" }}
+        <motion.div
+          className="hero-content download-hero-content"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <FontAwesomeIcon icon={faCloudArrowDown} /> GET APP TRIAL
-        </button>
+          <motion.div className="hero-text">
+            <motion.span className="hero-badge" variants={itemVariants}>
+              {currentAppVersion} — Now Available
+            </motion.span>
+            <motion.h1 variants={itemVariants}>
+              <span className="download-span">DOWNLOAD</span> OWL FOR YOUR
+              DEVICE
+            </motion.h1>
+          </motion.div>
+          <motion.div
+            className="hero-download"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.3,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            <button type="submit" className="download-button">
+              <FontAwesomeIcon icon={faMicrosoft} /> WINDOWS
+            </button>
+            <button type="submit" className="download-button">
+              <FontAwesomeIcon icon={faApple} /> MAC
+            </button>
+            <button type="submit" className="download-button">
+              <FontAwesomeIcon icon={faLinux} /> LINUX
+            </button>
+            <button type="submit" className="download-button" disabled>
+              <FontAwesomeIcon icon={faAndroid} /> ANDROID
+            </button>
+          </motion.div>
+        </motion.div>
       </form>
       <button className="back_btn" onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faCaretLeft} />
       </button>
-    </div>
+    </motion.div>
   );
 };
 
