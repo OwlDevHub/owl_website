@@ -1645,15 +1645,15 @@ button {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   :root {
     --text-5xl: 4rem;
-    --text-4xl: 2.75rem;
+    --text-4xl: 3.25rem;
     --text-3xl: 2.5rem;
     --text-2xl: 2rem;
     --text-xl: 1.35rem;
-    --text-lg: 1rem;
-    --text-base: 0.9rem;
+    --text-lg: 0.9rem;
+    --text-base: 0.85rem;
     --text-sm: 0.8rem;
     --space-3xl: 3.5rem;
     --space-2xl: 2.5rem;
@@ -1674,7 +1674,8 @@ button {
   }
 
   .hero h1 {
-    line-height: 1.7;
+    line-height: 1.5;
+    font-size: var(--text-4xl);
   }
 
   .hero {
@@ -1702,8 +1703,10 @@ button {
   }
   .hero-cta-primary,
   .hero-cta-secondary {
-    width: 100%;
+    width: 80%;
     text-align: center;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
   }
   .feature-grid {
     grid-template-columns: 1fr;
