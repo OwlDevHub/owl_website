@@ -1489,7 +1489,7 @@ button {
   --yellow: #dbbc7f;
   --subtle: #a8b5a0;
   --muted: #7a8a7f;
-  --surface: #ffffff;
+  --surface: #f9f5e8;
   --surface-hover: #f8f5ea;
   --border: #ddd8c5;
   --border-light: color-mix(in srgb, #ddd8c5 60%, transparent);
@@ -1508,7 +1508,7 @@ button {
 .light .hero-cta-primary,
 .light .hero h1 span,
 .light .download-button {
-  color: #ffffff;
+  color: #f8efd8;
 }
 
 .light .feature-card:hover {
@@ -1725,7 +1725,9 @@ button {
     border-radius: 50%;
     background: var(--border);
     cursor: pointer;
-    transition: background var(--transition), transform var(--transition);
+    transition:
+      background var(--transition),
+      transform var(--transition);
   }
   .pricing-dot.active {
     background: var(--pr);
