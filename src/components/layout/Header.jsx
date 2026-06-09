@@ -100,19 +100,12 @@ const Header = () => {
                 </a>
               ))}
               <button
-                className="header-cta"
+                className="mobile-theme-toggle"
                 onClick={() => {
                   toggleTheme();
-                  setMenuOpen(false);
-                }}
-                style={{
-                  background: "none",
-                  border: "1px solid var(--border)",
-                  color: "var(--fg)",
                 }}
               >
-                <FontAwesomeIcon icon={isDark ? faSun : faMoon} />{" "}
-                {isDark ? "Light" : "Dark"}
+                <a>Theme: {isDark ? "Light" : "Dark"}</a>
               </button>
             </div>
           </div>

@@ -401,6 +401,7 @@ button {
   justify-content: center;
   z-index: 200;
   animation: fadeIn 0.25s ease;
+  transition: background-color 0.5s ease-in;
 }
 
 .mobile-menu {
@@ -443,6 +444,20 @@ button {
 .mobile-menu-close:hover {
   color: var(--red);
   transform: rotate(90deg);
+}
+
+.mobile-theme-toggle {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  transition:
+    color var(--transition),
+    transform var(--transition);
+}
+
+.mobile-theme-toggle:hover {
+  color: var(--pr);
+  transform: scale(1.05);
 }
 
 /* ===== HERO ===== */
@@ -1691,7 +1706,7 @@ button {
     scrollbar-width: none;
     margin: 0 calc(-1 * var(--space-lg));
     width: auto;
-    padding-top: 10px;
+    padding-top: 30px;
     padding-bottom: 30px;
   }
   .pricing-scroll-wrap::-webkit-scrollbar {
