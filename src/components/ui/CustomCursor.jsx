@@ -93,6 +93,13 @@ const CustomCursor = () => {
         setIconHTML(iconEl ? iconEl.outerHTML : null);
         return;
       }
+      const contactBtn = e.target.closest(".contact_button");
+      if (contactBtn) {
+        setLabel(contactBtn.getAttribute("aria-label") || "");
+        setIconHTML(null);
+        return;
+      }
+
       const interactive = e.target.closest(
         "a, button, textarea, select, [role=button], [role=link]",
       );

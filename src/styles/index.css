@@ -1178,7 +1178,7 @@ button {
   padding: 0.65rem 1.75rem;
   width: 100%;
   border-radius: var(--radius-full);
-  border: 1px solid var(--pr);
+  border: 1px solid var(--border);
   background: transparent;
   color: var(--fg);
   font-weight: 600;
@@ -1598,9 +1598,6 @@ button {
   }
   .hero-cta-group {
     justify-content: center;
-  }
-  .hero-sub {
-    max-width: 100%;
   }
   .hero-visual {
     display: none;

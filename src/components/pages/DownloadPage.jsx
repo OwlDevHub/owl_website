@@ -78,6 +78,7 @@ const DownloadPage = () => {
             <button
               className="download-button"
               onClick={() => handleDownload("owl.dmg")}
+              disabled
             >
               <FontAwesomeIcon icon={faApple} /> MAC
             </button>
