@@ -32,6 +32,7 @@
   --text-3xl: 3rem;
   --text-4xl: 4.5rem;
   --text-5xl: 7rem;
+  --text-6xl: 11rem;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -477,9 +478,12 @@ button {
   z-index: 1;
   max-width: var(--max-width);
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
   gap: var(--space-2xl);
 }
 
@@ -496,6 +500,9 @@ button {
 .hero-text {
   display: flex;
   flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
   gap: var(--space-lg);
 }
 
@@ -514,7 +521,7 @@ button {
 }
 
 .hero h1 {
-  font-size: var(--text-5xl);
+  font-size: var(--text-6xl);
   font-weight: 700;
   letter-spacing: 1px;
   line-height: 1.1;
@@ -534,7 +541,7 @@ button {
 .hero-sub {
   font-size: var(--text-lg);
   color: var(--muted);
-  max-width: 480px;
+  max-width: 350px;
   line-height: 1.8;
 }
 
@@ -1553,11 +1560,14 @@ button {
   background-color: var(--fg) !important;
 }
 
-.light .header-cta,
-.light .hero-cta-primary,
 .light .hero h1 span,
 .light .download-button {
   color: var(--fg);
+}
+
+.light hero-cta-primary,
+.light .header-cta {
+  color: var(--bg);
 }
 
 .light .hero h1 span {
