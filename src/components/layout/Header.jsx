@@ -228,78 +228,96 @@ const Header = () => {
               <FontAwesomeIcon icon={faBars} />
             </button>
           </header>
-          {menuOpen && (
-            <div
-              className="mobile-menu-overlay"
-              onClick={() => {
-                setMenuOpen(false);
-                setMobileThemeOpen(false);
-              }}
-            >
-              <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-                <button
-                  className="mobile-menu-close"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setMobileThemeOpen(false);
-                  }}
-                  aria-label="Close menu"
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                className="mobile-menu-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileThemeOpen(false);
+                }}
+              >
+                <motion.div
+                  className="mobile-menu"
+                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                  transition={{ duration: 0.25, ease: [0.76, 0, 0.24, 1] }}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <FontAwesomeIcon icon={faXmark} />
-                </button>
-                {links.map((link) => (
-                  <a
-                    className="mobile-nav-button"
-                    key={link.href}
-                    href={link.href}
-                    onClick={handleNavClick}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <button
-                  className="mobile-nav-button mobile-theme-toggle"
-                  onClick={() => setMobileThemeOpen((v) => !v)}
-                >
-                  Theme
-                </button>
-                {mobileThemeOpen && (
-                  <div
-                    className="mobile-theme-backdrop"
-                    onClick={() => setMobileThemeOpen(false)}
-                  >
-                    <div
-                      className="mobile-theme-submenu"
-                      onClick={(e) => e.stopPropagation()}
+                  {links.map((link) => (
+                    <a
+                      className="mobile-nav-button"
+                      key={link.href}
+                      href={link.href}
+                      onClick={handleNavClick}
                     >
-                      {Object.entries(THEMES).map(([key, data]) => (
-                        <button
-                          key={key}
-                          className={`mobile-theme-card${themeName === key ? " active" : ""}`}
-                          onClick={() => {
-                            animateToTheme(key);
-                            setMenuOpen(false);
-                            setMobileThemeOpen(false);
+                      {link.label}
+                    </a>
+                  ))}
+                  <button
+                    className="mobile-nav-button mobile-theme-toggle"
+                    onClick={() => setMobileThemeOpen((v) => !v)}
+                  >
+                    Theme
+                  </button>
+                  <AnimatePresence>
+                    {mobileThemeOpen && (
+                      <motion.div
+                        className="mobile-theme-backdrop"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15, ease: "easeInOut" }}
+                        onClick={() => setMobileThemeOpen(false)}
+                      >
+                        <motion.div
+                          className="mobile-theme-submenu"
+                          initial={{ opacity: 0, scale: 0.92, y: 12 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.92, y: 12 }}
+                          transition={{
+                            duration: 0.2,
+                            ease: [0.76, 0, 0.24, 1],
                           }}
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          <span
-                            className="mobile-theme-swatch"
-                            style={{ backgroundColor: data.bg }}
-                          />
-                          <span className="mobile-theme-label">
-                            {data.label}
-                          </span>
-                          {themeName === key && (
-                            <span className="mobile-theme-check">✓</span>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+                          {Object.entries(THEMES).map(([key, data]) => (
+                            <button
+                              key={key}
+                              className={`mobile-theme-card${themeName === key ? " active" : ""}`}
+                              onClick={() => {
+                                animateToTheme(key);
+                                setTimeout(() => {
+                                  setMenuOpen(false);
+                                  setMobileThemeOpen(false);
+                                }, 300);
+                              }}
+                            >
+                              <span
+                                className="mobile-theme-swatch"
+                                style={{ backgroundColor: data.bg }}
+                              />
+                              <span className="mobile-theme-label">
+                                {data.label}
+                              </span>
+                              {themeName === key && (
+                                <span className="mobile-theme-check">✓</span>
+                              )}
+                            </button>
+                          ))}
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </>
       ) : (
         <header className={`header${scrolled ? " scrolled" : ""}`}>

@@ -399,7 +399,9 @@ button {
   align-items: center;
   justify-content: center;
   z-index: 300;
-  animation: fadeIn 0.2s ease;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .mobile-theme-submenu {
@@ -545,7 +547,6 @@ button {
   align-items: center;
   justify-content: center;
   z-index: 200;
-  animation: fadeIn 0.25s ease;
   transition: background-color 0.5s ease-in;
 }
 
