@@ -9,41 +9,54 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { OwlIcon } from "../ui";
 
+const THEMES = {
+  "mono-dark": { classes: [], label: "Mono Dark", icon: faMoon, opposite: "mono-light", bg: "#101010" },
+  "mono-light": { classes: ["light"], label: "Mono Light", icon: faSun, opposite: "mono-dark", bg: "#e8e8e8" },
+  "everforest-dark": { classes: ["everforest"], label: "Forest Dark", icon: faMoon, opposite: "everforest-light", bg: "#1e2326" },
+  "everforest-light": { classes: ["everforest", "light"], label: "Forest Light", icon: faSun, opposite: "everforest-dark", bg: "#f3efda" },
+};
+
 const useTheme = () => {
-  const [isDark, setIsDark] = useState(true);
+  const [themeName, setThemeName] = useState("mono-dark");
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
-    if (saved === "light") {
-      setIsDark(false);
-      document.documentElement.classList.add("light");
+    if (saved && THEMES[saved]) {
+      setThemeName(saved);
+      document.documentElement.classList.remove("light", "everforest");
+      THEMES[saved].classes.forEach((c) => document.documentElement.classList.add(c));
     }
   }, []);
 
-  const toggle = useCallback(() => {
-    setIsDark((prev) => {
-      const next = !prev;
-      document.documentElement.classList.toggle("light", !next);
-      localStorage.setItem("theme", next ? "dark" : "light");
-      return next;
-    });
+  const applyTheme = useCallback((name) => {
+    document.documentElement.classList.remove("light", "everforest");
+    THEMES[name].classes.forEach((c) => document.documentElement.classList.add(c));
+    localStorage.setItem("theme", name);
+    setThemeName(name);
   }, []);
 
-  return { isDark, toggle };
+  const isDark = themeName.endsWith("-dark");
+
+  return { themeName, applyTheme, isDark };
 };
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { isDark, toggle: toggleTheme } = useTheme();
+  const [mobileThemeOpen, setMobileThemeOpen] = useState(false);
+  const { themeName, applyTheme } = useTheme();
 
   const [animating, setAnimating] = useState(false);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
-  const [overlayColor, setOverlayColor] = useState("#1e2326");
+  const [overlayColor, setOverlayColor] = useState("#101010");
   const [transitionKey, setTransitionKey] = useState(0);
   const toggleRef = useRef(null);
   const transitioningRef = useRef(false);
+  const longPressTimer = useRef(null);
+  const menuRef = useRef(null);
+  const themeMenuOpenRef = useRef(false);
+  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -72,7 +85,24 @@ const Header = () => {
       document.documentElement.classList.remove("theme-transitioning");
   }, [animating]);
 
-  const animateThemeToggle = useCallback(() => {
+  useEffect(() => {
+    if (!themeMenuOpen) return;
+    const handler = (e) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        toggleRef.current &&
+        !toggleRef.current.contains(e.target)
+      ) {
+        setThemeMenuOpen(false);
+        themeMenuOpenRef.current = false;
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [themeMenuOpen]);
+
+  const animateToTheme = useCallback((target) => {
     if (transitioningRef.current) return;
     transitioningRef.current = true;
 
@@ -87,19 +117,51 @@ const Header = () => {
     }
 
     setOrigin({ x, y });
-    setOverlayColor(isDark ? "#ececec" : "#272727");
+    setOverlayColor(THEMES[target].bg);
     setTransitionKey((k) => k + 1);
     setAnimating(true);
 
     setTimeout(() => {
-      toggleTheme();
+      applyTheme(target);
     }, 280);
 
     setTimeout(() => {
       setAnimating(false);
       transitioningRef.current = false;
     }, 700);
-  }, [isDark, toggleTheme]);
+  }, [applyTheme]);
+
+  const handlePointerDown = useCallback(() => {
+    themeMenuOpenRef.current = false;
+    longPressTimer.current = setTimeout(() => {
+      themeMenuOpenRef.current = true;
+      setThemeMenuOpen(true);
+    }, 400);
+  }, []);
+
+  const handlePointerUp = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+    if (!themeMenuOpenRef.current) {
+      const next = THEMES[themeName].opposite;
+      animateToTheme(next);
+    }
+  }, [themeName, animateToTheme]);
+
+  const handlePointerLeave = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  }, []);
+
+  const handleMenuSelect = useCallback((name) => {
+    setThemeMenuOpen(false);
+    themeMenuOpenRef.current = false;
+    animateToTheme(name);
+  }, [animateToTheme]);
 
   const links = [
     { href: "#features", label: "Features" },
@@ -109,7 +171,10 @@ const Header = () => {
     { href: "/privacy", label: "Privacy" },
   ];
 
-  const handleNavClick = () => setMenuOpen(false);
+  const handleNavClick = () => {
+    setMenuOpen(false);
+    setMobileThemeOpen(false);
+  };
 
   return (
     <>
@@ -132,12 +197,18 @@ const Header = () => {
           {menuOpen && (
             <div
               className="mobile-menu-overlay"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                setMobileThemeOpen(false);
+              }}
             >
               <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
                 <button
                   className="mobile-menu-close"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setMobileThemeOpen(false);
+                  }}
                   aria-label="Close menu"
                 >
                   <FontAwesomeIcon icon={faXmark} />
@@ -154,10 +225,27 @@ const Header = () => {
                 ))}
                 <button
                   className="mobile-nav-button mobile-theme-toggle"
-                  onClick={animateThemeToggle}
+                  onClick={() => setMobileThemeOpen((v) => !v)}
                 >
-                  Theme: {isDark ? "Light" : "Dark"}
+                  Theme
                 </button>
+                {mobileThemeOpen && (
+                  <div className="mobile-theme-submenu">
+                    {Object.entries(THEMES).map(([key, data]) => (
+                      <button
+                        key={key}
+                        className={`mobile-theme-option${themeName === key ? " active" : ""}`}
+                        onClick={() => {
+                          animateToTheme(key);
+                          setMenuOpen(false);
+                          setMobileThemeOpen(false);
+                        }}
+                      >
+                        {data.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -175,14 +263,48 @@ const Header = () => {
               <a href="#download_app">Download</a>
               <a href="/terms">Terms</a>
               <a href="/privacy">Privacy</a>
-              <button
-                ref={toggleRef}
-                className="theme-toggle"
-                onClick={animateThemeToggle}
-                aria-label="Toggle theme"
-              >
-                <FontAwesomeIcon icon={isDark ? faMoon : faSun} />
-              </button>
+              <div className="theme-toggle-wrapper">
+                <button
+                  ref={toggleRef}
+                  className="theme-toggle"
+                  onPointerDown={handlePointerDown}
+                  onPointerUp={handlePointerUp}
+                  onPointerLeave={handlePointerLeave}
+                  onContextMenu={(e) => e.preventDefault()}
+                  aria-label="Toggle theme"
+                >
+                  <FontAwesomeIcon icon={THEMES[themeName].icon} />
+                </button>
+                <AnimatePresence>
+                  {themeMenuOpen && (
+                    <motion.div
+                      ref={menuRef}
+                      className="theme-menu"
+                      initial={{ opacity: 0, scale: 0.92, y: -4 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.92, y: -4 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                    >
+                      {Object.entries(THEMES).map(([key, data]) => (
+                        <button
+                          key={key}
+                          className={`theme-menu-item${themeName === key ? " active" : ""}`}
+                          onClick={() => handleMenuSelect(key)}
+                        >
+                          <span
+                            className="theme-menu-swatch"
+                            style={{ backgroundColor: data.bg }}
+                          />
+                          <span>{data.label}</span>
+                          {themeName === key && (
+                            <span className="theme-menu-check" />
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </nav>
           </div>
         </header>

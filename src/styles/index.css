@@ -156,8 +156,6 @@ button {
   background: var(--subtle);
 }
 
-
-
 /* ===== SMOOTH DIVIDER ===== */
 .section-divider {
   width: 100%;
@@ -173,32 +171,41 @@ button {
 /* ===== HEADER ===== */
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: var(--space-sm);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 100;
+  width: calc(100% - var(--space-lg) * 2);
+  max-width: calc(var(--max-width) + 2rem);
+  height: calc(var(--header-h) - 0.5rem);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  box-shadow: none;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: var(--space-sm) var(--space-lg);
-  background: transparent;
-  height: var(--header-h);
   transition:
     background var(--transition),
     border-color var(--transition),
+    box-shadow var(--transition),
     backdrop-filter var(--transition);
 }
 
 .header.scrolled {
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
 }
 
 .header-inner {
-  width: 100%;
-  max-width: var(--max-width);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--space-lg);
 }
 
 .header-logo {
@@ -326,6 +333,88 @@ button {
   transform: scale(1.05);
 }
 
+.theme-toggle-wrapper {
+  position: relative;
+}
+
+.theme-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 170px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0.35rem;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.theme-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--fg);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background var(--transition);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.theme-menu-item:hover {
+  background: var(--surface-hover);
+}
+
+.theme-menu-item.active {
+  color: var(--pr);
+}
+
+.theme-menu-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.theme-menu-check {
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pr);
+}
+
+.mobile-theme-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0 0 0.5rem;
+}
+
+.mobile-theme-option {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--text-base);
+  padding: 0.3rem 0;
+  cursor: pointer;
+  transition: color var(--transition);
+  text-align: center;
+}
+
+.mobile-theme-option:hover,
+.mobile-theme-option.active {
+  color: var(--pr);
+}
+
 /* ===== MOBILE HEADER ===== */
 .mobile-header {
   position: fixed;
@@ -348,7 +437,6 @@ button {
   background: color-mix(in srgb, var(--bg) 80%, transparent);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  border-bottom: 1px solid var(--border-light);
 }
 
 .mobile-burger {
@@ -1514,6 +1602,29 @@ button {
   }
 }
 
+/* ===== EVERFOREST DARK ===== */
+.everforest {
+  --bg: #1e2326;
+  --fg: #d3c6aa;
+  --pr: #a7c080;
+  --pr-light: color-mix(in srgb, var(--pr) 30%, transparent);
+  --ab: #2f383e;
+  --green: #a7c080;
+  --red: #e67e80;
+  --yellow: #dbbc7f;
+  --subtle: #4f5b58;
+  --muted: #859289;
+  --surface: #272e33;
+  --surface-hover: #2f383e;
+  --border: #3d484d;
+  --border-light: color-mix(in srgb, var(--border) 50%, transparent);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 30px color-mix(in srgb, var(--pr) 15%, transparent);
+  --glow-pr: 0 0 60px color-mix(in srgb, var(--pr) 8%, transparent);
+}
+
 /* ===== LIGHT THEME ===== */
 .light {
   --bg: #e8e8e8;
@@ -1533,6 +1644,29 @@ button {
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 30px color-mix(in srgb, var(--pr) 20%, transparent);
+  --glow-pr: 0 0 60px color-mix(in srgb, var(--pr) 10%, transparent);
+}
+
+/* ===== EVERFOREST LIGHT ===== */
+.everforest.light {
+  --bg: #f3efda;
+  --fg: #5c6a72;
+  --pr: #7a9e6e;
+  --pr-light: color-mix(in srgb, #7a9e6e 30%, transparent);
+  --ab: #f0ebd5;
+  --green: #7a9e6e;
+  --red: #e67e80;
+  --yellow: #dbbc7f;
+  --subtle: #a8b5a0;
+  --muted: #7a8a7f;
+  --surface: #f9f5e8;
+  --surface-hover: #f8f5ea;
+  --border: #ddd8c5;
+  --border-light: color-mix(in srgb, #ddd8c5 60%, transparent);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.08);
   --shadow-glow: 0 0 30px color-mix(in srgb, var(--pr) 20%, transparent);
   --glow-pr: 0 0 60px color-mix(in srgb, var(--pr) 10%, transparent);
 }
