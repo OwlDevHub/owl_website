@@ -19,7 +19,6 @@ const App = () => {
   return (
     <Router>
       <ThemeInitializer />
-      <div className="noise-overlay" />
       <CustomCursor />
       <SmoothScroll>
         <Routes>
