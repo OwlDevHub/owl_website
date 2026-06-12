@@ -68,7 +68,7 @@
 
 /* ===== PRELOADER ===== */
 .preloader-root {
-  position: relative;
+  width: 100%;
 }
 
 .preloader {
@@ -105,6 +105,10 @@
   font-size: min(15vw, 20vh);
   font-weight: 300;
   color: var(--subtle);
+}
+
+.preloader-children {
+  width: 100%;
 }
 
 * {

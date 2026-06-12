@@ -63,7 +63,7 @@ const Preloader = ({ children }) => {
           </motion.div>
         )}
       </AnimatePresence>
-      <div style={{ visibility: show ? "hidden" : "visible" }}>
+      <div className="preloader-children" style={{ visibility: show ? "hidden" : "visible" }}>
         {children}
       </div>
     </div>
