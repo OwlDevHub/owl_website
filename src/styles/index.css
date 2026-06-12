@@ -13,25 +13,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Homemade+Apple&family=Mr+Dafoe&family=Playwrite+RO:wght@100..400&display=swap");
 
 :root {
-  --bg: #1e2326;
-  --fg: #d3c6aa;
-  --pr: #a7c080;
-  --pr-light: color-mix(in srgb, var(--pr) 30%, transparent);
-  --ab: #2f383e;
-  --green: #a7c080;
-  --red: #e67e80;
-  --yellow: #dbbc7f;
-  --subtle: #4f5b58;
-  --muted: #859289;
-  --surface: #272e33;
-  --surface-hover: #2f383e;
-  --border: #3d484d;
-  --border-light: color-mix(in srgb, var(--border) 50%, transparent);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 30px color-mix(in srgb, var(--pr) 15%, transparent);
-  --glow-pr: 0 0 60px color-mix(in srgb, var(--pr) 8%, transparent);
+  --bg: #272727;
+  --fg: #c8c8c8;
+  --pr: #999999;
+  --pr-light: color-mix(in srgb, #999999 30%, transparent);
+  --ab: #2f2f2f;
+  --green: #999999;
+  --red: #888888;
+  --yellow: #aaaaaa;
+  --subtle: #666666;
+  --muted: #888888;
+  --surface: #333333;
+  --surface-hover: #3a3a3a;
+  --border: #464646;
+  --border-light: color-mix(in srgb, #464646 50%, transparent);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 30px color-mix(in srgb, #999 15%, transparent);
+  --glow-pr: 0 0 60px color-mix(in srgb, #999 8%, transparent);
 
   --text-xs: 0.8rem;
   --text-sm: 1rem;
@@ -156,15 +156,20 @@ button {
   background: var(--subtle);
 }
 
-/* ===== NOISE OVERLAY ===== */
+/* ===== PAPER TEXTURE OVERLAY ===== */
 .noise-overlay {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
+  opacity: 0.07;
+  background-image: radial-gradient(
+      ellipse at 50% 40%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.025) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E");
+  background-repeat: repeat, repeat;
   background-size: 256px 256px;
 }
 
@@ -523,7 +528,7 @@ button {
 .hero h1 span {
   font-family: "Satisfy", cursive;
   background: linear-gradient(135deg, var(--pr));
-  color: var(--bg);
+  color: var(--fg);
   padding: 1.5rem 3rem 1rem 3rem;
   border-radius: var(--radius-lg);
   display: inline-block;
@@ -1527,19 +1532,20 @@ button {
 
 /* ===== LIGHT THEME ===== */
 .light {
-  --bg: #f3efda;
-  --fg: #5c6a72;
-  --pr: #7a9e6e;
-  --ab: #f0ebd5;
-  --green: #7a9e6e;
-  --red: #e67e80;
-  --yellow: #dbbc7f;
-  --subtle: #a8b5a0;
-  --muted: #7a8a7f;
-  --surface: #f9f5e8;
-  --surface-hover: #f8f5ea;
-  --border: #ddd8c5;
-  --border-light: color-mix(in srgb, #ddd8c5 60%, transparent);
+  --bg: #ececec;
+  --fg: #444444;
+  --pr: #777777;
+  --pr-light: color-mix(in srgb, #777777 30%, transparent);
+  --ab: #e4e4e4;
+  --green: #777777;
+  --red: #666666;
+  --yellow: #888888;
+  --subtle: #888888;
+  --muted: #666666;
+  --surface: #f2f2f2;
+  --surface-hover: #f5f5f5;
+  --border: #d4d4d4;
+  --border-light: color-mix(in srgb, #d4d4d4 60%, transparent);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.08);
@@ -1551,17 +1557,12 @@ button {
   background-color: var(--fg) !important;
 }
 
-.light .hero h1 span,
-.light .download-button {
-  color: var(--fg);
+.light .hero h1 span {
+  color: var(--bg);
 }
 
 .light hero-cta-primary,
 .light .header-cta {
-  color: var(--bg);
-}
-
-.light .hero h1 span {
   color: var(--bg);
 }
 
@@ -1589,18 +1590,20 @@ button {
 .theme-transitioning *,
 .theme-transitioning *::before,
 .theme-transitioning *::after {
-  transition: background-color 0.5s ease,
-              color 0.4s ease,
-              border-color 0.45s ease,
-              box-shadow 0.5s ease,
-              opacity 0.4s ease,
-              text-shadow 0.4s ease !important;
+  transition:
+    background-color 0.5s ease,
+    color 0.4s ease,
+    border-color 0.45s ease,
+    box-shadow 0.5s ease,
+    opacity 0.4s ease,
+    text-shadow 0.4s ease !important;
 }
 
 .theme-transitioning .header,
 .theme-transitioning .mobile-header {
-  transition: background-color 0.5s ease,
-              border-color 0.45s ease !important;
+  transition:
+    background-color 0.5s ease,
+    border-color 0.45s ease !important;
 }
 
 /* ===== RESPONSIVE ===== */

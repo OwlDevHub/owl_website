@@ -87,7 +87,7 @@ const Header = () => {
     }
 
     setOrigin({ x, y });
-    setOverlayColor(isDark ? "#f3efda" : "#1e2326");
+    setOverlayColor(isDark ? "#ececec" : "#272727");
     setTransitionKey((k) => k + 1);
     setAnimating(true);
 
