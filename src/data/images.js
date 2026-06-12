@@ -35,10 +35,6 @@ const images = [
     imgURL: "/imgs/9.png",
     imgAlt: "img-9",
   },
-  {
-    imgURL: "/imgs/10.png",
-    imgAlt: "img-10",
-  },
 ];
 
 export default images;
