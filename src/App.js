@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/layout";
 import CustomCursor from "./components/ui/CustomCursor";
+import Preloader from "./components/ui/Preloader";
 import {
   HeroSection,
   FeaturesSection,
@@ -17,32 +18,34 @@ import ThemeInitializer from "./components/ThemeInitializer";
 
 const App = () => {
   return (
-    <Router>
-      <ThemeInitializer />
-      <CustomCursor />
-      <SmoothScroll>
-        <Routes>
-          <Route path="/download" element={<DownloadPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route
-            path="/"
-            element={
-              <main>
-                <Header />
-                <HeroSection />
-                <Content />
-                <FeaturesSection />
-                <PricingSection />
-                <DownloadSection />
-                <Contacts />
-                <Footer />
-              </main>
-            }
-          />
-        </Routes>
-      </SmoothScroll>
-    </Router>
+    <Preloader>
+      <Router>
+        <ThemeInitializer />
+        <CustomCursor />
+        <SmoothScroll>
+          <Routes>
+            <Route path="/download" element={<DownloadPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route
+              path="/"
+              element={
+                <main>
+                  <Header />
+                  <HeroSection />
+                  <Content />
+                  <FeaturesSection />
+                  <PricingSection />
+                  <DownloadSection />
+                  <Contacts />
+                  <Footer />
+                </main>
+              }
+            />
+          </Routes>
+        </SmoothScroll>
+      </Router>
+    </Preloader>
   );
 };
 

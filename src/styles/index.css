@@ -66,6 +66,47 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* ===== PRELOADER ===== */
+.preloader-root {
+  position: relative;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.preloader-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.05em;
+  width: 90%;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.preloader-number {
+  font-size: min(40vw, 50vh);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+.preloader-percent {
+  font-size: min(15vw, 20vh);
+  font-weight: 300;
+  color: var(--subtle);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -1871,7 +1912,7 @@ button {
 }
 
 @media screen and (max-width: 650px) {
-  :root {
+:root {
     --text-5xl: 4rem;
     --text-4xl: 3.25rem;
     --text-3xl: 2.5rem;

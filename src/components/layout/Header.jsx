@@ -249,6 +249,16 @@ const Header = () => {
                   transition={{ duration: 0.25, ease: [0.76, 0, 0.24, 1] }}
                   onClick={(e) => e.stopPropagation()}
                 >
+                  <button
+                    className="mobile-menu-close"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMobileThemeOpen(false);
+                    }}
+                    aria-label="Close menu"
+                  >
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
                   {links.map((link) => (
                     <a
                       className="mobile-nav-button"
@@ -286,6 +296,13 @@ const Header = () => {
                           }}
                           onClick={(e) => e.stopPropagation()}
                         >
+                          <button
+                            className="mobile-theme-close"
+                            onClick={() => setMobileThemeOpen(false)}
+                            aria-label="Close theme menu"
+                          >
+                            <FontAwesomeIcon icon={faXmark} />
+                          </button>
                           {Object.entries(THEMES).map(([key, data]) => (
                             <button
                               key={key}
