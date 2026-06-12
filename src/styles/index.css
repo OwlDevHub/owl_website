@@ -1,3 +1,13 @@
+/*
+ * Iosevka Charon
+ * Bebas Neue
+ * Caveat 
+ * Homemade Apple
+ * Mr Dafoe
+ * Playwrite RO
+ * Satisfy
+ */
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Homemade+Apple&family=Mr+Dafoe&family=Playwrite+RO:wght@100..400&display=swap");
@@ -24,7 +34,7 @@
   --glow-pr: 0 0 60px color-mix(in srgb, var(--pr) 8%, transparent);
 
   --text-xs: 0.8rem;
-  --text-sm: 0.9rem;
+  --text-sm: 1rem;
   --text-base: 1.05rem;
   --text-lg: 1.25rem;
   --text-xl: 1.75rem;
@@ -209,7 +219,6 @@ button {
   background: color-mix(in srgb, var(--bg) 80%, transparent);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  border-bottom: 1px solid var(--border-light);
 }
 
 .header-inner {
@@ -521,7 +530,7 @@ button {
 }
 
 .hero h1 {
-  font-size: var(--text-6xl);
+  font-size: var(--text-5xl);
   font-weight: 700;
   letter-spacing: 1px;
   line-height: 1.1;
@@ -529,10 +538,10 @@ button {
 }
 
 .hero h1 span {
-  font-family: "Caveat", cursive;
+  font-family: "Satisfy", cursive;
   background: linear-gradient(135deg, var(--pr));
   color: var(--bg);
-  padding: 0rem 3rem 0rem 3rem;
+  padding: 1.5rem 3rem 1rem 3rem;
   border-radius: var(--radius-lg);
   display: inline-block;
   box-shadow: var(--glow-pr);
@@ -754,15 +763,11 @@ button {
 
 .section-label {
   display: inline-block;
-  padding: 0.3rem 1.5rem;
-  border-radius: var(--radius-full);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: var(--text-3xl);
-  font-weight: 500;
+  font-size: var(--text-5xl);
+  font-weight: bolder;
   color: var(--pr);
+  font-family: "Bebas Neue", monospace;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
   margin-bottom: var(--space-xs);
 }
 
@@ -775,9 +780,8 @@ button {
 
 .section-desc {
   color: var(--muted);
-  max-width: 560px;
+  max-width: 700px;
   margin: 0 auto;
-  font-size: var(--text-base);
 }
 
 .contacts-section {
@@ -804,7 +808,7 @@ button {
   line-height: 2;
   font-size: var(--text-base);
   text-wrap: pretty;
-  max-width: 640px;
+  max-width: 600px;
 }
 
 .about-visual {
@@ -937,6 +941,10 @@ button {
   transform: scale(1.03) translateY(-4px);
 }
 
+.pricing-card p {
+  font-size: var(--text-sm);
+}
+
 .pricing-badge {
   position: absolute;
   top: -12px;
@@ -954,7 +962,7 @@ button {
 }
 
 .pricing-card h3 {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
 }
 
 .pricing-amount {

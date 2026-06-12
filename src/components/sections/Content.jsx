@@ -7,7 +7,9 @@ const Content = () => {
       <div className="section-inner">
         <Reveal>
           <div className="section-header">
-            <span className="section-label">About OWL</span>
+            <span className="section-label">
+              <hw>About</hw>
+            </span>
             <p className="section-desc">
               We believe productivity tools should be fast, beautiful, and
               frictionless. OWL brings all your work together.
@@ -30,14 +32,6 @@ const Content = () => {
                 <ImagesSection />
               </div>
             </Reveal>
-          </RevealItem>
-
-          <RevealItem>
-            <p>
-              With real-time sync, CLI integration, and a clean minimal
-              interface, OWL helps you focus on what matters — building great
-              products.
-            </p>
           </RevealItem>
         </RevealStagger>
       </div>

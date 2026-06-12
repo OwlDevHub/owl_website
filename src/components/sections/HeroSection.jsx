@@ -50,10 +50,6 @@ const HeroSection = () => {
         animate="visible"
       >
         <div className="hero-text">
-          <motion.span className="hero-badge" variants={itemVariants}>
-            {newVersion} — Now Available
-          </motion.span>
-
           <motion.h1 variants={itemVariants}>
             Meet Your New
             <br />
