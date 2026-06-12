@@ -20,7 +20,6 @@ const App = () => {
     <Router>
       <ThemeInitializer />
       <div className="noise-overlay" />
-      <div className="dot-grid" />
       <CustomCursor />
       <SmoothScroll>
         <Routes>
