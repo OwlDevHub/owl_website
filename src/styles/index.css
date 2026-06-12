@@ -528,7 +528,7 @@ button {
 .hero h1 span {
   font-family: "Satisfy", cursive;
   background: linear-gradient(135deg, var(--pr));
-  color: var(--fg);
+  color: var(--bg);
   padding: 1.5rem 3rem 1rem 3rem;
   border-radius: var(--radius-lg);
   display: inline-block;
