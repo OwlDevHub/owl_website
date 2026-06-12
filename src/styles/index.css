@@ -392,27 +392,102 @@ button {
   background: var(--pr);
 }
 
+.mobile-theme-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  animation: fadeIn 0.2s ease;
+}
+
 .mobile-theme-submenu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+  max-width: 280px;
+  width: calc(100% - 2rem);
+  position: relative;
+}
+
+.mobile-theme-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color var(--transition);
+}
+
+.mobile-theme-close:hover {
+  color: var(--fg);
+}
+
+.mobile-theme-card {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  padding: 0 0 0.5rem;
-}
-
-.mobile-theme-option {
-  border: none;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
   background: transparent;
   color: var(--muted);
-  font-size: var(--text-base);
-  padding: 0.3rem 0;
+  font-size: var(--text-sm);
+  padding: 0.85rem 0.5rem;
   cursor: pointer;
-  transition: color var(--transition);
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
   text-align: center;
+  position: relative;
 }
 
-.mobile-theme-option:hover,
-.mobile-theme-option.active {
+.mobile-theme-card:hover {
+  border-color: var(--pr);
+  color: var(--fg);
+  background: var(--surface-hover);
+  transform: scale(1.04);
+}
+
+.mobile-theme-card.active {
+  border-color: var(--pr);
   color: var(--pr);
+  background: color-mix(in srgb, var(--pr) 8%, transparent);
+}
+
+.mobile-theme-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+}
+
+.mobile-theme-label {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  line-height: 1.2;
+}
+
+.mobile-theme-check {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  font-size: 0.6rem;
+  color: var(--pr);
+  font-weight: 700;
 }
 
 /* ===== MOBILE HEADER ===== */

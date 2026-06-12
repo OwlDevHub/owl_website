@@ -10,10 +10,34 @@ import { motion, AnimatePresence } from "framer-motion";
 import { OwlIcon } from "../ui";
 
 const THEMES = {
-  "mono-dark": { classes: [], label: "Mono Dark", icon: faMoon, opposite: "mono-light", bg: "#101010" },
-  "mono-light": { classes: ["light"], label: "Mono Light", icon: faSun, opposite: "mono-dark", bg: "#e8e8e8" },
-  "everforest-dark": { classes: ["everforest"], label: "Forest Dark", icon: faMoon, opposite: "everforest-light", bg: "#1e2326" },
-  "everforest-light": { classes: ["everforest", "light"], label: "Forest Light", icon: faSun, opposite: "everforest-dark", bg: "#f3efda" },
+  "mono-dark": {
+    classes: [],
+    label: "Mono Dark",
+    icon: faMoon,
+    opposite: "mono-light",
+    bg: "#101010",
+  },
+  "mono-light": {
+    classes: ["light"],
+    label: "Mono Light",
+    icon: faSun,
+    opposite: "mono-dark",
+    bg: "#e8e8e8",
+  },
+  "everforest-dark": {
+    classes: ["everforest"],
+    label: "Forest Dark",
+    icon: faMoon,
+    opposite: "everforest-light",
+    bg: "#1e2326",
+  },
+  "everforest-light": {
+    classes: ["everforest", "light"],
+    label: "Forest Light",
+    icon: faSun,
+    opposite: "everforest-dark",
+    bg: "#f3efda",
+  },
 };
 
 const useTheme = () => {
@@ -24,13 +48,17 @@ const useTheme = () => {
     if (saved && THEMES[saved]) {
       setThemeName(saved);
       document.documentElement.classList.remove("light", "everforest");
-      THEMES[saved].classes.forEach((c) => document.documentElement.classList.add(c));
+      THEMES[saved].classes.forEach((c) =>
+        document.documentElement.classList.add(c),
+      );
     }
   }, []);
 
   const applyTheme = useCallback((name) => {
     document.documentElement.classList.remove("light", "everforest");
-    THEMES[name].classes.forEach((c) => document.documentElement.classList.add(c));
+    THEMES[name].classes.forEach((c) =>
+      document.documentElement.classList.add(c),
+    );
     localStorage.setItem("theme", name);
     setThemeName(name);
   }, []);
@@ -102,34 +130,37 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, [themeMenuOpen]);
 
-  const animateToTheme = useCallback((target) => {
-    if (transitioningRef.current) return;
-    transitioningRef.current = true;
+  const animateToTheme = useCallback(
+    (target) => {
+      if (transitioningRef.current) return;
+      transitioningRef.current = true;
 
-    let x, y;
-    if (toggleRef.current) {
-      const rect = toggleRef.current.getBoundingClientRect();
-      x = rect.left + rect.width / 2;
-      y = rect.top + rect.height / 2;
-    } else {
-      x = window.innerWidth / 2;
-      y = window.innerHeight / 2;
-    }
+      let x, y;
+      if (toggleRef.current) {
+        const rect = toggleRef.current.getBoundingClientRect();
+        x = rect.left + rect.width / 2;
+        y = rect.top + rect.height / 2;
+      } else {
+        x = window.innerWidth / 2;
+        y = window.innerHeight / 2;
+      }
 
-    setOrigin({ x, y });
-    setOverlayColor(THEMES[target].bg);
-    setTransitionKey((k) => k + 1);
-    setAnimating(true);
+      setOrigin({ x, y });
+      setOverlayColor(THEMES[target].bg);
+      setTransitionKey((k) => k + 1);
+      setAnimating(true);
 
-    setTimeout(() => {
-      applyTheme(target);
-    }, 280);
+      setTimeout(() => {
+        applyTheme(target);
+      }, 280);
 
-    setTimeout(() => {
-      setAnimating(false);
-      transitioningRef.current = false;
-    }, 700);
-  }, [applyTheme]);
+      setTimeout(() => {
+        setAnimating(false);
+        transitioningRef.current = false;
+      }, 700);
+    },
+    [applyTheme],
+  );
 
   const handlePointerDown = useCallback(() => {
     themeMenuOpenRef.current = false;
@@ -157,11 +188,14 @@ const Header = () => {
     }
   }, []);
 
-  const handleMenuSelect = useCallback((name) => {
-    setThemeMenuOpen(false);
-    themeMenuOpenRef.current = false;
-    animateToTheme(name);
-  }, [animateToTheme]);
+  const handleMenuSelect = useCallback(
+    (name) => {
+      setThemeMenuOpen(false);
+      themeMenuOpenRef.current = false;
+      animateToTheme(name);
+    },
+    [animateToTheme],
+  );
 
   const links = [
     { href: "#features", label: "Features" },
@@ -230,20 +264,37 @@ const Header = () => {
                   Theme
                 </button>
                 {mobileThemeOpen && (
-                  <div className="mobile-theme-submenu">
-                    {Object.entries(THEMES).map(([key, data]) => (
-                      <button
-                        key={key}
-                        className={`mobile-theme-option${themeName === key ? " active" : ""}`}
-                        onClick={() => {
-                          animateToTheme(key);
-                          setMenuOpen(false);
-                          setMobileThemeOpen(false);
-                        }}
-                      >
-                        {data.label}
-                      </button>
-                    ))}
+                  <div
+                    className="mobile-theme-backdrop"
+                    onClick={() => setMobileThemeOpen(false)}
+                  >
+                    <div
+                      className="mobile-theme-submenu"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {Object.entries(THEMES).map(([key, data]) => (
+                        <button
+                          key={key}
+                          className={`mobile-theme-card${themeName === key ? " active" : ""}`}
+                          onClick={() => {
+                            animateToTheme(key);
+                            setMenuOpen(false);
+                            setMobileThemeOpen(false);
+                          }}
+                        >
+                          <span
+                            className="mobile-theme-swatch"
+                            style={{ backgroundColor: data.bg }}
+                          />
+                          <span className="mobile-theme-label">
+                            {data.label}
+                          </span>
+                          {themeName === key && (
+                            <span className="mobile-theme-check">✓</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
