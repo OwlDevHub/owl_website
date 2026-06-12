@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import OwlIcon from "../ui/OwlIcon";
 import {
   getCachedVersion,
   setCachedVersion,
@@ -40,6 +39,8 @@ const HeroSection = () => {
       });
     }
   }, []);
+
+  console.log("New version:", newVersion);
 
   return (
     <div className="hero">
