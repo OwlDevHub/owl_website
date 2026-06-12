@@ -13,25 +13,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Homemade+Apple&family=Mr+Dafoe&family=Playwrite+RO:wght@100..400&display=swap");
 
 :root {
-  --bg: #272727;
-  --fg: #c8c8c8;
-  --pr: #999999;
-  --pr-light: color-mix(in srgb, #999999 30%, transparent);
-  --ab: #2f2f2f;
-  --green: #999999;
-  --red: #888888;
-  --yellow: #aaaaaa;
-  --subtle: #666666;
-  --muted: #888888;
-  --surface: #333333;
-  --surface-hover: #3a3a3a;
-  --border: #464646;
-  --border-light: color-mix(in srgb, #464646 50%, transparent);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 30px color-mix(in srgb, #999 15%, transparent);
-  --glow-pr: 0 0 60px color-mix(in srgb, #999 8%, transparent);
+  --bg: #101010;
+  --fg: #a09b9b;
+  --pr: #b8b3b3;
+  --pr-light: color-mix(in srgb, #b8b3b3 30%, transparent);
+  --ab: #1a1a1a;
+  --green: #b8b3b3;
+  --red: #989393;
+  --yellow: #a8a3a3;
+  --subtle: #686363;
+  --muted: #888383;
+  --surface: #151515;
+  --surface-hover: #1a1a1a;
+  --border: #2a2a2a;
+  --border-light: color-mix(in srgb, #2a2a2a 50%, transparent);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 30px color-mix(in srgb, #b8b3b3 10%, transparent);
+  --glow-pr: 0 0 60px color-mix(in srgb, #b8b3b3 5%, transparent);
 
   --text-xs: 0.8rem;
   --text-sm: 1rem;
@@ -204,7 +204,6 @@ button {
 }
 
 .header.scrolled {
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
 }
@@ -1532,23 +1531,23 @@ button {
 
 /* ===== LIGHT THEME ===== */
 .light {
-  --bg: #ececec;
-  --fg: #444444;
-  --pr: #777777;
-  --pr-light: color-mix(in srgb, #777777 30%, transparent);
-  --ab: #e4e4e4;
-  --green: #777777;
-  --red: #666666;
-  --yellow: #888888;
-  --subtle: #888888;
-  --muted: #666666;
-  --surface: #f2f2f2;
-  --surface-hover: #f5f5f5;
-  --border: #d4d4d4;
-  --border-light: color-mix(in srgb, #d4d4d4 60%, transparent);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.08);
+  --bg: #e8e8e8;
+  --fg: #3a3a3a;
+  --pr: #5a5a5a;
+  --pr-light: color-mix(in srgb, #5a5a5a 30%, transparent);
+  --ab: #e0e0e0;
+  --green: #5a5a5a;
+  --red: #4a4a4a;
+  --yellow: #6a6a6a;
+  --subtle: #7a7a7a;
+  --muted: #5a5a5a;
+  --surface: #eeeeee;
+  --surface-hover: #f0f0f0;
+  --border: #cccccc;
+  --border-light: color-mix(in srgb, #cccccc 60%, transparent);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
   --shadow-glow: 0 0 30px color-mix(in srgb, var(--pr) 20%, transparent);
   --glow-pr: 0 0 60px color-mix(in srgb, var(--pr) 10%, transparent);
 }
