@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 const DURATION = 2200;
@@ -7,11 +8,14 @@ const MIN_VISIBLE = 2000;
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
 const Preloader = ({ children }) => {
+  const location = useLocation();
   const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(true);
   const [fontsReady, setFontsReady] = useState(false);
   const startRef = useRef(Date.now());
   const rafRef = useRef(null);
+
+  const isDownloadPage = location.pathname === "/download";
 
   useEffect(() => {
     document.fonts.ready.then(() => setFontsReady(true));
@@ -47,23 +51,25 @@ const Preloader = ({ children }) => {
 
   return (
     <div className="preloader-root">
-      <AnimatePresence mode="wait">
-        {show && (
-          <motion.div
-            key="preloader"
-            className="preloader"
-            initial={{ opacity: 1 }}
-            exit={{ y: "-100%" }}
-            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-          >
-            <div className="preloader-content">
-              <span className="preloader-number">{progress}</span>
-              <span className="preloader-percent">%</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div className="preloader-children" style={{ visibility: show ? "hidden" : "visible" }}>
+      {!isDownloadPage && (
+        <AnimatePresence mode="wait">
+          {show && (
+            <motion.div
+              key="preloader"
+              className="preloader"
+              initial={{ opacity: 1 }}
+              exit={{ y: "-100%" }}
+              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+            >
+              <div className="preloader-content">
+                <span className="preloader-number">{progress}</span>
+                <span className="preloader-percent">%</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+      <div className="preloader-children" style={{ visibility: !isDownloadPage && show ? "hidden" : "visible" }}>
         {children}
       </div>
     </div>

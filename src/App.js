@@ -18,10 +18,10 @@ import ThemeInitializer from "./components/ThemeInitializer";
 
 const App = () => {
   return (
-    <Preloader>
-      <Router>
-        <ThemeInitializer />
-        <CustomCursor />
+    <Router>
+      <ThemeInitializer />
+      <CustomCursor />
+      <Preloader>
         <SmoothScroll>
           <Routes>
             <Route path="/download" element={<DownloadPage />} />
@@ -44,8 +44,8 @@ const App = () => {
             />
           </Routes>
         </SmoothScroll>
-      </Router>
-    </Preloader>
+      </Preloader>
+    </Router>
   );
 };
 
