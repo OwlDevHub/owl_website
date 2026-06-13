@@ -81,9 +81,7 @@ const Header = () => {
   const [transitionKey, setTransitionKey] = useState(0);
   const toggleRef = useRef(null);
   const transitioningRef = useRef(false);
-  const longPressTimer = useRef(null);
   const menuRef = useRef(null);
-  const themeMenuOpenRef = useRef(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -123,7 +121,6 @@ const Header = () => {
         !toggleRef.current.contains(e.target)
       ) {
         setThemeMenuOpen(false);
-        themeMenuOpenRef.current = false;
       }
     };
     document.addEventListener("mousedown", handler);
@@ -162,36 +159,13 @@ const Header = () => {
     [applyTheme],
   );
 
-  const handlePointerDown = useCallback(() => {
-    themeMenuOpenRef.current = false;
-    longPressTimer.current = setTimeout(() => {
-      themeMenuOpenRef.current = true;
-      setThemeMenuOpen(true);
-    }, 400);
-  }, []);
-
-  const handlePointerUp = useCallback(() => {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current);
-      longPressTimer.current = null;
-    }
-    if (!themeMenuOpenRef.current) {
-      const next = THEMES[themeName].opposite;
-      animateToTheme(next);
-    }
-  }, [themeName, animateToTheme]);
-
-  const handlePointerLeave = useCallback(() => {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current);
-      longPressTimer.current = null;
-    }
+  const handleToggleClick = useCallback(() => {
+    setThemeMenuOpen((v) => !v);
   }, []);
 
   const handleMenuSelect = useCallback(
     (name) => {
       setThemeMenuOpen(false);
-      themeMenuOpenRef.current = false;
       animateToTheme(name);
     },
     [animateToTheme],
@@ -353,11 +327,8 @@ const Header = () => {
                 <button
                   ref={toggleRef}
                   className="theme-toggle"
-                  onPointerDown={handlePointerDown}
-                  onPointerUp={handlePointerUp}
-                  onPointerLeave={handlePointerLeave}
-                  onContextMenu={(e) => e.preventDefault()}
-                  aria-label="Toggle theme"
+                  onClick={handleToggleClick}
+                  aria-label="Choose theme"
                 >
                   <FontAwesomeIcon icon={THEMES[themeName].icon} />
                 </button>
