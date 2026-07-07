@@ -7,6 +7,7 @@ import {
   faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { OwlIcon } from "../ui";
 
 const THEMES = {
@@ -233,16 +234,27 @@ const Header = () => {
                   >
                     <FontAwesomeIcon icon={faXmark} />
                   </button>
-                  {links.map((link) => (
-                    <a
-                      className="mobile-nav-button"
-                      key={link.href}
-                      href={link.href}
-                      onClick={handleNavClick}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
+                  {links.map((link) =>
+                    link.href.startsWith("#") ? (
+                      <a
+                        className="mobile-nav-button"
+                        key={link.href}
+                        href={link.href}
+                        onClick={handleNavClick}
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        className="mobile-nav-button"
+                        key={link.href}
+                        to={link.href}
+                        onClick={handleNavClick}
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  )}
                   <button
                     className="mobile-nav-button mobile-theme-toggle"
                     onClick={() => setMobileThemeOpen((v) => !v)}
@@ -321,8 +333,8 @@ const Header = () => {
               <a href="#features">Features</a>
               <a href="#about">About</a>
               <a href="#download_app">Download</a>
-              <a href="/terms">Terms</a>
-              <a href="/privacy">Privacy</a>
+              <Link to="/terms">Terms</Link>
+              <Link to="/privacy">Privacy</Link>
               <div className="theme-toggle-wrapper">
                 <button
                   ref={toggleRef}

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => (
   <footer className="footer">
     <div className="footer-inner">
@@ -8,8 +10,8 @@ const Footer = () => (
         </span>
       </span>
       <div className="footer-links">
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
+        <Link to="/privacy">Privacy</Link>
+        <Link to="/terms">Terms</Link>
         <a
           href="https://nighty3098.vercel.app/"
           target="_blank"
