@@ -190,14 +190,19 @@ const PrivacyPage = () => {
         <section>
           <h2>6. Data Retention</h2>
           <p>
-            We retain your data for as long as your account is active or as
-            needed to provide services. If you delete your account, we will
-            remove your personal data, including account information,
-            subscriptions, projects, boards, columns, tasks, login history, and
-            settings from our servers, except where retention is required by law
-            (e.g., for audit or tax purposes). Anonymized project and task data
-            may be retained for analytical purposes.
-          </p>
+             We retain your data for as long as your account is active or as
+             needed to provide services. If you delete your account, we will
+             remove your personal data, including account information,
+             subscriptions, projects, boards, columns, tasks, login history, and
+             settings from our servers, except where retention is required by law
+             (e.g., for audit or tax purposes). Anonymized project and task data
+             may be retained for analytical purposes.
+           </p>
+           <p>
+             If your account is banned, your personal data will be deleted or
+             irreversibly anonymized within 30 calendar days from the date of
+             the ban, except where retention is required by law.
+           </p>
         </section>
 
         <section>

@@ -176,10 +176,19 @@ const TermsOfService = () => {
             applicable law.
           </p>
           <p>
-            7.3. The User is fully responsible for their actions on the Service,
-            including posting content that may infringe on third-party rights.
-          </p>
-        </section>
+             7.3. The User is fully responsible for their actions on the Service,
+             including posting content that may infringe on third-party rights.
+           </p>
+           <p>
+             7.4. To the maximum extent permitted by applicable law, the total
+             aggregate liability of the Service (including its affiliates,
+             officers, and employees) to the User for any claims arising out of
+             or relating to these Terms or the Service shall not exceed the total
+             amount paid by the User to the Service in the 3 (three) months
+             immediately preceding the event giving rise to the liability. If no
+             payments have been made, liability is limited to €50 (fifty Euros).
+           </p>
+         </section>
 
         <section>
           <h2>8. Termination of Access</h2>
@@ -189,12 +198,19 @@ const TermsOfService = () => {
             <code>is_banned</code> flag and lose access to all data.
           </p>
           <p>
-            8.2. The User may stop using the Service at any time by deleting
-            their account as per the instructions provided in the settings. Upon
-            account deletion, personal data will be processed in accordance with
-            our Privacy Policy and GDPR requirements.
-          </p>
-        </section>
+             8.2. The User may stop using the Service at any time by deleting
+             their account as per the instructions provided in the settings. Upon
+             account deletion, personal data will be processed in accordance with
+             our Privacy Policy and GDPR requirements.
+           </p>
+           <p>
+             8.3. For banned Users, the Service will delete or irreversibly
+             anonymize all personal data within 30 (thirty) calendar days from
+             the date of the ban. Only essential records required by applicable
+             law (e.g., for tax or audit purposes) may be retained beyond this
+             period.
+           </p>
+         </section>
 
         <section>
           <h2>9. Dispute Resolution</h2>
@@ -246,7 +262,57 @@ const TermsOfService = () => {
           </p>
         </section>
 
-        <p className="last-updated">Last updated: June 8, 2026</p>
+        <section>
+           <h2>12. Take-Down Notice</h2>
+           <p>
+             12.1. If you believe that content available on the Service
+             infringes your copyright or other intellectual property rights, you
+             may submit a Take-Down Notice to us at{" "}
+             <a href="mailto:night3098games@gmail.com">
+               night3098games@gmail.com
+             </a>{" "}
+             with the following:
+           </p>
+           <ul>
+             <li>
+               (a) Identification of the copyrighted work claimed to be
+               infringed;
+             </li>
+             <li>
+               (b) Identification of the infringing material and its location
+               on the Service;
+             </li>
+             <li>
+               (c) Your contact information (name, address, email, phone);
+             </li>
+             <li>
+               (d) A statement that you have a good faith belief that the use
+               is not authorized by the rights owner;
+             </li>
+             <li>
+               (e) A statement, under penalty of perjury, that the information
+               is accurate and that you are the rights owner or authorized to
+               act on their behalf.
+             </li>
+           </ul>
+           <p>
+             12.2. Upon receipt of a valid notice, we will promptly remove or
+             disable access to the allegedly infringing content and notify the
+             User who posted it.
+           </p>
+           <p>
+             12.3. The User who posted the content may submit a counter-notice
+             within 14 days. If we receive a valid counter-notice, we may
+             restore the content unless the rights owner files a court action.
+           </p>
+           <p>
+             12.4. Users who submit false or misleading notices are liable for
+             all damages (including costs and attorneys' fees) incurred by the
+             Service or the affected user as a result of the removal.
+           </p>
+         </section>
+
+         <p className="last-updated">Last updated: June 8, 2026</p>
         <div
           className="spacer"
           style={{ height: "100px", minHeight: "100px" }}
