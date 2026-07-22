@@ -30,9 +30,11 @@ const HeroSection = () => {
       >
         <div className="hero-text">
           <motion.h1 variants={itemVariants}>
-            From idea to done.
+            Meet Your New
             <br />
-            <span>ONE WORKSPACE</span>
+            <span>PRODUCTIVITY</span>
+            <br />
+            System
           </motion.h1>
 
           <motion.div className="hero-cta-group" variants={itemVariants}>
