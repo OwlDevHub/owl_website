@@ -4,7 +4,7 @@ const Footer = () => (
   <footer className="footer">
     <div className="footer-inner">
       <span>
-        OWL —{" "}
+        OWL -{" "}
         <span style={{ fontFamily: "Caveat, cursive", fontSize: "1.1em" }}>
           Productivity System
         </span>

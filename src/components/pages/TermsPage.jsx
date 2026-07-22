@@ -40,7 +40,7 @@ const TermsOfService = () => {
           <p>
             2.1. To access the full functionality of the Service, the User must
             register by providing accurate information (name, email address,
-            password). A password hash is stored securely — the Service never
+            password). A password hash is stored securely - the Service never
             stores plain-text passwords.
           </p>
           <p>
@@ -98,16 +98,16 @@ const TermsOfService = () => {
           <p>4.1. The Service offers three subscription plans:</p>
           <ul>
             <li>
-              <strong>Free</strong> — $0.00/30 days: Basic access to core
+              <strong>Free</strong> - $0.00/30 days: Basic access to core
               features with limits on usage and data volume.
             </li>
             <li>
-              <strong>Pro</strong> — $5.90/30 days: Enhanced features for
+              <strong>Pro</strong> - $5.90/30 days: Enhanced features for
               professional users, including prioritized support and increased
               limits.
             </li>
             <li>
-              <strong>Premium</strong> — $8.90/30 days: Full access to all app
+              <strong>Premium</strong> - $8.90/30 days: Full access to all app
               features, including exclusive content and personalized settings.
             </li>
           </ul>

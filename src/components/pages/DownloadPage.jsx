@@ -52,7 +52,7 @@ const DownloadPage = () => {
         >
           <motion.div className="hero-text">
             <motion.span className="hero-badge" variants={itemVariants}>
-              {currentAppVersion} — Now Available
+              {currentAppVersion} - Now Available
             </motion.span>
             <motion.h1 variants={itemVariants}>
               <span className="download-span">DOWNLOAD</span> OWL FOR YOUR

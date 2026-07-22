@@ -10,6 +10,7 @@ import {
   PricingSection,
   Content,
   Contacts,
+  StickyCtaBar,
 } from "./components/sections";
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import SmoothScroll from "./components/SmoothScroll";
@@ -39,6 +40,7 @@ const App = () => {
                   <DownloadSection />
                   <Contacts />
                   <Footer />
+                  <StickyCtaBar />
                 </main>
               }
             />

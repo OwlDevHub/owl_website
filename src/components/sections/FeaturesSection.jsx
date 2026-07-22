@@ -14,33 +14,33 @@ import { Reveal, RevealStagger, RevealItem } from "../ui/Reveal";
 const defaultFeatures = [
   {
     icon: faPenRuler,
-    text: "Minimalistic design",
-    desc: "Clean and intuitive interface that gets out of your way. No clutter, just focus.",
+    text: "Zero-clutter focus",
+    desc: "Clean interface that stays out of your way. Every pixel has a purpose - no tabs, no toolbars, no noise.",
   },
   {
     icon: faRotate,
-    text: "Fast sync",
-    desc: "Real-time updates across all your devices. Changes propagate in milliseconds.",
+    text: "Real-time sync",
+    desc: "Changes propagate across every device in milliseconds. Your workspace is always up to date.",
   },
   {
     icon: faTerminal,
-    text: "CLI mode",
-    desc: "Powerful command-line interface for advanced users who live in the terminal.",
+    text: "Native CLI mode",
+    desc: "Full terminal integration for advanced workflows. Script it, pipe it, automate it - without leaving your shell.",
   },
   {
     icon: faUsers,
-    text: "Collaborative work",
-    desc: "Work together seamlessly with real-time collaboration and shared workspaces.",
+    text: "Real-time collaboration",
+    desc: "Co-edit tasks, share workspaces, and move faster together. Built for teams that ship.",
   },
   {
     icon: faDollarSign,
-    text: "Free trial",
-    desc: "Try before you commit. Full access, no credit card required.",
+    text: "Free to start",
+    desc: "Full-featured free tier. No time limit. No credit card required. Upgrade when you outgrow it.",
   },
   {
     icon: faApple,
-    text: "Cross platform",
-    desc: "Works everywhere you do — macOS, Windows, Linux, and mobile.",
+    text: "Runs everywhere",
+    desc: "Native on macOS, Windows, and Linux. One consistent experience across every machine you own.",
   },
 ];
 
@@ -52,7 +52,7 @@ const FeaturesSection = ({ title = "Features", items = defaultFeatures }) => {
           <div className="section-header">
             <span className="section-label">Why OWL</span>
             <p className="section-desc">
-              Everything you need to stay productive, nothing you don't.
+              Every feature exists for one reason: to make you faster.
             </p>
           </div>
         </Reveal>

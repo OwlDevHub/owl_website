@@ -1,10 +1,4 @@
-import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  getCachedVersion,
-  setCachedVersion,
-  getNewAppVersion,
-} from "./../../api/github_release";
 
 const containerVariants = {
   hidden: {},
@@ -26,22 +20,6 @@ const itemVariants = {
 };
 
 const HeroSection = () => {
-  const [newVersion, setNewVersion] = useState("");
-
-  useEffect(() => {
-    const cached = getCachedVersion();
-    if (cached) {
-      setNewVersion(cached);
-    } else {
-      getNewAppVersion().then((version) => {
-        setNewVersion(version);
-        setCachedVersion(version);
-      });
-    }
-  }, []);
-
-  console.log("New version:", newVersion);
-
   return (
     <div className="hero">
       <motion.div
@@ -52,19 +30,24 @@ const HeroSection = () => {
       >
         <div className="hero-text">
           <motion.h1 variants={itemVariants}>
-            Meet Your New
+            From idea to done.
             <br />
-            <span>PRODUCTIVITY</span>
-            <br />
-            System
+            <span>ONE WORKSPACE</span>
           </motion.h1>
+
           <motion.div className="hero-cta-group" variants={itemVariants}>
             <a className="hero-cta-primary" href="#download_app">
-              Get Early Access
+              Get Early Access - Free
             </a>
             <a className="hero-cta-secondary" href="#features">
-              Explore Features
+              See how it works
             </a>
+          </motion.div>
+
+          <motion.div className="hero-trust" variants={itemVariants}>
+            <span className="hero-trust-line">
+              Built for developers who ship. No bloat. No distractions.
+            </span>
           </motion.div>
         </div>
       </motion.div>

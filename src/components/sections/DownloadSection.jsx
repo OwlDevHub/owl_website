@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 import { Reveal } from "../ui/Reveal";
 import {
   fetchIpAddress,
@@ -16,6 +17,7 @@ const DownloadSection = () => {
   const [ipAddr, setIpAddr] = useState("");
   const [timezone, setTimezone] = useState("");
   const [status, setStatus] = useState(null);
+  const inputRef = useRef(null);
 
   const [deviceData, setDeviceData] = useState({});
   const [screenInfo, setScreenInfo] = useState({});
@@ -39,6 +41,12 @@ const DownloadSection = () => {
     };
     collect();
   }, []);
+
+  useEffect(() => {
+    if (status === "sending" && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [status]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -91,49 +99,96 @@ const DownloadSection = () => {
           <div className="section-header">
             <span className="section-label">Early Access</span>
             <p className="section-desc">
-              Be the first to try OWL. Drop your email and we'll let you know
-              when it's ready.
+              Be the first to try OWL. Early adopters get 20% off first year.
             </p>
           </div>
         </Reveal>
-        <Reveal variant="scaleIn">
-          <div className="download-card">
-            <h2>Join the waitlist</h2>
-            <p>
-              Early adopters get exclusive access and a special launch discount.
-            </p>
-            <form onSubmit={handleSubmit} className="download-form">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="download-input"
-              />
-              <button
-                type="submit"
-                className="download-button"
-                disabled={status === "sending"}
-              >
-                Notify me
-              </button>
-            </form>
-            {status === "sending" && (
-              <p className="status-wait">Sending a request. Please wait</p>
-            )}
-            {status === "success" && (
-              <p className="status-success">
-                Thanks! You have been added to the waiting list.
+
+        <div className="download-grid">
+          <Reveal variant="scaleIn">
+            <div className="download-card">
+              <div className="download-card-header">
+                <h2>Get Early Access</h2>
+              </div>
+              <p>
+                Drop your email and we'll notify you the moment OWL launches.
+                No spam, no noise - just one email.
               </p>
-            )}
-            {status === "error" && (
-              <p className="status-error">
-                Error when sending. Try again later.
-              </p>
-            )}
-          </div>
-        </Reveal>
+              <form onSubmit={handleSubmit} className="download-form">
+                <div className="download-input-group">
+                  <input
+                    ref={inputRef}
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    className="download-input"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="download-button"
+                  disabled={status === "sending"}
+                >
+                  {status === "sending"
+                    ? "Sending..."
+                    : "Claim my early access"}
+                </button>
+              </form>
+              {status === "sending" && (
+                <motion.p
+                  className="status-wait"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <span className="status-loading-dot" />
+                  Securing your spot...
+                </motion.p>
+              )}
+              {status === "success" && (
+                <motion.p
+                  className="status-success"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  ✓ You're on the list. We'll notify you at launch.
+                </motion.p>
+              )}
+              {status === "error" && (
+                <motion.p
+                  className="status-error"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  Something went wrong. Try again or reach out on Telegram.
+                </motion.p>
+              )}
+
+            </div>
+          </Reveal>
+
+          <Reveal variant="fadeUp">
+            <div className="download-benefits">
+              <h3>Early adopters get:</h3>
+              <ul className="download-benefits-list">
+                <li>
+                  <span className="download-benefit-check">→</span>
+                  20% off first year
+                </li>
+                <li>
+                  <span className="download-benefit-check">→</span>
+                  Priority feature requests
+                </li>
+                <li>
+                  <span className="download-benefit-check">→</span>
+                  Direct line to the founder
+                </li>
+
+              </ul>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </div>
   );

@@ -1,33 +1,52 @@
 import { useRef, useState, useCallback } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { Reveal, RevealStagger, RevealItem } from "../ui/Reveal";
 
 const plans = [
   {
     name: "Free",
-    price: 0.0,
+    price: 0,
     duration_days: 30,
-    about:
-      "Free basic access to the app's core features with limits on usage and data volume",
-    cta: "Get Started",
+    about: "Core features for solo developers exploring OWL",
+    cta: "Start Free",
     featured: false,
+    features: [
+      "Up to 3 projects",
+      "Task & project management",
+      "CLI mode",
+      "Community support",
+    ],
   },
   {
     name: "Pro",
     price: 5.9,
     duration_days: 30,
-    about:
-      "Enhanced features for professional users, including prioritized support and increased limits",
-    cta: "Try Pro",
+    about: "For professionals who need more power and flexibility",
+    cta: "Try Pro Free for 14 Days",
     featured: true,
+    features: [
+      "Unlimited projects",
+      "Real-time collaboration",
+      "Priority support",
+      "Advanced automation",
+      "Cross-device sync",
+    ],
   },
   {
     name: "Premium",
     price: 8.9,
     duration_days: 30,
-    about:
-      "Full access to all app features, including exclusive content and personalized settings",
+    about: "Full access for teams and power users",
     cta: "Go Premium",
     featured: false,
+    features: [
+      "Everything in Pro",
+      "Admin controls & roles",
+      "Custom integrations",
+      "Dedicated onboarding",
+      "SLA guarantee",
+    ],
   },
 ];
 
@@ -49,7 +68,7 @@ const PricingSection = () => {
           <div className="section-header">
             <span className="section-label">Pricing</span>
             <p className="section-desc">
-              Choose the plan that fits your workflow. Upgrade anytime.
+              Start free. Upgrade when you need more. No hidden fees.
             </p>
           </div>
         </Reveal>
@@ -65,13 +84,27 @@ const PricingSection = () => {
                   )}
                   <h3>{plan.name}</h3>
                   <div className="pricing-amount">
-                    <span className="pricing-currency">$</span>
-                    <span className="pricing-value">{plan.price}</span>
-                    <span className="pricing-period">
-                      / {plan.duration_days} days
+                    {plan.price > 0 && (
+                      <span className="pricing-currency">$</span>
+                    )}
+                    <span className="pricing-value">
+                      {plan.price > 0 ? plan.price : "Free"}
                     </span>
+                    {plan.price > 0 && (
+                      <span className="pricing-period">
+                        / {plan.duration_days} days
+                      </span>
+                    )}
                   </div>
                   <p className="pricing-desc">{plan.about}</p>
+                  <ul className="pricing-features">
+                    {plan.features.map((f) => (
+                      <li key={f}>
+                        <FontAwesomeIcon icon={faCheck} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                   <a
                     href="#download_app"
                     className={
