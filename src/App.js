@@ -2,15 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/layout";
 import CustomCursor from "./components/ui/CustomCursor";
-import Preloader from "./components/ui/Preloader";
 import {
   HeroSection,
   FeaturesSection,
   DownloadSection,
   PricingSection,
   Content,
-  Contacts,
-  StickyCtaBar,
 } from "./components/sections";
 import { PrivacyPage, TermsPage, DownloadPage } from "./components/pages";
 import SmoothScroll from "./components/SmoothScroll";
@@ -22,8 +19,7 @@ const App = () => {
     <Router>
       <ThemeInitializer />
       <CustomCursor />
-      <Preloader>
-        <SmoothScroll>
+      <SmoothScroll>
           <Routes>
             <Route path="/download" element={<DownloadPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
@@ -34,19 +30,16 @@ const App = () => {
                 <main>
                   <Header />
                   <HeroSection />
-                  <Content />
                   <FeaturesSection />
+                  <Content />
                   <PricingSection />
                   <DownloadSection />
-                  <Contacts />
                   <Footer />
-                  <StickyCtaBar />
                 </main>
               }
             />
           </Routes>
         </SmoothScroll>
-      </Preloader>
     </Router>
   );
 };

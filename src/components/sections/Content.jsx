@@ -1,56 +1,37 @@
-import { Reveal, RevealStagger, RevealItem } from "../ui/Reveal";
-import ImagesSection from "./ImagesSection";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { Reveal } from "../ui/Reveal";
 
 const Content = () => {
   return (
     <div className="section" id="about">
       <div className="section-inner">
         <Reveal>
-          <div className="section-header">
-            <span className="section-label">
-              <hw>About</hw>
-            </span>
-            <p className="section-desc">
-              Most productivity tools add more noise. OWL removes it - so you
-              can focus on what actually matters: shipping.
-            </p>
-          </div>
-        </Reveal>
-
-        <RevealStagger className="about-text" staggerDelay={0.15}>
-          <RevealItem>
-            <p>
-              OWL is a keyboard-first workspace that unifies project management,
-              task tracking, and team collaboration into one fast, native
-              experience. No web app lag. No context switching. No feature
-              bloat.
-            </p>
-          </RevealItem>
-
-          <RevealItem>
-            <Reveal>
-              <div className="about-visual">
-                <ImagesSection />
+          <div className="card card--large feature-split">
+            <div className="feature-split__text">
+              <span className="section-label">About OWL</span>
+              <h3>
+                OWL is an applied research team building the future of project
+                management.
+              </h3>
+              <p>
+                Most productivity tools add more noise. OWL removes it - a{" "}
+                <strong>keyboard-first workspace</strong> that unifies project
+                management, task tracking, and team collaboration into one fast,
+                native experience. No web app lag. No context switching. No
+                feature bloat.
+              </p>
+              <a className="feature-split__link" href="#download_app">
+                Join the early access{" "}
+                <span aria-hidden="true"><FontAwesomeIcon icon={faArrowRight} /></span>
+              </a>
+            </div>
+            <div className="feature-split__media">
+              <div className="product-window">
+                <div className="product-window__body">
+                  <img src="/imgs/4.png" alt="OWL workspace overview" />
+                </div>
               </div>
-            </Reveal>
-          </RevealItem>
-        </RevealStagger>
-
-        <Reveal>
-          <div className="about-stats">
-            <div className="about-stat">
-              <span className="about-stat-value">CLI</span>
-              <span className="about-stat-label">Native terminal integration</span>
-            </div>
-            <div className="about-stat-divider" />
-            <div className="about-stat">
-              <span className="about-stat-value">100%</span>
-              <span className="about-stat-label">Keyboard-driven workflow</span>
-            </div>
-            <div className="about-stat-divider" />
-            <div className="about-stat">
-              <span className="about-stat-value">0</span>
-              <span className="about-stat-label">Distractions. Just focus.</span>
             </div>
           </div>
         </Reveal>

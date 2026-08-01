@@ -6,5 +6,4 @@ export { default as FeaturesSection } from "./FeaturesSection";
 export { default as ImagesSection } from "./ImagesSection";
 export { default as HeroSection } from "./HeroSection";
 export { default as Contacts } from "./Contacts";
-export { default as TestimonialsSection } from "./TestimonialsSection";
 export { default as StickyCtaBar } from "./StickyCtaBar";

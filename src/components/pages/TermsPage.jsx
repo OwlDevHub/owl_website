@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const TermsOfService = () => {
@@ -11,7 +11,7 @@ const TermsOfService = () => {
       <div className="privacy-container">
         <div className="spacer" style={{ height: "100px" }}></div>
         <button className="back-link" onClick={() => navigate(-1)}>
-          ← Back to Home
+          <FontAwesomeIcon icon={faArrowLeft} /> Back to Home
         </button>
         <h1>Terms of Service</h1>
 
@@ -319,7 +319,7 @@ const TermsOfService = () => {
         ></div>
       </div>
       <button className="back_btn" onClick={() => navigate(-1)}>
-        <FontAwesomeIcon icon={faCaretLeft} />
+        <FontAwesomeIcon icon={faArrowLeft} />
       </button>
     </div>
   );

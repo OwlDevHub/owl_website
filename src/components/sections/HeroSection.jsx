@@ -1,4 +1,8 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import SmoothScrollHero from "../ui/SmoothScrollHero";
+import bgImage from "../../assets/bg.jpg";
+import foregroundImage from "../../assets/1.png";
 
 const containerVariants = {
   hidden: {},
@@ -21,39 +25,45 @@ const itemVariants = {
 
 const HeroSection = () => {
   return (
-    <div className="hero">
-      <motion.div
-        className="hero-content"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="hero-text">
-          <motion.h1 variants={itemVariants}>
-            Meet Your New
-            <br />
-            <span>PRODUCTIVITY</span>
-            <br />
-            System
-          </motion.h1>
+    <SmoothScrollHero
+      scrollHeight={1500}
+      desktopImage={bgImage}
+      mobileImage={bgImage}
+      foregroundImage={foregroundImage}
+      initialClipPercentage={25}
+      finalClipPercentage={75}
+    >
+      <div className="hero">
+        <motion.div
+          className="hero-blur-torn"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+        >
+          <div className="hero-text">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+            >
+              <motion.h1 variants={itemVariants}>
+                OWL is your productivity system for building{" "}
+                <span>ambitious software.</span>
+              </motion.h1>
 
-          <motion.div className="hero-cta-group" variants={itemVariants}>
-            <a className="hero-cta-primary" href="#download_app">
-              Get Early Access - Free
-            </a>
-            <a className="hero-cta-secondary" href="#features">
-              See how it works
-            </a>
-          </motion.div>
-
-          <motion.div className="hero-trust" variants={itemVariants}>
-            <span className="hero-trust-line">
-              Built for developers who ship. No bloat. No distractions.
-            </span>
-          </motion.div>
-        </div>
-      </motion.div>
-    </div>
+              <motion.div className="hero-cta-group" variants={itemVariants}>
+                <Link className="btn btn--primary" to="/download">
+                  Download
+                </Link>
+                <a className="btn btn--secondary" href="#download_app">
+                  Get early access
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </SmoothScrollHero>
   );
 };
 

@@ -1,89 +1,46 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
-  faXmark,
   faSun,
   faMoon,
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { OwlIcon } from "../ui";
 
 const THEMES = {
-  "mono-dark": {
-    classes: [],
-    label: "Mono Dark",
-    icon: faMoon,
-    opposite: "mono-light",
-    bg: "#101010",
-  },
-  "mono-light": {
-    classes: ["light"],
-    label: "Mono Light",
-    icon: faSun,
-    opposite: "mono-dark",
-    bg: "#e8e8e8",
-  },
-  "everforest-dark": {
-    classes: ["everforest"],
-    label: "Forest Dark",
-    icon: faMoon,
-    opposite: "everforest-light",
-    bg: "#1e2326",
-  },
-  "everforest-light": {
-    classes: ["everforest", "light"],
-    label: "Forest Light",
-    icon: faSun,
-    opposite: "everforest-dark",
-    bg: "#f3efda",
-  },
+  dark: { icon: faMoon },
+  light: { icon: faSun },
 };
 
 const useTheme = () => {
-  const [themeName, setThemeName] = useState("mono-dark");
+  const [themeName, setThemeName] = useState("dark");
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
-    if (saved && THEMES[saved]) {
-      setThemeName(saved);
-      document.documentElement.classList.remove("light", "everforest");
-      THEMES[saved].classes.forEach((c) =>
-        document.documentElement.classList.add(c),
-      );
+    if (saved === "light") {
+      setThemeName("light");
     }
   }, []);
 
   const applyTheme = useCallback((name) => {
-    document.documentElement.classList.remove("light", "everforest");
-    THEMES[name].classes.forEach((c) =>
-      document.documentElement.classList.add(c),
-    );
+    document.documentElement.classList.toggle("light", name === "light");
     localStorage.setItem("theme", name);
     setThemeName(name);
   }, []);
 
-  const isDark = themeName.endsWith("-dark");
-
-  return { themeName, applyTheme, isDark };
+  return { themeName, applyTheme };
 };
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mobileThemeOpen, setMobileThemeOpen] = useState(false);
   const { themeName, applyTheme } = useTheme();
 
-  const [animating, setAnimating] = useState(false);
-  const [origin, setOrigin] = useState({ x: 0, y: 0 });
-  const [overlayColor, setOverlayColor] = useState("#101010");
-  const [transitionKey, setTransitionKey] = useState(0);
-  const toggleRef = useRef(null);
-  const transitioningRef = useRef(false);
-  const menuRef = useRef(null);
-  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const [openNav, setOpenNav] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -103,86 +60,51 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (animating) {
-      document.documentElement.classList.add("theme-transitioning");
-    } else {
-      document.documentElement.classList.remove("theme-transitioning");
-    }
-    return () =>
-      document.documentElement.classList.remove("theme-transitioning");
-  }, [animating]);
-
-  useEffect(() => {
-    if (!themeMenuOpen) return;
+    if (!openNav) return;
     const handler = (e) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(e.target) &&
-        toggleRef.current &&
-        !toggleRef.current.contains(e.target)
-      ) {
-        setThemeMenuOpen(false);
+      if (!e.target.closest(".nav-item, .nav-sub")) {
+        setOpenNav(null);
       }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, [themeMenuOpen]);
-
-  const animateToTheme = useCallback(
-    (target) => {
-      if (transitioningRef.current) return;
-      transitioningRef.current = true;
-
-      let x, y;
-      if (toggleRef.current) {
-        const rect = toggleRef.current.getBoundingClientRect();
-        x = rect.left + rect.width / 2;
-        y = rect.top + rect.height / 2;
-      } else {
-        x = window.innerWidth / 2;
-        y = window.innerHeight / 2;
-      }
-
-      setOrigin({ x, y });
-      setOverlayColor(THEMES[target].bg);
-      setTransitionKey((k) => k + 1);
-      setAnimating(true);
-
-      setTimeout(() => {
-        applyTheme(target);
-      }, 280);
-
-      setTimeout(() => {
-        setAnimating(false);
-        transitioningRef.current = false;
-      }, 700);
-    },
-    [applyTheme],
-  );
+  }, [openNav]);
 
   const handleToggleClick = useCallback(() => {
-    setThemeMenuOpen((v) => !v);
-  }, []);
-
-  const handleMenuSelect = useCallback(
-    (name) => {
-      setThemeMenuOpen(false);
-      animateToTheme(name);
-    },
-    [animateToTheme],
-  );
+    applyTheme(themeName === "dark" ? "light" : "dark");
+  }, [themeName, applyTheme]);
 
   const links = [
     { href: "#features", label: "Features" },
+    { href: "#pricing", label: "Pricing" },
     { href: "#about", label: "About" },
-    { href: "#download_app", label: "Download" },
     { href: "/terms", label: "Terms" },
     { href: "/privacy", label: "Privacy" },
   ];
 
+  const navGroups = [
+    {
+      id: "product",
+      label: "Product",
+      items: [
+        { href: "#features", label: "Features" },
+        { href: "#pricing", label: "Pricing" },
+        { href: "/download", label: "Download" },
+      ],
+    },
+    {
+      id: "resources",
+      label: "Resources",
+      items: [
+        { href: "#about", label: "About" },
+        { href: "https://github.com/OwlDevHub", label: "GitHub" },
+        { href: "https://t.me/W2N3098", label: "Community" },
+      ],
+    },
+  ];
+
   const handleNavClick = () => {
     setMenuOpen(false);
-    setMobileThemeOpen(false);
   };
 
   return (
@@ -194,14 +116,25 @@ const Header = () => {
               <OwlIcon />
               OWL
             </a>
-            <button
-              className="mobile-burger"
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-label="Open menu"
-            >
-              Menu
-              <FontAwesomeIcon icon={faBars} />
-            </button>
+            <div className="mobile-header-right">
+              <div className="theme-toggle-wrapper">
+                <button
+                  className="theme-toggle"
+                  onClick={handleToggleClick}
+                  aria-label="Toggle theme"
+                >
+                  <FontAwesomeIcon icon={THEMES[themeName].icon} />
+                </button>
+              </div>
+              <button
+                className="mobile-burger"
+                onClick={() => setMenuOpen((v) => !v)}
+                aria-label="Open menu"
+              >
+                Menu
+                <FontAwesomeIcon icon={faBars} />
+              </button>
+            </div>
           </header>
           <AnimatePresence>
             {menuOpen && (
@@ -211,10 +144,7 @@ const Header = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2, ease: "easeInOut" }}
-                onClick={() => {
-                  setMenuOpen(false);
-                  setMobileThemeOpen(false);
-                }}
+                onClick={() => setMenuOpen(false)}
               >
                 <motion.div
                   className="mobile-menu"
@@ -224,16 +154,6 @@ const Header = () => {
                   transition={{ duration: 0.25, ease: [0.76, 0, 0.24, 1] }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <button
-                    className="mobile-menu-close"
-                    onClick={() => {
-                      setMenuOpen(false);
-                      setMobileThemeOpen(false);
-                    }}
-                    aria-label="Close menu"
-                  >
-                    <FontAwesomeIcon icon={faXmark} />
-                  </button>
                   {links.map((link) =>
                     link.href.startsWith("#") ? (
                       <a
@@ -253,70 +173,22 @@ const Header = () => {
                       >
                         {link.label}
                       </Link>
-                    )
+                    ),
                   )}
-                  <button
-                    className="mobile-nav-button mobile-theme-toggle"
-                    onClick={() => setMobileThemeOpen((v) => !v)}
+                  <Link
+                    className="mobile-nav-button"
+                    to="/download"
+                    onClick={handleNavClick}
                   >
-                    Theme
+                    Download
+                  </Link>
+                  <button
+                    className="mobile-menu-close"
+                    onClick={() => setMenuOpen(false)}
+                    aria-label="Close menu"
+                  >
+                    Close
                   </button>
-                  <AnimatePresence>
-                    {mobileThemeOpen && (
-                      <motion.div
-                        className="mobile-theme-backdrop"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.15, ease: "easeInOut" }}
-                        onClick={() => setMobileThemeOpen(false)}
-                      >
-                        <motion.div
-                          className="mobile-theme-submenu"
-                          initial={{ opacity: 0, scale: 0.92, y: 12 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.92, y: 12 }}
-                          transition={{
-                            duration: 0.2,
-                            ease: [0.76, 0, 0.24, 1],
-                          }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <button
-                            className="mobile-theme-close"
-                            onClick={() => setMobileThemeOpen(false)}
-                            aria-label="Close theme menu"
-                          >
-                            <FontAwesomeIcon icon={faXmark} />
-                          </button>
-                          {Object.entries(THEMES).map(([key, data]) => (
-                            <button
-                              key={key}
-                              className={`mobile-theme-card${themeName === key ? " active" : ""}`}
-                              onClick={() => {
-                                animateToTheme(key);
-                                setTimeout(() => {
-                                  setMenuOpen(false);
-                                  setMobileThemeOpen(false);
-                                }, 300);
-                              }}
-                            >
-                              <span
-                                className="mobile-theme-swatch"
-                                style={{ backgroundColor: data.bg }}
-                              />
-                              <span className="mobile-theme-label">
-                                {data.label}
-                              </span>
-                              {themeName === key && (
-                                <span className="mobile-theme-check">✓</span>
-                              )}
-                            </button>
-                          ))}
-                        </motion.div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </motion.div>
               </motion.div>
             )}
@@ -330,78 +202,89 @@ const Header = () => {
               OWL
             </a>
             <nav className="header-nav">
-              <a href="#features">Features</a>
-              <a href="#about">About</a>
-              <a href="#download_app">Download</a>
-              <Link to="/terms">Terms</Link>
-              <Link to="/privacy">Privacy</Link>
+              {navGroups.map((group) => (
+                <div key={group.id} style={{ position: "relative" }}>
+                  <button
+                    className={`nav-item${openNav === group.id ? " open" : ""}`}
+                    onClick={() =>
+                      setOpenNav((v) => (v === group.id ? null : group.id))
+                    }
+                    aria-haspopup="true"
+                    aria-expanded={openNav === group.id}
+                  >
+                    {group.label}
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </button>
+                  <AnimatePresence>
+                    {openNav === group.id && (
+                      <motion.div
+                        className="nav-sub"
+                        initial={{ opacity: 0, x: "-50%", y: -6 }}
+                        animate={{ opacity: 1, x: "-50%", y: 0 }}
+                        exit={{ opacity: 0, x: "-50%", y: -6 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                      >
+                        {group.items.map((item) =>
+                          item.href.startsWith("/") ? (
+                            <Link
+                              key={item.label}
+                              to={item.href}
+                              className="nav-sub-link"
+                              onClick={() => setOpenNav(null)}
+                            >
+                              {item.label}
+                            </Link>
+                          ) : item.href.startsWith("#") ? (
+                            <a
+                              key={item.label}
+                              href={item.href}
+                              className="nav-sub-link"
+                              onClick={() => setOpenNav(null)}
+                            >
+                              {item.label}
+                            </a>
+                          ) : (
+                            <a
+                              key={item.label}
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="nav-sub-link"
+                              onClick={() => setOpenNav(null)}
+                            >
+                              {item.label}
+                            </a>
+                          ),
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+              <a href="#pricing" className="nav-item">
+                Pricing
+              </a>
+              <a href="#about" className="nav-item">
+                About
+              </a>
+            </nav>
+            <div className="header-nav-right">
               <div className="theme-toggle-wrapper">
                 <button
-                  ref={toggleRef}
                   className="theme-toggle"
                   onClick={handleToggleClick}
-                  aria-label="Choose theme"
+                  aria-label="Toggle theme"
                 >
                   <FontAwesomeIcon icon={THEMES[themeName].icon} />
                 </button>
-                <AnimatePresence>
-                  {themeMenuOpen && (
-                    <motion.div
-                      ref={menuRef}
-                      className="theme-menu"
-                      initial={{ opacity: 0, scale: 0.92, y: -4 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.92, y: -4 }}
-                      transition={{ duration: 0.15, ease: "easeOut" }}
-                    >
-                      {Object.entries(THEMES).map(([key, data]) => (
-                        <button
-                          key={key}
-                          className={`theme-menu-item${themeName === key ? " active" : ""}`}
-                          onClick={() => handleMenuSelect(key)}
-                        >
-                          <span
-                            className="theme-menu-swatch"
-                            style={{ backgroundColor: data.bg }}
-                          />
-                          <span>{data.label}</span>
-                          {themeName === key && (
-                            <span className="theme-menu-check" />
-                          )}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
-            </nav>
+              <Link to="/download" className="btn btn--primary btn--sm">
+                Download
+              </Link>
+            </div>
           </div>
         </header>
       )}
-
-      <AnimatePresence mode="wait">
-        {animating && (
-          <motion.div
-            key={`theme-overlay-${transitionKey}`}
-            className="theme-transition-overlay"
-            initial={{
-              clipPath: `circle(0% at ${origin.x}px ${origin.y}px)`,
-            }}
-            animate={{
-              clipPath: `circle(141% at ${origin.x}px ${origin.y}px)`,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.7,
-              ease: [0.76, 0, 0.24, 1],
-              opacity: { duration: 0.3, ease: "easeIn" },
-            }}
-            style={{ backgroundColor: overlayColor }}
-          />
-        )}
-      </AnimatePresence>
     </>
   );
 };

@@ -8,7 +8,7 @@ const plans = [
     name: "Free",
     price: 0,
     duration_days: 30,
-    about: "Core features for solo developers exploring OWL",
+    about: "Free basic access to the app's core features with limits on usage and data volume",
     cta: "Start Free",
     featured: false,
     features: [
@@ -22,14 +22,13 @@ const plans = [
     name: "Pro",
     price: 5.9,
     duration_days: 30,
-    about: "For professionals who need more power and flexibility",
+    about: "Enhanced features for professional users, including prioritized support and increased limits",
     cta: "Try Pro Free for 14 Days",
     featured: true,
     features: [
       "Unlimited projects",
       "Real-time collaboration",
       "Priority support",
-      "Advanced automation",
       "Cross-device sync",
     ],
   },
@@ -37,7 +36,7 @@ const plans = [
     name: "Premium",
     price: 8.9,
     duration_days: 30,
-    about: "Full access for teams and power users",
+    about: "Full access to all app features, including exclusive content and personalized settings",
     cta: "Go Premium",
     featured: false,
     features: [
@@ -67,8 +66,9 @@ const PricingSection = () => {
         <Reveal>
           <div className="section-header">
             <span className="section-label">Pricing</span>
+            <h2 className="section-title">Start free. Scale when you're ready.</h2>
             <p className="section-desc">
-              Start free. Upgrade when you need more. No hidden fees.
+              No hidden fees. Upgrade when you need more.
             </p>
           </div>
         </Reveal>
@@ -79,9 +79,6 @@ const PricingSection = () => {
                 <div
                   className={`pricing-card${plan.featured ? " featured" : ""}`}
                 >
-                  {plan.featured && (
-                    <span className="pricing-badge">Most Popular</span>
-                  )}
                   <h3>{plan.name}</h3>
                   <div className="pricing-amount">
                     {plan.price > 0 && (
@@ -107,9 +104,7 @@ const PricingSection = () => {
                   </ul>
                   <a
                     href="#download_app"
-                    className={
-                      plan.featured ? "hero-cta-main" : "hero-cta-secondary"
-                    }
+                    className={`btn${plan.featured ? " btn--primary" : " btn--secondary"}`}
                   >
                     {plan.cta}
                   </a>

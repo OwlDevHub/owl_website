@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const PrivacyPage = () => {
@@ -15,7 +15,7 @@ const PrivacyPage = () => {
           style={{ height: "100px", minHeight: "100px" }}
         ></div>
         <Link to="/" className="back-link">
-          ← Back to Home
+          <FontAwesomeIcon icon={faArrowLeft} /> Back to Home
         </Link>
         <h1>Privacy Policy</h1>
         <p>
@@ -221,7 +221,7 @@ const PrivacyPage = () => {
         ></div>
       </div>
       <button className="back_btn" onClick={() => navigate(-1)}>
-        <FontAwesomeIcon icon={faCaretLeft} />
+        <FontAwesomeIcon icon={faArrowLeft} />
       </button>
     </div>
   );
