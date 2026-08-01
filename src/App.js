@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/layout";
 import CustomCursor from "./components/ui/CustomCursor";
+import NoiseOverlay from "./components/ui/NoiseOverlay";
 import {
   HeroSection,
   FeaturesSection,
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <Router>
       <ThemeInitializer />
+      <NoiseOverlay />
       <CustomCursor />
       <SmoothScroll>
           <Routes>
