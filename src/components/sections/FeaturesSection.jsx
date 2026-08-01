@@ -96,7 +96,7 @@ const FeaturesSection = () => {
         <Reveal>
           <div className="section-header">
             <span className="section-label">Features</span>
-            <h2 className="section-title">
+            <h2 className="handwrite_h2">
               Everything you need. Nothing you don't.
             </h2>
             <p className="section-desc">

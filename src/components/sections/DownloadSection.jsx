@@ -100,7 +100,7 @@ const DownloadSection = () => {
         <Reveal>
           <div className="download-cta">
             <span className="section-label">Early access</span>
-            <h2>Try OWL now.</h2>
+            <h2 className="handwrite_h2">Try OWL now.</h2>
             <p>
               Be the first to try OWL. Early adopters get 20% off the first
               year - drop your email and we'll notify you the moment OWL

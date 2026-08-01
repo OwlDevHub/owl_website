@@ -8,7 +8,8 @@ const plans = [
     name: "Free",
     price: 0,
     duration_days: 30,
-    about: "Free basic access to the app's core features with limits on usage and data volume",
+    about:
+      "Free basic access to the app's core features with limits on usage and data volume",
     cta: "Start Free",
     featured: false,
     features: [
@@ -22,7 +23,8 @@ const plans = [
     name: "Pro",
     price: 5.9,
     duration_days: 30,
-    about: "Enhanced features for professional users, including prioritized support and increased limits",
+    about:
+      "Enhanced features for professional users, including prioritized support and increased limits",
     cta: "Try Pro Free for 14 Days",
     featured: true,
     features: [
@@ -36,7 +38,8 @@ const plans = [
     name: "Premium",
     price: 8.9,
     duration_days: 30,
-    about: "Full access to all app features, including exclusive content and personalized settings",
+    about:
+      "Full access to all app features, including exclusive content and personalized settings",
     cta: "Go Premium",
     featured: false,
     features: [
@@ -66,7 +69,9 @@ const PricingSection = () => {
         <Reveal>
           <div className="section-header">
             <span className="section-label">Pricing</span>
-            <h2 className="section-title">Start free. Scale when you're ready.</h2>
+            <h2 className="handwrite_h2">
+              Start free. Scale when you're ready.
+            </h2>
             <p className="section-desc">
               No hidden fees. Upgrade when you need more.
             </p>
@@ -81,17 +86,11 @@ const PricingSection = () => {
                 >
                   <h3>{plan.name}</h3>
                   <div className="pricing-amount">
-                    {plan.price > 0 && (
-                      <span className="pricing-currency">$</span>
-                    )}
-                    <span className="pricing-value">
-                      {plan.price > 0 ? plan.price : "Free"}
+                    <span className="pricing-currency">$</span>
+                    <span className="pricing-value">{plan.price}</span>
+                    <span className="pricing-period">
+                      / {plan.duration_days} days
                     </span>
-                    {plan.price > 0 && (
-                      <span className="pricing-period">
-                        / {plan.duration_days} days
-                      </span>
-                    )}
                   </div>
                   <p className="pricing-desc">{plan.about}</p>
                   <ul className="pricing-features">
