@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { OwlIcon } from "../ui";
 
 const Footer = () => (
@@ -21,43 +19,43 @@ const Footer = () => (
         <div className="footer-col">
           <h4>Product</h4>
           <a href="#features">
-            Features <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            Features
           </a>
           <a href="#pricing">
-            Pricing <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            Pricing
           </a>
           <Link to="/download">
-            Download <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            Download
           </Link>
         </div>
 
         <div className="footer-col">
           <h4>Resources</h4>
           <a href="#about">
-            About <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            About
           </a>
           <a href="https://github.com/OwlDevHub" target="_blank" rel="noopener noreferrer">
-            GitHub <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            GitHub
           </a>
         </div>
 
         <div className="footer-col">
           <h4>Company</h4>
           <a href="https://nighty3098.vercel.app/" target="_blank" rel="noopener noreferrer">
-            Portfolio <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            Portfolio
           </a>
           <a href="https://t.me/Night3098" target="_blank" rel="noopener noreferrer">
-            Contact <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            Contact
           </a>
         </div>
 
         <div className="footer-col">
           <h4>Legal</h4>
           <Link to="/terms">
-            Terms <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            Terms
           </Link>
           <Link to="/privacy">
-            Privacy <span className="footer-arrow" aria-hidden="true"><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></span>
+            Privacy
           </Link>
         </div>
       </div>
