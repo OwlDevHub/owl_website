@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 import {
   motion,
   useMotionTemplate,
@@ -7,22 +6,6 @@ import {
   useTransform,
 } from "framer-motion";
 import PropTypes from "prop-types";
-
-const useMediaQuery = (query) => {
-  const [matches, setMatches] = useState(() =>
-    typeof window !== "undefined" ? window.matchMedia(query).matches : false,
-  );
-
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    const onChange = () => setMatches(mql.matches);
-    mql.addEventListener("change", onChange);
-    setMatches(mql.matches);
-    return () => mql.removeEventListener("change", onChange);
-  }, [query]);
-
-  return matches;
-};
 
 const SmoothScrollHeroBackground = ({
   scrollHeight,
@@ -33,7 +16,6 @@ const SmoothScrollHeroBackground = ({
   finalClipPercentage,
 }) => {
   const { scrollY } = useScroll();
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const clipStart = useTransform(
     scrollY,
@@ -48,13 +30,16 @@ const SmoothScrollHeroBackground = ({
 
   const clipPath = useMotionTemplate`polygon(${clipStart}% ${clipStart}%, ${clipEnd}% ${clipStart}%, ${clipEnd}% ${clipEnd}%, ${clipStart}% ${clipEnd}%)`;
 
-  const backgroundSize = useTransform(
-    scrollY,
-    [0, scrollHeight + 500],
-    isMobile ? ["auto 170%", "auto 100%"] : ["170%", "100%"],
-  );
+  const backgroundScale = useTransform(scrollY, [0, scrollHeight + 500], [1.7, 1]);
 
   const foregroundScale = useTransform(scrollY, [0, scrollHeight], [0.6, 1]);
+
+  const imageStyle = {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    scale: backgroundScale,
+  };
 
   return (
     <motion.div
@@ -64,19 +49,15 @@ const SmoothScrollHeroBackground = ({
       <motion.div
         className="ss-hero-img ss-hero-img--mobile"
         style={{
+          ...imageStyle,
           backgroundImage: `url(${mobileImage})`,
-          backgroundSize,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
         }}
       />
       <motion.div
         className="ss-hero-img ss-hero-img--desktop"
         style={{
+          ...imageStyle,
           backgroundImage: `url(${desktopImage})`,
-          backgroundSize,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
         }}
       />
       {foregroundImage && (
