@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Reveal } from "../ui/Reveal";
+import { AppDemo } from "../../owl-demo/components";
+import "../../owl-demo/styles.css";
 
 const Content = () => {
   return (
@@ -27,11 +29,7 @@ const Content = () => {
               </a>
             </div>
             <div className="feature-split__media">
-              <div className="product-window">
-                <div className="product-window__body">
-                  <img src="/imgs/4.png" alt="OWL workspace overview" />
-                </div>
-              </div>
+              <AppDemo defaultTab="stats" />
             </div>
           </div>
         </Reveal>

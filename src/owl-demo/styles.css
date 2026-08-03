@@ -1,0 +1,219 @@
+/* ============================================================================
+ * OWL product demo styles
+ *
+ * How this file works:
+ *
+ *  1. `@import "./app.css"` pulls in the desktop app's own stylesheet
+ *     (`main.css` + the gold `dark.css` token set), postcss-scoped so every
+ *     rule reads `.owl-demo <class>` and only applies inside the demo.
+ *     All real app classes (titlebar, nav, kanban, project cards, stats,
+ *     welcome widgets, calendar, ...) are therefore styled pixel-identically
+ *     to the app with zero duplication here.
+ *
+ *  2. `@import "@fortawesome/fontawesome-free/css/all.min.css"` gives the demo
+ *     the same FontAwesome icon set the app uses (`fa-solid ...`). CSS import
+ *     is required because the landing page itself does not load FA icons.
+ *
+ *  3. The `.owl-demo` block defines the gold dark palette + layout glue the
+ *     scoped sheet relies on (the app's `:root` tokens), and shrink-wraps the
+ *     app at native scale. It overrides the tokens that come from the app css
+ *     because it appears later in the cascade.
+ *
+ *  The demo therefore contains only: palette, frame/scale math, and a few
+ *  demo-only classes (cursor hints, autoplay). It stays pixel-identical to
+ *  the app.
+ * ==========================================================================*/
+
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "./app.css";
+
+/* ---------------------------- Scale container ---------------------------- */
+
+.owl-demo-frame {
+  position: relative;
+  width: 100%;
+  height: 550px; /* 1000px * 0.55 */
+  overflow: hidden;
+  border: 1px solid var(--border-02, rgba(237, 236, 236, 0.16));
+  border-radius: 10px;
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.14),
+    0 14px 32px rgba(0, 0, 0, 0.1),
+    0 0 0 1px var(--border-02, rgba(237, 236, 236, 0.16));
+}
+
+.owl-demo {
+  /* --- Backgrounds - Earthy & Deep (dark.css) --- */
+  --bg: #14120b;
+  --bg2: #1b1913;
+  --bg3: #1e1f1a;
+  --bg-tr: rgba(26, 27, 23, 0.85);
+
+  /* --- Foreground - Warm Off-White --- */
+  --fg: #f0ede8;
+  --fg2: #e8e4dd;
+  --text-primary: var(--fg);
+  --text-secondary: rgba(240, 237, 232, 0.62);
+  --text-heading: #f0ede8;
+  --text-caption: rgba(240, 237, 232, 0.42);
+  --text-on-accent: #1a1b17;
+  --placeholder: rgba(240, 237, 232, 0.42);
+
+  /* --- Accent - Warm Gold --- */
+  --accent: #e0c17c;
+  --accent-hover: #eace8f;
+  --accent-active: #f0d89a;
+  --accent-disabled: rgba(224, 193, 124, 0.2);
+
+  /* --- Colors - Natural Palette --- */
+  --red: #c97a7a;
+  --red-hover: #d48f8f;
+  --green: #7cc98b;
+  --green-hover: #8fd49d;
+  --blue: #7cb8c9;
+  --blue-hover: #8fc9d4;
+  --yellow: #e0c17c;
+  --pink: #c97a8a;
+  --purple: #a68fc9;
+  --cyan: #7cc9b8;
+
+  /* --- Borders - Subtle Warmth --- */
+  --border-base: rgba(240, 237, 232, 0.08);
+  --border-muted: rgba(240, 237, 232, 0.05);
+  --border: rgba(240, 237, 232, 0.08);
+  --border-light: rgba(240, 237, 232, 0.12);
+  --border-accent: var(--accent);
+
+  /* --- Surfaces - Layered Earth --- */
+  --surface-card: #1e1f1a;
+  --surface-popover: #23241f;
+  --surface-header: rgba(26, 27, 23, 0.85);
+  --surface-tooltip: #2d2e28;
+
+  /* --- Effects --- */
+  --focus-ring: rgba(224, 193, 124, 0.25);
+  --disabled-bg: #2d2e28;
+  --disabled-fg: rgba(240, 237, 232, 0.3);
+  --blur: rgba(26, 27, 23, 0.5);
+  --bg-filter: blur(5px);
+
+  /* --- Shadows - Deeper and Warmer --- */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow: 0px 0px 15px rgba(0, 0, 0, 0.05);
+
+  /* --- Scrollbar --- */
+  --scrollbar-thumb: #2d2e28;
+  --scrollbar-track: var(--bg);
+
+  /* --- Additional custom variables (dark.css tail) --- */
+  --pr: #e0c17c;
+  --pr-bg: #e0c17c;
+  --pr-fg: #1a1b17;
+  --ab: #2d2e28;
+  --card-hex: #23241f;
+  --card-hover: #2d2e28;
+  --chrome: #1a1b17;
+  --serif: #e8e0d2;
+
+  /* --- Layout tokens (main.css :root) --- */
+  --border-radius: 15px;
+  --border-radius-l: 20px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --spacing-xs: 5px;
+  --spacing-s: 10px;
+  --spacing-m: 15px;
+  --spacing-l: 20px;
+  --spacing-xl: 30px;
+  --spacing-xxl: 50px;
+  --page-margin: 40px;
+  --padding-s: var(--spacing-s);
+  --text-xs: 0.7rem;
+  --text-sm: 0.8rem;
+  --text-base: 0.9rem;
+  --text-md: 0.95rem;
+  --text-lg: 1rem;
+  --text-xl: 1.1rem;
+  --text-2xl: 1.2rem;
+  --text-3xl: 1.5rem;
+  --text-4xl: 1.6rem;
+
+  position: relative;
+  width: calc(100% / 0.55);
+  height: 1000px;
+  transform: scale(0.55);
+  transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans, system-ui, -apple-system, "Segoe UI", sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* FontAwesome + app css set `cursor: default` globally; restore pointer affordance */
+.owl-demo button,
+.owl-demo select,
+.owl-demo label,
+.owl-demo .navigate_button,
+.owl-demo .menu_button,
+.owl-demo .calendar-day,
+.owl-demo .dot,
+.owl-demo .create_tasks_board,
+.owl-demo .sort_selector {
+  cursor: pointer;
+}
+
+/* ------------------------ Demo-only autoplay glue ------------------------ */
+
+.owl-demo .owl-demo-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Keep the scaled demo from growing the page on very small viewports */
+@media (max-height: 700px), (max-width: 520px) {
+  .owl-demo-frame {
+    display: none;
+  }
+}
+
+/* ----------------------- Responsive demo -> screenshot -------------------- */
+
+.demo-product {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.demo-product__shot {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-product .owl-demo-frame {
+    display: none;
+  }
+  .demo-product__shot {
+    display: block;
+    overflow: hidden;
+  }
+  .demo-product__shot img {
+    width: 100%;
+    display: block;
+    min-width: 0;
+    max-height: 460px;
+    object-fit: cover;
+    object-position: top;
+  }
+}
