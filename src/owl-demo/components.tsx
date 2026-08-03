@@ -1123,6 +1123,7 @@ const TasksChartBlock: React.FC = () => {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
         plugins: { legend: { display: false } },
         scales: {
           y: { display: false, beginAtZero: true, grid: { display: false } },
@@ -1175,6 +1176,7 @@ const ProjectsChartBlock: React.FC = () => {
         responsive: true,
         maintainAspectRatio: false,
         cutout: "64%",
+        animation: false,
         plugins: { legend: { display: false } },
       },
     });
@@ -2972,6 +2974,24 @@ export type AppDemoProps = { defaultTab?: TabId };
 
 export const AppDemo: React.FC<AppDemoProps> = ({ defaultTab = "home" }) => {
   const [activeTab] = useState<TabId>(defaultTab);
+  const [mounted, setMounted] = useState(false);
+  const frameRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setMounted(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "400px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const renderActiveTab = (): ReactElement => {
     switch (activeTab) {
@@ -2987,23 +3007,33 @@ export const AppDemo: React.FC<AppDemoProps> = ({ defaultTab = "home" }) => {
   };
 
   return (
-    <div className="owl-demo-frame">
+    <div className="owl-demo-frame" ref={frameRef}>
       <div className="owl-demo">
-        <NavBar activeTab={activeTab} onTabChange={() => undefined} />
-        <div className="owl-demo-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.28 }}
-              style={{ width: "100%", height: "100%" }}
-            >
-              {renderActiveTab()}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        {mounted ? (
+          <>
+            <NavBar activeTab={activeTab} onTabChange={() => undefined} />
+            <div className="owl-demo-body">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.28 }}
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  {renderActiveTab()}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </>
+        ) : (
+          <div
+            className="owl-demo-placeholder"
+            style={{ width: "1000px", height: "1000px" }}
+            aria-hidden="true"
+          />
+        )}
       </div>
     </div>
   );
