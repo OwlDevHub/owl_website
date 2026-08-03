@@ -24,9 +24,9 @@ const Footer = () => (
           <a href="#pricing">
             Pricing
           </a>
-          <Link to="/download">
-            Download
-          </Link>
+          <a href="#download_app">
+            Join Beta
+          </a>
         </div>
 
         <div className="footer-col">

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import SmoothScrollHero from "../ui/SmoothScrollHero";
 import bgImage from "../../assets/bg.jpg";
 import foregroundImage from "../../assets/1.png";
@@ -52,11 +51,11 @@ const HeroSection = () => {
               </motion.h1>
 
               <motion.div className="hero-cta-group" variants={itemVariants}>
-                <Link className="btn btn--primary" to="/download">
-                  Download
-                </Link>
-                <a className="btn btn--secondary" href="#download_app">
-                  Get early access
+                <a className="btn btn--primary" href="#download_app">
+                  Join Beta
+                </a>
+                <a className="btn btn--secondary" href="#features">
+                  See how it works
                 </a>
               </motion.div>
             </motion.div>

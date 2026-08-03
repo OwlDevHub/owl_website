@@ -89,7 +89,7 @@ const Header = () => {
       items: [
         { href: "#features", label: "Features" },
         { href: "#pricing", label: "Pricing" },
-        { href: "/download", label: "Download" },
+        { href: "#download_app", label: "Join Beta" },
       ],
     },
     {
@@ -175,13 +175,13 @@ const Header = () => {
                       </Link>
                     ),
                   )}
-                  <Link
+                  <a
                     className="mobile-nav-button"
-                    to="/download"
+                    href="#download_app"
                     onClick={handleNavClick}
                   >
-                    Download
-                  </Link>
+                    Join Beta
+                  </a>
                   <button
                     className="mobile-menu-close"
                     onClick={() => setMenuOpen(false)}
@@ -278,9 +278,9 @@ const Header = () => {
                   <FontAwesomeIcon icon={THEMES[themeName].icon} />
                 </button>
               </div>
-              <Link to="/download" className="btn btn--primary btn--sm">
-                Download
-              </Link>
+              <a href="#download_app" className="btn btn--primary btn--sm">
+                Join Beta
+              </a>
             </div>
           </div>
         </header>
