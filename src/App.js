@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/layout";
 import CustomCursor from "./components/ui/CustomCursor";
-import NoiseOverlay from "./components/ui/NoiseOverlay";
 import {
   HeroSection,
   FeaturesSection,
@@ -19,29 +18,28 @@ const App = () => {
   return (
     <Router>
       <ThemeInitializer />
-      <NoiseOverlay />
       <CustomCursor />
       <SmoothScroll>
-          <Routes>
-            <Route path="/download" element={<DownloadPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route
-              path="/"
-              element={
-                <main>
-                  <Header />
-                  <HeroSection />
-                  <FeaturesSection />
-                  <Content />
-                  <PricingSection />
-                  <DownloadSection />
-                  <Footer />
-                </main>
-              }
-            />
-          </Routes>
-        </SmoothScroll>
+        <Routes>
+          <Route path="/download" element={<DownloadPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route
+            path="/"
+            element={
+              <main>
+                <Header />
+                <HeroSection />
+                <FeaturesSection />
+                <Content />
+                <PricingSection />
+                <DownloadSection />
+                <Footer />
+              </main>
+            }
+          />
+        </Routes>
+      </SmoothScroll>
     </Router>
   );
 };
