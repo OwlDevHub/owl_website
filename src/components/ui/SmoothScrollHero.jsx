@@ -60,6 +60,7 @@ const SmoothScrollHeroBackground = ({
           backgroundImage: `url(${desktopImage})`,
         }}
       />
+      <div className="ss-hero-overlay" />
       {foregroundImage && (
         <motion.div
           className="ss-hero-foreground"

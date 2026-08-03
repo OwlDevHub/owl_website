@@ -673,7 +673,6 @@ hw {
   color: var(--fg);
   text-wrap: balance;
   max-width: 18ch;
-  text-shadow: 0 2px 24px color-mix(in srgb, var(--fg) 32%, transparent);
 }
 
 .hero h1 span {
@@ -778,7 +777,20 @@ hw {
 }
 
 @media screen and (min-width: 768px) {
-  .ss-hero-img--desktop {
+.ss-hero-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.42) 30%,
+    rgba(0, 0, 0, 0.2) 55%,
+    rgba(0, 0, 0, 0) 78%
+  );
+}
+
+.ss-hero-img--desktop {
     display: block;
   }
 
