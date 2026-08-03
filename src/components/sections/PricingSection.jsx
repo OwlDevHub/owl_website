@@ -7,9 +7,9 @@ const plans = [
   {
     name: "Free",
     price: 0,
-    duration_days: 30,
+    period: "month",
     about:
-      "Free basic access to the app's core features with limits on usage and data volume",
+      "Free forever. Basic access to the app's core features with limits on usage and data volume",
     cta: "Start Free",
     featured: false,
     features: [
@@ -22,10 +22,10 @@ const plans = [
   {
     name: "Pro",
     price: 5.9,
-    duration_days: 30,
+    period: "month",
     about:
       "Enhanced features for professional users, including prioritized support and increased limits",
-    cta: "Try Pro Free for 14 Days",
+    cta: "Go Pro",
     featured: true,
     features: [
       "Unlimited projects",
@@ -37,7 +37,7 @@ const plans = [
   {
     name: "Premium",
     price: 8.9,
-    duration_days: 30,
+    period: "month",
     about:
       "Full access to all app features, including exclusive content and personalized settings",
     cta: "Go Premium",
@@ -89,7 +89,7 @@ const PricingSection = () => {
                     <span className="pricing-currency">$</span>
                     <span className="pricing-value">{plan.price}</span>
                     <span className="pricing-period">
-                      / {plan.duration_days} days
+                      / {plan.period}
                     </span>
                   </div>
                   <p className="pricing-desc">{plan.about}</p>
@@ -112,6 +112,10 @@ const PricingSection = () => {
             ))}
           </RevealStagger>
         </div>
+        <p className="pricing-note">
+          OWL is currently in closed beta - pricing plans will become available
+          after the release.
+        </p>
         <div className="pricing-dots">
           {plans.map((_, i) => (
             <span

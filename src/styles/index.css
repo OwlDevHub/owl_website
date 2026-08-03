@@ -1207,6 +1207,13 @@ hw {
   display: none;
 }
 
+.pricing-note {
+  margin-top: var(--space-md);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
 .pricing-scroll-wrap {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
