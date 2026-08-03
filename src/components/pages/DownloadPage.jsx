@@ -7,8 +7,9 @@ import {
   faAndroid,
 } from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import bgImage from "../../assets/bg.jpg";
+import { getRandomBackground } from "../../utils/randomBackground";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -31,6 +32,7 @@ const containerVariants = {
 
 const DownloadPage = () => {
   const navigate = useNavigate();
+  const [bgImage] = useState(() => getRandomBackground());
 
   const handleDownload = (platform) => {
     window.location.href = `https://github.com/OwlDevHub/OWL_APP/releases/latest/download/${platform}`;

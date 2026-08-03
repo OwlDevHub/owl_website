@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import SmoothScrollHero from "../ui/SmoothScrollHero";
-import bgImage from "../../assets/bg.jpg";
 import foregroundImage from "../../assets/1.png";
+import { getRandomBackground } from "../../utils/randomBackground";
 
 const containerVariants = {
   hidden: {},
@@ -23,6 +24,8 @@ const itemVariants = {
 };
 
 const HeroSection = () => {
+  const [bgImage] = useState(() => getRandomBackground());
+
   return (
     <SmoothScrollHero
       scrollHeight={1500}
