@@ -1,73 +1,99 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faEnvelopeOpenText } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faApple,
+  faMicrosoft,
+  faLinux,
+  faAndroid,
+} from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import bgImage from "../../assets/bg.jpg";
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
+    },
+  },
+};
 
 const DownloadPage = () => {
   const navigate = useNavigate();
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.15,
-      },
-    },
+  const handleDownload = (platform) => {
+    window.location.href = `https://github.com/OwlDevHub/OWL_APP/releases/latest/download/${platform}`;
   };
 
   return (
-    <motion.div className="hero">
-      <motion.div
-        className="hero-content download-hero-content"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div className="hero-text">
-          <motion.span className="hero-badge" variants={itemVariants}>
-            Closed Beta
-          </motion.span>
-          <motion.h1 variants={itemVariants}>
-            <span className="download-span">JOIN THE</span> OWL BETA
-          </motion.h1>
-          <motion.p
-            className="section-desc"
-            style={{ maxWidth: "46ch" }}
-            variants={itemVariants}
-          >
-            OWL is in a limited closed beta right now. Leave your email and
-            we'll notify you the moment we open up new spots.
-          </motion.p>
-        </motion.div>
+    <div className="hero hero--download">
+      <div
+        className="hero--download__bg"
+        style={{ backgroundImage: `url(${bgImage})` }}
+        aria-hidden="true"
+      />
+      <div className="hero--download__overlay" aria-hidden="true" />
+
+      <div className="hero-text">
         <motion.div
-          className="hero-download"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.6,
-            delay: 0.3,
-            ease: [0.25, 0.1, 0.25, 1],
-          }}
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
         >
-          <a className="download-button" href="/#download_app">
-            <FontAwesomeIcon icon={faEnvelopeOpenText} /> REQUEST BETA ACCESS
-          </a>
+          <motion.h1 variants={itemVariants}>
+            <span className="download-span">DOWNLOAD</span> OWL
+          </motion.h1>
+
+          <motion.div className="hero-download" variants={itemVariants}>
+            <button
+              type="button"
+              className="btn btn--primary"
+              onClick={() => handleDownload("owl.exe")}
+            >
+              <FontAwesomeIcon icon={faMicrosoft} /> WINDOWS
+            </button>
+            <button
+              type="button"
+              className="btn btn--secondary"
+              onClick={() => handleDownload("owl.dmg")}
+              disabled
+            >
+              <FontAwesomeIcon icon={faApple} /> MAC
+            </button>
+            <button
+              type="button"
+              className="btn btn--primary"
+              onClick={() => handleDownload("owl.AppImage")}
+            >
+              <FontAwesomeIcon icon={faLinux} /> LINUX
+            </button>
+            <button
+              type="button"
+              className="btn btn--secondary"
+              onClick={() => handleDownload("owl.apk")}
+              disabled
+            >
+              <FontAwesomeIcon icon={faAndroid} /> ANDROID
+            </button>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
+
       <button className="back_btn" onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faCaretLeft} />
       </button>
-    </motion.div>
+    </div>
   );
 };
 
