@@ -1763,6 +1763,43 @@ const BoardElement: React.FC<{
   </div>
 );
 
+const DemoTasksHeader: React.FC<{ columns: DemoColumn[] }> = ({ columns }) => {
+  const { totalTasks, completedTasks } = useMemo(() => {
+    let totalTasks = 0;
+    let completedTasks = 0;
+    for (const column of columns) {
+      for (const task of column.tasks) {
+        totalTasks++;
+        if (task.completed) completedTasks++;
+      }
+    }
+    return { totalTasks, completedTasks };
+  }, [columns]);
+  const completionPercentage = totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
+  return (
+    <div className="tab_header_content">
+      <div
+        className="progress"
+        style={{ margin: "0px", padding: "0px", width: "220px", height: "15px", backgroundColor: "var(--bg2)" }}
+      >
+        <div
+          className="progress-bar"
+          style={{
+            margin: "0px",
+            padding: "0px",
+            width: `${completionPercentage}%`,
+            height: "15px",
+            backgroundColor: "var(--accent)",
+          }}
+        />
+      </div>
+      <strong>
+        {completedTasks}/{totalTasks}
+      </strong>
+    </div>
+  );
+};
+
 const TasksTab: React.FC = () => {
   const [boards, setBoards] = useState<DemoBoard[]>(INITIAL_BOARDS);
   const [currentBoardId, setCurrentBoardId] = useState<string>(INITIAL_BOARDS[0].id);
@@ -1770,6 +1807,17 @@ const TasksTab: React.FC = () => {
 
   const currentBoard = boards.find((b) => b.id === currentBoardId) || boards[0];
   const columns = currentBoard?.columns ?? [];
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && (event.code === "KeyB" || event.key === "b")) {
+        event.preventDefault();
+        setIsBoardsListVisible((prev) => !prev);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const updateBoard = (boardId: string, updater: (b: DemoBoard) => DemoBoard) => {
     setBoards((prev) => prev.map((b) => (b.id === boardId ? updater(b) : b)));
@@ -1913,31 +1961,49 @@ const TasksTab: React.FC = () => {
           overflow: "hidden",
         }}
       >
-        {isBoardsListVisible && (
-          <div className="boards-list">
-            <BoardsHeader onCreateNewBoard={createNewBoard} onToggleList={() => setIsBoardsListVisible(false)} />
-            <div data-droppable="boards">
-              {boards.map((board) => (
-                <BoardElement
-                  key={board.id}
-                  board={board}
-                  isSelected={board.id === currentBoardId}
-                  onSelect={() => setCurrentBoardId(board.id)}
-                  onDragStart={(e) => {
-                    e.dataTransfer.setData("text/board", board.id);
-                    e.dataTransfer.effectAllowed = "move";
-                    setScaledDragImage(e);
-                  }}
-                  onDragEnd={() => undefined}
-                  onBoardDrop={handleBoardDrop}
-                />
-              ))}
-            </div>
-            <button className="menu_button" style={{ marginTop: "var(--spacing-m)" }} onClick={createNewBoard}>
-              <i className="fa-solid fa-plus"></i> New board
-            </button>
-          </div>
-        )}
+        <AnimatePresence>
+          {isBoardsListVisible && (
+            <motion.div
+              key="boards-panel"
+              initial={{ width: 0 }}
+              animate={{ width: 320 }}
+              exit={{ width: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              style={{ overflow: "hidden", height: "100%", flexShrink: 0, marginLeft: "var(--spacing-l)" }}
+            >
+              <motion.div
+                className="boards-list"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15, delay: 0.15 }}
+                style={{ padding: "10px", height: "100%", overflowY: "auto", marginLeft: "auto" }}
+              >
+                <BoardsHeader onCreateNewBoard={createNewBoard} onToggleList={() => setIsBoardsListVisible(false)} />
+                <div data-droppable="boards">
+                  {boards.map((board) => (
+                    <BoardElement
+                      key={board.id}
+                      board={board}
+                      isSelected={board.id === currentBoardId}
+                      onSelect={() => setCurrentBoardId(board.id)}
+                      onDragStart={(e) => {
+                        e.dataTransfer.setData("text/board", board.id);
+                        e.dataTransfer.effectAllowed = "move";
+                        setScaledDragImage(e);
+                      }}
+                      onDragEnd={() => undefined}
+                      onBoardDrop={handleBoardDrop}
+                    />
+                  ))}
+                </div>
+                <button className="menu_button" style={{ marginTop: "var(--spacing-m)" }} onClick={createNewBoard}>
+                  <i className="fa-solid fa-plus"></i> New board
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div
           className="kanbanview"
@@ -1994,6 +2060,7 @@ const TasksTab: React.FC = () => {
           <i className="fa-solid fa-list"></i>
         </button>
       )}
+      <DemoTasksHeader columns={columns} />
     </div>
   );
 };
