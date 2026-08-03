@@ -79,12 +79,67 @@
       rel="stylesheet"
     />
 
-    <!-- Performance: Preload critical assets -->
-    <!-- <link rel="preload" href="%PUBLIC_URL%/fonts/main-font.woff2" as="font" type="font/woff2" crossorigin /> -->
+    <!--
+      Performance: Preload critical assets
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "the OWL project",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "OWL is a powerful and intuitive platform for managing projects, tasks, and teams, created specifically for developers and IT teams.",
+        "url": "https://owl-tech.vercel.app/",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Free",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Pro",
+            "price": "5.9",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Premium",
+            "price": "8.9",
+            "priceCurrency": "USD"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <noscript>
+      <h1>the OWL project - Project Management for Developers &amp; IT Teams</h1>
+      <p>
+        OWL is a powerful and intuitive platform for managing projects, tasks,
+        and teams, created specifically for developers and IT teams. Boards,
+        timelines, and docs live side by side in a single fast workspace.
+      </p>
+      <p>Enable JavaScript to use the interactive demo and sign up.</p>
+    </noscript>
+    <div id="root">
+      <div style="padding: 3rem 1.5rem; font-family: sans-serif; line-height: 1.6">
+        <h1>the OWL project - Project Management for Developers &amp; IT Teams</h1>
+        <p>
+          OWL is a powerful and intuitive platform for managing projects,
+          tasks, and teams, created specifically for developers and IT teams.
+          Boards, timelines, and docs live side by side in a single fast
+          workspace.
+        </p>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#download_app">Join the closed beta</a></li>
+        </ul>
+      </div>
+    </div>
     <!--
       Move styles to CSS file instead of inline styles
       Create a separate global.css file and import it
