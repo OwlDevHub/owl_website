@@ -30,9 +30,9 @@ const SmoothScrollHeroBackground = ({
 
   const clipPath = useMotionTemplate`polygon(${clipStart}% ${clipStart}%, ${clipEnd}% ${clipStart}%, ${clipEnd}% ${clipEnd}%, ${clipStart}% ${clipEnd}%)`;
 
-  const backgroundScale = useTransform(scrollY, [0, scrollHeight + 500], [1.7, 1]);
+  const backgroundScale = useTransform(scrollY, [0, scrollHeight + 500], [1.3, 1]);
 
-  const foregroundScale = useTransform(scrollY, [0, scrollHeight], [0.6, 1]);
+  const foregroundScale = useTransform(scrollY, [0, scrollHeight], [0.85, 1]);
 
   const imageStyle = {
     backgroundSize: "cover",
