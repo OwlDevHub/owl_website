@@ -790,6 +790,36 @@ hw {
   transform: none;
 }
 
+/* Hero text sits over a dark sky with a dark overlay in both themes,
+   so in the light theme it must stay light (--bg) instead of --fg */
+.light .ss-hero .hero h1,
+.light .ss-hero .hero h1 span,
+.light .hero--download h1,
+.light .ss-hero .hero-cta-group .btn--secondary,
+.light .hero--download .btn--secondary {
+  color: var(--bg);
+}
+
+.light .download-span {
+  color: var(--bg) !important;
+}
+
+.light .ss-hero .hero-cta-group .btn--primary,
+.light .hero--download .btn--primary {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.light .ss-hero .hero-cta-group .btn--primary:hover,
+.light .hero--download .btn--primary:hover {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+}
+
+.light .ss-hero .hero-cta-group .btn--secondary,
+.light .hero--download .btn--secondary {
+  border-color: color-mix(in srgb, var(--bg) 45%, transparent);
+}
+
 @media screen and (max-width: 600px) {
   .hero-download {
     grid-template-columns: 1fr 1fr;
