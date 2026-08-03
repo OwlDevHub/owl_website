@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Reveal } from "../ui/Reveal";
-import { AppDemo } from "../../owl-demo/components";
-import "../../owl-demo/styles.css";
+import LazyDemo from "../ui/LazyDemo";
 
 const Content = () => {
   return (
@@ -29,7 +28,7 @@ const Content = () => {
               </a>
             </div>
             <div className="feature-split__media">
-              <AppDemo defaultTab="stats" />
+              <LazyDemo defaultTab="stats" />
             </div>
           </div>
         </Reveal>

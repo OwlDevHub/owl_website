@@ -2,8 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Reveal } from "../ui/Reveal";
-import { AppDemo } from "../../owl-demo/components";
-import "../../owl-demo/styles.css";
+import LazyDemo from "../ui/LazyDemo";
 
 const CliWindow = ({ lines }) => (
   <div className="product-window">
@@ -36,7 +35,7 @@ const features = [
     link: { href: "#download_app", label: "Join the beta" },
     media: (
       <div className="demo-product">
-        <AppDemo defaultTab="tasks" />
+        <LazyDemo defaultTab="tasks" />
         <div className="product-window demo-product__shot">
           <div className="product-window__body">
             <img src="/imgs/2.png" alt="OWL kanban board" />
@@ -52,7 +51,7 @@ const features = [
     link: { href: "#download_app", label: "Join the beta" },
     media: (
       <div className="demo-product">
-        <AppDemo defaultTab="projects" />
+        <LazyDemo defaultTab="projects" />
         <div className="product-window demo-product__shot">
           <div className="product-window__body">
             <img src="/imgs/7.png" alt="OWL team collaboration" />

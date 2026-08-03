@@ -2,6 +2,7 @@ import { type ReactElement, useCallback, useEffect, useMemo, useRef, useState } 
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Chart from "chart.js/auto";
+import "./styles.css";
 
 /* ---------------------------------------------------------------------------
  * OWL product demo
