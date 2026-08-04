@@ -1133,6 +1133,14 @@ hw {
   }
 }
 
+@media screen and (max-width: 900px) {
+  .feature-split {
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: clamp(1.25rem, 4vw, 2rem);
+  }
+}
+
 /* copy command block */
 .copy-command {
   display: flex;
