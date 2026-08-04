@@ -497,7 +497,8 @@ const NavBar: React.FC<NavBarProps> = ({ activeTab, onTabChange }) => {
       <div
         className="no-drag"
         style={{
-          paddingRight: "var(--spacing-m)",
+          position: "fixed",
+          right: "var(--spacing-m)",
           display: "flex",
           alignItems: "center",
           zIndex: 500,
