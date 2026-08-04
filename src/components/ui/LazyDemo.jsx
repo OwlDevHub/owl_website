@@ -5,11 +5,7 @@ const AppDemo = React.lazy(() =>
 );
 
 const placeholder = (
-  <div
-    className="owl-demo-placeholder"
-    style={{ width: "1000px", height: "1000px" }}
-    aria-hidden="true"
-  />
+  <div className="owl-demo-placeholder" aria-hidden="true" />
 );
 
 const LazyDemo = ({ defaultTab }) => {
@@ -33,7 +29,7 @@ const LazyDemo = ({ defaultTab }) => {
   }, []);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} style={{ width: "100%", minWidth: 0 }}>
       {nearViewport ? (
         <Suspense fallback={placeholder}>
           <AppDemo defaultTab={defaultTab} />

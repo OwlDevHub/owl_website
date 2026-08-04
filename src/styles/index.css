@@ -966,6 +966,14 @@ hw {
   min-width: 0;
 }
 
+.owl-demo-placeholder {
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  min-width: 0;
+}
+
 /* CLI window content */
 .cli-window {
   padding: 0.75rem 0.875rem 0.875rem;
