@@ -24,13 +24,15 @@ import "./styles.css";
  * autoplay timers are synthetic (the app would fetch from its local API).
  * ------------------------------------------------------------------------- */
 
-type TabId = "home" | "tasks" | "projects" | "stats";
+type TabId = "home" | "tasks" | "projects" | "stats" | "account" | "settings";
 
 const TABS: Record<TabId, string> = {
   home: "Home",
   tasks: "Tasks",
   projects: "Projects",
   stats: "Statistics",
+  account: "Account",
+  settings: "Settings",
 };
 
 /* defaultColors() from Other/ColorPickerModal.tsx of the app */
@@ -453,6 +455,8 @@ const NavBar: React.FC<NavBarProps> = ({ activeTab, onTabChange }) => {
     { id: "tasks", icon: "fa-circle-check", text: TABS.tasks },
     { id: "projects", icon: "fa-code-branch", text: TABS.projects },
     { id: "stats", icon: "fa-chart-simple", text: TABS.stats },
+    { id: "account", icon: "fa-user", text: TABS.account },
+    { id: "settings", icon: "fa-gear", text: TABS.settings },
   ];
 
   return (
@@ -3313,6 +3317,181 @@ const StatisticTab: React.FC = () => (
   </div>
 );
 
+/* --------------------------------- Account -------------------------------- */
+/* Mirrors Account/AccountComponents.tsx (logged-in, Pro subscription).       */
+
+const AccountTab: React.FC = () => (
+  <div className="tab-content centered_content" id="account_block" style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "var(--spacing-l)" }}>
+    <div className="account_info_grid">
+      <div className="account_info_block centered_content" style={{ backgroundColor: "var(--bg2)" }}>
+        <div
+          style={{
+            width: "100%",
+            height: "40px",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className="centered_content account-control" style={{ position: "relative", gap: "var(--spacing-s)" }}>
+            <button className="button" onClick={() => undefined}>
+              Options <i className="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
+        </div>
+        <i className="fa-regular fa-circle-user centered_content" style={{ fontSize: "200px", padding: "0px", margin: "0px", flex: "1" }} />
+        <button className="username" style={{ cursor: "text", color: "var(--fg)" }} onClick={() => undefined}>
+          @nighty
+        </button>
+        <p style={{ fontSize: "medium", fontWeight: "bolder", opacity: "0.7" }}>nighty@owl.app</p>
+      </div>
+      <div className="account_info_block" style={{ backgroundColor: "var(--bg2)" }}>
+        <div className="spacer" style={{ height: "40px" }}></div>
+        <h1 className="centered_content" style={{ fontSize: "120px", flex: "1" }}>
+          $9.99
+        </h1>
+        <p className="username" style={{ fontSize: "x-large", fontWeight: "bolder" }}>
+          Pro
+        </p>
+        <p style={{ fontSize: "medium", fontWeight: "bolder", opacity: "0.7" }}>Days before: 27</p>
+      </div>
+    </div>
+  </div>
+);
+
+/* -------------------------------- Settings --------------------------------- */
+/* Mirrors Settings/SettingsComponents.tsx (all blocks, static controls).     */
+
+const SettingsTab: React.FC = () => (
+  <div className="tab-content" id="settings_block">
+    <div className="settings_content">
+      <div className="inner-container">
+        <div style={{ width: "100%", maxWidth: "600px" }}>
+          <div>
+            <h2 className="settings_block_title">
+              <i className="fa-solid fa-user"></i> Account
+            </h2>
+            <div className="settings_item" style={{ width: "100%" }}>
+              <label className="settings_item_title" htmlFor="public_account_checkbox">
+                <i className="fa-solid fa-user"></i> Public account
+              </label>
+              <input id="public_account_checkbox" type="checkbox" className="checkbox" defaultChecked />
+            </div>
+          </div>
+          <div>
+            <h2 className="settings_block_title">
+              <i className="fa-solid fa-swatchbook"></i> Appearance
+            </h2>
+            <div className="settings_item">
+              <p className="settings_item_title">
+                <i className="fa-solid fa-brush"></i> Theme
+              </p>
+              <select defaultValue="">
+                <option value="" disabled>
+                  Select theme
+                </option>
+                <option value="dark">Dark</option>
+              </select>
+            </div>
+            <div className="settings_item">
+              <p className="settings_item_title">
+                <i className="fa-solid fa-brush"></i> Font
+              </p>
+              <select defaultValue="Roboto">
+                <option value="" disabled>
+                  Select font
+                </option>
+                {["Merienda", "Caveat", "Gochi Hand", "Noto Sans", "Noto Serif", "Roboto", "Space Grotesk", "Ubuntu"].map((font) => (
+                  <option key={font} value={font}>
+                    {font}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div>
+            <h2 className="settings_block_title">
+              <i className="fa-solid fa-gears"></i> General
+            </h2>
+            <div className="settings_item">
+              <p className="settings_item_title">
+                <i className="fa-solid fa-earth-americas"></i> Language
+              </p>
+              <select id="language_list" defaultValue="en">
+                {[
+                  { code: "en", label: "English" },
+                  { code: "ru", label: "Русский" },
+                  { code: "ja", label: "日本語" },
+                  { code: "de", label: "Deutsch" },
+                  { code: "es", label: "Español" },
+                ].map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="settings_item" style={{ width: "100%" }}>
+              <label className="settings_item_title" htmlFor="animations_checkbox">
+                <i className="fa-solid fa-arrows-left-right-to-line"></i> Disable animations (restart)
+              </label>
+              <input id="animations_checkbox" type="checkbox" className="checkbox" defaultChecked />
+            </div>
+          </div>
+          <div>
+            <h2 className="settings_block_title">
+              <i className="fa-solid fa-clock"></i> Pomodoro
+            </h2>
+            <div className="settings_item" style={{ width: "100%" }}>
+              <label className="settings_item_title">
+                <i className="fa-solid fa-briefcase"></i> Work time
+              </label>
+              <input type="number" defaultValue={25} style={{ width: "100%" }} min="1" />
+            </div>
+            <div className="settings_item" style={{ width: "100%" }}>
+              <label className="settings_item_title">
+                <i className="fa-solid fa-bed"></i> Break time
+              </label>
+              <input type="number" defaultValue={5} style={{ width: "100%" }} min="1" />
+            </div>
+          </div>
+          <div>
+            <h2 className="settings_block_title">
+              <i className="fa-solid fa-clock"></i> Contacts
+            </h2>
+            <div className="settings_item" style={{ width: "100%" }}>
+              <label className="settings_item_title">
+                <i className="fa-brands fa-telegram"></i> Support
+              </label>
+              <button className="button" onClick={() => undefined}>
+                Support chat
+              </button>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-s)" }}>
+            <h2 className="settings_block_title">
+              <i className="fa-solid fa-rotate"></i> Updates
+            </h2>
+            <div className="settings_item">
+              <button className="button" style={{ width: "100%" }} onClick={() => undefined}>
+                <i className="fa-solid fa-rotate-right" /> Check for updates
+              </button>
+            </div>
+            <div className="settings_item">
+              <button className="button" style={{ width: "100%" }} onClick={() => undefined}>
+                <i className="fa-solid fa-file-lines" /> Third party notices
+              </button>
+            </div>
+            <p style={{ textAlign: "center", opacity: "0.6" }}>Version 2.4.1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 /* ------------------------------ App shell ----------------------------------- */
 
 export type AppDemoProps = { defaultTab?: TabId };
@@ -3348,6 +3527,10 @@ export const AppDemo: React.FC<AppDemoProps> = ({ defaultTab = "home" }) => {
         return <ProjectsTab />;
       case "stats":
         return <StatisticTab />;
+      case "account":
+        return <AccountTab />;
+      case "settings":
+        return <SettingsTab />;
     }
   };
 
