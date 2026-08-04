@@ -1434,9 +1434,75 @@ const OPS_COLUMNS: DemoColumn[] = [
   },
 ];
 
+const LAUNCHER_COLUMNS: DemoColumn[] = [
+  {
+    id: "launch-1",
+    title: "Backlog",
+    color: "var(--bg2)",
+    tasks: [
+      { id: "l-101", content: "Design updater UI states", completed: false, deadline: "2026-08-06" },
+      { id: "l-102", content: "Multi-channel releases (stable / beta)", completed: false, deadline: "2026-08-10" },
+      { id: "l-103", content: "Code signing pipeline for macOS builds", completed: false, deadline: "2026-08-14" },
+    ],
+  },
+  {
+    id: "launch-2",
+    title: "In Progress",
+    color: "var(--bg2)",
+    tasks: [
+      { id: "l-201", content: "Auto-update delta patches", completed: false, deadline: "2026-08-09" },
+      { id: "l-202", content: "Playtime tracking hooks", completed: false, deadline: "2026-08-12" },
+      { id: "l-203", content: "Game library import & scan", completed: false, deadline: "2026-08-15" },
+    ],
+  },
+  {
+    id: "launch-3",
+    title: "Completed",
+    color: "var(--bg2)",
+    tasks: [
+      { id: "l-301", content: "Installer bootstrapper", completed: true, deadline: "2026-07-25" },
+      { id: "l-302", content: "OAuth login flow", completed: true, deadline: "2026-07-28" },
+      { id: "l-303", content: "Download manager resume", completed: true, deadline: "2026-08-01" },
+    ],
+  },
+];
+
+const PIPELINE_COLUMNS: DemoColumn[] = [
+  {
+    id: "pipe-1",
+    title: "Backlog",
+    color: "var(--bg2)",
+    tasks: [
+      { id: "pl-101", content: "Event schema v2 migration", completed: false, deadline: "2026-08-16" },
+      { id: "pl-102", content: "Warehouse export (Parquet / S3)", completed: false, deadline: "2026-08-24" },
+    ],
+  },
+  {
+    id: "pipe-2",
+    title: "In Progress",
+    color: "var(--bg2)",
+    tasks: [
+      { id: "pl-201", content: "Kafka sink for UI events", completed: false, deadline: "2026-08-18" },
+      { id: "pl-202", content: "Dashboard latency queries", completed: false, deadline: "2026-08-22" },
+    ],
+  },
+  {
+    id: "pipe-3",
+    title: "Completed",
+    color: "var(--bg2)",
+    tasks: [
+      { id: "pl-301", content: "Event ingestion API", completed: true, deadline: "2026-07-29" },
+      { id: "pl-302", content: "Session rollups", completed: true, deadline: "2026-08-02" },
+      { id: "pl-303", content: "Error tracking pipeline", completed: true, deadline: "2026-08-05" },
+    ],
+  },
+];
+
 const INITIAL_BOARDS: DemoBoard[] = [
   { id: "board-1", title: "Product", columns: INITIAL_COLUMNS },
   { id: "board-2", title: "Ops", columns: OPS_COLUMNS },
+  { id: "board-launcher", title: "Launcher V2", columns: LAUNCHER_COLUMNS },
+  { id: "board-pipeline", title: "Analytics Pipeline", columns: PIPELINE_COLUMNS },
 ];
 
 const TaskContent: React.FC<{
@@ -2104,6 +2170,7 @@ const INITIAL_PROJECTS: DemoProject[] = [
     deadline: "2026-08-15",
     priority: "high",
     status: "In Progress",
+    board_id: "board-launcher",
     link_to: "https://github.com/owl/launcher",
     is_owner: true,
     user_id: 1,
@@ -2120,6 +2187,7 @@ const INITIAL_PROJECTS: DemoProject[] = [
     deadline: "2026-09-01",
     priority: "low",
     status: "On Hold",
+    board_id: "board-pipeline",
     is_owner: true,
     user_id: 1,
     members: [
