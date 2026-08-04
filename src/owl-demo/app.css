@@ -92,14 +92,14 @@
   /* Colors - Natural Palette */
   --red: #c97a7a; /* muted red */
   --red-hover: #d48f8f;
-  --green: #7cc98b; /* natural green */
-  --green-hover: #8fd49d;
+  --green: #c9b27c; /* natural green (переведён в золотой) */
+  --green-hover: #d4bf8f;
   --blue: #7cb8c9; /* soft teal/blue */
   --blue-hover: #8fc9d4;
   --yellow: #e0c17c; /* warm yellow */
   --pink: #c97a8a; /* muted pink */
   --purple: #a68fc9; /* soft purple */
-  --cyan: #7cc9b8; /* soft cyan */
+  --cyan: #c9a57c; /* soft cyan (переведён в оранжево-золотой) */
 
   /* Borders - Subtle Warmth */
   --border-base: rgba(240, 237, 232, 0.08);

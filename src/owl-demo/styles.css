@@ -45,8 +45,8 @@
 .owl-demo {
   /* --- Backgrounds - Earthy & Deep (dark.css) --- */
   --bg: #14120b;
-  --bg2: #1b1913;
-  --bg3: #1e1f1a;
+  --bg2: #1b1913; /* soft background */
+  --bg3: #1e1f1a; /* card background */
   --bg-tr: rgba(26, 27, 23, 0.85);
 
   /* --- Foreground - Warm Off-White --- */
@@ -68,14 +68,14 @@
   /* --- Colors - Natural Palette --- */
   --red: #c97a7a;
   --red-hover: #d48f8f;
-  --green: #7cc98b;
-  --green-hover: #8fd49d;
+  --green: #c9b27c; /* natural green (переведён в золотой) */
+  --green-hover: #d4bf8f;
   --blue: #7cb8c9;
   --blue-hover: #8fc9d4;
   --yellow: #e0c17c;
   --pink: #c97a8a;
   --purple: #a68fc9;
-  --cyan: #7cc9b8;
+  --cyan: #c9a57c; /* soft cyan (переведён в оранжево-золотой) */
 
   /* --- Borders - Subtle Warmth --- */
   --border-base: rgba(240, 237, 232, 0.08);
@@ -106,6 +106,10 @@
   /* --- Scrollbar --- */
   --scrollbar-thumb: #2d2e28;
   --scrollbar-track: var(--bg);
+
+  /* --- Code --- */
+  --code-bg: #1e1f1a;
+  --code-comment: rgba(240, 237, 232, 0.42);
 
   /* --- Additional custom variables (dark.css tail) --- */
   --pr: #e0c17c;
