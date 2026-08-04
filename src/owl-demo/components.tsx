@@ -64,12 +64,14 @@ const CircularProgressBar: React.FC<{
   strokeWidth?: number;
   trackColor?: string;
   progressColor?: string;
+  style?: React.CSSProperties;
 }> = ({
   progress = 0,
   size = 160,
   strokeWidth = 12,
   trackColor = "var(--bg3)",
   progressColor = "var(--accent)",
+  style,
 }) => {
   const normalizedProgress = Math.min(Math.max(progress, 0), 100);
   const radius = size / 2 - strokeWidth / 2;
@@ -80,7 +82,7 @@ const CircularProgressBar: React.FC<{
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}
-      style={{ transform: "rotate(-90deg)" }}
+      style={{ transform: "rotate(-90deg)", ...style }}
     >
       <circle
         r={radius}
@@ -2042,7 +2044,7 @@ const TasksTab: React.FC = () => {
             style={{ flex: "0 0 220px", width: 220, alignSelf: "flex-start", minHeight: 200 }}
           >
             <button
-              className="tr_button task-add-column centered_content"
+              className="tr_button task-block-header centered_content"
               style={{ textAlign: "center", height: "100%", maxHeight: "600px", minHeight: "200px" }}
               onClick={() => createNewColumn(currentBoardId)}
             >
@@ -2067,50 +2069,82 @@ const TasksTab: React.FC = () => {
 
 /* ------------------------------ Projects tab --------------------------------- */
 
+export interface DemoProjectMember {
+  user_id: number;
+  name: string;
+  email: string;
+  role: "OWNER" | "MEMBER";
+}
+
 export interface DemoProject {
   id: string;
   title: string;
   created_at: string;
   deadline: string;
-  priority: "High" | "Medium" | "Low";
+  priority: "high" | "medium" | "low";
   status: string;
   about?: string;
   link_to?: string;
   board_id?: string;
+  is_owner?: boolean;
+  user_id?: number;
+  members?: DemoProjectMember[];
 }
 
 const INITIAL_PROJECTS: DemoProject[] = [
   {
     id: "p1",
     title: "Launcher v2.0",
-    created_at: "Mar 04",
+    created_at: "2026-03-04",
     deadline: "2026-08-15",
-    priority: "High",
+    priority: "high",
     status: "In Progress",
+    link_to: "https://github.com/owl/launcher",
+    is_owner: true,
+    user_id: 1,
+    members: [
+      { user_id: 1, name: "Night Owl", email: "night@owl.app", role: "OWNER" },
+      { user_id: 3, name: "Mira", email: "mira@owl.app", role: "MEMBER" },
+      { user_id: 5, name: "Alex", email: "alex@owl.app", role: "MEMBER" },
+    ],
   },
   {
     id: "p2",
     title: "Analytics pipeline",
-    created_at: "May 22",
+    created_at: "2026-05-22",
     deadline: "2026-09-01",
-    priority: "Low",
+    priority: "low",
     status: "On Hold",
+    is_owner: true,
+    user_id: 1,
+    members: [
+      { user_id: 1, name: "Night Owl", email: "night@owl.app", role: "OWNER" },
+    ],
   },
   {
     id: "p3",
     title: "Mobile companion",
-    created_at: "Jun 11",
+    created_at: "2026-06-11",
     deadline: "2026-11-20",
-    priority: "Medium",
+    priority: "medium",
     status: "Planned",
+    is_owner: true,
+    user_id: 1,
+    members: [],
   },
   {
     id: "p4",
     title: "Team workspace",
-    created_at: "Apr 17",
+    created_at: "2026-04-17",
     deadline: "2026-06-30",
-    priority: "Medium",
+    priority: "medium",
     status: "Completed",
+    is_owner: true,
+    user_id: 1,
+    members: [
+      { user_id: 1, name: "Night Owl", email: "night@owl.app", role: "OWNER" },
+      { user_id: 2, name: "Lena", email: "lena@owl.app", role: "MEMBER" },
+    ],
   },
 ];
 
@@ -2121,8 +2155,13 @@ const ProjectCard: React.FC<{
   onDragEnd: () => void;
   onOpen: () => void;
 }> = ({ project, index, onDragStart, onDragEnd, onOpen }) => {
-  const ddl = new Date(project.deadline);
-  const days = Math.ceil((ddl.getTime() - Date.now()) / (1000 * 3600 * 24));
+  const statusColor = getStatusColor(project.status);
+  const priorityColor = getPriorityColor(project.priority);
+  const { days } = getDeadlineDifference(project.deadline);
+
+  const isOverdue = days !== null && days < 0;
+  const isSoon = days !== null && days >= 0 && days <= 7;
+  const daysColor = isOverdue ? "var(--red)" : isSoon ? "var(--yellow)" : "var(--fg-secondary)";
 
   return (
     <div draggable onDragStart={onDragStart} onDragEnd={onDragEnd} style={{ cursor: "grab" }}>
@@ -2160,147 +2199,93 @@ const ProjectCard: React.FC<{
           }
         }}
       >
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: "var(--spacing-l)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "auto",
-            justifyContent: "center",
-            gap: "var(--spacing-l)",
-          }}
-        >
-          <input
-            className="project_title_input"
-            placeholder="Project title"
-            value={project.title}
-            readOnly
-            style={{
-              fontWeight: "600",
-              border: "none",
-              outline: "none",
-              width: "100%",
-              margin: "0px",
-              padding: "0px",
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              width: "auto",
-              gap: "var(--spacing-s)",
-              flexDirection: "column",
-              textAlign: "left",
-            }}
-          >
-            <strong style={{ fontSize: "var(--text-base)", opacity: "0.7" }}>
-              Created: {project.created_at}
-            </strong>
-            <strong
-              style={{
-                fontSize: "var(--text-base)",
-                opacity: "0.7",
-                display: "flex",
-                gap: "var(--spacing-s)",
-              }}
-            >
-              DDL: {project.deadline}{" "}
-              <span style={{ fontSize: "var(--text-base)", opacity: "1" }}>
-                ({days} days)
-              </span>
-            </strong>
+        <div className="project_card_inner">
+          <div className="project_card_main">
+            <div className="project_card_left">
+              <input
+                className="project_title_input"
+                placeholder="Project title"
+                value={project.title}
+                readOnly
+              />
+              <div className="project_card_dates">
+                <div className="project_card_meta_row">
+                  <i className="fa-regular fa-calendar-plus" style={{ color: "var(--fg-secondary)" }}></i>
+                  <strong className="project_card_meta_text">Created: {formatDate(project.created_at)}</strong>
+                </div>
+                <div className="project_card_meta_row">
+                  <i className="fa-regular fa-hourglass-half" style={{ color: "var(--fg-secondary)" }}></i>
+                  <strong className="project_card_meta_text">
+                    DDL: <span style={{ color: "var(--fg)", opacity: "1", fontWeight: 700 }}>{formatDate(project.deadline)}</span>
+                  </strong>
+                </div>
+                {days !== null && (
+                  <div className="project_card_meta_row">
+                    <i className="fa-regular fa-clock" style={{ color: daysColor }}></i>
+                    <strong className="project_card_meta_text" style={{ color: daysColor }}>
+                      {isOverdue ? `${Math.abs(days)} days overdue` : `${days} days left`}
+                    </strong>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="project_card_right">
+              <div className="project_card_info_row">
+                <div className="centered_content project_card_label">
+                  <i className="fa-solid fa-hourglass-start" style={{ fontSize: "var(--text-lg)" }}></i> Status:
+                </div>
+                <span className="project_status centered_content" style={{ backgroundColor: statusColor }}>
+                  {project.status}
+                </span>
+              </div>
+              <div className="project_card_info_row">
+                <div className="centered_content project_card_label">
+                  <i className="fa-solid fa-flag" style={{ fontSize: "var(--text-lg)" }}></i> Priority:
+                </div>
+                <span className="project_priority centered_content" style={{ backgroundColor: priorityColor }}>
+                  {project.priority}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="project_card_footer">
+            <div className="project_card_members">
+              {project.members && project.members.length > 0 ? (
+                project.members.map((member, i) => (
+                  <div
+                    key={member.user_id}
+                    title={member.name || member.email}
+                    className="project_card_avatar"
+                    style={{
+                      backgroundColor: getAvatarColor(member.user_id),
+                      marginLeft: i === 0 ? 0 : "-8px",
+                      zIndex: (project.members?.length ?? 0) - i,
+                    }}
+                  >
+                    {getMemberInitial(member)}
+                  </div>
+                ))
+              ) : (
+                <span style={{ fontSize: "var(--text-sm)", color: "var(--fg-secondary)" }}>No members</span>
+              )}
+            </div>
+            {project.link_to && (
+              <a
+                href={project.link_to}
+                onClick={(e) => e.stopPropagation()}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Project link"
+                className="project_card_link"
+              >
+                <i className="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            )}
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "auto",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "var(--spacing-l)",
-          }}
-        >
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              alignContent: "center",
-              justifyContent: "space-between",
-              gap: "var(--spacing-s)",
-            }}
-          >
-            <div
-              className="centered_content"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "var(--spacing-s)",
-                fontSize: "var(--text-lg)",
-              }}
-            >
-              <i
-                className="fa-solid fa-flag"
-                style={{ fontSize: "var(--text-lg)" }}
-              ></i>{" "}
-              Priority:
-            </div>
-            <div className="spacer" style={{ width: "var(--spacing-s)" }} />
-            <span
-              className={`centered_content project_priority priority-${project.priority.toLowerCase()}`}
-              style={{ backgroundColor: getPriorityColor(project.priority) }}
-            >
-              {project.priority}
-            </span>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              alignContent: "center",
-              justifyContent: "space-between",
-              gap: "var(--spacing-s)",
-            }}
-          >
-            <div
-              className="centered_content"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "var(--spacing-s)",
-                fontSize: "var(--text-lg)",
-              }}
-            >
-              <i
-                className="fa-solid fa-hourglass-start"
-                style={{ fontSize: "var(--text-lg)" }}
-              ></i>{" "}
-              Status:
-            </div>
-            <div className="spacer" style={{ width: "var(--spacing-s)" }} />
-            <span
-              className={`project_status centered_content status-${project.status.replace(/\s/g, "")}`}
-              style={{ backgroundColor: getStatusColor(project.status) }}
-            >
-              {project.status}
-            </span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
     </div>
   );
 };
@@ -2325,7 +2310,7 @@ const getStatusColor = (status: string): string => {
 
 /* getPriorityColor() from Projects/ProjectModal.tsx of the app */
 const getPriorityColor = (priority: string): string => {
-  switch (priority.toLowerCase()) {
+  switch (priority) {
     case "high":
       return "var(--red)";
     case "medium":
@@ -2335,6 +2320,43 @@ const getPriorityColor = (priority: string): string => {
     default:
       return "var(--fg)";
   }
+};
+
+/* Avatar helpers from Projects/ProjectCard.tsx of the app */
+const AVATAR_COLORS = [
+  "var(--red)",
+  "var(--yellow)",
+  "var(--green)",
+  "var(--blue)",
+  "var(--purple)",
+  "var(--pink)",
+  "var(--cyan)",
+];
+
+const getAvatarColor = (userId: number): string => AVATAR_COLORS[userId % AVATAR_COLORS.length];
+
+const getMemberInitial = (member: DemoProjectMember): string => {
+  const letter = member.email ? member.email.charAt(0) : member.name ? member.name.charAt(0) : "?";
+  return letter.toUpperCase();
+};
+
+/* getDeadlineDifference() from Projects/ProjectsComponents.tsx of the app */
+const getDeadlineDifference = (deadline: string): { days: number | null } => {
+  if (!deadline) return { days: null };
+  const deadlineDate = new Date(deadline);
+  if (isNaN(deadlineDate.getTime())) return { days: null };
+  const currentDate = new Date();
+  const differenceInTime = deadlineDate.getTime() - currentDate.getTime();
+  const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+  return { days: differenceInDays };
+};
+
+/* formatDate() from Projects/ProjectCard.tsx of the app */
+const formatDate = (date: string): string => {
+  if (!date) return "-";
+  const parsed = new Date(date);
+  if (isNaN(parsed.getTime())) return date;
+  return parsed.toLocaleDateString("en-EN", { day: "2-digit", month: "short", year: "numeric" });
 };
 
 /* DemoSelect: the app uses native <select> elements, but inside the CSS-scaled
@@ -2573,6 +2595,7 @@ const ProjectsHeader: React.FC<{
         justifyContent: "center",
       }}
       onClick={onToggleDirection}
+      disabled={!sortBy}
     >
       {sortDirection === "asc" ? (
         <i
@@ -2666,36 +2689,238 @@ const ProjectTasksProgress: React.FC<{ boardId: string }> = ({ boardId }) => {
   const allTasks = board ? board.columns.flatMap((col) => col.tasks) : [];
   const progress = allTasks.length === 0 ? 0 : (allTasks.filter((t) => t.completed).length / allTasks.length) * 100;
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        alignContent: "center",
-        textAlign: "center",
-        gap: "var(--spacing-m)",
-        width: "auto",
-      }}
-    >
-      <div
-        style={{
-          width: "45px",
-          height: "45px",
-          maxWidth: "45px",
-          padding: "0px",
-          margin: "0px",
-          maxHeight: "45px",
-        }}
-      >
-        <CircularProgressBar
-          size={50}
-          strokeWidth={10}
-          progress={progress}
-          progressColor={"var(--green)"}
-        />
-      </div>
+    <div className="project_modal_progress">
+      <CircularProgressBar
+        style={{ width: "60px", height: "60px", maxWidth: "60px", padding: "0px", margin: "0px", maxHeight: "60px" }}
+        size={60}
+        strokeWidth={10}
+        progress={progress}
+        progressColor={"var(--green)"}
+      />
     </div>
+  );
+};
+
+const FieldLabel: React.FC<{ icon: string; children: React.ReactNode }> = ({ icon, children }) => (
+  <label className="project_modal_field_label">
+    <i className={icon}></i>
+    {children}
+  </label>
+);
+
+const ProjectMembersModal: React.FC<{
+  projectId: string;
+  projectTitle: string;
+  ownerId: number;
+  members: DemoProjectMember[];
+  onAddMember: (email: string) => void;
+  onRemoveMember: (userId: number) => void;
+  onClose: () => void;
+}> = ({ projectId, projectTitle, ownerId, members, onAddMember, onRemoveMember, onClose }) => {
+  const [newEmail, setNewEmail] = useState("");
+  const [error, setError] = useState("");
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const isOwner = (member: DemoProjectMember): boolean => member.role === "OWNER";
+  const isCurrentUserOwner = (): boolean => ownerId === 1;
+  const canRemoveMember = (member: DemoProjectMember): boolean => isCurrentUserOwner() && !isOwner(member);
+
+  const handleAddMember = () => {
+    const email = newEmail.trim();
+    if (!email) return;
+    if (members.some((m) => m.email.toLowerCase() === email.toLowerCase())) {
+      setError("This email is already a member");
+      return;
+    }
+    setError("");
+    onAddMember(email);
+    setNewEmail("");
+  };
+
+    useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [onClose]);
+
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+      onClose();
+    }
+  };
+
+  return (
+    <motion.div
+      className="modal-overlay"
+      style={{ userSelect: "none" }}
+      onClick={handleOverlayClick}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="project-modal-content"
+        ref={contentRef}
+        style={{ width: "calc(80% - var(--spacing-xxl) - var(--spacing-xxl))", justifyContent: "space-between" }}
+        initial={{ opacity: 0, y: -200 }}
+        exit={{ opacity: 0, y: -200 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <button className="modal_close_button" onClick={onClose} aria-label="Close" title="Close">
+          <i className="fa-solid fa-xmark"></i>
+        </button>
+        <div>
+          <div style={{ display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center", justifyContent: "flex-start" }}>
+            <p className="project_title" style={{ textAlign: "left", width: "auto" }}>
+              {projectTitle}
+            </p>
+          </div>
+
+          <div className="spacer" style={{ height: "10px" }}></div>
+
+          {error && (
+            <div
+              style={{
+                color: "var(--bg)",
+                padding: "var(--spacing-m)",
+                backgroundColor: "var(--red)",
+                borderRadius: "var(--border-radius)",
+                marginBottom: "var(--spacing-m)",
+              }}
+            >
+              {error}
+            </div>
+          )}
+
+          <div className="project-modal-subcontent">
+            <div className="project-editor-content">
+              <div style={{ display: "flex", flexDirection: "row", gap: "var(--spacing-m)", width: "100%" }}>
+                <DemoInputField
+                  label="Member email"
+                  value={newEmail}
+                  name="email"
+                  type="email"
+                  onChange={(e) => setNewEmail(e.target.value)}
+                />
+                <button
+                  className="button"
+                  id="green"
+                  onClick={handleAddMember}
+                  disabled={!isCurrentUserOwner() || !newEmail.trim()}
+                  style={{ width: "130px" }}
+                >
+                  <i className="fa-solid fa-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="spacer" style={{ height: "10px" }}></div>
+
+          {members.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "var(--spacing-l)", color: "var(--fg-secondary)" }}>No members</div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-s)", width: "100%", padding: "0px", margin: "0px" }}>
+              {members.map((member) => (
+                <div
+                  key={member.user_id}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "var(--spacing-m)",
+                    backgroundColor: "transparent",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-m)" }}>
+                    <div
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                        backgroundColor: isOwner(member) ? "var(--red)" : "var(--green)",
+                        color: "var(--bg)",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        fontSize: "var(--text-4xl)",
+                        aspectRatio: 1 / 1,
+                      }}
+                    >
+                      {member.name ? member.name.charAt(0).toUpperCase() : "?"}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "auto",
+                        gap: "5px",
+                      }}
+                    >
+                      <div style={{ fontWeight: 500, fontSize: "var(--text-lg)" }}>{member.name || "Unknown"}</div>
+                      <div style={{ fontSize: "var(--text-base)", color: "var(--fg-secondary)" }}>{member.email}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-m)" }}>
+                    {canRemoveMember(member) && (
+                      <button
+                        className="button"
+                        onClick={() => onRemoveMember(member.user_id)}
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignContent: "center",
+                          alignItems: "center",
+                          textAlign: "center",
+                          justifyContent: "center",
+                          background: "var(--red)",
+                          color: "var(--bg)",
+                        }}
+                        title="Remove member"
+                      >
+                        <i className="fa-solid fa-trash" style={{ margin: "0px", padding: "0px" }}></i>
+                      </button>
+                    )}
+                    <span
+                      className="button"
+                      style={{
+                        width: "80px",
+                        fontWeight: "bolder",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignContent: "center",
+                        alignItems: "center",
+                        textAlign: "center",
+                        justifyContent: "center",
+                        backgroundColor: isOwner(member) ? "var(--red)" : "var(--green)",
+                        color: "var(--bg)",
+                      }}
+                    >
+                      {member.role}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="spacer" style={{ height: "20px" }}></div>
+        </div>
+        <div className="modal-actions">
+          <button className="button" id="green" onClick={onClose} style={{ width: "60%" }}>
+            <i className="fa-solid fa-sd-card"></i> Save
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
@@ -2711,10 +2936,15 @@ const ProjectModal: React.FC<{
     deadline: project.deadline || new Date().toISOString().split("T")[0],
     status: project.status || PROJECT_STATUSES[0],
     link_to: project.link_to || "",
-    priority: project.priority || "Low",
-    board_id: project.board_id || "0",
+    priority: project.priority || "low",
+    board_id: project.board_id || "",
     created_at: project.created_at || new Date().toISOString(),
+    is_owner: project.is_owner ?? true,
+    user_id: project.user_id ?? 1,
+    members: project.members || [],
   });
+  const [members, setMembers] = useState<DemoProjectMember[]>(project.members || []);
+  const [membersModalOpen, setMembersModalOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const statusColor = getStatusColor(formData.status);
 
@@ -2724,7 +2954,7 @@ const ProjectModal: React.FC<{
   };
 
   const handleSave = () => {
-    onSave(formData);
+    onSave({ ...formData, members });
     onClose();
   };
 
@@ -2733,14 +2963,15 @@ const ProjectModal: React.FC<{
       if (e.key === "Escape") {
         /* a select popup is open — let it close itself, don't close the modal */
         if (document.querySelector(".owl-demo .demo-select-popup")) return;
-        onClose();
+        if (!membersModalOpen) onClose();
       }
     };
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [onClose]);
+  }, [onClose, membersModalOpen]);
 
   const handleOverlayClick = (e: React.MouseEvent) => {
+    if (membersModalOpen) return;
     if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
       onClose();
     }
@@ -2765,84 +2996,48 @@ const ProjectModal: React.FC<{
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignContent: "center",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <DemoInputField
-            label="Project title"
-            value={formData.title}
-            name="title"
-            onChange={handleChange}
-            className="project_title"
-          />
-          <ProjectTasksProgress boardId={formData.board_id ?? "0"} />
-        </div>
-        <div className="spacer" style={{ height: "20px" }}></div>
-        <div className="project-modal-subcontent">
-          <div className="project-editor-content">
-            <div className="project_content_sub_block">
-              <label>
-                <i className="fa-solid fa-check-double"></i> Board
-              </label>
-              <DemoSelect
-                value={formData.board_id ?? ""}
-                onChange={(v) => setFormData((prev) => ({ ...prev, board_id: v }))}
-                ariaLabel="Project board"
-                placeholder="SELECT BOARD"
-                triggerStyle={{ width: "200px", height: "40px", backgroundColor: "transparent", boxShadow: "none" }}
-                options={[
-                  { value: "", label: "SELECT BOARD", disabled: true },
-                  ...INITIAL_BOARDS.map((board) => ({ value: board.id, label: board.title })),
-                ]}
-              />
-            </div>
-            <div className="project_content_sub_block">
-              <label>
-                <i className="fa-solid fa-paperclip"></i> Link
-              </label>
+        <button className="modal_close_button" onClick={onClose} aria-label="Close" title="Close">
+          <i className="fa-solid fa-xmark"></i>
+        </button>
+        <div className="project_modal_body">
+          <div className="project_modal_main">
+            <div className="project_modal_header">
               <DemoInputField
-                className="project_link_to_source"
-                label="Type... "
-                name="link_to"
-                value={formData.link_to}
+                label="Project title"
+                value={formData.title}
+                name="title"
                 onChange={handleChange}
+                className="project_title"
               />
+              <ProjectTasksProgress boardId={formData.board_id ?? ""} />
             </div>
-            <div className="project_content_sub_block">
-              <label>
-                <i className="fa-regular fa-clock"></i> Deadline:{" "}
-              </label>
+
+            <div className="project_modal_field project_modal_about">
               <DemoInputField
-                className="project_deadline project_deadline_modal"
-                label="Deadline"
-                name="deadline"
-                type="date"
-                value={formData.deadline}
+                label="About project"
+                as="textarea"
+                value={formData.about}
+                name="about"
                 onChange={handleChange}
+                className="project_info_editor"
               />
             </div>
-            <div className="project_content_sub_block">
-              <label>
-                <i className="fa-solid fa-chart-simple"></i> Status
-              </label>
+          </div>
+
+          <div className="project_modal_params">
+            <div className="project_modal_field">
+              <FieldLabel icon="fa-solid fa-chart-simple">Status</FieldLabel>
               <DemoSelect
                 value={formData.status}
                 onChange={(v) => setFormData((prev) => ({ ...prev, status: v }))}
                 ariaLabel="Project status"
                 placeholder="Select status"
                 triggerStyle={{
-                  color: statusColor,
-                  width: "200px",
+                  backgroundColor: statusColor,
+                  color: "var(--bg)",
+                  width: "100%",
                   height: "40px",
                   textAlign: "left",
-                  backgroundColor: "transparent",
-                  boxShadow: "none",
                 }}
                 options={[
                   { value: "", label: "Select status", disabled: true },
@@ -2854,48 +3049,126 @@ const ProjectModal: React.FC<{
                 ]}
               />
             </div>
-            <div className="project_content_sub_block">
-              <label>
-                <i className="fa-solid fa-brain"></i> Priority
-              </label>
+
+            <div className="project_modal_field">
+              <FieldLabel icon="fa-solid fa-brain">Priority</FieldLabel>
               <DemoSelect
                 value={formData.priority}
                 onChange={(v) => setFormData((prev) => ({ ...prev, priority: v as DemoProject["priority"] }))}
                 ariaLabel="Project priority"
+                placeholder="Select priority"
                 triggerStyle={{
-                  width: "200px",
+                  backgroundColor: getPriorityColor(formData.priority),
+                  color: "var(--bg)",
+                  width: "100%",
                   height: "40px",
-                  color: getPriorityColor(formData.priority),
                   textAlign: "left",
-                  backgroundColor: "transparent",
-                  boxShadow: "none",
                 }}
-                options={(["Low", "Medium", "High"] as const).map((priority) => ({
+                options={(["low", "medium", "high"] as const).map((priority) => ({
                   value: priority,
                   label: priority,
                   color: getPriorityColor(priority),
                 }))}
               />
             </div>
-            <div className="spacer" style={{ height: "5px" }}></div>
-            <div className="spacer" style={{ height: "5px", backgroundColor: "var(--bg2)", width: "70%" }}></div>
-            <div className="spacer" style={{ height: "5px" }}></div>
+
+            <div className="project_modal_field">
+              <FieldLabel icon="fa-regular fa-clock">Deadline</FieldLabel>
+              <div className="project_modal_deadline_row">
+                <input
+                  className="project_deadline"
+                  type="date"
+                  name="deadline"
+                  value={formData.deadline}
+                  onChange={handleChange}
+                  placeholder="Deadline"
+                />
+              </div>
+            </div>
+
+            <div className="project_modal_field">
+              <FieldLabel icon="fa-solid fa-check-double">Board</FieldLabel>
+              <DemoSelect
+                value={formData.board_id ?? ""}
+                onChange={(v) => setFormData((prev) => ({ ...prev, board_id: v }))}
+                ariaLabel="Project board"
+                placeholder="SELECT BOARD"
+                triggerStyle={{ width: "100%", height: "40px" }}
+                options={[
+                  { value: "", label: "SELECT BOARD", disabled: true },
+                  ...INITIAL_BOARDS.map((board) => ({ value: board.id, label: board.title })),
+                ]}
+              />
+            </div>
+
+            <div className="project_modal_field">
+              <FieldLabel icon="fa-solid fa-paperclip">Link</FieldLabel>
+              <DemoInputField
+                className="project_link_to_source"
+                label="Type... "
+                name="link_to"
+                value={formData.link_to}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </div>
-        <DemoInputField
-          label="About project"
-          as="textarea"
-          value={formData.about}
-          name="about"
-          onChange={handleChange}
-          className="project_info_editor"
-        />
+
+        <div className="project_modal_field project_modal_members">
+          <div className="project_modal_members_row">
+            {formData.is_owner && formData.id && (
+              <button className="button" onClick={() => setMembersModalOpen(true)} style={{ height: "34px", padding: "0 var(--spacing-m)" }}>
+                <i className="fa-solid fa-user-gear"></i> Manage members
+              </button>
+            )}
+            <div className="project_card_members">
+              {members.length > 0 ? (
+                members.map((member, i) => (
+                  <div
+                    key={member.user_id}
+                    title={member.name || member.email}
+                    className="project_card_avatar"
+                    style={{
+                      backgroundColor: getAvatarColor(member.user_id),
+                      marginLeft: i === 0 ? 0 : "-8px",
+                      zIndex: members.length - i,
+                    }}
+                  >
+                    {getMemberInitial(member)}
+                  </div>
+                ))
+              ) : (
+                <span style={{ fontSize: "var(--text-sm)", color: "var(--fg-secondary)" }}>No members</span>
+              )}
+            </div>
+          </div>
+        </div>
+
         <div className="modal-actions">
           <button className="button" id="green" onClick={handleSave} style={{ width: "60%" }}>
             <i className="fa-solid fa-sd-card"></i> Save
           </button>
         </div>
       </motion.div>
+
+      <AnimatePresence>
+        {membersModalOpen && (
+          <ProjectMembersModal
+            projectId={formData.id}
+            projectTitle={formData.title}
+            ownerId={formData.user_id ?? 1}
+            members={members}
+            onAddMember={(email) => {
+              setMembers((prev) => [
+                ...prev,
+                { user_id: Date.now(), name: email.split("@")[0], email, role: "MEMBER" },
+              ]);
+            }}
+            onRemoveMember={(userId) => setMembers((prev) => prev.filter((m) => m.user_id !== userId))}
+            onClose={() => setMembersModalOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
@@ -2932,10 +3205,13 @@ const ProjectsTab: React.FC = () => {
     const newProject: DemoProject = {
       id: "p-" + Date.now(),
       title: "New Project",
-      created_at: new Date().toISOString().slice(5, 10),
+      created_at: new Date().toISOString().slice(0, 10),
       deadline: new Date().toISOString().slice(0, 10),
-      priority: "Low",
+      priority: "low",
       status: "Planned",
+      is_owner: true,
+      user_id: 1,
+      members: [],
     };
     setProjects((prev) => [...prev, newProject]);
   };
