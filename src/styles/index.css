@@ -855,16 +855,21 @@ hw {
 .ss-hero-foreground {
   position: absolute;
   inset: 0;
+  width: 50%;
+  height: 50%;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  padding: 1rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  box-sizing: border-box;
 }
 
 .ss-hero-foreground img {
-  width: 100%;
-  max-width: min(100%, 1040px);
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
