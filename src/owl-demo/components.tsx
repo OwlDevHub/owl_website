@@ -2372,20 +2372,41 @@ const ProjectCard: React.FC<{
           <div className="project_card_footer">
             <div className="project_card_members">
               {project.members && project.members.length > 0 ? (
-                project.members.map((member, i) => (
-                  <div
-                    key={member.user_id}
-                    title={member.name || member.email}
-                    className="project_card_avatar"
-                    style={{
-                      backgroundColor: getAvatarColor(member.user_id),
-                      marginLeft: i === 0 ? 0 : "-8px",
-                      zIndex: (project.members?.length ?? 0) - i,
-                    }}
-                  >
-                    {getMemberInitial(member)}
-                  </div>
-                ))
+                <>
+                  {project.members.slice(0, 5).map((member, i) => (
+                    <div
+                      key={member.user_id}
+                      title={member.name || member.email}
+                      className="project_card_avatar"
+                      style={{
+                        backgroundColor: getAvatarColor(member.user_id),
+                        marginLeft: i === 0 ? 0 : "-8px",
+                        zIndex: (project.members?.length ?? 0) - i,
+                      }}
+                    >
+                      {getMemberInitial(member)}
+                    </div>
+                  ))}
+                  {(project.members?.length ?? 0) > 5 && (
+                    <div
+                      className="project_card_avatar"
+                      style={{
+                        backgroundColor: "var(--bg-secondary)",
+                        margin: "0px",
+                        padding: "0px",
+                        zIndex: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontWeight: "bold",
+                        fontSize: "var(--text-xxl)",
+                        color: "var(--fg-secondary)",
+                      }}
+                    >
+                      +{project.members.length - 5}
+                    </div>
+                  )}
+                </>
               ) : (
                 <span style={{ fontSize: "var(--text-sm)", color: "var(--fg-secondary)" }}>No members</span>
               )}
