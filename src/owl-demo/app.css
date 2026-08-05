@@ -3954,3 +3954,110 @@
 .owl-demo .stats_content > *:last-child {
   margin-bottom: 0;
 }
+.owl-demo .markdown_editor {
+  width: 100%;
+  min-height: 120px;
+  height: 100%;
+  overflow-y: auto;
+  border-radius: var(--border-radius);
+  font-size: var(--text-base);
+}
+
+.owl-demo .markdown_editor .milkdown {
+  height: 100%;
+  min-height: 120px;
+  outline: none;
+}
+
+.owl-demo .markdown_editor .milkdown .milkdown-theme-nord {
+  --text-base: 0.9rem;
+  --text-base--line-height: calc(1.5 / 0.9);
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror {
+  min-height: 120px;
+  outline: none;
+  padding: var(--spacing-s);
+  color: var(--fg);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  position: relative;
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror.is-empty[data-placeholder]::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  top: var(--spacing-s);
+  left: var(--spacing-s);
+  color: var(--fg-secondary);
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror li[data-item-type="task"] {
+  list-style: none;
+  position: relative;
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror li[data-item-type="task"] > p {
+  margin-left: var(--spacing-l);
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror li[data-item-type="task"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  width: 1em;
+  height: 1em;
+  border: 1px solid var(--fg-secondary);
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror li[data-item-type="task"][data-checked="true"]::before {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror li[data-item-type="task"][data-checked="true"]::after {
+  content: "✓";
+  position: absolute;
+  left: 0.15em;
+  top: 0.1em;
+  font-size: 0.9em;
+  line-height: 1;
+  color: var(--bg);
+  font-weight: bold;
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror > *:first-child {
+  margin-top: 0;
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror > *:last-child {
+  margin-bottom: 0;
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror pre {
+  background-color: var(--bg);
+  color: var(--fg);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-s);
+  font-size: var(--text-sm);
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror code {
+  color: var(--accent);
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror blockquote {
+  border-left-color: var(--accent);
+  color: var(--fg-secondary);
+}
+
+.owl-demo .markdown_editor .milkdown .ProseMirror[contenteditable="false"] {
+  cursor: default;
+  opacity: 0.85;
+}

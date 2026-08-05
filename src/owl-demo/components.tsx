@@ -2,6 +2,7 @@ import { type ReactElement, useCallback, useEffect, useMemo, useRef, useState } 
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Chart from "chart.js/auto";
+import { MarkdownEditor } from "./MarkdownEditor";
 import "./styles.css";
 
 /* ---------------------------------------------------------------------------
@@ -2172,12 +2173,43 @@ const INITIAL_PROJECTS: DemoProject[] = [
     status: "In Progress",
     board_id: "board-launcher",
     link_to: "https://github.com/owl/launcher",
+    about: `## Mission
+
+**Launcher V2** is the next-gen desktop client: *faster*, lighter and fully keyboard-driven.
+
+### Current sprint
+
+- [x] Installer bootstrapper
+- [x] OAuth login flow
+- [ ] Auto-update delta patches
+- [ ] Game library import & scan
+
+### Stack
+
+\`\`\`ts
+export const launcher = {
+  runtime: "Tauri 2",
+  ui: "React 19",
+  updates: "delta + code signing",
+};
+\`\`\`
+
+> Drops the legacy updater in favor of a signed multi-channel pipeline.`,
     is_owner: true,
     user_id: 1,
     members: [
       { user_id: 1, name: "Night Owl", email: "night@owl.app", role: "OWNER" },
+      { user_id: 2, name: "Lena", email: "lena@owl.app", role: "MEMBER" },
       { user_id: 3, name: "Mira", email: "mira@owl.app", role: "MEMBER" },
+      { user_id: 4, name: "Kira", email: "kira@owl.app", role: "MEMBER" },
       { user_id: 5, name: "Alex", email: "alex@owl.app", role: "MEMBER" },
+      { user_id: 6, name: "Ivan", email: "ivan@owl.app", role: "MEMBER" },
+      { user_id: 7, name: "Dima", email: "dima@owl.app", role: "MEMBER" },
+      { user_id: 8, name: "Anna", email: "anna@owl.app", role: "MEMBER" },
+      { user_id: 9, name: "Max", email: "max@owl.app", role: "MEMBER" },
+      { user_id: 10, name: "Zoe", email: "zoe@owl.app", role: "MEMBER" },
+      { user_id: 11, name: "Leo", email: "leo@owl.app", role: "MEMBER" },
+      { user_id: 12, name: "Nina", email: "nina@owl.app", role: "MEMBER" },
     ],
   },
   {
@@ -2188,6 +2220,20 @@ const INITIAL_PROJECTS: DemoProject[] = [
     priority: "low",
     status: "On Hold",
     board_id: "board-pipeline",
+    about: `## Goal
+
+Event collection from **all clients** into a single warehouse.
+
+- [x] Event ingestion API
+- [x] Session rollups
+- [ ] Kafka sink for UI events
+- [ ] Event schema v2 migration
+
+### Pipeline
+
+\`events → kafka → rollups → parquet\` with **99.9%** delivery SLA.
+
+> Latency budget: under 60s from click to dashboard.`,
     is_owner: true,
     user_id: 1,
     members: [
@@ -3086,13 +3132,11 @@ const ProjectModal: React.FC<{
             </div>
 
             <div className="project_modal_field project_modal_about">
-              <DemoInputField
-                label="About project"
-                as="textarea"
-                value={formData.about}
-                name="about"
-                onChange={handleChange}
-                className="project_info_editor"
+              <MarkdownEditor
+                value={formData.about ?? ""}
+                onChange={(markdown) => setFormData((prev) => ({ ...prev, about: markdown }))}
+                editable={formData.is_owner}
+                placeholder="About project"
               />
             </div>
           </div>
