@@ -1151,7 +1151,7 @@
 .owl-demo .project-members-modal-body {
   display: flex;
   flex-direction: row;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-xxl);
   width: 100%;
   flex: 1;
   min-height: 0;
@@ -1172,8 +1172,8 @@
   flex-direction: column;
   gap: var(--spacing-s);
   overflow-y: auto;
-  max-height: min(288px, 38vh);
-  flex-shrink: 1;
+  flex: 1;
+  min-height: 0;
   padding-right: var(--spacing-s);
   scrollbar-width: thin;
   scrollbar-color: var(--accent) transparent;

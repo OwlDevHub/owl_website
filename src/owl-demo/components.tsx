@@ -3788,7 +3788,10 @@ const ProjectMembersModal: React.FC<{
                   placeholder="Search members"
                   value={memberSearch}
                   onChange={(e) => setMemberSearch(e.target.value)}
-                  style={{ width: "100%", paddingLeft: "calc(var(--spacing-l) + var(--spacing-s))" }}
+                  style={{
+                    width: "calc(100% - calc(var(--spacing-l) + var(--spacing-s)))",
+                    paddingLeft: "calc(var(--spacing-l) + var(--spacing-s))",
+                  }}
                 />
               </div>
               {filteredMembers.length === 0 ? (
@@ -3910,7 +3913,10 @@ const ProjectMembersModal: React.FC<{
                     placeholder="Search public users"
                     value={publicSearch}
                     onChange={(e) => setPublicSearch(e.target.value)}
-                    style={{ width: "100%", paddingLeft: "calc(var(--spacing-l) + var(--spacing-s))" }}
+style={{
+                      width: "calc(100% - calc(var(--spacing-l) + var(--spacing-s)))",
+                      paddingLeft: "calc(var(--spacing-l) + var(--spacing-s))",
+                    }}
                   />
                 </div>
                 {filteredPublicUsers.length === 0 ? (
@@ -4209,26 +4215,51 @@ const ProjectModal: React.FC<{
         <div className="project_modal_field project_modal_members">
           <div className="project_modal_members_row">
             {formData.is_owner && formData.id && (
-              <button className="button" onClick={() => setMembersModalOpen(true)} style={{ height: "34px", padding: "0 var(--spacing-m)" }}>
+              <button
+                className="button"
+                onClick={() => setMembersModalOpen(true)}
+                style={{ height: "34px", padding: "0 var(--spacing-m)", whiteSpace: "nowrap", flexShrink: 0 }}
+              >
                 <i className="fa-solid fa-user-gear"></i> Manage members
               </button>
             )}
             <div className="project_card_members">
               {members.length > 0 ? (
-                members.map((member, i) => (
-                  <div
-                    key={member.user_id}
-                    title={member.name || member.email}
-                    className="project_card_avatar"
-                    style={{
-                      backgroundColor: getAvatarColor(member.user_id),
-                      marginLeft: i === 0 ? 0 : "-8px",
-                      zIndex: members.length - i,
-                    }}
-                  >
-                    {getMemberInitial(member)}
-                  </div>
-                ))
+                <>
+                  {members.slice(0, 5).map((member, i) => (
+                    <div
+                      key={member.user_id}
+                      title={member.name || member.email}
+                      className="project_card_avatar"
+                      style={{
+                        backgroundColor: getAvatarColor(member.user_id),
+                        marginLeft: i === 0 ? 0 : "-8px",
+                        zIndex: members.length - i,
+                      }}
+                    >
+                      {getMemberInitial(member)}
+                    </div>
+                  ))}
+                  {members.length > 5 && (
+                    <div
+                      className="project_card_avatar"
+                      style={{
+                        backgroundColor: "var(--bg-secondary)",
+                        margin: "0px",
+                        padding: "0px",
+                        zIndex: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontWeight: "bold",
+                        fontSize: "var(--text-xxl)",
+                        color: "var(--fg-secondary)",
+                      }}
+                    >
+                      +{members.length - 5}
+                    </div>
+                  )}
+                </>
               ) : (
                 <span style={{ fontSize: "var(--text-sm)", color: "var(--fg-secondary)" }}>No members</span>
               )}
