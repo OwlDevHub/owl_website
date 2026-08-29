@@ -650,8 +650,22 @@ const DateBlock: React.FC = () => {
   );
 };
 
-const Calendar: React.FC = () => {
-  const [currentDate] = useState(new Date());
+/* Calendar from Welcome/Widgets.tsx of the app: month/year navigation and a
+   tooltip on day click listing the upcoming tasks (deadline >= that day). */
+interface DemoCalendarTask {
+  id: string;
+  content: string;
+  deadline: string;
+  completed: boolean;
+}
+
+const Calendar: React.FC<{ tasks?: DemoCalendarTask[] }> = ({ tasks }) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [clickedDay, setClickedDay] = useState<number | null>(null);
+  const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number } | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const monthNames = [
     "Jan",
     "Feb",
@@ -678,17 +692,31 @@ const Calendar: React.FC = () => {
     1,
   ).getDay();
 
+  const handlePrevMonth = () =>
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+  const handleNextMonth = () =>
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+  const handlePrevYear = () =>
+    setCurrentDate(new Date(currentDate.getFullYear() - 1, currentDate.getMonth()));
+  const handleNextYear = () =>
+    setCurrentDate(new Date(currentDate.getFullYear() + 1, currentDate.getMonth()));
+
+  const handleDateClick = (day: number) =>
+    setSelectedDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day));
+
   const renderWeekdayHeaders = () =>
     weekDays.map((d, i) => (
       <div
         key={`weekday-${i}`}
         style={{
-          fontSize: "small",
-          opacity: 0.7,
+          fontSize: "var(--text-xs)",
+          opacity: 0.4,
           color: "var(--fg)",
           textAlign: "center",
           fontWeight: 600,
           padding: "2px 0",
+          textTransform: "uppercase",
+          letterSpacing: "0.05em",
         }}
       >
         {d}
@@ -700,23 +728,69 @@ const Calendar: React.FC = () => {
       <div key={`empty-${i}`} />
     ));
 
+  const getTasksForDay = (day: number): DemoCalendarTask[] => {
+    if (!tasks) return [];
+    const targetDateStr = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      day,
+    )
+      .toISOString()
+      .split("T")[0];
+    const tasksForDay = tasks.filter((task) => {
+      const taskDeadline = new Date(task.deadline).toISOString().split("T")[0];
+      return taskDeadline >= targetDateStr;
+    });
+    const sortedTasks = [...tasksForDay].sort((a, b) => {
+      const dateA = new Date(a.deadline).toISOString().split("T")[0];
+      const dateB = new Date(b.deadline).toISOString().split("T")[0];
+      if (dateA === targetDateStr && dateB !== targetDateStr) return -1;
+      if (dateA !== targetDateStr && dateB === targetDateStr) return 1;
+      return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+    });
+    return sortedTasks.slice(0, 5);
+  };
+
   const renderDayCells = () =>
-    Array.from({ length: daysInMonth }).map((_, day) => {
+    Array.from({ length: daysInMonth }).map((_, dayIndex) => {
+      const day = dayIndex + 1;
+      const isSelected =
+        selectedDate?.getDate() === day &&
+        selectedDate?.getMonth() === currentDate.getMonth() &&
+        selectedDate?.getFullYear() === currentDate.getFullYear();
       const isToday =
-        day + 1 === new Date().getDate() &&
+        day === new Date().getDate() &&
         currentDate.getMonth() === new Date().getMonth() &&
         currentDate.getFullYear() === new Date().getFullYear();
-      const backgroundColor = isToday ? "var(--accent)" : "transparent";
-      const textColor = isToday ? "var(--bg)" : "var(--fg)";
+      const backgroundColor = isSelected || isToday ? "var(--accent)" : "transparent";
+      const textColor = isSelected || isToday ? "var(--bg)" : "var(--fg)";
       return (
         <button
           key={`day-${day}`}
           className="calendar-day centered_content"
+          onClick={(e) => {
+            if (clickedDay === day) {
+              setClickedDay(null);
+              setTooltipPosition(null);
+            } else {
+              handleDateClick(day);
+              if (!containerRef.current) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const containerRect = containerRef.current.getBoundingClientRect();
+              setClickedDay(day);
+              setTooltipPosition({
+                x: rect.left - containerRect.left,
+                y: rect.top - containerRect.top,
+              });
+            }
+          }}
+          aria-label={`Select date ${day} ${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`}
           style={{
             padding: "4px",
             backgroundColor,
             color: textColor,
             fontWeight: isToday ? 700 : 500,
+            transition: "background 0.2s, color 0.2s",
             margin: "4px 0",
             cursor: "pointer",
             border: "none",
@@ -729,13 +803,47 @@ const Calendar: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          {day + 1}
+          {day}
         </button>
       );
     });
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setClickedDay(null);
+        setTooltipPosition(null);
+        setSelectedDate(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const navBtnStyle = {
+    height: 28,
+    width: 28,
+    borderRadius: "var(--border-radius)",
+    color: "var(--fg)",
+    padding: "0px",
+    margin: "0px",
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    transition: "background-color 0.15s",
+    display: "flex" as const,
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
+    fontSize: "var(--text-md)",
+  };
+  const onNavEnter = (e: React.MouseEvent<HTMLButtonElement>) =>
+    (e.currentTarget.style.backgroundColor = "var(--bg3)");
+  const onNavLeave = (e: React.MouseEvent<HTMLButtonElement>) =>
+    (e.currentTarget.style.backgroundColor = "transparent");
+
   return (
     <div
+      ref={containerRef}
       style={{
         position: "relative",
         width: "100%",
@@ -753,91 +861,64 @@ const Calendar: React.FC = () => {
           width: "100%",
           marginBottom: "var(--spacing-s)",
           gap: "var(--spacing-s)",
-          height: "60px",
+          height: "40px",
         }}
       >
-        <div style={{ display: "flex", gap: "var(--spacing-s)" }}>
+        <div style={{ display: "flex", gap: "2px" }}>
           <button
             className="button"
-            style={{
-              height: "20px",
-              minHeight: "20px",
-              aspectRatio: "1/1",
-              borderRadius: "10px",
-              color: "var(--fg)",
-              padding: "0px",
-              margin: "0px",
-              background: "var(--bg)",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "none",
-            }}
+            style={navBtnStyle}
+            onMouseEnter={onNavEnter}
+            onMouseLeave={onNavLeave}
+            onClick={handlePrevYear}
             title="Previous Year"
-          />
+          >
+            <i className="fa-solid fa-angles-left" />
+          </button>
           <button
             className="button"
-            style={{
-              height: "20px",
-              minHeight: "20px",
-              aspectRatio: "1.5/1",
-              borderRadius: "10px",
-              color: "var(--fg)",
-              padding: "0px",
-              margin: "0px",
-              background: "var(--bg)",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "none",
-            }}
+            style={navBtnStyle}
+            onMouseEnter={onNavEnter}
+            onMouseLeave={onNavLeave}
+            onClick={handlePrevMonth}
             title="Previous Month"
-          />
+          >
+            <i className="fa-solid fa-angle-left" />
+          </button>
         </div>
         <h2
           style={{
             margin: 0,
-            fontSize: "medium",
-            minWidth: "150px",
+            fontSize: "var(--text-md)",
+            fontWeight: 600,
+            minWidth: "120px",
             textAlign: "center",
             color: "var(--fg)",
           }}
         >
           {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
         </h2>
-        <div style={{ display: "flex", gap: "var(--spacing-s)" }}>
+        <div style={{ display: "flex", gap: "2px" }}>
           <button
             className="button"
-            style={{
-              height: "20px",
-              minHeight: "20px",
-              aspectRatio: "1.5/1",
-              borderRadius: "10px",
-              color: "var(--fg)",
-              padding: "0px",
-              margin: "0px",
-              background: "var(--bg)",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "none",
-            }}
+            style={navBtnStyle}
+            onMouseEnter={onNavEnter}
+            onMouseLeave={onNavLeave}
+            onClick={handleNextMonth}
             title="Next Month"
-          />
+          >
+            <i className="fa-solid fa-angle-right" />
+          </button>
           <button
             className="button"
-            style={{
-              height: "20px",
-              minHeight: "20px",
-              aspectRatio: "1/1",
-              borderRadius: "10px",
-              color: "var(--fg)",
-              padding: "0px",
-              margin: "0px",
-              background: "var(--bg)",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "none",
-            }}
+            style={navBtnStyle}
+            onMouseEnter={onNavEnter}
+            onMouseLeave={onNavLeave}
+            onClick={handleNextYear}
             title="Next Year"
-          />
+          >
+            <i className="fa-solid fa-angles-right" />
+          </button>
         </div>
       </div>
       <div
@@ -854,18 +935,73 @@ const Calendar: React.FC = () => {
         {renderEmptyCells()}
         {renderDayCells()}
       </div>
+
+      {clickedDay !== null && tooltipPosition && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "center",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            position: "absolute",
+            left: tooltipPosition.x - 100 + 5,
+            top: tooltipPosition.y - 40,
+            transform: "translateY(-100%)",
+            backgroundColor: "var(--surface-popover)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--border-radius)",
+            padding: "var(--spacing-m)",
+            boxShadow: "var(--shadow)",
+            zIndex: 1000,
+            minWidth: "200px",
+            maxWidth: "300px",
+            maxHeight: "300px",
+            overflowY: "auto",
+            gap: "var(--spacing-s)",
+          }}
+        >
+          <div style={{ fontWeight: 700, fontSize: "var(--text-md)", marginBottom: "2px" }}>
+            {clickedDay} {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+          </div>
+          {getTasksForDay(clickedDay).length === 0 ? (
+            <div style={{ opacity: 0.4, fontSize: "var(--text-xs)" }}>No tasks</div>
+          ) : (
+            getTasksForDay(clickedDay).map((task) => (
+              <div
+                key={task.id}
+                style={{
+                  padding: "4px 0",
+                  borderBottom: "1px solid var(--border-light)",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: "var(--spacing-s)",
+                  fontSize: "var(--text-md)",
+                }}
+              >
+                <input type="checkbox" className="checkbox" checked={task.completed} readOnly />
+                {task.content}
+              </div>
+            ))
+          )}
+        </motion.div>
+      )}
     </div>
   );
 };
 
-const CalendarWidget: React.FC = () => (
+const CalendarWidget: React.FC<{ tasks?: DemoCalendarTask[] }> = ({ tasks }) => (
   <div
     className="widget_block"
     id="calendar-widget"
     style={{
       padding: "var(--spacing-xl)",
       margin: "0px",
-      justifyContent: "center",
+      justifyContent: "flex-start",
       alignItems: "center",
       zIndex: "50",
       overflow: "visible",
@@ -875,7 +1011,7 @@ const CalendarWidget: React.FC = () => (
       boxSizing: "border-box",
     }}
   >
-    <Calendar />
+    <Calendar tasks={tasks} />
   </div>
 );
 
@@ -908,6 +1044,211 @@ const QuoteWidget: React.FC = () => {
   );
 };
 
+/* ActivityGraph from Welcome/Widgets.tsx of the app: Github-style contribution
+   heatmap. The demo feeds it a synthetic Map<date, count> (no backend). */
+function buildDemoActivityCounts(): Map<string, number> {
+  const counts = new Map<string, number>();
+  const year = new Date().getFullYear();
+  let seed = 7;
+  const rand = () => {
+    seed = (seed * 1103515245 + 12345) % 2147483648;
+    return seed / 2147483648;
+  };
+  for (let d = 0; d < 365; d++) {
+    const date = new Date(year, 0, 1);
+    date.setDate(date.getDate() + d);
+    if (date > new Date()) continue;
+    if (d % 3 === 0 || (d > 240 && d % 2 === 0)) {
+      counts.set(date.toLocaleDateString("en-CA"), 1 + Math.floor(rand() * 9));
+    }
+  }
+  return counts;
+}
+
+const ActivityGraph: React.FC<{ activityCounts?: Map<string, number> }> = ({
+  activityCounts,
+}) => {
+  const [hoveredCell, setHoveredCell] = useState<{ date: string; count: number; x: number; y: number } | null>(null);
+  const [tooltipCoords, setTooltipCoords] = useState<{ left: number; top: number } | null>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  const repositionTooltip = useCallback(() => {
+    if (!hoveredCell) return;
+    const tipRect = tooltipRef.current?.getBoundingClientRect();
+    const margin = 10;
+    const tipWidth = tipRect?.width ?? 0;
+    const tipHeight = tipRect?.height ?? 0;
+    const left = Math.max(margin, Math.min(hoveredCell.x - tipWidth / 2, window.innerWidth - tipWidth - margin));
+    let top = hoveredCell.y - tipHeight - margin;
+    if (top < margin) top = hoveredCell.y + margin;
+    top = Math.min(top, window.innerHeight - tipHeight - margin);
+    setTooltipCoords({ left, top });
+  }, [hoveredCell]);
+
+  useEffect(() => repositionTooltip(), [repositionTooltip]);
+
+  const CELL_SIZE = 13;
+  const CELL_GAP = 5;
+
+  const activityData = activityCounts || new Map<string, number>();
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), 0, 1);
+  const endDate = new Date(today.getFullYear(), 11, 31);
+  const maxCount = Math.max(1, ...Array.from(activityData.values()));
+
+  const weeks: { date: Date; count: number }[][] = [];
+  let currentWeek: { date: Date; count: number }[] = [];
+  const cursor = new Date(startDate);
+  while (cursor <= endDate) {
+    const dateStr = cursor.toLocaleDateString("en-CA");
+    const count = activityData.get(dateStr) || 0;
+    currentWeek.push({ date: new Date(cursor), count });
+    if (cursor.getDay() === 0) {
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  if (currentWeek.length > 0) weeks.push(currentWeek);
+
+  const getOpacity = (count: number): number => {
+    if (count === 0) return 0.08;
+    return 0.2 + (count / maxCount) * 0.8;
+  };
+
+  const monthLabels: { label: string; weekIndex: number }[] = [];
+  let lastMonth = -1;
+  weeks.forEach((week, i) => {
+    const firstDay = week[0]?.date;
+    if (firstDay) {
+      const month = firstDay.getMonth();
+      if (month !== lastMonth) {
+        monthLabels.push({ label: firstDay.toLocaleString("en-US", { month: "short" }), weekIndex: i });
+        lastMonth = month;
+      }
+    }
+  });
+
+  const dayLabels = ["", "Mon", "", "Wed", "", "Fri", ""];
+
+  return (
+    <div
+      className="widget_block activity-graph"
+      style={{
+        gridColumn: "1 / -1",
+        padding: "var(--spacing-l)",
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <div style={{ overflowX: "auto", overflowY: "hidden", width: "100%", display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `24px repeat(${weeks.length}, ${CELL_SIZE}px)`,
+            gridTemplateRows: `auto repeat(7, ${CELL_SIZE}px)`,
+            gap: CELL_GAP,
+            minWidth: "fit-content",
+            position: "relative",
+          }}
+        >
+          {monthLabels.map((m, i) => (
+            <div
+              key={`month-${i}`}
+              style={{
+                gridColumn: `${m.weekIndex + 2} / span ${monthLabels[i + 1] ? monthLabels[i + 1].weekIndex - m.weekIndex : weeks.length - m.weekIndex}`,
+                gridRow: 1,
+                fontSize: "var(--text-xs)",
+                opacity: 0.4,
+                color: "var(--fg)",
+              }}
+            >
+              {m.label}
+            </div>
+          ))}
+          {dayLabels.map((label, i) => (
+            <div
+              key={`day-label-${i}`}
+              style={{
+                gridColumn: 1,
+                gridRow: i + 2,
+                fontSize: "var(--text-xs)",
+                opacity: 0.4,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                color: "var(--fg)",
+                paddingRight: 4,
+              }}
+            >
+              {label}
+            </div>
+          ))}
+          {weeks.map((week, wi) =>
+            week.map((day, di) => {
+              const isToday = day.date.toLocaleDateString("en-CA") === today.toLocaleDateString("en-CA");
+              return (
+                <div
+                  key={`${wi}-${di}`}
+                  style={{
+                    gridColumn: wi + 2,
+                    gridRow: di + 2,
+                    width: CELL_SIZE,
+                    height: CELL_SIZE,
+                    borderRadius: 2,
+                    backgroundColor: "var(--accent)",
+                    opacity: getOpacity(day.count),
+                    cursor: "default",
+                    transition: "opacity 0.15s",
+                    outline: isToday ? "1.5px solid var(--fg)" : "none",
+                    outlineOffset: 1,
+                  }}
+                  onMouseEnter={(e) => {
+                    const rect = (e.target as HTMLElement).getBoundingClientRect();
+                    setHoveredCell({
+                      date: day.date.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
+                      count: day.count,
+                      x: rect.left + rect.width / 2,
+                      y: rect.top + rect.height / 2,
+                    });
+                  }}
+                  onMouseLeave={() => setHoveredCell(null)}
+                />
+              );
+            }),
+          )}
+        </div>
+      </div>
+      {createPortal(
+        hoveredCell &&
+          tooltipCoords && (
+            <div
+              ref={tooltipRef}
+              style={{
+                position: "fixed",
+                left: tooltipCoords.left,
+                top: tooltipCoords.top,
+                backgroundColor: "var(--surface-tooltip, var(--bg3))",
+                border: "1px solid var(--border-base)",
+                borderRadius: "var(--border-radius-sm, 4px)",
+                padding: "6px 10px",
+                fontSize: "var(--text-xs)",
+                color: "var(--fg)",
+                whiteSpace: "nowrap",
+                pointerEvents: "none",
+                zIndex: 9999,
+                boxShadow: "var(--shadow)",
+              }}
+            >
+              {hoveredCell.count} tasks {hoveredCell.date}
+            </div>
+          ),
+        document.body,
+      )}
+    </div>
+  );
+};
+
 /* -------------------------- Statistics (Blocks) ------------------------------ */
 
 const BlockIcon: React.FC<{ iconClass: string; color: string }> = ({
@@ -932,6 +1273,9 @@ const BlockIcon: React.FC<{ iconClass: string; color: string }> = ({
       className={`emoji ${iconClass}`}
       style={{
         color,
+        fontWeight: "bolder",
+        fontSize: "28px",
+        opacity: 0.7,
         alignContent: "right",
         alignItems: "right",
         justifyContent: "center",
@@ -952,7 +1296,7 @@ const BlockContent: React.FC<{
       display: "flex",
       justifyContent: "center",
       flexDirection: "column",
-      alignItems: "center",
+      alignItems: "flex-start",
       width: "100%",
       height: "100%",
     }}
@@ -963,14 +1307,14 @@ const BlockContent: React.FC<{
         textAlign: "left",
         display: "flex",
         flexDirection: "row",
-        alignItems: "flex-end",
-        gap: "var(--spacing-s)",
+        alignItems: "baseline",
+        gap: "var(--spacing-xs)",
       }}
     >
-      <h1 style={{ width: "auto", fontWeight: "1000" }}>{value}</h1>
+      <h1 style={{ width: "auto", fontWeight: 700 }}>{value}</h1>
       <h2>{text}</h2>
     </div>
-    <h3 style={{ marginTop: "5px" }}>{subtitle}</h3>
+    <h3 style={{ marginTop: "2px" }}>{subtitle}</h3>
   </div>
 );
 
@@ -1004,8 +1348,8 @@ const CurrentStreakBlock: React.FC = () => {
     <Block
       iconClass="fa-solid fa-fire"
       color="var(--red)"
-      text="days"
-      subtitle="current streak"
+      text="Days"
+      subtitle="CURRENT STREAK"
       value={`${6 + (t % 2)}`}
     />
   );
@@ -1017,8 +1361,8 @@ const TodayTasksBlock: React.FC = () => {
     <Block
       iconClass="fa-solid fa-fire-flame-curved"
       color="var(--accent)"
-      text="tasks"
-      subtitle="on today"
+      text="Tasks"
+      subtitle="Today"
       value={`${4 + (t % 2)}`}
     />
   );
@@ -1030,8 +1374,8 @@ const DaysActivityBlock: React.FC = () => {
     <Block
       iconClass="fa-regular fa-circle-check"
       color="var(--accent)"
-      text="days"
-      subtitle="total"
+      text="Days"
+      subtitle="TOTAL"
       value={`${24 + (t % 2)}`}
     />
   );
@@ -1041,12 +1385,24 @@ const TasksProgressBlock: React.FC = () => {
   const total = 30;
   const completed = 18 + (useTimer(6000) % 2);
   const progress = Math.round((completed / total) * 100);
+  let emojiClass = "fa-regular fa-face-smile";
+  let emojiColor = "var(--blue)";
+  if (progress > 70) {
+    emojiClass = "fa-regular fa-face-grin-stars";
+    emojiColor = "var(--green)";
+  } else if (progress < 21) {
+    emojiClass = "fa-regular fa-face-frown";
+    emojiColor = "var(--red)";
+  } else if (progress < 41) {
+    emojiClass = "fa-regular fa-face-meh";
+    emojiColor = "var(--yellow)";
+  }
   return (
     <Block
-      iconClass="fa-regular fa-face-grin-stars"
-      color="var(--green)"
-      text="tasks"
-      subtitle={`${completed}/${total} completed`}
+      iconClass={emojiClass}
+      color={emojiColor}
+      text="Tasks"
+      subtitle={`${completed}/${total} COMPLETED`}
       value={`${progress}%`}
     />
   );
@@ -1058,8 +1414,8 @@ const LongestStreakBlock: React.FC = () => {
     <Block
       iconClass="fa-regular fa-star"
       color="var(--yellow)"
-      text="days"
-      subtitle="longest streak"
+      text="Days"
+      subtitle="LONGEST STREAK"
       value={`${11 + (t % 2)}`}
     />
   );
@@ -1071,8 +1427,8 @@ const TotalProjectsBlock: React.FC = () => {
     <Block
       iconClass="fa-solid fa-meteor"
       color="var(--purple)"
-      text="projects"
-      subtitle="total projects"
+      text="Projects"
+      subtitle="TOTAL PROJECTS"
       value={`${17 + (t % 2)}`}
     />
   );
@@ -1083,8 +1439,8 @@ const DeadlineProjectsBlock: React.FC = () => {
     <Block
       iconClass="fa-solid fa-fire"
       color="var(--red)"
-      text="projects"
-      subtitle="end of month"
+      text="Projects"
+      subtitle="End of month"
       value="2"
     />
   );
@@ -1203,30 +1559,47 @@ const ProjectsChartBlock: React.FC = () => {
 
 /* ------------------------------- Home tab ------------------------------------ */
 
-const WelcomeTab: React.FC = () => (
-  <motion.div
-    className="centered_content"
-    id="main_tab"
-    style={{
-      gap: "var(--spacing-xl)",
-      height: "100%",
-      width: "auto",
-      padding: "var(--spacing-l)",
-      margin: "0px",
-    }}
-  >
-    <div className="welcome_grid">
-      <DateBlock />
-      <CalendarWidget />
-      <QuoteWidget />
-      <div className="stat_blocks_row">
-        <DaysActivityBlock />
-        <CurrentStreakBlock />
-        <TodayTasksBlock />
+const WelcomeTab: React.FC = () => {
+  const activityCounts = useMemo(buildDemoActivityCounts, []);
+  const tasksWithDeadline = useMemo(() => {
+    const out: DemoCalendarTask[] = [];
+    for (const board of INITIAL_BOARDS) {
+      for (const column of board.columns) {
+        for (const task of column.tasks) {
+          if (task.deadline) {
+            out.push({ id: task.id, content: task.content, deadline: task.deadline, completed: task.completed });
+          }
+        }
+      }
+    }
+    return out;
+  }, []);
+  return (
+    <motion.div
+      className="centered_content"
+      id="main_tab"
+      style={{
+        gap: "var(--spacing-xl)",
+        height: "100%",
+        width: "auto",
+        padding: "var(--spacing-l)",
+        margin: "0px",
+      }}
+    >
+      <div className="welcome_grid">
+        <DateBlock />
+        <CalendarWidget tasks={tasksWithDeadline} />
+        <QuoteWidget />
+        <div className="stat_blocks_row">
+          <DaysActivityBlock />
+          <CurrentStreakBlock />
+          <TodayTasksBlock />
+        </div>
+        <ActivityGraph activityCounts={activityCounts} />
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 /* ------------------------------- Tasks tab ----------------------------------- */
 
@@ -1511,11 +1884,21 @@ const TaskContent: React.FC<{
   columnId: string;
   bg_color: string;
   onToggleTask: (columnId: string, taskId: string) => void;
-}> = ({ task, columnId, bg_color, onToggleTask }) => (
+  onOpen: (columnId: string, task: DemoTask) => void;
+}> = ({ task, columnId, bg_color, onToggleTask, onOpen }) => (
   <div
     className="task-content"
     role="button"
     tabIndex={0}
+    onContextMenu={(e) => {
+      e.preventDefault();
+    }}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onToggleTask(columnId, task.id);
+      }
+    }}
     aria-label={`Task: ${task.content}`}
     style={{ width: "100%" }}
   >
@@ -1527,6 +1910,8 @@ const TaskContent: React.FC<{
         width: "100%",
         justifyContent: "space-between",
         alignItems: "center",
+        padding: "0 var(--spacing-l)",
+        boxSizing: "border-box",
       }}
     >
       <div
@@ -1545,16 +1930,16 @@ const TaskContent: React.FC<{
             display: "flex",
             flexDirection: "row",
             height: "50px",
-            width:
-              "calc(100% - var(--spacing-m) - var(--spacing-m) - var(--spacing-m))",
+            width: "100%",
             justifyContent: "space-between",
             alignItems: "center",
+            padding: "0",
             margin: "0px",
           }}
         >
           <input
             className="checkbox"
-            style={{ margin: "0px", padding: "0px", cursor: "pointer" }}
+            style={{ margin: "0px", padding: "0px" }}
             type="checkbox"
             checked={task.completed}
             onChange={() => onToggleTask(columnId, task.id)}
@@ -1563,13 +1948,15 @@ const TaskContent: React.FC<{
             className="task-text centered_content"
             style={{
               opacity: "0.9",
-              width: "100%",
+              width: "auto",
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "flex-end",
               gap: "var(--spacing-s)",
               color: getTextColorForBg(bg_color),
+              padding: "0px",
+              margin: "0px",
             }}
           >
             <span style={{ width: "auto", padding: "0px", margin: "0px" }}>
@@ -1595,7 +1982,7 @@ const TaskContent: React.FC<{
           style={{
             backgroundColor: "transparent",
             border: "none",
-            width: "calc(100% - 50px)",
+            width: "100%",
             overflowY: "auto",
             whiteSpace: "pre-wrap",
             cursor: "text",
@@ -1603,12 +1990,58 @@ const TaskContent: React.FC<{
             padding: "0px",
             margin: "0px",
             paddingBottom: "var(--spacing-m)",
+            transition: "color 0.3s ease-in",
             color: getTextColorForBg(bg_color),
+            textAlign: "left",
           }}
+          onClick={() => onOpen(columnId, task)}
         >
           {task.content}
         </button>
       </div>
+      {(() => {
+        const lastAction = demoLastAction(task);
+        return (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              height: "50px",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "0",
+              margin: "0px",
+            }}
+          >
+            <span
+              style={{
+                padding: "0px",
+                margin: "0px",
+                opacity: "0.65",
+                color: getTextColorForBg(bg_color),
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                minWidth: 0,
+              }}
+            >
+              {TASK_ACTION_LABELS[lastAction.action] ?? lastAction.action}
+            </span>
+            <span
+              style={{
+                padding: "0px",
+                margin: "0px",
+                opacity: "0.65",
+                color: getTextColorForBg(bg_color),
+                flexShrink: 0,
+              }}
+            >
+              {lastAction.userName}
+            </span>
+          </div>
+        );
+      })()}
     </div>
   </div>
 );
@@ -1618,9 +2051,10 @@ const Task: React.FC<{
   columnId: string;
   color: string;
   onToggleTask: (columnId: string, taskId: string) => void;
+  onOpen: (columnId: string, task: DemoTask) => void;
   onDragStart: (e: React.DragEvent) => void;
   onDragEnd: (e: React.DragEvent) => void;
-}> = ({ task, columnId, color, onToggleTask, onDragStart, onDragEnd }) => (
+}> = ({ task, columnId, color, onToggleTask, onOpen, onDragStart, onDragEnd }) => (
   <motion.div layout initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 1, scale: 1 }}>
     <div
       draggable
@@ -1629,7 +2063,7 @@ const Task: React.FC<{
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
-      <TaskContent task={task} columnId={columnId} bg_color={color} onToggleTask={onToggleTask} />
+      <TaskContent task={task} columnId={columnId} bg_color={color} onToggleTask={onToggleTask} onOpen={onOpen} />
     </div>
   </motion.div>
 );
@@ -1694,8 +2128,9 @@ const ColumnHeader: React.FC<{
 const TaskList: React.FC<{
   column: DemoColumn;
   onToggleTask: (columnId: string, taskId: string) => void;
+  onOpen: (columnId: string, task: DemoTask) => void;
   onTaskDrop: (e: React.DragEvent, column: DemoColumn) => void;
-}> = ({ column, onToggleTask, onTaskDrop }) => (
+}> = ({ column, onToggleTask, onOpen, onTaskDrop }) => (
   <div
     className="task-list"
     data-droppable={column.id}
@@ -1713,6 +2148,7 @@ const TaskList: React.FC<{
           columnId={column.id}
           color="var(--bg2)"
           onToggleTask={onToggleTask}
+          onOpen={onOpen}
           onDragStart={(e) => {
             e.dataTransfer.setData("text/task", task.id);
             e.dataTransfer.setData("text/column", column.id);
@@ -1729,10 +2165,11 @@ const TaskList: React.FC<{
 const Column: React.FC<{
   column: DemoColumn;
   onToggleTask: (columnId: string, taskId: string) => void;
+  onOpen: (columnId: string, task: DemoTask) => void;
   onCreateTask: (columnId: string) => void;
   onColumnDrop: (e: React.DragEvent<HTMLDivElement>, column: DemoColumn) => void;
   onTaskDrop: (e: React.DragEvent, column: DemoColumn) => void;
-}> = ({ column, onToggleTask, onCreateTask, onColumnDrop, onTaskDrop }) => (
+}> = ({ column, onToggleTask, onOpen, onCreateTask, onColumnDrop, onTaskDrop }) => (
   <motion.div className="task-main-block" layout>
     <ColumnHeader
       column={column}
@@ -1753,7 +2190,7 @@ const Column: React.FC<{
       }}
       onDrop={(e) => onColumnDrop(e, column)}
     >
-      <TaskList column={column} onToggleTask={onToggleTask} onTaskDrop={onTaskDrop} />
+      <TaskList column={column} onToggleTask={onToggleTask} onOpen={onOpen} onTaskDrop={onTaskDrop} />
     </div>
   </motion.div>
 );
@@ -1874,10 +2311,250 @@ const DemoTasksHeader: React.FC<{ columns: DemoColumn[] }> = ({ columns }) => {
   );
 };
 
+/* Fake action-history data (the app keeps real per-task logs; the demo
+   synthesizes deterministic entries so the EditTaskModal history panel and
+   the per-card last-action row behave identically). */
+const TASK_ACTION_LABELS: Record<string, string> = {
+  edit: "Edit",
+  assign: "Assign",
+  complete: "Complete",
+  reopen: "Reopen",
+  change_column: "Change column",
+  change_color: "Change color",
+  change_order: "Change order",
+  change_deadline: "Change deadline",
+};
+
+const DEMO_USERS: ReadonlyArray<readonly [string, string]> = [
+  ["Alex Mercer", "alex@owl.dev"],
+  ["Sam Rivera", "sam@owl.dev"],
+  ["Mia Chen", "mia@owl.dev"],
+  ["Leo Park", "leo@owl.dev"],
+];
+
+type DemoTaskLastAction = [action: string, userName: string, userEmail: string, createdAt: string];
+
+function hashDemoId(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+const demoLastAction = (task: DemoTask): { action: string; userName: string } => {
+  const h = hashDemoId(task.id);
+  const actions = task.completed
+    ? ["complete", "change_column", "change_color"]
+    : ["edit", "edit", "change_deadline", "assign", "reopen", "change_order"];
+  return {
+    action: actions[h % actions.length],
+    userName: DEMO_USERS[(h + 1) % DEMO_USERS.length][0],
+  };
+};
+
+const demoLastActions = (task: DemoTask): DemoTaskLastAction[] => {
+  const h = hashDemoId(task.id);
+  const actions = ["edit", "change_column", "change_deadline", "complete", "reopen", "assign", "change_color", "change_order"];
+  const now = Date.now();
+  const out: DemoTaskLastAction[] = [];
+  for (let i = 0; i < 4; i++) {
+    const [name, email] = DEMO_USERS[(h + i) % DEMO_USERS.length];
+    out.push([
+      actions[(h + i) % actions.length],
+      name,
+      email,
+      new Date(now - (i + 0.4) * 13 * 3600e3).toISOString(),
+    ]);
+  }
+  return out;
+};
+
+/* EditTaskModal from Tasks/EditTaskModal.tsx of the app: task text + deadline
+   editors with a scrollable history of the last actions; hovering (or
+   clicking) a history item shows a tooltip with the user email to copy. */
+const EditTaskModal: React.FC<{
+  tempContent: string;
+  onContentChange: (value: string) => void;
+  onSave: () => void;
+  onCancel: () => void;
+  deadline: string;
+  onDeadlineChange: (value: string) => void;
+  task: DemoTask;
+}> = ({ tempContent, onContentChange, onSave, onCancel, deadline, onDeadlineChange, task }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [tooltip, setTooltip] = useState<{
+    x: number;
+    y: number;
+    action: string;
+    userName: string;
+    userEmail: string;
+    date: string;
+  } | null>(null);
+  const lastActions = demoLastActions(task);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCancel();
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [onCancel]);
+
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (contentRef.current && !contentRef.current.contains(e.target as Node)) onSave();
+  };
+
+  const btnStyle: React.CSSProperties = {
+    flex: 1,
+    height: "40px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "var(--spacing-xs)",
+    background: "var(--bg2)",
+    border: "none",
+    color: "var(--fg)",
+    cursor: "pointer",
+    borderRadius: "var(--border-radius)",
+    transition: "all 0.3s ease-in-out",
+  };
+
+  return (
+    <motion.div
+      className="modal-overlay"
+      onClick={handleOverlayClick}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="modal-content"
+        ref={contentRef}
+        style={{ width: "800px", maxHeight: "400px", overflow: "hidden" }}
+        initial={{ opacity: 0, y: -200 }}
+        exit={{ opacity: 0, y: -200 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: "var(--spacing-m)",
+            width: "100%",
+            alignItems: "stretch",
+            minHeight: 0,
+            maxHeight: "360px",
+          }}
+        >
+          <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
+            <textarea
+              className="task-text"
+              value={tempContent}
+              onChange={(e) => onContentChange(e.target.value)}
+              style={{
+                backgroundColor: "transparent",
+                border: "none",
+                width: "100%",
+                overflowY: "auto",
+                whiteSpace: "pre-wrap",
+                height: "100%",
+                minHeight: "230px",
+                padding: "0px",
+                margin: "0px",
+                resize: "none",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "100%",
+                marginTop: "var(--spacing-m)",
+              }}
+            >
+              <span style={{ whiteSpace: "nowrap" }}>Deadline:</span>
+              <input
+                className="project_deadline"
+                style={{ width: "auto", minWidth: "120px" }}
+                type="date"
+                value={deadline ? deadline.split("T")[0] : ""}
+                onChange={(e) => onDeadlineChange(e.target.value)}
+              />
+            </div>
+            <div style={{ display: "flex", gap: "var(--spacing-s)", width: "100%", marginTop: "var(--spacing-m)" }}>
+              <button style={btnStyle} onClick={onSave}>
+                <i className="fa-solid fa-hard-drive"></i> Save
+              </button>
+              <button style={btnStyle} onClick={onCancel}>
+                <i className="fa-solid fa-xmark"></i> Cancel
+              </button>
+            </div>
+          </div>
+          {lastActions.length > 0 && (
+            <div
+              style={{
+                flex: 1,
+                minWidth: 0,
+                minHeight: 0,
+                paddingLeft: "var(--spacing-m)",
+                display: "flex",
+                flexDirection: "column",
+                overflow: "hidden",
+              }}
+            >
+              <div className="task-history" style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
+                {lastActions.map(([action, userName, userEmail, createdAt], i) => (
+                  <div
+                    className="task-history-item"
+                    key={i}
+                    onClick={() => userEmail && navigator.clipboard?.writeText(userEmail)}
+                    onMouseEnter={(e) =>
+                      userEmail &&
+                      setTooltip({
+                        x: e.clientX,
+                        y: e.clientY,
+                        action,
+                        userName,
+                        userEmail,
+                        date: new Date(createdAt).toLocaleString(),
+                      })
+                    }
+                    onMouseMove={(e) => setTooltip((prev) => (prev ? { ...prev, x: e.clientX, y: e.clientY } : prev))}
+                    onMouseLeave={() => setTooltip(null)}
+                  >
+                    <div className="task-history-item-header">
+                      <span className="task-history-action">{TASK_ACTION_LABELS[action] ?? action}</span>
+                      <span className="task-history-user">{userName}</span>
+                    </div>
+                    <div className="task-history-item-date">{new Date(createdAt).toLocaleString()}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        {tooltip && (
+          <div className="action-email-tooltip" style={{ position: "fixed", top: tooltip.y + 16, left: tooltip.x + 16 }}>
+            <div>{TASK_ACTION_LABELS[tooltip.action] ?? tooltip.action}</div>
+            <div>{tooltip.userName}</div>
+            <div>{tooltip.userEmail}</div>
+            <div>{tooltip.date}</div>
+            <div>Click to copy</div>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const TasksTab: React.FC = () => {
   const [boards, setBoards] = useState<DemoBoard[]>(INITIAL_BOARDS);
   const [currentBoardId, setCurrentBoardId] = useState<string>(INITIAL_BOARDS[0].id);
   const [isBoardsListVisible, setIsBoardsListVisible] = useState(true);
+  const [editing, setEditing] = useState<{ boardId: string; columnId: string; taskId: string } | null>(null);
+  const [tempContent, setTempContent] = useState("");
+  const [tempDeadline, setTempDeadline] = useState("");
 
   const currentBoard = boards.find((b) => b.id === currentBoardId) || boards[0];
   const columns = currentBoard?.columns ?? [];
@@ -1943,6 +2620,37 @@ const TasksTab: React.FC = () => {
       ),
     }));
   };
+
+  const openTaskEditor = (columnId: string, task: DemoTask) => {
+    setTempContent(task.content);
+    setTempDeadline(task.deadline ?? "");
+    setEditing({ boardId: currentBoardId, columnId, taskId: task.id });
+  };
+
+  const handleEditTaskSave = () => {
+    if (!editing) return;
+    updateBoard(editing.boardId, (b) => ({
+      ...b,
+      columns: b.columns.map((col) =>
+        col.id === editing.columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((t) =>
+                t.id === editing.taskId ? { ...t, content: tempContent, deadline: tempDeadline || undefined } : t,
+              ),
+            }
+          : col,
+      ),
+    }));
+    setEditing(null);
+  };
+
+  const editingTask = editing
+    ? boards
+        .find((b) => b.id === editing.boardId)
+        ?.columns.find((c) => c.id === editing.columnId)
+        ?.tasks.find((t) => t.id === editing.taskId)
+    : undefined;
 
   const reorderColumns = (boardId: string, from: number, to: number) => {
     if (from === to) return;
@@ -2106,6 +2814,7 @@ const TasksTab: React.FC = () => {
               key={column.id}
               column={column}
               onToggleTask={(columnId, taskId) => toggleTask(currentBoardId, columnId, taskId)}
+              onOpen={openTaskEditor}
               onCreateTask={(columnId) => createNewTask(currentBoardId, columnId)}
               onColumnDrop={handleColumnDrop}
               onTaskDrop={handleTaskDrop}
@@ -2135,6 +2844,19 @@ const TasksTab: React.FC = () => {
         </button>
       )}
       <DemoTasksHeader columns={columns} />
+      <AnimatePresence>
+        {editing && editingTask && (
+          <EditTaskModal
+            task={editingTask}
+            tempContent={tempContent}
+            onContentChange={setTempContent}
+            onSave={handleEditTaskSave}
+            onCancel={() => setEditing(null)}
+            deadline={tempDeadline}
+            onDeadlineChange={setTempDeadline}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -2162,6 +2884,27 @@ export interface DemoProject {
   user_id?: number;
   members?: DemoProjectMember[];
 }
+
+/* Public users fetched by the app's ProjectMembersModal (api.getPublicUsers);
+   the demo lists the ones that aren't members of the current project yet. */
+const DEMO_PUBLIC_USERS: Array<{ id: number; name: string; email: string }> = [
+  { id: 101, name: "Elena Volkov", email: "elena@owl.dev" },
+  { id: 102, name: "Noah Fischer", email: "noah@owl.dev" },
+  { id: 103, name: "Yuki Tanaka", email: "yuki@owl.dev" },
+  { id: 104, name: "Ivan Petrov", email: "ivan@owl.dev" },
+  { id: 105, name: "Sofia Rossi", email: "sofia@owl.dev" },
+  { id: 106, name: "Mateo Garcia", email: "mateo@owl.dev" },
+  { id: 107, name: "Hannah Mueller", email: "hannah@owl.dev" },
+  { id: 108, name: "Felix Weber", email: "felix@owl.dev" },
+  { id: 109, name: "Aya Nakamura", email: "aya@owl.dev" },
+  { id: 110, name: "Omar Haddad", email: "omar@owl.dev" },
+  { id: 111, name: "Petra Novak", email: "petra@owl.dev" },
+  { id: 112, name: "Liam O'Connor", email: "liam@owl.dev" },
+  { id: 113, name: "Eva Kowalski", email: "eva@owl.dev" },
+  { id: 114, name: "Arjun Patel", email: "arjun@owl.dev" },
+  { id: 115, name: "Maria Santos", email: "maria@owl.dev" },
+  { id: 116, name: "Daniel Kim", email: "daniel@owl.dev" },
+];
 
 const INITIAL_PROJECTS: DemoProject[] = [
   {
@@ -2210,6 +2953,50 @@ export const launcher = {
       { user_id: 10, name: "Zoe", email: "zoe@owl.app", role: "MEMBER" },
       { user_id: 11, name: "Leo", email: "leo@owl.app", role: "MEMBER" },
       { user_id: 12, name: "Nina", email: "nina@owl.app", role: "MEMBER" },
+      { user_id: 13, name: "Oscar", email: "oscar@owl.app", role: "MEMBER" },
+      { user_id: 14, name: "Pia", email: "pia@owl.app", role: "MEMBER" },
+      { user_id: 15, name: "Quinn", email: "quinn@owl.app", role: "MEMBER" },
+      { user_id: 16, name: "Rita", email: "rita@owl.app", role: "MEMBER" },
+      { user_id: 17, name: "Sam", email: "sam@owl.app", role: "MEMBER" },
+      { user_id: 18, name: "Tina", email: "tina@owl.app", role: "MEMBER" },
+      { user_id: 19, name: "Uma", email: "uma@owl.app", role: "MEMBER" },
+      { user_id: 20, name: "Vik", email: "vik@owl.app", role: "MEMBER" },
+      { user_id: 21, name: "Wendy", email: "wendy@owl.app", role: "MEMBER" },
+      { user_id: 22, name: "Xavi", email: "xavi@owl.app", role: "MEMBER" },
+      { user_id: 23, name: "Yara", email: "yara@owl.app", role: "MEMBER" },
+      { user_id: 24, name: "Zack", email: "zack@owl.app", role: "MEMBER" },
+      { user_id: 25, name: "Alice", email: "alice@owl.app", role: "MEMBER" },
+      { user_id: 26, name: "Bob", email: "bob@owl.app", role: "MEMBER" },
+      { user_id: 27, name: "Cara", email: "cara@owl.app", role: "MEMBER" },
+      { user_id: 28, name: "Dan", email: "dan@owl.app", role: "MEMBER" },
+      { user_id: 29, name: "Eli", email: "eli@owl.app", role: "MEMBER" },
+      { user_id: 30, name: "Faye", email: "faye@owl.app", role: "MEMBER" },
+      { user_id: 31, name: "Gus", email: "gus@owl.app", role: "MEMBER" },
+      { user_id: 32, name: "Hana", email: "hana@owl.app", role: "MEMBER" },
+      { user_id: 33, name: "Ida", email: "ida@owl.app", role: "MEMBER" },
+      { user_id: 34, name: "Jake", email: "jake@owl.app", role: "MEMBER" },
+      { user_id: 35, name: "Kai", email: "kai@owl.app", role: "MEMBER" },
+      { user_id: 36, name: "Luna", email: "luna@owl.app", role: "MEMBER" },
+      { user_id: 37, name: "Mia", email: "mia@owl.app", role: "MEMBER" },
+      { user_id: 38, name: "Nick", email: "nick@owl.app", role: "MEMBER" },
+      { user_id: 39, name: "Olya", email: "olya@owl.app", role: "MEMBER" },
+      { user_id: 40, name: "Pavel", email: "pavel@owl.app", role: "MEMBER" },
+      { user_id: 41, name: "Rada", email: "rada@owl.app", role: "MEMBER" },
+      { user_id: 42, name: "Sasha", email: "sasha@owl.app", role: "MEMBER" },
+      { user_id: 43, name: "Toma", email: "toma@owl.app", role: "MEMBER" },
+      { user_id: 44, name: "Ulya", email: "ulya@owl.app", role: "MEMBER" },
+      { user_id: 45, name: "Vera", email: "vera@owl.app", role: "MEMBER" },
+      { user_id: 46, name: "Wade", email: "wade@owl.app", role: "MEMBER" },
+      { user_id: 47, name: "Sonia", email: "sonia@owl.app", role: "MEMBER" },
+      { user_id: 48, name: "Roma", email: "roma@owl.app", role: "MEMBER" },
+      { user_id: 49, name: "Gleb", email: "gleb@owl.app", role: "MEMBER" },
+      { user_id: 50, name: "Mila", email: "mila@owl.app", role: "MEMBER" },
+      { user_id: 51, name: "Den", email: "den@owl.app", role: "MEMBER" },
+      { user_id: 52, name: "Rus", email: "rus@owl.app", role: "MEMBER" },
+      { user_id: 53, name: "Vita", email: "vita@owl.app", role: "MEMBER" },
+      { user_id: 54, name: "Kristina", email: "kristina@owl.app", role: "MEMBER" },
+      { user_id: 55, name: "Anton", email: "anton@owl.app", role: "MEMBER" },
+      { user_id: 56, name: "Dasha", email: "dasha@owl.app", role: "MEMBER" },
     ],
   },
   {
@@ -2273,7 +3060,8 @@ const ProjectCard: React.FC<{
   onDragStart: (e: React.DragEvent) => void;
   onDragEnd: () => void;
   onOpen: () => void;
-}> = ({ project, index, onDragStart, onDragEnd, onOpen }) => {
+  onContextMenu: (e: React.MouseEvent) => void;
+}> = ({ project, index, onDragStart, onDragEnd, onOpen, onContextMenu }) => {
   const statusColor = getStatusColor(project.status);
   const priorityColor = getPriorityColor(project.priority);
   const { days } = getDeadlineDifference(project.deadline);
@@ -2293,6 +3081,7 @@ const ProjectCard: React.FC<{
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: (index % 4) * 0.08 }}
+        onContextMenu={onContextMenu}
         onMouseDown={(e) => {
           if (e.button !== 0) return;
           const startX = e.clientX;
@@ -2319,53 +3108,65 @@ const ProjectCard: React.FC<{
         }}
       >
         <div className="project_card_inner">
-          <div className="project_card_main">
-            <div className="project_card_left">
-              <input
-                className="project_title_input"
-                placeholder="Project title"
-                value={project.title}
-                readOnly
-              />
-              <div className="project_card_dates">
-                <div className="project_card_meta_row">
-                  <i className="fa-regular fa-calendar-plus" style={{ color: "var(--fg-secondary)" }}></i>
-                  <strong className="project_card_meta_text">Created: {formatDate(project.created_at)}</strong>
-                </div>
-                <div className="project_card_meta_row">
-                  <i className="fa-regular fa-hourglass-half" style={{ color: "var(--fg-secondary)" }}></i>
-                  <strong className="project_card_meta_text">
-                    DDL: <span style={{ color: "var(--fg)", opacity: "1", fontWeight: 700 }}>{formatDate(project.deadline)}</span>
-                  </strong>
-                </div>
-                {days !== null && (
-                  <div className="project_card_meta_row">
-                    <i className="fa-regular fa-clock" style={{ color: daysColor }}></i>
-                    <strong className="project_card_meta_text" style={{ color: daysColor }}>
-                      {isOverdue ? `${Math.abs(days)} days overdue` : `${days} days left`}
-                    </strong>
-                  </div>
-                )}
-              </div>
-            </div>
+          <div className="project_card_header">
+            <input
+              className="project_title_input"
+              placeholder="Project title"
+              value={project.title}
+              readOnly
+            />
+            {project.link_to && (
+              <a
+                href={project.link_to}
+                onClick={(e) => e.stopPropagation()}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Project link"
+                className="project_card_link"
+              >
+                <i className="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            )}
+          </div>
 
-            <div className="project_card_right">
-              <div className="project_card_info_row">
-                <div className="centered_content project_card_label">
-                  <i className="fa-solid fa-hourglass-start" style={{ fontSize: "var(--text-lg)" }}></i> Status:
-                </div>
-                <span className="project_status centered_content" style={{ backgroundColor: statusColor }}>
-                  {project.status}
+          <div className="project_card_grid">
+            <div className="project_card_meta_row">
+              <i className="fa-regular fa-calendar-plus" style={{ color: "var(--fg-secondary)" }}></i>
+              <strong className="project_card_meta_text">
+                {formatDate(project.created_at)} –{" "}
+                <span style={{ color: isOverdue ? "var(--red)" : isSoon ? "var(--yellow)" : undefined, fontWeight: 700 }}>
+                  {formatDate(project.deadline)}
                 </span>
+              </strong>
+            </div>
+            <div className="project_card_meta_row">
+              <span
+                className="project_card_priority_marker"
+                style={{ color: priorityColor, textTransform: "capitalize" }}
+                title={`Priority: ${project.priority}`}
+              >
+                {project.priority === "high" ? (
+                  <i className="fa-solid fa-chevron-up"></i>
+                ) : project.priority === "medium" ? (
+                  <i className="fa-solid fa-chevron-right"></i>
+                ) : (
+                  <i className="fa-solid fa-chevron-down"></i>
+                )}
+                {project.priority}
+              </span>
+            </div>
+            {days !== null && (
+              <div className="project_card_meta_row">
+                <i className="fa-regular fa-clock" style={{ color: daysColor }}></i>
+                <strong className="project_card_meta_text" style={{ color: daysColor }}>
+                  {isOverdue ? `${Math.abs(days)} days overdue` : `${days} days left`}
+                </strong>
               </div>
-              <div className="project_card_info_row">
-                <div className="centered_content project_card_label">
-                  <i className="fa-solid fa-flag" style={{ fontSize: "var(--text-lg)" }}></i> Priority:
-                </div>
-                <span className="project_priority centered_content" style={{ backgroundColor: priorityColor }}>
-                  {project.priority}
-                </span>
-              </div>
+            )}
+            <div className="project_card_meta_row">
+              <strong className="project_card_meta_text" style={{ color: statusColor, textTransform: "capitalize" }}>
+                {project.status}
+              </strong>
             </div>
           </div>
 
@@ -2411,18 +3212,6 @@ const ProjectCard: React.FC<{
                 <span style={{ fontSize: "var(--text-sm)", color: "var(--fg-secondary)" }}>No members</span>
               )}
             </div>
-            {project.link_to && (
-              <a
-                href={project.link_to}
-                onClick={(e) => e.stopPropagation()}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Project link"
-                className="project_card_link"
-              >
-                <i className="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            )}
           </div>
         </div>
       </motion.div>
@@ -2848,6 +3637,30 @@ const FieldLabel: React.FC<{ icon: string; children: React.ReactNode }> = ({ ico
   </label>
 );
 
+const MEMBER_PAGE_SIZE = 50;
+const PUBLIC_PAGE_SIZE = 50;
+
+const matchesQuery = (query: string, ...fields: (string | null | undefined)[]): boolean => {
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+  return fields.some((f) => (f ?? "").toLowerCase().includes(q));
+};
+
+const SearchIcon: React.FC<{ color?: string }> = ({ color = "var(--fg-secondary)" }) => (
+  <i
+    className="fa-solid fa-magnifying-glass"
+    style={{
+      position: "absolute",
+      left: "var(--spacing-m)",
+      top: "50%",
+      transform: "translateY(-50%)",
+      color,
+      pointerEvents: "none",
+      fontSize: "var(--text-base)",
+    }}
+  ></i>
+);
+
 const ProjectMembersModal: React.FC<{
   projectId: string;
   projectTitle: string;
@@ -2859,11 +3672,38 @@ const ProjectMembersModal: React.FC<{
 }> = ({ projectId, projectTitle, ownerId, members, onAddMember, onRemoveMember, onClose }) => {
   const [newEmail, setNewEmail] = useState("");
   const [error, setError] = useState("");
+  const [memberSearch, setMemberSearch] = useState("");
+  const [publicSearch, setPublicSearch] = useState("");
+  const [memberLimit, setMemberLimit] = useState(MEMBER_PAGE_SIZE);
+  const [publicLimit, setPublicLimit] = useState(PUBLIC_PAGE_SIZE);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const isOwner = (member: DemoProjectMember): boolean => member.role === "OWNER";
   const isCurrentUserOwner = (): boolean => ownerId === 1;
   const canRemoveMember = (member: DemoProjectMember): boolean => isCurrentUserOwner() && !isOwner(member);
+
+  const availablePublicUsers = useMemo(
+    () => DEMO_PUBLIC_USERS.filter((u) => !members.some((m) => m.email.toLowerCase() === u.email.toLowerCase())),
+    [members],
+  );
+
+  const filteredMembers = useMemo(
+    () => members.filter((member) => matchesQuery(memberSearch, member.name, member.email)),
+    [members, memberSearch],
+  );
+
+  const filteredPublicUsers = useMemo(
+    () => availablePublicUsers.filter((user) => matchesQuery(publicSearch, user.name, user.email)),
+    [availablePublicUsers, publicSearch],
+  );
+
+  useEffect(() => {
+    setMemberLimit(MEMBER_PAGE_SIZE);
+  }, [memberSearch, members]);
+
+  useEffect(() => {
+    setPublicLimit(PUBLIC_PAGE_SIZE);
+  }, [publicSearch, availablePublicUsers]);
 
   const handleAddMember = () => {
     const email = newEmail.trim();
@@ -2877,7 +3717,7 @@ const ProjectMembersModal: React.FC<{
     setNewEmail("");
   };
 
-    useEffect(() => {
+  useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -2905,7 +3745,7 @@ const ProjectMembersModal: React.FC<{
       <motion.div
         className="project-modal-content"
         ref={contentRef}
-        style={{ width: "calc(80% - var(--spacing-xxl) - var(--spacing-xxl))", justifyContent: "space-between" }}
+        style={{ width: "calc(80% - var(--spacing-xxl) - var(--spacing-xxl))", justifyContent: "flex-start" }}
         initial={{ opacity: 0, y: -200 }}
         exit={{ opacity: 0, y: -200 }}
         animate={{ opacity: 1, y: 0 }}
@@ -2914,146 +3754,260 @@ const ProjectMembersModal: React.FC<{
         <button className="modal_close_button" onClick={onClose} aria-label="Close" title="Close">
           <i className="fa-solid fa-xmark"></i>
         </button>
-        <div>
-          <div style={{ display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center", justifyContent: "flex-start" }}>
-            <p className="project_title" style={{ textAlign: "left", width: "auto" }}>
-              {projectTitle}
+        <div style={{ display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center", justifyContent: "flex-start" }}>
+          <p className="project_title" style={{ textAlign: "left", width: "auto" }}>
+            {projectTitle}
+          </p>
+        </div>
+
+        {error && (
+          <div
+            style={{
+              color: "var(--bg)",
+              padding: "var(--spacing-m)",
+              backgroundColor: "var(--red)",
+              borderRadius: "var(--border-radius)",
+              marginBottom: "var(--spacing-m)",
+            }}
+          >
+            {error}
+          </div>
+        )}
+
+        <div className="project-members-modal-body">
+          <div className="project-members-column">
+            <p style={{ fontWeight: 500, fontSize: "var(--text-lg)" }}>
+              Members{" "}
+              <span style={{ color: "var(--fg-secondary)", fontWeight: 400 }}>({members.length})</span>
             </p>
-          </div>
 
-          <div className="spacer" style={{ height: "10px" }}></div>
-
-          {error && (
-            <div
-              style={{
-                color: "var(--bg)",
-                padding: "var(--spacing-m)",
-                backgroundColor: "var(--red)",
-                borderRadius: "var(--border-radius)",
-                marginBottom: "var(--spacing-m)",
-              }}
-            >
-              {error}
-            </div>
-          )}
-
-          <div className="project-modal-subcontent">
-            <div className="project-editor-content">
-              <div style={{ display: "flex", flexDirection: "row", gap: "var(--spacing-m)", width: "100%" }}>
-                <DemoInputField
-                  label="Member email"
-                  value={newEmail}
-                  name="email"
-                  type="email"
-                  onChange={(e) => setNewEmail(e.target.value)}
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-s)", width: "100%", minHeight: 0 }}>
+              <div style={{ position: "relative", width: "100%" }}>
+                <SearchIcon />
+                <input
+                  placeholder="Search members"
+                  value={memberSearch}
+                  onChange={(e) => setMemberSearch(e.target.value)}
+                  style={{ width: "100%", paddingLeft: "calc(var(--spacing-l) + var(--spacing-s))" }}
                 />
-                <button
-                  className="button"
-                  id="green"
-                  onClick={handleAddMember}
-                  disabled={!isCurrentUserOwner() || !newEmail.trim()}
-                  style={{ width: "130px" }}
-                >
-                  <i className="fa-solid fa-plus"></i> Add
-                </button>
               </div>
+              {filteredMembers.length === 0 ? (
+                <div style={{ textAlign: "center", padding: "var(--spacing-l)", color: "var(--fg-secondary)" }}>
+                  {members.length === 0 ? "No members" : "No members found"}
+                </div>
+              ) : (
+                <div className="project-members-list">
+                  {filteredMembers.slice(0, memberLimit).map((member) => (
+                    <div
+                      key={member.user_id}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        backgroundColor: "transparent",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-m)", minWidth: 0 }}>
+                        <div
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            borderRadius: "50%",
+                            backgroundColor: isOwner(member) ? "var(--red)" : "var(--green)",
+                            color: "var(--bg)",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            textAlign: "center",
+                            fontWeight: "bold",
+                            fontSize: "var(--text-4xl)",
+                            aspectRatio: 1 / 1,
+                            flexShrink: 0,
+                          }}
+                        >
+                          {member.name ? member.name.charAt(0).toUpperCase() : "?"}
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "auto",
+                            gap: "5px",
+                            minWidth: 0,
+                          }}
+                        >
+                          <div style={{ fontWeight: 500, fontSize: "var(--text-lg)" }}>{member.name || "Unknown"}</div>
+                          <div style={{ fontSize: "var(--text-base)", color: "var(--fg-secondary)" }}>{member.email}</div>
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-m)", flexShrink: 0 }}>
+                        {canRemoveMember(member) && (
+                          <button
+                            className="button"
+                            onClick={() => onRemoveMember(member.user_id)}
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignContent: "center",
+                              alignItems: "center",
+                              textAlign: "center",
+                              justifyContent: "center",
+                              background: "var(--red)",
+                              color: "var(--bg)",
+                            }}
+                            title="Remove member"
+                          >
+                            <i className="fa-solid fa-trash" style={{ margin: "0px", padding: "0px" }}></i>
+                          </button>
+                        )}
+                        <span
+                          className="button"
+                          style={{
+                            width: "80px",
+                            fontWeight: "bolder",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
+                            justifyContent: "center",
+                            backgroundColor: isOwner(member) ? "var(--red)" : "var(--green)",
+                            color: "var(--bg)",
+                          }}
+                        >
+                          {member.role}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {filteredMembers.length > memberLimit && (
+                <button className="button" onClick={() => setMemberLimit((limit) => limit + MEMBER_PAGE_SIZE)} style={{ width: "100%" }}>
+                  Show more ({filteredMembers.length - memberLimit})
+                </button>
+              )}
             </div>
           </div>
 
-          <div className="spacer" style={{ height: "10px" }}></div>
+          <div className="project-users-column">
+            <p style={{ fontWeight: 500, fontSize: "var(--text-lg)" }}>
+              Public users{" "}
+              <span style={{ color: "var(--fg-secondary)", fontWeight: 400 }}>({availablePublicUsers.length})</span>
+            </p>
 
-          {members.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "var(--spacing-l)", color: "var(--fg-secondary)" }}>No members</div>
-          ) : (
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-s)", width: "100%", padding: "0px", margin: "0px" }}>
-              {members.map((member) => (
-                <div
-                  key={member.user_id}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "var(--spacing-m)",
-                    backgroundColor: "transparent",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-m)" }}>
-                    <div
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                        backgroundColor: isOwner(member) ? "var(--red)" : "var(--green)",
-                        color: "var(--bg)",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: "var(--text-4xl)",
-                        aspectRatio: 1 / 1,
-                      }}
-                    >
-                      {member.name ? member.name.charAt(0).toUpperCase() : "?"}
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "auto",
-                        gap: "5px",
-                      }}
-                    >
-                      <div style={{ fontWeight: 500, fontSize: "var(--text-lg)" }}>{member.name || "Unknown"}</div>
-                      <div style={{ fontSize: "var(--text-base)", color: "var(--fg-secondary)" }}>{member.email}</div>
-                    </div>
+            {availablePublicUsers.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "var(--spacing-l)", color: "var(--fg-secondary)" }}>
+                No public users
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-s)", width: "100%", minHeight: 0 }}>
+                <div style={{ position: "relative", width: "100%" }}>
+                  <SearchIcon />
+                  <input
+                    placeholder="Search public users"
+                    value={publicSearch}
+                    onChange={(e) => setPublicSearch(e.target.value)}
+                    style={{ width: "100%", paddingLeft: "calc(var(--spacing-l) + var(--spacing-s))" }}
+                  />
+                </div>
+                {filteredPublicUsers.length === 0 ? (
+                  <div style={{ textAlign: "center", padding: "var(--spacing-l)", color: "var(--fg-secondary)" }}>
+                    No users found
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-m)" }}>
-                    {canRemoveMember(member) && (
-                      <button
-                        className="button"
-                        onClick={() => onRemoveMember(member.user_id)}
+                ) : (
+                  <div className="project-users-list">
+                    {filteredPublicUsers.slice(0, publicLimit).map((user) => (
+                      <div
+                        key={user.id}
                         style={{
                           display: "flex",
-                          flexDirection: "column",
-                          alignContent: "center",
                           alignItems: "center",
-                          textAlign: "center",
-                          justifyContent: "center",
-                          background: "var(--red)",
-                          color: "var(--bg)",
+                          justifyContent: "space-between",
+                          backgroundColor: "transparent",
+                          flexShrink: 0,
                         }}
-                        title="Remove member"
                       >
-                        <i className="fa-solid fa-trash" style={{ margin: "0px", padding: "0px" }}></i>
-                      </button>
-                    )}
-                    <span
-                      className="button"
-                      style={{
-                        width: "80px",
-                        fontWeight: "bolder",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                        justifyContent: "center",
-                        backgroundColor: isOwner(member) ? "var(--red)" : "var(--green)",
-                        color: "var(--bg)",
-                      }}
-                    >
-                      {member.role}
-                    </span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-m)", minWidth: 0 }}>
+                          <div
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                              borderRadius: "50%",
+                              backgroundColor: "var(--blue)",
+                              color: "var(--bg)",
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              fontWeight: "bold",
+                              fontSize: "var(--text-4xl)",
+                              aspectRatio: 1 / 1,
+                              flexShrink: 0,
+                            }}
+                          >
+                            {user.name ? user.name.charAt(0).toUpperCase() : "?"}
+                          </div>
+                          <div style={{ display: "flex", flexDirection: "column", width: "auto", gap: "5px", minWidth: 0 }}>
+                            <div style={{ fontWeight: 500, fontSize: "var(--text-lg)" }}>{user.name || "Unknown"}</div>
+                            <div style={{ fontSize: "var(--text-base)", color: "var(--fg-secondary)" }}>{user.email}</div>
+                          </div>
+                        </div>
+                        <button
+                          className="button"
+                          onClick={() => onAddMember(user.email)}
+                          disabled={!isCurrentUserOwner()}
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
+                            justifyContent: "center",
+                            background: "var(--blue)",
+                            color: "var(--bg)",
+                            flexShrink: 0,
+                          }}
+                          title="Add member"
+                        >
+                          <i className="fa-solid fa-plus" style={{ margin: "0px", padding: "0px" }}></i>
+                        </button>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                )}
+                {filteredPublicUsers.length > publicLimit && (
+                  <button className="button" onClick={() => setPublicLimit((limit) => limit + PUBLIC_PAGE_SIZE)} style={{ width: "100%" }}>
+                    Show more ({filteredPublicUsers.length - publicLimit})
+                  </button>
+                )}
+              </div>
+            )}
 
-          <div className="spacer" style={{ height: "20px" }}></div>
+            <div style={{ display: "flex", flexDirection: "row", gap: "var(--spacing-m)", width: "100%" }}>
+              <DemoInputField
+                label="Member email"
+                value={newEmail}
+                name="email"
+                type="email"
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+              <button
+                className="button"
+                id="green"
+                onClick={handleAddMember}
+                disabled={!isCurrentUserOwner() || !newEmail.trim()}
+                style={{ width: "130px" }}
+              >
+                <i className="fa-solid fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
         </div>
+
         <div className="modal-actions">
           <button className="button" id="green" onClick={onClose} style={{ width: "60%" }}>
             <i className="fa-solid fa-sd-card"></i> Save
@@ -3311,11 +4265,56 @@ const ProjectModal: React.FC<{
   );
 };
 
+/* ProjectsContextMenus from ContextMenu/ProjectsContextMenus.tsx of the app:
+   right-click a project card to Open / open source code / Manage members /
+   Delete it. The demo converts the viewport click position into the scaled
+   container's coordinate space (scale 0.55, origin top-left). */
+const ContextMenu: React.FC<{
+  position: { top: number; left: number };
+  onDelete: () => void;
+  onEdit: () => void;
+  onClose: () => void;
+  onSourceCode: () => void;
+  onManageMembers?: () => void;
+}> = ({ position, onDelete, onEdit, onClose, onSourceCode, onManageMembers }) => (
+  <motion.div
+    className="context-menu"
+    style={{ position: "absolute", top: position.top - 50, left: position.left, zIndex: 20 }}
+    onMouseLeave={onClose}
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    transition={{ duration: 0.2 }}
+  >
+    <button className="menu_button" onClick={onEdit}>
+      <i className="fa-solid fa-pen"></i> Open
+    </button>
+
+    <button className="menu_button" onClick={onSourceCode}>
+      <i className="fa-solid fa-link"></i> Source code
+    </button>
+
+    {onManageMembers && (
+      <button className="menu_button" onClick={onManageMembers}>
+        <i className="fa-solid fa-users"></i> Manage members
+      </button>
+    )}
+
+    <div className="spacer" style={{ backgroundColor: "var(--fg)", height: "1px" }}></div>
+
+    <button className="menu_button" onClick={onDelete}>
+      <i className="fa-solid fa-trash"></i> Delete
+    </button>
+  </motion.div>
+);
+
 const ProjectsTab: React.FC = () => {
   const [projects, setProjects] = useState<DemoProject[]>(INITIAL_PROJECTS);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [editingProject, setEditingProject] = useState<DemoProject | null>(null);
+  const [contextMenu, setContextMenu] = useState<{ project: DemoProject; position: { top: number; left: number } } | null>(null);
+  const [membersProject, setMembersProject] = useState<DemoProject | null>(null);
 
   const sortedProjects = useMemo(() => {
     if (!sortBy) return [...projects];
@@ -3360,6 +4359,31 @@ const ProjectsTab: React.FC = () => {
     setSortBy("");
   };
 
+  const openProjectContextMenu = (project: DemoProject) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const demo = (e.currentTarget as HTMLElement).closest(".owl-demo") as HTMLElement | null;
+    if (!demo) return;
+    const rect = demo.getBoundingClientRect();
+    const scale = rect.width > 0 && demo.offsetWidth > 0 ? rect.width / demo.offsetWidth : 1;
+    setContextMenu({
+      project,
+      position: {
+        top: (e.clientY - rect.top) / scale,
+        left: (e.clientX - rect.left) / scale,
+      },
+    });
+  };
+
+  const handleDeleteProject = (projectId: string) => {
+    setProjects((prev) => prev.filter((p) => p.id !== projectId));
+    setContextMenu(null);
+  };
+
+  const handleOpenSourceCode = (project: DemoProject) => {
+    if (project.link_to) window.open(project.link_to, "_blank", "noopener,noreferrer");
+    setContextMenu(null);
+  };
+
   return (
     <div className="tab-content">
       <ProjectsHeader
@@ -3400,9 +4424,28 @@ const ProjectsTab: React.FC = () => {
             }}
             onDragEnd={() => undefined}
             onOpen={() => setEditingProject(project)}
+            onContextMenu={openProjectContextMenu(project)}
           />
         ))}
       </div>
+      <AnimatePresence>
+        {contextMenu && (
+          <ContextMenu
+            position={contextMenu.position}
+            onEdit={() => {
+              setEditingProject(contextMenu.project);
+              setContextMenu(null);
+            }}
+            onSourceCode={() => handleOpenSourceCode(contextMenu.project)}
+            onManageMembers={() => {
+              setMembersProject(contextMenu.project);
+              setContextMenu(null);
+            }}
+            onDelete={() => handleDeleteProject(contextMenu.project.id)}
+            onClose={() => setContextMenu(null)}
+          />
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {editingProject && (
           <ProjectModal
@@ -3411,6 +4454,41 @@ const ProjectsTab: React.FC = () => {
               setProjects((prev) => prev.map((p) => (p.id === updated.id ? updated : p)))
             }
             onClose={() => setEditingProject(null)}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {membersProject && (
+          <ProjectMembersModal
+            projectId={membersProject.id}
+            projectTitle={membersProject.title}
+            ownerId={membersProject.user_id ?? 1}
+            members={membersProject.members ?? []}
+            onAddMember={(email) =>
+              setProjects((prev) =>
+                prev.map((p) =>
+                  p.id === membersProject.id
+                    ? {
+                        ...p,
+                        members: [
+                          ...(p.members ?? []),
+                          { user_id: Date.now(), name: email.split("@")[0], email, role: "MEMBER" },
+                        ],
+                      }
+                    : p,
+                ),
+              )
+            }
+            onRemoveMember={(userId) =>
+              setProjects((prev) =>
+                prev.map((p) =>
+                  p.id === membersProject.id
+                    ? { ...p, members: (p.members ?? []).filter((m) => m.user_id !== userId) }
+                    : p,
+                ),
+              )
+            }
+            onClose={() => setMembersProject(null)}
           />
         )}
       </AnimatePresence>
@@ -3423,14 +4501,7 @@ const ProjectsTab: React.FC = () => {
 const StatisticTab: React.FC = () => (
   <div className="tab-content" id="stats_block">
     <div className="stats_content">
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 600,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <div className="inner-container">
         <div className="stats_grid">
           <div className="grid-tasks-chart">
             <TasksChartBlock />
@@ -3451,48 +4522,159 @@ const StatisticTab: React.FC = () => (
 );
 
 /* --------------------------------- Account -------------------------------- */
-/* Mirrors Account/AccountComponents.tsx (logged-in, Pro subscription).       */
+/* Mirrors Account/AccountComponents.tsx + SubscriptionPlans.tsx (logged-in,
+   Pro subscription). The demo renders the AccountControl action list with the
+   subscription-plan modal fed by hardcoded plans (no backend). */
 
-const AccountTab: React.FC = () => (
-  <div className="tab-content centered_content" id="account_block" style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "var(--spacing-l)" }}>
-    <div className="account_info_grid">
-      <div className="account_info_block centered_content" style={{ backgroundColor: "var(--bg2)" }}>
+interface DemoSubscriptionPlan {
+  id: number;
+  name: string;
+  about: string | null;
+  price: number | null;
+}
+
+const DEMO_SUBSCRIPTION_PLANS: DemoSubscriptionPlan[] = [
+  { id: 1, name: "Starter", about: "For individuals starting out", price: 4.99 },
+  { id: 2, name: "Pro", about: "Everything you need for power users", price: 9.99 },
+  { id: 3, name: "Enterprise", about: "For teams and organizations", price: null },
+];
+
+const SubPlanCard: React.FC<DemoSubscriptionPlan> = ({ name, about, price }) => (
+  <motion.button
+    className="subs-card"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.3 }}
+  >
+    <h3 className="subs-card-name">{name}</h3>
+    <div className="subs-card-price">
+      <span className="subs-card-price-value">{price ?? "—"}</span>
+      <span className="subs-card-price-currency">$/mo</span>
+    </div>
+    {about && <p className="subs-card-about">{about}</p>}
+  </motion.button>
+);
+
+const SubscriptionPlanModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+  return (
+    <motion.div
+      className="modal"
+      style={{ height: "100%", width: "100%", zIndex: 1000, background: "var(--bg)", userSelect: "none", padding: "0px", margin: "0px" }}
+      initial={{ opacity: 0, y: -100 }}
+      exit={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="login_modal centered_content" style={{ overflowY: "auto", gap: 0 }}>
         <div
           style={{
-            width: "100%",
-            height: "40px",
             display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            alignContent: "center",
+            flexDirection: "column",
             alignItems: "center",
+            width: "100%",
+            maxWidth: "900px",
+            minWidth: 0,
+            boxSizing: "border-box",
+            gap: "var(--spacing-m)",
           }}
         >
-          <div className="centered_content account-control" style={{ position: "relative", gap: "var(--spacing-s)" }}>
-            <button className="button" onClick={() => undefined}>
-              Options <i className="fa-solid fa-chevron-down"></i>
+          <div className="subs-grid">
+            {DEMO_SUBSCRIPTION_PLANS.map((sub) => (
+              <SubPlanCard key={sub.id} {...sub} />
+            ))}
+          </div>
+          <div style={{ display: "flex", gap: "var(--spacing-s)", justifyContent: "center", width: "100%", padding: "0px", margin: "0px" }}>
+            <button className="button" onClick={onClose} style={{ width: "100%", margin: "0px" }}>
+              Close
             </button>
           </div>
         </div>
-        <i className="fa-regular fa-circle-user centered_content" style={{ fontSize: "200px", padding: "0px", margin: "0px", flex: "1" }} />
-        <button className="username" style={{ cursor: "text", color: "var(--fg)" }} onClick={() => undefined}>
-          @nighty
-        </button>
-        <p style={{ fontSize: "medium", fontWeight: "bolder", opacity: "0.7" }}>nighty@owl.app</p>
       </div>
-      <div className="account_info_block" style={{ backgroundColor: "var(--bg2)" }}>
-        <div className="spacer" style={{ height: "40px" }}></div>
-        <h1 className="centered_content" style={{ fontSize: "120px", flex: "1" }}>
-          $9.99
-        </h1>
-        <p className="username" style={{ fontSize: "x-large", fontWeight: "bolder" }}>
-          Pro
-        </p>
-        <p style={{ fontSize: "medium", fontWeight: "bolder", opacity: "0.7" }}>Days before: 27</p>
-      </div>
-    </div>
+    </motion.div>
+  );
+};
+
+const AccountControl: React.FC<{ onOpenSubPlan: () => void }> = ({ onOpenSubPlan }) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignContent: "center",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "var(--bg2)",
+      width: "100%",
+      borderRadius: "var(--border-radius-l)",
+      padding: "var(--spacing-l)",
+    }}
+  >
+    <button className="menu_button" onClick={onOpenSubPlan}>
+      Change subscription plan
+    </button>
+    <button className="menu_button" onClick={() => undefined}>
+      Change email
+    </button>
+    <button className="menu_button" onClick={() => undefined}>
+      Change password
+    </button>
+    <button className="menu_button" style={{ color: "var(--red)" }}>
+      Logout
+    </button>
+    <button className="menu_button" style={{ color: "var(--red)" }}>
+      Delete account
+    </button>
   </div>
 );
+
+const AccountTab: React.FC = () => {
+  const [isChangeSubOpen, setIsChangeSubOpen] = useState(false);
+  return (
+    <div
+      className="tab-content centered_content"
+      id="account_block"
+      style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "var(--spacing-l)" }}
+    >
+      <div style={{ display: "flex", flexDirection: "column", alignContent: "center", alignItems: "center", justifyContent: "center", gap: "var(--spacing-l)" }}>
+        <div className="account_info_grid">
+          <div className="account_info_block centered_content" style={{ backgroundColor: "var(--bg2)" }}>
+            <div
+              style={{
+                width: "100%",
+                height: "40px",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignContent: "center",
+                alignItems: "center",
+              }}
+            ></div>
+            <i className="fa-regular fa-circle-user centered_content" style={{ fontSize: "200px", padding: "0px", margin: "0px", flex: "1" }} />
+            <button className="username" style={{ cursor: "text", color: "var(--fg)" }} onClick={() => undefined}>
+              @nighty
+            </button>
+            <p style={{ fontSize: "medium", fontWeight: "bolder", opacity: "0.7" }}>nighty@owl.app</p>
+          </div>
+          <div className="account_info_block" style={{ backgroundColor: "var(--bg2)" }}>
+            <div className="spacer" style={{ height: "40px" }}></div>
+            <h1 className="centered_content" style={{ fontSize: "120px", flex: "1" }}>
+              $9.99
+            </h1>
+            <p className="username" style={{ fontSize: "x-large", fontWeight: "bolder" }}>
+              Pro
+            </p>
+            <p style={{ fontSize: "medium", fontWeight: "bolder", opacity: "0.7" }}>Days before: 27</p>
+          </div>
+        </div>
+        <AccountControl onOpenSubPlan={() => setIsChangeSubOpen(true)} />
+      </div>
+      <AnimatePresence>
+        {isChangeSubOpen && <SubscriptionPlanModal isOpen={isChangeSubOpen} onClose={() => setIsChangeSubOpen(false)} />}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 /* -------------------------------- Settings --------------------------------- */
 /* Mirrors Settings/SettingsComponents.tsx (all blocks, static controls).     */
@@ -3536,7 +4718,7 @@ const SettingsTab: React.FC = () => (
                 <option value="" disabled>
                   Select font
                 </option>
-                {["Merienda", "Caveat", "Gochi Hand", "Noto Sans", "Noto Serif", "Roboto", "Space Grotesk", "Ubuntu"].map((font) => (
+                {["Merienda", "Caveat", "Gochi Hand", "Noto Sans", "Noto Serif", "Roboto Condensed", "Roboto", "Space Grotesk", "Ubuntu Mono", "Ubuntu", "system-ui"].map((font) => (
                   <option key={font} value={font}>
                     {font}
                   </option>
@@ -3617,7 +4799,9 @@ const SettingsTab: React.FC = () => (
                 <i className="fa-solid fa-file-lines" /> Third party notices
               </button>
             </div>
-            <p style={{ textAlign: "center", opacity: "0.6" }}>Version 2.4.1</p>
+            <p className="version centered_content" style={{ textAlign: "center", opacity: "0.6" }}>
+              App version: 1.3.2-alpha
+            </p>
           </div>
         </div>
       </div>

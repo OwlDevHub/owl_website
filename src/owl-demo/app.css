@@ -1148,6 +1148,49 @@
   color: var(--red);
 }
 
+.owl-demo .project-members-modal-body {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-xl);
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.owl-demo .project-members-column,
+.owl-demo .project-users-column {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+.owl-demo .project-members-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+  overflow-y: auto;
+  max-height: min(288px, 38vh);
+  flex-shrink: 1;
+  padding-right: var(--spacing-s);
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+.owl-demo .project-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  padding-right: var(--spacing-s);
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
 .owl-demo .project_modal_header {
   display: flex;
   flex-direction: row-reverse;
@@ -1845,6 +1888,65 @@
 
 .owl-demo .task-text:not(.strikethrough)::after {
   opacity: 0;
+}
+
+.owl-demo .action-email-tooltip {
+  background: var(--bg2);
+  color: var(--fg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-l);
+  font-size: 0.8em;
+  line-height: 1.5rem;
+  padding: var(--spacing-s);
+  pointer-events: none;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.owl-demo .task-history-item {
+  padding: var(--spacing-xs) var(--spacing-s);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.owl-demo .task-history-item:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.owl-demo .task-history-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-s);
+  font-size: 0.85em;
+  line-height: 1.5rem;
+  opacity: 0.8;
+}
+
+.owl-demo .task-history-action {
+  flex-shrink: 0;
+}
+
+.owl-demo .task-history-user {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.owl-demo .task-history-item-date {
+  font-size: 0.75em;
+  line-height: 1.2rem;
+  opacity: 0.55;
+  text-align: right;
+}
+
+.owl-demo .task-history::-webkit-scrollbar-thumb {
+  background: var(--accent);
 }
 
 .owl-demo .notify {
@@ -2696,9 +2798,9 @@
 
 .owl-demo .project_block {
   min-width: 300px;
-  height: 185px;
-  min-height: 185px;
-  max-height: 185px;
+  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2714,7 +2816,7 @@
   gap: 0px;
   cursor: default;
   content-visibility: auto;
-  contain-intrinsic-size: auto 185px;
+  contain-intrinsic-size: auto 170px;
 }
 
 .owl-demo .project_card_inner {
@@ -2725,31 +2827,43 @@
   gap: var(--spacing-m);
 }
 
-.owl-demo .project_card_main {
+.owl-demo .project_card_header {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-s);
+  width: 100%;
+  min-width: 0;
+}
+
+.owl-demo .project_card_priority_marker {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+.owl-demo .project_card_priority_marker i {
+  font-size: inherit;
+}
+
+.owl-demo .project_card_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--spacing-xs) var(--spacing-l);
   width: 100%;
   flex: 1;
-  gap: var(--spacing-l);
-  justify-content: space-between;
-  align-items: center;
+  align-content: center;
 }
 
-.owl-demo .project_card_left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--spacing-l);
-  flex: 1;
-  min-width: 0;
-  text-align: left;
-}
-
-.owl-demo .project_card_dates {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-s);
-  text-align: left;
+.owl-demo .project_card_grid > .project_card_meta_row:nth-child(even) {
+  justify-content: flex-end;
+  text-align: right;
+  opacity: 1;
 }
 
 .owl-demo .project_card_meta_row {
@@ -2759,6 +2873,7 @@
   font-size: var(--text-base);
   opacity: 0.75;
   color: var(--fg);
+  min-width: 0;
 }
 
 .owl-demo .project_card_meta_text {
@@ -2768,32 +2883,6 @@
   text-overflow: ellipsis;
 }
 
-.owl-demo .project_card_right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-l);
-  flex-shrink: 0;
-}
-
-.owl-demo .project_card_info_row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-s);
-  width: 100%;
-}
-
-.owl-demo .project_card_label {
-  flex-direction: row;
-  gap: var(--spacing-s);
-  font-size: var(--text-lg);
-  color: var(--fg);
-  white-space: nowrap;
-}
-
 .owl-demo .project_card_footer {
   display: flex;
   flex-direction: row;
@@ -2801,7 +2890,6 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--spacing-s);
-  padding-top: var(--spacing-m);
 }
 
 .owl-demo .project_card_members {
@@ -2831,10 +2919,21 @@
   font-size: var(--text-lg);
   display: flex;
   flex-shrink: 0;
+  margin-left: auto;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.owl-demo .project_block:hover .project_card_link,
+.owl-demo .project_card_link:hover {
+  opacity: 1;
 }
 
 .owl-demo .project_card_link i {
   pointer-events: none;
+  padding: 0;
+  padding-right: 0;
+  margin-right: 0;
 }
 
 .owl-demo .project_block p {
@@ -3563,6 +3662,13 @@
 }
 
 @media screen and (max-width: 900px) {
+  .owl-demo .project-members-modal-body {
+    flex-direction: column;
+  }
+  .owl-demo .project-members-column,
+  .owl-demo .project-users-column {
+    width: 100%;
+  }
   .owl-demo .login_modal {
     flex-direction: column;
   }
