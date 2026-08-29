@@ -1,95 +1,13 @@
 const OwlIcon = () => (
   <svg
     className="app_logo"
-    viewBox="0 0 14.528579 19.371439"
+    viewBox="0 0 38.690071 46.720203"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g transform="translate(-136.269,-93.404792)">
-      <g
-        transform="matrix(0.69183708,0,0,0.69183708,132.11798,92.021118)"
-        style={{ strokeOpacity: 1 }}
-      >
-        <circle
-          cx={16}
-          cy={12}
-          r={9}
-          style={{
-            fill: "none",
-            stroke: "currentColor",
-            strokeWidth: 2,
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            strokeMiterlimit: 10,
-            strokeOpacity: 1,
-          }}
-        />
-        <g style={{ strokeOpacity: 1 }}>
-          <path
-            d="M 20.5,4.2 C 19.2,3.4 17.6,3 16,3 14.4,3 12.8,3.4 11.5,4.2 14.2,5.8 16,8.7 16,12 16,8.7 17.8,5.8 20.5,4.2 Z"
-            style={{
-              fill: "none",
-              stroke: "currentColor",
-              strokeWidth: 2,
-              strokeLinecap: "round",
-              strokeLinejoin: "round",
-              strokeMiterlimit: 10,
-              strokeOpacity: 1,
-            }}
-          />
-        </g>
-        <circle
-          cx={12}
-          cy={12}
-          r={1}
-          style={{
-            fill: "none",
-            stroke: "currentColor",
-            strokeWidth: 2,
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            strokeMiterlimit: 10,
-            strokeOpacity: 1,
-          }}
-        />
-        <circle
-          cx={20}
-          cy={12}
-          r={1}
-          style={{
-            fill: "none",
-            stroke: "currentColor",
-            strokeWidth: 2,
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            strokeMiterlimit: 10,
-            strokeOpacity: 1,
-          }}
-        />
-        <path
-          d="m 16.1,21 c 2.2,2.3 5.4,3.8 8.9,3.8 v 0 V 12"
-          style={{
-            fill: "none",
-            stroke: "currentColor",
-            strokeWidth: 2,
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            strokeMiterlimit: 10,
-            strokeOpacity: 1,
-          }}
-        />
-        <path
-          d="m 7,12 c 0,9 9.7,17 19,17"
-          style={{
-            fill: "none",
-            stroke: "currentColor",
-            strokeWidth: 2,
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            strokeMiterlimit: 10,
-            strokeOpacity: 1,
-          }}
-        />
+    <g transform="translate(-12.654964,-8.6398985)">
+      <g transform="matrix(0.97223154,0,0,0.97223154,8.6398933,8.6395043)" fill="var(--fg)">
+        <path d="M 40.923,3.644 C 40.789,2.264 40.136,0.991 38.894,0.377 37.65,-0.237 36.165,-0.091 35.066,0.752 L 30.265,4.43 H 18.157 L 13.358,0.752 C 12.258,-0.092 10.774,-0.237 9.53,0.377 8.287,0.989 7.646,2.264 7.5,3.643 c -1.05,9.884 -7.028,32.728 0,39.756 5.908,5.909 28.171,6.5 33.424,0 C 47.17,35.67 41.88,13.536 40.923,3.644 Z M 15.965,26.966 c -3.71,0 -6.719,-3.008 -6.719,-6.721 0,-3.711 3.009,-6.718 6.719,-6.718 3.71,0 6.719,3.008 6.719,6.719 0,3.712 -3.009,6.72 -6.719,6.72 z m 11.054,1.999 -2.428,4.935 c -0.105,0.215 -0.325,0.354 -0.564,0.354 -0.24,0 -0.459,-0.139 -0.565,-0.354 l -2.425,-4.935 c -0.096,-0.195 -0.084,-0.428 0.031,-0.611 0.115,-0.185 0.317,-0.297 0.535,-0.297 h 4.851 c 0.217,0 0.42,0.112 0.535,0.297 0.114,0.183 0.125,0.415 0.03,0.611 z m 5.07,-1.999 c -3.71,0 -6.719,-3.008 -6.719,-6.721 0,-3.711 3.009,-6.718 6.719,-6.718 3.71,0 6.719,3.008 6.719,6.719 -10e-4,3.712 -3.009,6.72 -6.719,6.72 z" />
       </g>
     </g>
   </svg>
