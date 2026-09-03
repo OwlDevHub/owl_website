@@ -1,6 +1,15 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faDesktop,
+  faLaptop,
+  faMobile,
+  faTablet,
+  faCloud,
+  faArrowsRotate,
+} from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 import { Reveal } from "../ui/Reveal";
 import LazyDemo from "../ui/LazyDemo";
 
@@ -23,6 +32,84 @@ const CliWindow = ({ lines }) => (
             line.text
           )}
         </div>
+      ))}
+    </div>
+  </div>
+);
+
+const syncCenter = { x: 150, y: 150 };
+
+const syncDevices = [
+  { icon: faDesktop, label: "Desktop", x: 55, y: 55, p: { top: "18.3%", left: "18.3%" } },
+  { icon: faLaptop, label: "Laptop", x: 245, y: 55, p: { top: "18.3%", left: "81.7%" } },
+  { icon: faMobile, label: "Phone", x: 55, y: 245, p: { top: "81.7%", left: "18.3%" } },
+  { icon: faTablet, label: "Tablet", x: 245, y: 245, p: { top: "81.7%", left: "81.7%" } },
+];
+
+const SyncStage = () => (
+  <div className="product-window sync-window">
+    <div className="product-window__bar">
+      <span className="product-window__dot" />
+      <span className="product-window__dot" />
+      <span className="product-window__dot" />
+      <span className="product-window__title">owl - sync status</span>
+    </div>
+    <div className="sync-stage">
+      <svg
+        className="sync-stage__lines"
+        viewBox="0 0 300 300"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        {syncDevices.map((d, i) => (
+          <motion.line
+            key={i}
+            x1={syncCenter.x}
+            y1={syncCenter.y}
+            x2={d.x}
+            y2={d.y}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 + i * 0.12, duration: 0.3 }}
+          />
+        ))}
+      </svg>
+
+      <div className="sync-stage__hub">
+        <div className="sync-stage__hub-icon">
+          <motion.div
+            className="sync-stage__ripple"
+            animate={{ scale: [1, 2.1, 2.1], opacity: [0.5, 0, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+          />
+          <motion.div
+            className="sync-stage__ripple"
+            animate={{ scale: [1, 2.1, 2.1], opacity: [0.5, 0, 0] }}
+            transition={{
+              duration: 2.2,
+              repeat: Infinity,
+              ease: "easeOut",
+              delay: 1.1,
+            }}
+          />
+          <FontAwesomeIcon icon={faCloud} />
+        </div>
+        <span className="sync-stage__hub-label">OWL Cloud</span>
+      </div>
+
+      {syncDevices.map((d, i) => (
+        <motion.div
+          key={i}
+          className="sync-node"
+          style={{ left: d.p.left, top: d.p.top }}
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3 + (i + 1) * 0.12, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="sync-node__icon">
+            <FontAwesomeIcon icon={d.icon} />
+          </div>
+          <span className="sync-node__label">{d.label}</span>
+        </motion.div>
       ))}
     </div>
   </div>
@@ -62,22 +149,32 @@ const features = [
     reverse: true,
   },
   {
+    title: "Real-time sync, everywhere",
+    desc: "Every change propagates instantly across all your devices and team members. CRDT-based sync resolves concurrent edits automatically - no conflicts, no merges, no stale state.",
+    link: { href: "#download_app", label: "Join the beta" },
+    media: <SyncStage />,
+    reverse: false,
+  },
+  {
     title: "In every tool, at every step",
     desc: "Full terminal integration for advanced workflows. Script and pipe it - without leaving your shell.",
     link: { href: "#download_app", label: "Join the beta" },
     media: (
       <CliWindow
         lines={[
-          { cmd: "owl init my-project" },
-          { text: "✓ Project created (84ms)" },
-          { cmd: 'owl task add "Ship OWL 1.4" --priority high' },
+          { cmd: "owl_cli init NewProject" },
+          { text: "✓ Project created" },
+          { cmd: 'owl_cli task add "Ship OWL 1.4" --priority high' },
+          { text: " > sprint-14" },
+          { text: "   NewProject" },
+          { text: "   TechSupport" },
           { text: "✓ Task added to sprint-14" },
           { cmd: "owl status" },
           { text: "✓ 2 in progress, 1 blocked" },
         ]}
       />
     ),
-    reverse: false,
+    reverse: true,
   },
 ];
 

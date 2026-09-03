@@ -1930,6 +1930,129 @@ hw {
   }
 }
 
+/* ===== SYNC FEATURE ===== */
+.sync-window {
+  position: relative;
+  width: 100%;
+}
+
+.sync-stage {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+}
+
+.sync-stage__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sync-stage__lines line {
+  stroke: var(--border-02);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+  animation: sync-dash 3s linear infinite;
+}
+
+@keyframes sync-dash {
+  to { stroke-dashoffset: -20; }
+}
+
+.sync-stage__hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.sync-stage__hub-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--chrome);
+  border: 1px solid var(--border-02);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: var(--fg);
+}
+
+.sync-stage__ripple {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border-02);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.sync-stage__hub-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--fg-subtle);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.sync-node {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 2;
+}
+
+.sync-node__icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--chrome);
+  border: 1px solid var(--border-02);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  transition:
+    color var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.sync-node:hover .sync-node__icon {
+  color: var(--fg);
+  background: var(--card-hover);
+  border-color: color-mix(in srgb, var(--border-02) 140%, transparent);
+}
+
+.sync-node__label {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--fg-subtle);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
