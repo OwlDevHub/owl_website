@@ -13,6 +13,10 @@ import { motion } from "framer-motion";
 import { Reveal } from "../ui/Reveal";
 import LazyDemo from "../ui/LazyDemo";
 
+const DemoBadge = () => (
+  <span className="demo-badge">Click to explore</span>
+);
+
 const CliWindow = ({ lines }) => (
   <div className="product-window">
     <div className="product-window__bar">
@@ -123,6 +127,7 @@ const features = [
     media: (
       <div className="demo-product">
         <LazyDemo defaultTab="tasks" />
+        <DemoBadge />
         <div className="product-window demo-product__shot">
           <div className="product-window__body">
             <img src="/imgs/2.png" alt="OWL kanban board" />
@@ -139,6 +144,7 @@ const features = [
     media: (
       <div className="demo-product">
         <LazyDemo defaultTab="projects" />
+        <DemoBadge />
         <div className="product-window demo-product__shot">
           <div className="product-window__body">
             <img src="/imgs/7.png" alt="OWL team collaboration" />

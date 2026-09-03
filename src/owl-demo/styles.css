@@ -200,11 +200,35 @@
   max-width: 100%;
 }
 
+.demo-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--fg);
+  padding: 8px 13px;
+  background: var(--card);
+  border: 1px solid var(--border-02);
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+}
+
 .demo-product__shot {
   display: none;
 }
 
 @media screen and (max-width: 768px) {
+  .demo-badge {
+    display: none;
+  }
   .demo-product .owl-demo-frame {
     display: none;
   }
